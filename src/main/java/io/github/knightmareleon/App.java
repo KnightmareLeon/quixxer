@@ -7,12 +7,12 @@ import javafx.stage.Stage;
 
 public class App extends Application {
     @Override
-    public void start(Stage primaryStage) {
-        Label label = new Label("Hello, JavaFX 25!");
+    public void start(Stage stage) {
+        Label label = new Label("Hey");
         Scene scene = new Scene(label, 400, 200);
-        primaryStage.setTitle("Quixxer JavaFX Test");
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        stage.setTitle("Quixxer");
+        stage.setScene(scene);
+        stage.show();
     }
 
     public static void main(String[] args) {
