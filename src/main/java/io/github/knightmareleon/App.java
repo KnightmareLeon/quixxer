@@ -1,17 +1,24 @@
 package io.github.knightmareleon;
 
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 public class App extends Application {
     @Override
-    public void start(Stage stage) {
-        Label label = new Label("Hey");
-        Scene scene = new Scene(label, 400, 200);
-        stage.setTitle("Quixxer");
+    public void start(Stage stage) throws Exception{
+
+        FXMLLoader rootLoader = new FXMLLoader(
+            getClass().getResource("/io/github/knightmareleon/RootView.fxml")
+        );
+
+        Parent root = rootLoader.load();
+
+        Scene scene = new Scene(root, 900, 600);
         stage.setScene(scene);
+        stage.setTitle("Quixxer");
         stage.show();
     }
 
