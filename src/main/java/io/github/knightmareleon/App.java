@@ -17,6 +17,9 @@ public class App extends Application {
         Parent root = rootLoader.load();
 
         Scene scene = new Scene(root, 900, 600);
+        scene.getStylesheets().add(
+            getClass().getResource("/io/github/knightmareleon/css/base.css").toExternalForm()
+        );
         stage.setScene(scene);
         stage.setTitle("Quixxer");
         stage.show();

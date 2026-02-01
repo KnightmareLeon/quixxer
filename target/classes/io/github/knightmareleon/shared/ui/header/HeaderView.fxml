@@ -5,24 +5,25 @@
 
 <HBox xmlns:fx="http://javafx.com/fxml"
       fx:controller="io.github.knightmareleon.shared.ui.header.HeaderController"
+      styleClass="standard-dark-bg"
       spacing="10"
       alignment="CENTER"
-      style="-fx-background-color: #2c3e50; -fx-padding: 10;">
+      style="-fx-padding: 10;">
 
     <Button text="Dashboard"
-            style="-fx-text-fill: white;"
+            styleClass="standard-font,standard-dark-bg"
             onAction="#onDashboardClicked"/>
 
     <Button text="Test"
-            style="-fx-text-fill: white;"
+            styleClass="standard-font,standard-dark-bg"
             onAction="#onTestClicked"/>
 
     <Button text="Sets"
-            style="-fx-text-fill: white;"
+            styleClass="standard-font,standard-dark-bg"
             onAction="#onSetsClicked"/>
 
     <Button text="Settings"
-            style="-fx-text-fill: white;"
+            styleClass="standard-font,standard-dark-bg"
             onAction="#onSettingsClicked"/>
 
 </HBox>
