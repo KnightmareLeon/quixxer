@@ -18,6 +18,16 @@ public class HeaderController {
     }
 
     @FXML
+    private void onTestClicked() {
+        onTabSelected.accept("test");
+    }
+
+    @FXML
+    private void onSetsClicked() {
+        onTabSelected.accept("sets");
+    }
+
+    @FXML
     private void onSettingsClicked() {
         onTabSelected.accept("settings");
     }

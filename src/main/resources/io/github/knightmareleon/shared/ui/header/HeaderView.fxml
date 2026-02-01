@@ -13,6 +13,14 @@
             style="-fx-text-fill: white;"
             onAction="#onDashboardClicked"/>
 
+    <Button text="Test"
+            style="-fx-text-fill: white;"
+            onAction="#onTestClicked"/>
+
+    <Button text="Sets"
+            style="-fx-text-fill: white;"
+            onAction="#onSetsClicked"/>
+
     <Button text="Settings"
             style="-fx-text-fill: white;"
             onAction="#onSettingsClicked"/>

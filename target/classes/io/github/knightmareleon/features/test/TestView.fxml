@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.control.Label?>
+
+<StackPane xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="io.github.knightmareleon.features.test.TestController">
+
+    <Label text="Test" style="-fx-font-size: 24px;" />
+
+</StackPane>
