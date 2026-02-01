@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Button?>
 
 <HBox xmlns:fx="http://javafx.com/fxml"
       fx:controller="io.github.knightmareleon.shared.ui.header.HeaderController"
       styleClass="standard-dark-bg"
       spacing="10"
-      alignment="CENTER"
+      alignment="CENTER_LEFT"
       style="-fx-padding: 10;">
+
+    <Label  text="Quixxer"
+            styleClass="standard-font"/>
 
     <Button text="Dashboard"
             styleClass="standard-font,standard-dark-bg"
