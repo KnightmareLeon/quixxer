@@ -3,6 +3,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Button?>
+<?import io.github.knightmareleon.shared.ui.controls.IconButton?>
 
 <HBox xmlns:fx="http://javafx.com/fxml"
       fx:controller="io.github.knightmareleon.shared.ui.header.HeaderController"
@@ -11,23 +12,24 @@
       alignment="CENTER_LEFT"
       style="-fx-padding: 10;">
 
-    <Label  text="Quixxer"
-            styleClass="standard-font"/>
+    <Label 
+        text="Quixxer"
+        styleClass="standard-font"/>
 
-    <Button text="Dashboard"
-            styleClass="standard-font,standard-dark-bg"
-            onAction="#onDashboardClicked"/>
+     <IconButton 
+        text="Dashboard"
+        onAction="#onDashboardClicked"/>
 
-    <Button text="Test"
-            styleClass="standard-font,standard-dark-bg"
-            onAction="#onTestClicked"/>
+    <IconButton 
+        text="Test"
+        onAction="#onTestClicked"/>
 
-    <Button text="Sets"
-            styleClass="standard-font,standard-dark-bg"
-            onAction="#onSetsClicked"/>
+    <IconButton 
+        text="Sets"
+        onAction="#onSetsClicked"/>
 
-    <Button text="Settings"
-            styleClass="standard-font,standard-dark-bg"
-            onAction="#onSettingsClicked"/>
+    <IconButton 
+        text="Setting"
+        onAction="#onSettingsClicked"/>
 
 </HBox>

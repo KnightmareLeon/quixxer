@@ -4,5 +4,6 @@ io\github\knightmareleon\features\dashboard\DashboardController.class
 io\github\knightmareleon\features\sets\SetsController.class
 io\github\knightmareleon\shared\navigator\TabNavigator.class
 io\github\knightmareleon\shared\ui\header\HeaderController.class
+io\github\knightmareleon\shared\ui\controls\IconButton.class
 io\github\knightmareleon\App.class
 io\github\knightmareleon\RootController.class
