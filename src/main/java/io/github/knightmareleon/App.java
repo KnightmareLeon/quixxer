@@ -20,6 +20,9 @@ public class App extends Application {
         scene.getStylesheets().add(
             getClass().getResource("/io/github/knightmareleon/css/base.css").toExternalForm()
         );
+        scene.getStylesheets().add(
+            getClass().getResource("/io/github/knightmareleon/css/controls.css").toExternalForm()
+        );
         stage.setScene(scene);
         stage.setTitle("Quixxer");
         stage.show();

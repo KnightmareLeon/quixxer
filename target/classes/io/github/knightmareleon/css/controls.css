@@ -3,6 +3,7 @@
     -fx-background-radius: 6;
     -fx-padding: 6 12;
     -fx-cursor: hand;
+    -fx-text-fill: white;
 }
 
 .icon-button:hover {
@@ -13,10 +14,8 @@
     -fx-background-color: #181820;
 }
 
-.icon-button .content .text {
-    -fx-text-fill: white;
-}
-
-.icon-button .content .icon {
-    -fx-text-fill: white;
+.icon-base {
+    -fx-background-color: white; 
+    -fx-pref-width: 1.333em;  
+    -fx-pref-height: 1.333em; 
 }
