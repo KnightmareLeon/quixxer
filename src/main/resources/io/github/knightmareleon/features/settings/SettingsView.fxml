@@ -4,7 +4,8 @@
 <?import javafx.scene.control.Label?>
 
 <StackPane xmlns:fx="http://javafx.com/fxml/1"
-           fx:controller="io.github.knightmareleon.features.settings.SettingsController">
+           fx:controller="io.github.knightmareleon.features.settings.SettingsController"
+           styleClass="standard-gray-bg">
 
     <Label text="Settings" style="-fx-font-size: 24px;" />
 

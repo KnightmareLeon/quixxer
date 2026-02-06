@@ -4,7 +4,8 @@
 <?import javafx.scene.control.Label?>
 
 <StackPane xmlns:fx="http://javafx.com/fxml/1"
-           fx:controller="io.github.knightmareleon.features.test.TestController">
+           fx:controller="io.github.knightmareleon.features.test.TestController"
+           styleClass="standard-gray-bg">
 
     <Label text="Test" style="-fx-font-size: 24px;" />
 

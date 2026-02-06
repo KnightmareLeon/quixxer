@@ -4,7 +4,8 @@
 <?import javafx.scene.control.Label?>
 
 <StackPane xmlns:fx="http://javafx.com/fxml/1"
-           fx:controller="io.github.knightmareleon.features.dashboard.DashboardController">
+           fx:controller="io.github.knightmareleon.features.dashboard.DashboardController"
+           styleClass="standard-gray-bg">
 
     <Label text="Dashboard" style="-fx-font-size: 24px;" />
 
