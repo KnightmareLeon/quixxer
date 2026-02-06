@@ -1,12 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
 
 <StackPane xmlns:fx="http://javafx.com/fxml/1"
            fx:controller="io.github.knightmareleon.features.test.TestController"
            styleClass="standard-gray-bg">
-
-    <Label text="Test" style="-fx-font-size: 24px;" />
-
+    <ScrollPane fx:id="scrollPane"
+            maxWidth="1136"
+            maxHeight="840"
+            hbarPolicy="AS_NEEDED"
+            vbarPolicy="AS_NEEDED"
+            fitToWidth="true"
+            fitToHeight="true"
+            styleClass="standard-dark-bg">
+        <VBox alignment="CENTER"
+                styleClass="standard-dark-bg"
+                fillWidth="true">
+            <Button text="MULTIPLE CHOICE" style="-fx-font-size: 24px;" />
+            <Button text="FLASHCARDS" style="-fx-font-size: 24px;" />
+            <Button text="MATCHING TYPE" style="-fx-font-size: 24px;" />
+            <Button text="ENUMERATION" style="-fx-font-size: 24px;" />
+            <Button text="TRUE OR FALSE" style="-fx-font-size: 24px;" />
+            <Button text="COMBINED" style="-fx-font-size: 24px;" />
+        </VBox>
+    </ScrollPane>
 </StackPane>
