@@ -17,19 +17,18 @@
             hbarPolicy="AS_NEEDED"
             vbarPolicy="AS_NEEDED"
             fitToWidth="true"
-            fitToHeight="true"
             styleClass="standard-dark-bg">
         <VBox fx:id="testcontainer"
               alignment="CENTER"
               styleClass="standard-dark-bg"
-              spacing="24"
+              spacing="48"
               fillWidth="true">
-            <Button text="MULTIPLE CHOICE" styleClass="mul-choice-bg,standard-font,test-card" prefWidth="${testcontainer.width * 0.9154929577}" />
-            <Button text="FLASHCARDS" styleClass="fc-test-bg,standard-font,test-card" prefWidth="${testcontainer.width * 0.9154929577}" />
-            <Button text="MATCHING TYPE" styleClass="match-type-test-bg,standard-font,test-card" prefWidth="${testcontainer.width * 0.9154929577}" />
-            <Button text="ENUMERATION" styleClass="enum-test-bg,standard-font,test-card" prefWidth="${testcontainer.width * 0.9154929577}" />
-            <Button text="TRUE OR FALSE" styleClass="tof-test-bg,standard-font,test-card" prefWidth="${testcontainer.width * 0.9154929577}" />
-            <Button text="COMBINED" styleClass="combined-test-bg,standard-font,test-card" prefWidth="${testcontainer.width * 0.9154929577}" />
+            <Button text="MULTIPLE CHOICE" styleClass="mul-choice-bg,standard-font,test-card" prefWidth="${testcontainer.width * 0.9154929577}" prefHeight="${scrollPane.height * 0.1785714286}"/>
+            <Button text="FLASHCARDS" styleClass="fc-test-bg,standard-font,test-card" prefWidth="${testcontainer.width * 0.9154929577}" prefHeight="${scrollPane.height * 0.1785714286}"/>
+            <Button text="MATCHING TYPE" styleClass="match-type-test-bg,standard-font,test-card" prefWidth="${testcontainer.width * 0.9154929577}" prefHeight="${scrollPane.height * 0.1785714286}"/>
+            <Button text="ENUMERATION" styleClass="enum-test-bg,standard-font,test-card" prefWidth="${testcontainer.width * 0.9154929577}" prefHeight="${scrollPane.height * 0.1785714286}"/>
+            <Button text="TRUE OR FALSE" styleClass="tof-test-bg,standard-font,test-card" prefWidth="${testcontainer.width * 0.9154929577}" prefHeight="${scrollPane.height * 0.1785714286}"/>
+            <Button text="COMBINED" styleClass="combined-test-bg,standard-font,test-card" prefWidth="${testcontainer.width * 0.9154929577}" prefHeight="${scrollPane.height * 0.1785714286}"/>
         </VBox>
     </ScrollPane>
 </StackPane>
