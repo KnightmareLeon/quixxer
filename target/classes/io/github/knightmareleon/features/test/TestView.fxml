@@ -9,10 +9,11 @@
 
 <StackPane xmlns:fx="http://javafx.com/fxml/1"
            fx:controller="io.github.knightmareleon.features.test.TestController"
+           fx:id="maintestcontainer"
            styleClass="standard-gray-bg">
     <ScrollPane fx:id="scrollPane"
             maxWidth="1136"
-            maxHeight="840"
+            maxHeight="${maintestcontainer.height * 0.9051724138}"
             hbarPolicy="AS_NEEDED"
             vbarPolicy="AS_NEEDED"
             fitToWidth="true"
