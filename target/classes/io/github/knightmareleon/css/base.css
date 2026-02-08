@@ -7,5 +7,6 @@
 }
 
 .standard-font {
+    -fx-font-family: "Inter 24pt ExtraLight";
     -fx-text-fill: white
 }

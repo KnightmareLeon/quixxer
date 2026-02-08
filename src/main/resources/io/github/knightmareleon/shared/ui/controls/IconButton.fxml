@@ -6,7 +6,7 @@
 <fx:root type="Button"
          xmlns:fx="http://javafx.com/fxml"
          stylesheets="/io/github/knightmareleon/css/controls.css"
-         styleClass="icon-button">
+         styleClass="icon-button,standard-font">
     <graphic>
         <Region fx:id="icon"/>
     </graphic>

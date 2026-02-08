@@ -4,11 +4,13 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 public class App extends Application {
     @Override
     public void start(Stage stage) throws Exception{
+        Font.loadFont(getClass().getResourceAsStream("/io/github/knightmareleon/fonts/Inter_24pt-ExtraLight.ttf"), 24);
 
         FXMLLoader rootLoader = new FXMLLoader(
             getClass().getResource("/io/github/knightmareleon/RootView.fxml")
@@ -23,6 +25,7 @@ public class App extends Application {
         scene.getStylesheets().add(
             getClass().getResource("/io/github/knightmareleon/css/controls.css").toExternalForm()
         );
+
         stage.setScene(scene);
         stage.setTitle("Quixxer");
         stage.show();
