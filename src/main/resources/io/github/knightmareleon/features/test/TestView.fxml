@@ -10,6 +10,7 @@
 <StackPane xmlns:fx="http://javafx.com/fxml/1"
            fx:controller="io.github.knightmareleon.features.test.TestController"
            fx:id="maintestcontainer"
+           stylesheets="@../../css/test.css"
            styleClass="standard-gray-bg">
     <ScrollPane fx:id="scrollPane"
             maxWidth="1136"
@@ -17,7 +18,8 @@
             hbarPolicy="AS_NEEDED"
             vbarPolicy="AS_NEEDED"
             fitToWidth="true"
-            styleClass="standard-dark-bg">
+            styleClass="standard-dark-bg"
+            style="-fx-padding: 48 0 48 0">
         <VBox fx:id="testcontainer"
               alignment="CENTER"
               styleClass="standard-dark-bg"
