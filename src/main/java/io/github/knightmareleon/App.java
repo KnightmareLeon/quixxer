@@ -1,5 +1,8 @@
 package io.github.knightmareleon;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -19,7 +22,11 @@ public class App extends Application {
 
         Parent root = rootLoader.load();
 
-        Scene scene = new Scene(root, 900, 600);
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        double width = screenSize.getWidth();
+        double height = screenSize.getHeight();
+
+        Scene scene = new Scene(root, width, height - 100);
         scene.getStylesheets().add(
             getClass().getResource("/io/github/knightmareleon/css/base.css").toExternalForm()
         );
