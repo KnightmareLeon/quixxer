@@ -10,3 +10,10 @@
     -fx-font-family: "Inter 24pt ExtraLight";
     -fx-text-fill: white
 }
+
+.standard-header-font{
+    -fx-font-family: "Inter Regular";
+    -fx-font-size: 24px;
+    -fx-font-weight: bolder;
+    -fx-text-fill: white
+}

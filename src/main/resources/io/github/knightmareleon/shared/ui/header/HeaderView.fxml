@@ -15,7 +15,12 @@
 
     <Label 
         text="Quixxer"
-        styleClass="standard-font"/>
+        styleClass="standard-header-font"/>
+
+    <Label 
+        text=" |"
+        styleClass="standard-font"
+        style="-fx-font-size: 24px;"/>
 
      <IconButton
         text="Dashboard"
