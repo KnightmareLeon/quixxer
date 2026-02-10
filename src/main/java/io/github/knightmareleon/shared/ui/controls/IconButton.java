@@ -33,7 +33,6 @@ public class IconButton extends Button{
 
     @FXML
     public void initialize() {
-        //icon.setClass("-fx-background-color: white; -fx-pref-width: 1.333em;  -fx-pref-height: 1.333em; -fx-shape: \"m 0,15.984 5.672,5.664 c 0,0 3.182,-3.18 6.314,-6.312 V 32 h 8.021 V 15.336 l 6.32,6.32 L 32,15.984 16.002,0 Z\";");
         icon.getStyleClass().add(this.iconStyleClass);
         icon.setStyle("-fx-shape: \"" + this.iconPath + "\"");
         this.setGraphic(icon);
