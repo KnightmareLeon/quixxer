@@ -22,3 +22,11 @@
 .combined-test-bg {
     -fx-background-color: linear-gradient(to bottom, rgb(153, 95, 0, 0.8), #FF9F00);
 }
+
+.test-icon-base {
+    -fx-background-color: white; 
+    -fx-min-width: 102;  
+    -fx-min-height: 102; 
+    -fx-max-width: 102;  
+    -fx-max-height: 102; 
+}
