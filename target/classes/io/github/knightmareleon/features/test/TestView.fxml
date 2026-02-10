@@ -18,11 +18,11 @@
             hbarPolicy="AS_NEEDED"
             vbarPolicy="AS_NEEDED"
             fitToWidth="true"
-            styleClass="standard-dark-bg"
-            style="-fx-padding: 48 0 48 0">
+            styleClass="standard-dark-bg">
         <VBox fx:id="testcontainer"
               alignment="CENTER"
               styleClass="standard-dark-bg"
+              style="-fx-padding: 48 0 48 0"
               spacing="48"
               fillWidth="true">
             <Button text="MULTIPLE CHOICE" styleClass="mul-choice-bg,standard-font,test-card" prefWidth="${testcontainer.width * 0.9154929577}" prefHeight="${scrollPane.height * 0.1785714286}"/>
