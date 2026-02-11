@@ -11,5 +11,5 @@
          maxWidth="Infinity"
          VBox.vgrow="ALWAYS"
          prefHeight="150"
-         style="-fx-border-radius: 15; -fx-background-radius: 15">
+         styleClass="test-button">
 </fx:root>
