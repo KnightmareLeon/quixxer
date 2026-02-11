@@ -19,7 +19,7 @@
             hbarPolicy="AS_NEEDED"
             vbarPolicy="AS_NEEDED"
             fitToWidth="true"
-            styleClass="standard-dark-bg">
+            styleClass="standard-gray-bg">
         <VBox fx:id="vbox"
               alignment="CENTER"
               styleClass="standard-dark-bg"
