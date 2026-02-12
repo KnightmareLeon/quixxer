@@ -4,6 +4,7 @@
     -fx-padding: 6 12;
     -fx-cursor: hand;
     -fx-text-fill: white;
+    transition: all 0.15s ease-in-out;
 }
 
 .icon-button:hover {
