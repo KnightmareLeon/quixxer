@@ -2,7 +2,9 @@ package io.github.knightmareleon;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.sql.Connection;
 
+import io.github.knightmareleon.database.DatabaseManager;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -13,6 +15,8 @@ import javafx.stage.Stage;
 public class App extends Application {
     @Override
     public void start(Stage stage) throws Exception{
+
+        Connection connection = DatabaseManager.getConnection();
         Font.loadFont(getClass().getResourceAsStream("/io/github/knightmareleon/fonts/Inter_24pt-ExtraLight.ttf"), 16);
         Font.loadFont(getClass().getResourceAsStream("/io/github/knightmareleon/fonts/Inter-VariableFont_opsz,wght.ttf"), 16);
 

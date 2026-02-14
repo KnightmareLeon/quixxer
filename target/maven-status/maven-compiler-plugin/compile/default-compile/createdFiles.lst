@@ -1,4 +1,5 @@
 io\github\knightmareleon\features\settings\SettingsController.class
+io\github\knightmareleon\database\DatabaseManager.class
 io\github\knightmareleon\features\test\TestController.class
 io\github\knightmareleon\features\dashboard\DashboardController.class
 io\github\knightmareleon\features\sets\SetsController.class
