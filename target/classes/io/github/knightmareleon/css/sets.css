@@ -1,0 +1,10 @@
+.set-standard-bg {
+    -fx-background-color: linear-gradient(to bottom, rgb(42, 42, 51, 0.9), rgb(126, 126, 153, 0.3));
+}
+
+.set-button {
+    -fx-cursor: hand;
+    transition: all 0.15s ease-in-out;
+    -fx-border-radius: 15;
+    -fx-background-radius: 15;
+}

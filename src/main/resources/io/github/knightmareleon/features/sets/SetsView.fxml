@@ -1,12 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ScrollPane?>
+<?import io.github.knightmareleon.shared.ui.controls.IconButton?>
 
 <StackPane xmlns:fx="http://javafx.com/fxml/1"
+           fx:id="mainContainer"
            fx:controller="io.github.knightmareleon.features.sets.SetsController"
+           stylesheets="@../../css/sets.css"
            styleClass="standard-gray-bg">
+    <VBox fx:id="vbox"
+          alignment="CENTER"
+          styleClass="standard-dark-bg"
+          style="-fx-padding: 48"
+          spacing="24"
+          fillWidth="true"
+          maxWidth="1136"
+          maxHeight="${mainContainer.height * 0.9051724138}">
+        <HBox
+            maxHeight="48"
+            >
+            <HBox>
+                <IconButton
+                    iconStyleClass="icon-base"
+                    iconPath="M0 -0.000244141V10.3898H10.39V-0.000244141H0ZM12.6293 
+                    -0.000244141V10.3898H23.0193V-0.000244141H12.6293ZM25.2586 -0.000244141V10.3898H35.8277V-0.000244141H25.2586ZM0 
+                    12.629V23.0191H10.39V12.629H0ZM12.6293 12.629V23.0191H23.0193V12.629H12.6293ZM25.2586 
+                    12.629V23.0191H35.8277V12.629H25.2586ZM0 25.2583V35.8275H10.39V25.2583H0ZM12.6293 
+                    25.2583V35.8275H23.0193V25.2583H12.6293ZM25.2586 25.2583V35.8275H35.8277V25.2583H25.2586Z"
+                >
+                </IconButton>
+                <IconButton
+                    iconStyleClass="icon-base"
+                    iconPath="M0 31.0283C0 30.5964 0.171578 30.1822 0.476987 29.8768C0.782396 29.5714 1.19662 29.3998 1.62853 
+                    29.3998H34.1992C34.6311 29.3998 35.0454 29.5714 35.3508 29.8768C35.6562 30.1822 35.8278 30.5964 35.8278 
+                    31.0283C35.8278 31.4603 35.6562 31.8745 35.3508 32.1799C35.0454 32.4853 34.6311 32.6569 34.1992 
+                    32.6569H1.62853C1.19662 32.6569 0.782396 32.4853 0.476987 32.1799C0.171578 31.8745 0 31.4603 0 31.0283ZM0 
+                    18.0001C0 17.5682 0.171578 17.1539 0.476987 16.8485C0.782396 16.5431 1.19662 16.3715 1.62853 
+                    16.3715H34.1992C34.6311 16.3715 35.0454 16.5431 35.3508 16.8485C35.6562 17.1539 35.8278 17.5682 35.8278 
+                    18.0001C35.8278 18.432 35.6562 18.8462 35.3508 19.1516C35.0454 19.457 34.6311 19.6286 34.1992 
+                    19.6286H1.62853C1.19662 19.6286 0.782396 19.457 0.476987 19.1516C0.171578 18.8462 0 18.432 0 
+                    18.0001ZM0 4.9718C0 4.53988 0.171578 4.12566 0.476987 3.82025C0.782396 3.51484 1.19662 3.34326 1.62853 
+                    3.34326H34.1992C34.6311 3.34326 35.0454 3.51484 35.3508 3.82025C35.6562 4.12566 35.8278 4.53988 35.8278 
+                    4.9718C35.8278 5.40371 35.6562 5.81793 35.3508 6.12334C35.0454 6.42875 34.6311 6.60033 34.1992 
+                    6.60033H1.62853C1.19662 6.60033 0.782396 6.42875 0.476987 6.12334C0.171578 5.81793 0 5.40371 0 4.9718Z"
+                >
+                </IconButton>
+            </HBox>
+            <Region HBox.hgrow="ALWAYS" />
+            <HBox spacing="12">
+                <Button text="+ Create Set" styleClass="set-standard-bg,standard-font,set-button" prefHeight="48"/>
+                <TextField promptText="Search"
+                    prefHeight="48"/>
+            </HBox>
+        </HBox>
 
-    <Label text="Sets" style="-fx-font-size: 24px;" />
+    </VBox>
+    
 
 </StackPane>
