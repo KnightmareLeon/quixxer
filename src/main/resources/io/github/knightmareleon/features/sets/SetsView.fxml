@@ -61,7 +61,23 @@
                     prefHeight="48"/>
             </HBox>
         </HBox>
-
+        <ScrollPane fx:id="scrollPane"
+            maxWidth="1136"
+            prefHeight="${mainContainer.height * 0.9051724138}"
+            hbarPolicy="AS_NEEDED"
+            vbarPolicy="AS_NEEDED"
+            fitToWidth="true"
+            fitToHeight="true"
+            styleClass="standard-dark-bg"
+            style="-fx-border-color: ;">
+            <VBox fx:id="vbox"
+                alignment="CENTER"
+                styleClass="standard-dark-bg"
+                style="-fx-padding: 48"
+                spacing="48"
+                fillWidth="true">
+            </VBox>
+        </ScrollPane>
     </VBox>
     
 
