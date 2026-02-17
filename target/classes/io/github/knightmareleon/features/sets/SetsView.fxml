@@ -24,9 +24,7 @@
           fillWidth="true"
           maxWidth="1136"
           maxHeight="${mainContainer.height * 0.9051724138}">
-        <HBox
-            maxHeight="48"
-            >
+        <HBox maxHeight="48">
             <HBox>
                 <IconButton
                     iconStyleClass="icon-base"
@@ -56,9 +54,18 @@
             </HBox>
             <Region HBox.hgrow="ALWAYS" />
             <HBox spacing="12">
-                <Button text="+ Create Set" styleClass="set-standard-bg,standard-font,set-button" prefHeight="48"/>
-                <TextField promptText="Search"
-                    prefHeight="48"/>
+                <Button 
+                    text="+ Create Set" 
+                    styleClass="set-standard-bg,standard-font,set-button" 
+                    prefHeight="48"
+                    prefWidth="${mainContainer.width * 0.2253521126760563}"
+                    maxWidth="256"/>
+                <TextField 
+                    promptText="Search"
+                    prefHeight="48"
+                    prefWidth="${mainContainer.width * 0.3679577464788732}"
+                    maxWidth="418"
+                    style="-fx-background-radius: 15; -fx-border-radius: 15"/>
             </HBox>
         </HBox>
         <ScrollPane fx:id="scrollPane"
@@ -68,8 +75,7 @@
             vbarPolicy="AS_NEEDED"
             fitToWidth="true"
             fitToHeight="true"
-            styleClass="standard-dark-bg"
-            style="-fx-border-color: ;">
+            styleClass="standard-dark-bg">
             <VBox fx:id="vbox"
                 alignment="CENTER"
                 styleClass="standard-dark-bg"

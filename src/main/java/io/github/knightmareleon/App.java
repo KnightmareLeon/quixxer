@@ -1,5 +1,7 @@
 package io.github.knightmareleon;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.sql.Connection;
 
 import io.github.knightmareleon.database.DatabaseManager;
@@ -24,8 +26,12 @@ public class App extends Application {
         );
 
         Parent root = rootLoader.load();
+        
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        double width = screenSize.getWidth();
+        double height = screenSize.getHeight();
 
-        Scene scene = new Scene(root);
+        Scene scene = new Scene(root, width - 50, height - 100);
 
         scene.getStylesheets().add(
             getClass().getResource("/io/github/knightmareleon/css/base.css").toExternalForm()
