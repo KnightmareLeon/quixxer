@@ -14,6 +14,8 @@ public class DatabaseManager {
     private static final String APP_NAME = "quixxer";
     private static Connection connection;
 
+    private DatabaseManager() {}
+
     public static Connection getConnection() throws SQLException {
         if (connection == null || connection.isClosed()) {
             Path dir = Paths.get(System.getProperty("user.home"),
@@ -28,8 +30,8 @@ public class DatabaseManager {
             try (Statement stmt = connection.createStatement()) {
                 stmt.execute("PRAGMA foreign_keys = ON;");
             }
+            System.out.println("Connected to database successfully!");
         }
-        System.out.println("Connected to database successfully!");
         return connection;
     }
 }
