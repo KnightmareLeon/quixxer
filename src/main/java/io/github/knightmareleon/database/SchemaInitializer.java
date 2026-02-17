@@ -21,6 +21,8 @@ public class SchemaInitializer {
                     stmt.execute(statement);
                 }
             }
+
+            System.out.println("Schema initialized.");
         }
     }
 
