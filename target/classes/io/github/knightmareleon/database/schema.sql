@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS standard_question (
         ON DELETE CASCADE
 );
 
-CREATE INDEX idx_std_question_set_id_id
+CREATE INDEX IF NOT EXISTS idx_std_question_set_id_id
 ON standard_question(set_id, id);
 
 CREATE TABLE IF NOT EXISTS tof_question (
@@ -29,8 +29,21 @@ CREATE TABLE IF NOT EXISTS tof_question (
     set_id INTEGER NOT NULL,
     FOREIGN KEY (set_id) 
         REFERENCES study_set(id) 
-        on DELETE CASCADE
+        ON DELETE CASCADE
 );
 
-CREATE INDEX idx_tof_question_set_id_id
+CREATE INDEX IF NOT EXISTS idx_tof_question_set_id_id
 ON tof_question(set_id, id);
+
+CREATE TABLE IF NOT EXISTS choice (
+    id INTEGER PRIMARY KEY,
+    description TEXT NOT NULL,
+    answer INTEGER NOT NULL CHECK (answer IN (0,1)),
+    q_id INTEGER NOT NULL,
+    FOREIGN KEY (q_id)
+        REFERENCES standard_question(id)
+        ON DELETE CASCADE
+);
+
+CREATE INDEX IF NOT EXISTS idx_choice_q_id_id
+ON choice(q_id, id);
