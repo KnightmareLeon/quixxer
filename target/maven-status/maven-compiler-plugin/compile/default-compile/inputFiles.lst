@@ -5,10 +5,14 @@ C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightma
 C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\features\dashboard\DashboardDAO.java
 C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\features\dashboard\DashboardModel.java
 C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\features\dashboard\DashboardService.java
+C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\features\sets\components\create\SetsCreateController.java
+C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\features\sets\components\main\SetsMainController.java
+C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\features\sets\components\main\SetsMainDAO.java
+C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\features\sets\components\main\SetsMainModel.java
+C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\features\sets\components\main\SetsMainService.java
+C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\features\sets\components\SetsNavigator.java
+C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\features\sets\components\SetsPage.java
 C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\features\sets\SetsController.java
-C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\features\sets\SetsDAO.java
-C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\features\sets\SetsModel.java
-C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\features\sets\SetsService.java
 C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\features\settings\SettingsController.java
 C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\features\settings\SettingsDAO.java
 C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\features\settings\SettingsModel.java
@@ -19,6 +23,7 @@ C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightma
 C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\features\test\TestModel.java
 C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\features\test\TestService.java
 C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\RootController.java
-C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\shared\navigator\TabNavigator.java
+C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\shared\navigator\BaseTabNavigator.java
+C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\shared\navigator\RootTabNavigator.java
 C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\shared\ui\controls\IconButton.java
 C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\shared\ui\header\HeaderController.java

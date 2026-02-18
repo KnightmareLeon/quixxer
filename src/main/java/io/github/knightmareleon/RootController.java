@@ -1,6 +1,6 @@
 package io.github.knightmareleon;
 
-import io.github.knightmareleon.shared.navigator.TabNavigator;
+import io.github.knightmareleon.shared.navigator.RootTabNavigator;
 import io.github.knightmareleon.shared.ui.header.HeaderController;
 import javafx.fxml.FXML;
 import javafx.scene.layout.StackPane;
@@ -13,12 +13,12 @@ public class RootController {
     @FXML
     private HeaderController headerController;
 
-    private TabNavigator navigator;
+    private RootTabNavigator navigator;
 
     @FXML
     public void initialize() {
 
-        navigator = new TabNavigator(contentArea);
+        navigator = new RootTabNavigator(contentArea);
 
         headerController.setOnTabSelected(tabId -> {
             navigator.show(tabId);
