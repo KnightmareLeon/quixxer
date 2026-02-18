@@ -87,3 +87,9 @@
     -fx-cursor: hand;
     transition: all 0.15s ease-in-out;
 }
+
+.scroll-pane .viewport {
+    -fx-background-color: transparent;
+    -fx-background-radius: 53 0 0 53;
+    -fx-border-radius: 53 0 0 53;
+}

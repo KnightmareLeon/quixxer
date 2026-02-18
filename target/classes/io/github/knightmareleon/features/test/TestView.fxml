@@ -19,11 +19,12 @@
             hbarPolicy="AS_NEEDED"
             vbarPolicy="AS_NEEDED"
             fitToWidth="true"
-            styleClass="standard-dark-bg">
+            styleClass="standard-dark-bg"
+            style="-fx-background-radius: 53 0 0 53; -fx-border-radius: 53 0 0 53;">
         <VBox fx:id="vbox"
               alignment="CENTER"
               styleClass="standard-dark-bg"
-              style="-fx-padding: 48"
+              style="-fx-padding: 48; -fx-background-radius: 53 0 0 53; -fx-border-radius: 53 0 0 53;"
               spacing="48"
               fillWidth="true">
             <TestIconButton

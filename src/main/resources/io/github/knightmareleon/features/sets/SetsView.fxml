@@ -19,7 +19,7 @@
     <VBox fx:id="vbox"
           alignment="CENTER"
           styleClass="standard-dark-bg"
-          style="-fx-padding: 48"
+          style="-fx-padding: 48; -fx-border-radius: 53; -fx-background-radius: 53;"
           spacing="24"
           fillWidth="true"
           maxWidth="1136"
