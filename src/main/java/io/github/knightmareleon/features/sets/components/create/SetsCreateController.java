@@ -14,7 +14,7 @@ public class SetsCreateController implements SetsPage{
     }
 
     @FXML
-    private void onBackPageClick() {
+    private void onBackPageClicked() {
         navigator.show("main");
     }
 
