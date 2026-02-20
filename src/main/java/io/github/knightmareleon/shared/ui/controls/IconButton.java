@@ -2,26 +2,30 @@ package io.github.knightmareleon.shared.ui.controls;
 
 import java.io.IOException;
 
+import org.kordamp.ikonli.javafx.FontIcon;
+
 import javafx.beans.NamedArg;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
-import javafx.scene.layout.Region;
 
 public class IconButton extends Button{
 
     @FXML
-    private Region icon = new Region();
+    private FontIcon icon = new FontIcon();
 
+    private final String iconLiteral;
     private final String iconStyleClass;
-    private final String iconPath;
 
-    public IconButton(@NamedArg("iconStyleClass") String iconStyleClass, @NamedArg("iconPath") String iconPath) {
+    public IconButton(@NamedArg("iconLiteral") String iconLiteral, @NamedArg("iconStyleClass") String iconStyleClass) {
+
+        this.iconLiteral = iconLiteral;
         this.iconStyleClass = iconStyleClass;
-        this.iconPath = iconPath;
+
         FXMLLoader loader = new FXMLLoader(
             getClass().getResource("IconButton.fxml")
         );
+
         loader.setRoot(this);
         loader.setController(this);
         try {
@@ -33,9 +37,9 @@ public class IconButton extends Button{
 
     @FXML
     public void initialize() {
-        icon.getStyleClass().add(this.iconStyleClass);
-        icon.setStyle("-fx-shape: \"" + this.iconPath + "\"");
-        this.setGraphic(icon);
+        this.icon.setIconLiteral(this.iconLiteral);
+        this.icon.getStyleClass().add(this.iconStyleClass);
+        this.setGraphic(this.icon);
     }
 
 }

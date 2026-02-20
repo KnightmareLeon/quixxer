@@ -1,5 +1,5 @@
 .icon-button {
-    -fx-background-color: #212129;
+
     -fx-background-radius: 6;
     -fx-padding: 6 12;
     -fx-cursor: hand;
@@ -7,16 +7,18 @@
     transition: all 0.15s ease-in-out;
 }
 
-.icon-button:hover {
+.icon-button-base-bg {
+    -fx-background-color: #212129;
+}
+
+.icon-button-base-bg:hover {
     -fx-background-color: #2B2B36;
 }
 
-.icon-button:pressed {
+.icon-button-base-bg:pressed {
     -fx-background-color: #181820;
 }
 
-.icon-base {
-    -fx-background-color: white; 
-    -fx-pref-width: 1.333em;  
-    -fx-pref-height: 1.333em; 
+.icon-base-color {
+    -fx-icon-color: white;
 }
