@@ -73,11 +73,8 @@
 }
 
 .test-icon-base {
-    -fx-background-color: white; 
-    -fx-min-width: 102;  
-    -fx-min-height: 102; 
-    -fx-max-width: 102;  
-    -fx-max-height: 102; 
+    -fx-icon-color: white; 
+    -fx-icon-size: 102;
 }
 
 .test-button{

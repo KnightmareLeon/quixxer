@@ -22,7 +22,7 @@
 
     <IconButton
         text="Dashboard"
-        iconLiteral="fas-border-all"
+        iconLiteral="bi-columns-gap"
         iconStyleClass="icon-base-color"
         styleClass="icon-button-base-bg"
         onAction="#onDashboardClicked"/>

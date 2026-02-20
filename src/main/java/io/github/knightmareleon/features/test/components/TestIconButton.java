@@ -2,6 +2,8 @@ package io.github.knightmareleon.features.test.components;
 
 import java.io.IOException;
 
+import org.kordamp.ikonli.javafx.FontIcon;
+
 import javafx.beans.NamedArg;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,23 +11,23 @@ import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 
 public class TestIconButton extends Button{
 
-    @FXML private Region icon = new Region();
+    @FXML private FontIcon icon = new FontIcon();
     @FXML private HBox hbox = new HBox();
     @FXML private VBox vbox = new VBox();
     @FXML private Label header = new Label();
     @FXML private Label desc = new Label();
 
-    private String iconPath;
-    private String headerText;
-    private String descText;
-    public TestIconButton(@NamedArg("iconPath") String iconPath, @NamedArg("headerText") String headerText, @NamedArg("descText") String descText) {
+    private final String iconLiteral;
+    private final String headerText;
+    private final String descText;
 
-        this.iconPath = iconPath;
+    public TestIconButton(@NamedArg("iconLiteral") String iconLiteral, @NamedArg("headerText") String headerText, @NamedArg("descText") String descText) {
+
+        this.iconLiteral = iconLiteral;
         this.headerText = headerText;
         this.descText = descText;
 
@@ -43,8 +45,8 @@ public class TestIconButton extends Button{
 
     @FXML
     public void initialize() {
-        icon.getStyleClass().add("test-icon-base");
-        icon.setStyle("-fx-shape: \"" + this.iconPath + "\"");
+        this.icon.setIconLiteral(this.iconLiteral);
+        this.icon.getStyleClass().add("test-icon-base");
 
         this.header.setText(this.headerText);
         this.header.getStyleClass().add("standard-header-font");
