@@ -9,6 +9,7 @@ io\github\knightmareleon\features\dashboard\DashboardService.class
 io\github\knightmareleon\features\dashboard\DashboardDAO.class
 io\github\knightmareleon\features\sets\components\main\SetsMainModel.class
 io\github\knightmareleon\features\test\TestDAO.class
+io\github\knightmareleon\features\sets\components\controls\QuestionField.class
 io\github\knightmareleon\shared\ui\controls\IconButton.class
 io\github\knightmareleon\App.class
 io\github\knightmareleon\features\sets\components\main\SetsMainDAO.class

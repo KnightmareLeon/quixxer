@@ -12,6 +12,7 @@
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
 <?import io.github.knightmareleon.shared.ui.controls.IconButton?>
+<?import io.github.knightmareleon.features.sets.components.controls.QuestionField?>
 
 <VBox
     xmlns:fx="http://javafx.com/fxml/1"
@@ -45,21 +46,23 @@
         <VBox fx:id="vbox"
             alignment="TOP_LEFT"
             styleClass="standard-dark-bg"
+            style="-fx-padding: 0 24 0 0"
             spacing="24"
             fillWidth="true">
             <Label text="Set Name"
                 styleClass="standard-header-font"/>
             <TextField
                 styleClass="border-radius-15"
-                prefHeight="48"/>
+                minHeight="48"/>
             <Label text="Subject"
                 styleClass="standard-header-font"/>
             <ComboBox fx:id="subjectPicker" 
                 styleClass="border-radius-15"
-                prefHeight="48">
+                minHeight="48">
             </ComboBox>
             <Label text="Questions"
                 styleClass="standard-header-font"/>
+            <QuestionField />
         </VBox>
 
     </ScrollPane>
