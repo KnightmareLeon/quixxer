@@ -33,6 +33,13 @@
             styleClass="standard-header-font"/>
         <Region HBox.hgrow="ALWAYS" />
         <IconButton 
+            iconLiteral="fas-save"
+            styleClass="set-standard-bg"
+            iconStyleClass="icon-base-color"
+            minHeight="48"
+            minWidth="48"
+            onAction="#saveSet"/>
+        <IconButton 
             iconLiteral="bi-box-arrow-left"
             styleClass="set-standard-bg"
             iconStyleClass="icon-base-color"
@@ -57,6 +64,7 @@
             <Label text="Set Name"
                 styleClass="standard-header-font"/>
             <TextField
+                fx:id="setName"
                 styleClass="border-radius-15,standard-font"
                 style="-fx-text-fill: black !important"
                 minHeight="44"/>

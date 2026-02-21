@@ -35,6 +35,11 @@ public class QuestionField extends VBox{
     );
     @FXML private VBox choices;
     @FXML private List<HBox> choiceRows = new ArrayList<>();
+
+    private ToggleGroup trueOrFalse = new ToggleGroup();
+    private RadioButton trueButton = new RadioButton("True");
+    private RadioButton falseButton = new RadioButton("False");
+
     @FXML private Button addChoiceButton = new Button();
 
     public QuestionField() {
@@ -56,6 +61,13 @@ public class QuestionField extends VBox{
         this.addChoiceButton.setMaxWidth(Double.MAX_VALUE);
         this.qTypePicker.setItems(this.qTypes);
 
+        this.trueButton.setToggleGroup(trueOrFalse);
+        this.falseButton.setToggleGroup(trueOrFalse);
+        this.trueButton.setSelected(true);
+
+        this.trueButton.getStyleClass().add("standard-font");
+        this.falseButton.getStyleClass().add("standard-font");
+
         this.qTypePicker.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
             if(newVal.equals(oldVal)) {
                 return;
@@ -69,16 +81,6 @@ public class QuestionField extends VBox{
                 this.addChoice();
             } else {
                 addChoiceButton.setVisible(false);
-                ToggleGroup trueOrFalse = new ToggleGroup();
-                RadioButton trueButton = new RadioButton("True");
-                RadioButton falseButton = new RadioButton("False");
-
-                trueButton.setToggleGroup(trueOrFalse);
-                falseButton.setToggleGroup(trueOrFalse);
-                trueButton.setSelected(true);
-
-                trueButton.getStyleClass().add("standard-font");
-                falseButton.getStyleClass().add("standard-font");
 
                 choices.getChildren().addAll(trueButton, falseButton);
             }
@@ -140,6 +142,37 @@ public class QuestionField extends VBox{
 
     public String getType(){
         return this.qTypePicker.getValue();
+    }
+
+    public List<String> getChoices(){
+        List<String> choiceList = new ArrayList<>();
+        if(this.getType().equals("True or False")){
+            return choiceList;
+        }
+        int index = this.getType().equals("Identification") ? 1 : 0;
+        for (HBox row : this.choiceRows) {
+            choiceList.add(((TextField)row.getChildren().get(index)).getText());
+        }
+
+        return choiceList;
+    }
+
+    public List<Integer> getAnswers(){
+        if(this.getType().equals("True or False")){
+            return ((RadioButton) this.trueOrFalse.getSelectedToggle()).equals(trueButton) ?
+                List.of(0) : List.of(1) ;
+        } else if (this.getType().equals("Identification")){
+            List<Integer> answerIndices = new ArrayList<>();
+            int i = 0;
+            for (HBox row : this.choiceRows) {
+                if(((CheckBox)row.getChildren().get(0)).isSelected()) {
+                    answerIndices.add(i++);
+                }
+            }
+
+            return answerIndices;
+        }
+        return new ArrayList<Integer>();
     }
 
     public void setCloseButtonAction(EventHandler<ActionEvent> closeAction){

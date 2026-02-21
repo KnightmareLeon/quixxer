@@ -7,10 +7,13 @@ C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightma
 C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\features\dashboard\DashboardService.java
 C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\features\sets\components\controls\QuestionField.java
 C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\features\sets\components\create\SetsCreateController.java
+C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\features\sets\components\create\SetsCreateService.java
 C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\features\sets\components\main\SetsMainController.java
 C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\features\sets\components\main\SetsMainDAO.java
 C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\features\sets\components\main\SetsMainModel.java
 C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\features\sets\components\main\SetsMainService.java
+C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\features\sets\components\models\Question.java
+C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\features\sets\components\models\StudySet.java
 C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\features\sets\components\SetsNavigator.java
 C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\features\sets\components\SetsPage.java
 C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\features\sets\SetsController.java
