@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
@@ -8,21 +10,41 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 
+<?import io.github.knightmareleon.shared.ui.controls.IconButton?>
+
 <fx:root type="VBox"
     xmlns:fx="http://javafx.com/fxml/1"
     alignment="TOP_LEFT"
     style="-fx-border-color: white; -fx-padding: 24"
     stylesheets="/io/github/knightmareleon/css/controls.css"
     styleClass="standard-dark-bg, border-radius-15"
-    spacing="24"
+    spacing="12"
     fillWidth="true"
     maxWidth="1136">
-    <Label text="Question" styleClass="standard-font"/>
-    <TextArea fx:id="question" minHeight="96" styleClass="standard-font" style="-fx-text-fill: black !important"/>
-    <Label text="Type" styleClass="standard-font"/>
+    <HBox alignment="CENTER">
+        <Label text="Question" styleClass="standard-font"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <IconButton 
+            fx:id="closeQuestionButton"
+            iconLiteral="bi-x"
+            styleClass="set-standard-bg"
+            iconStyleClass="icon-base-color"
+            minHeight="32"
+            minWidth="32"/>
+    </HBox>
+    <TextArea 
+        fx:id="question" 
+        minHeight="96" 
+        styleClass="standard-font" 
+        style="-fx-text-fill: black !important"/>
+    <Label 
+        text="Type" 
+        styleClass="standard-font"/>
     <ComboBox fx:id="qTypePicker" 
         styleClass="border-radius-15, standard-font"/>
-    <Label text="Choices" styleClass="standard-font"/>
+    <Label 
+        text="Choices" 
+        styleClass="standard-font"/>
     <VBox fx:id="choices" 
         fillWidth="true"
         maxWidth="1136"

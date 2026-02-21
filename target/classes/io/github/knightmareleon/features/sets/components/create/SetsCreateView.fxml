@@ -8,6 +8,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Button?>
 
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
@@ -51,23 +52,32 @@
             alignment="TOP_LEFT"
             styleClass="standard-dark-bg"
             style="-fx-padding: 0 24 0 0"
-            spacing="24"
+            spacing="12"
             fillWidth="true">
             <Label text="Set Name"
                 styleClass="standard-header-font"/>
             <TextField
                 styleClass="border-radius-15,standard-font"
                 style="-fx-text-fill: black !important"
-                minHeight="48"/>
+                minHeight="44"/>
             <Label text="Subject"
                 styleClass="standard-header-font"/>
             <ComboBox fx:id="subjectPicker" 
                 styleClass="border-radius-15, standard-font"
-                minHeight="48">
+                minHeight="44">
             </ComboBox>
             <Label text="Questions"
                 styleClass="standard-header-font"/>
-            <QuestionField />
+            <VBox 
+                fx:id="questionContainer"
+                spacing="24"
+                fillWidth="true"/>
+            <Button 
+                fx:id="addQuestion"
+                text="+ Add Question"
+                maxWidth="1000000"
+                styleClass="set-standard-bg,set-button,standard-font"
+                onAction="#addQuestion"/>
         </VBox>
 
     </ScrollPane>

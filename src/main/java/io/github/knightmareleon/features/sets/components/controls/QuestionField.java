@@ -7,6 +7,8 @@ import java.util.List;
 import io.github.knightmareleon.shared.ui.controls.IconButton;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
@@ -24,6 +26,7 @@ import javafx.scene.layout.VBox;
 public class QuestionField extends VBox{
 
     @FXML private TextArea question;
+    @FXML private IconButton closeQuestionButton;
     @FXML private ComboBox<String> qTypePicker;
     private ObservableList<String> qTypes = FXCollections.observableArrayList(
         "Identification",
@@ -51,7 +54,6 @@ public class QuestionField extends VBox{
     @FXML
     public void initialize(){
         this.addChoiceButton.setMaxWidth(Double.MAX_VALUE);
-        this.qTypePicker.setMinHeight(48);
         this.qTypePicker.setItems(this.qTypes);
 
         this.qTypePicker.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
@@ -99,13 +101,13 @@ public class QuestionField extends VBox{
         row.setFillHeight(true);
         row.setAlignment(Pos.CENTER);
 
-        choiceField.setMinHeight(48);
+        choiceField.setMinHeight(24);
         choiceField.getStyleClass().addAll("border-radius-15","standard-font");
         choiceField.setStyle("-fx-text-fill: black !important");
         HBox.setHgrow(choiceField, Priority.ALWAYS);
 
-        deleteChoiceField.setMinHeight(48);
-        deleteChoiceField.setMinWidth(48);
+        deleteChoiceField.setMinHeight(32);
+        deleteChoiceField.setMinWidth(32);
         deleteChoiceField.getStyleClass().add("icon-button-base-bg");
 
         if(qTypePicker.getValue().equals("Identification")){
@@ -138,5 +140,9 @@ public class QuestionField extends VBox{
 
     public String getType(){
         return this.qTypePicker.getValue();
+    }
+
+    public void setCloseButtonAction(EventHandler<ActionEvent> closeAction){
+        this.closeQuestionButton.setOnAction(closeAction);
     }
 }
