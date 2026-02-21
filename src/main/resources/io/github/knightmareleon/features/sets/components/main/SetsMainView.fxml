@@ -50,7 +50,8 @@
                 prefHeight="48"
                 prefWidth="${vbox.width * 0.3679577464788732}"
                 maxWidth="418"
-                styleClass="border-radius-15"/>
+                styleClass="border-radius-15,standard-font"
+                style="-fx-text-fill: black !important"/>
         </HBox>
     </HBox>
     <ScrollPane fx:id="scrollPane"

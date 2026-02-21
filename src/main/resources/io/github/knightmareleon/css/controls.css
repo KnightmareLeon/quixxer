@@ -22,3 +22,11 @@
 .icon-base-color {
     -fx-icon-color: white;
 }
+
+.combo-box-text-white .list-cell {
+    -fx-text-fill: white;
+}
+
+.combo-box-gray-bg .list-cell {
+    -fx-background-color: #323949
+}

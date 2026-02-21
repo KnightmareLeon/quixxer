@@ -12,19 +12,26 @@
     xmlns:fx="http://javafx.com/fxml/1"
     alignment="TOP_LEFT"
     style="-fx-border-color: white; -fx-padding: 24"
+    stylesheets="/io/github/knightmareleon/css/controls.css"
     styleClass="standard-dark-bg, border-radius-15"
     spacing="24"
     fillWidth="true"
     maxWidth="1136">
     <Label text="Question" styleClass="standard-font"/>
-    <TextArea fx:id="question"/>
+    <TextArea fx:id="question" minHeight="96" styleClass="standard-font" style="-fx-text-fill: black !important"/>
     <Label text="Type" styleClass="standard-font"/>
-    <ComboBox fx:id="qTypePicker" styleClass="border-radius-15"/>
+    <ComboBox fx:id="qTypePicker" 
+        styleClass="border-radius-15, standard-font"/>
     <Label text="Choices" styleClass="standard-font"/>
     <VBox fx:id="choices" 
         fillWidth="true"
         maxWidth="1136"
         spacing="12">
     </VBox>
-    <Button fx:id="addChoiceButton" text="Add Choice" onAction="#addChoice"/>
+    <Button 
+        fx:id="addChoiceButton" 
+        text="+ Add Choice" 
+        styleClass="set-standard-bg,set-button,standard-font"
+        onAction="#addChoice"
+    />
 </fx:root>
