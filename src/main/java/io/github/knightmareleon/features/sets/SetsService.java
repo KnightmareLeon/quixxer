@@ -1,13 +1,20 @@
-package io.github.knightmareleon.features.sets.components.create;
+package io.github.knightmareleon.features.sets;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import io.github.knightmareleon.shared.daos.SetsDao;
 import io.github.knightmareleon.shared.models.Question;
 import io.github.knightmareleon.shared.models.StudySet;
 import io.github.knightmareleon.shared.utils.Result;
 
-public class SetsCreateService {
+public class SetsService {
+    
+    private final SetsDao setsDao;
+
+    public SetsService(SetsDao setsDao){
+        this.setsDao = setsDao;
+    }
     
     public Result<StudySet> saveStudySet(StudySet studySet){
         List<String> errorMessages = new ArrayList<>();

@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import io.github.knightmareleon.features.sets.SetsService;
 import io.github.knightmareleon.features.sets.components.SetsNavigator;
 import io.github.knightmareleon.features.sets.components.SetsPage;
 import io.github.knightmareleon.features.sets.components.controls.QuestionField;
+import io.github.knightmareleon.shared.infrastructure.AppContext;
 import io.github.knightmareleon.shared.models.Question;
 import io.github.knightmareleon.shared.models.StudySet;
 import io.github.knightmareleon.shared.utils.Result;
@@ -22,7 +24,7 @@ import javafx.scene.layout.VBox;
 
 public class SetsCreateController implements SetsPage{
 
-    private final SetsCreateService service = new SetsCreateService();
+    private final SetsService setsService;
     private SetsNavigator navigator;
 
     @FXML private Label titleErrorLabel;
@@ -42,6 +44,10 @@ public class SetsCreateController implements SetsPage{
 
     @FXML private VBox questionContainer;
     private final List<QuestionField> questionFields = new ArrayList<>();
+
+    public SetsCreateController(AppContext context){
+        this.setsService = context.getStudySetService();
+    }
 
     @Override
     public void setSetsNavigator(SetsNavigator navigator) {
@@ -112,7 +118,7 @@ public class SetsCreateController implements SetsPage{
         );
 
         
-        Result<StudySet> result = service.saveStudySet(studySet);
+        Result<StudySet> result = setsService.saveStudySet(studySet);
         
         if(result.isSuccess()){
             titleErrorLabel.setVisible(false);
