@@ -5,8 +5,8 @@ import io.github.knightmareleon.shared.models.StudySet;
 public class SetsCreateService {
     
     public void saveStudySet(StudySet studySet){
-        System.out.println(studySet.name());
-        System.out.println(studySet.subject());
-        System.out.println(studySet.questions());
+        System.out.println(studySet.getTitle());
+        System.out.println(studySet.getSubject());
+        System.out.println(studySet.getQuestions());
     }
 }

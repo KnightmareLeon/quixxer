@@ -14,6 +14,7 @@ public class SetsMainController implements SetsPage{
     }
 
     @FXML
+    @SuppressWarnings("unused")
     private void onCreateSetsClicked() {
         navigator.show("create");
     }

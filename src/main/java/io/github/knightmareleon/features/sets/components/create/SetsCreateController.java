@@ -17,10 +17,10 @@ import javafx.scene.layout.VBox;
 
 public class SetsCreateController implements SetsPage{
 
-    private SetsCreateService service = new SetsCreateService();
+    private final SetsCreateService service = new SetsCreateService();
     private SetsNavigator navigator;
 
-    @FXML private TextField setName;
+    @FXML private TextField setTitle;
     @FXML private ComboBox<String> subjectPicker;
     private final ObservableList<String> subjects = FXCollections.observableArrayList(
         "Computer Science",
@@ -33,7 +33,7 @@ public class SetsCreateController implements SetsPage{
     );
 
     @FXML private VBox questionContainer;
-    private List<QuestionField> questionFields = new ArrayList<>();
+    private final List<QuestionField> questionFields = new ArrayList<>();
 
     @Override
     public void setSetsNavigator(SetsNavigator navigator) {
@@ -47,6 +47,7 @@ public class SetsCreateController implements SetsPage{
     }
 
     @FXML
+    @SuppressWarnings("unused")
     private void onBackPageClicked() {
         navigator.show("main");
     }
@@ -67,6 +68,7 @@ public class SetsCreateController implements SetsPage{
     }
 
     @FXML
+    @SuppressWarnings("unused")
     private void saveSet(){
         List<Question> questions = new ArrayList<>();
         
@@ -77,6 +79,7 @@ public class SetsCreateController implements SetsPage{
             List<String> trueOrFalse = List.of("True","False");
             if(questionField.getType().equals("True or False")){
                 questions.add(new Question(
+                    0,
                     question,
                     qType,
                     trueOrFalse,
@@ -84,6 +87,7 @@ public class SetsCreateController implements SetsPage{
                 ));
             } else {
                 questions.add(new Question(
+                    0,
                     question,
                     qType,
                     questionField.getChoices(),
@@ -93,8 +97,9 @@ public class SetsCreateController implements SetsPage{
         }
 
         StudySet studySet = new StudySet(
-            this.setName.getText(),
+            this.setTitle.getText(),
             this.subjectPicker.getValue(),
+            "default",
             questions
         );
 

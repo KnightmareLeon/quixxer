@@ -14,13 +14,13 @@ public abstract class BaseTabNavigator {
         this.container = container;
     }
 
+    @SuppressWarnings("CallToPrintStackTrace")
     public void show(String tabId) {
         try {
             String fxmlPath = this.getFXMLPath(tabId);
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
             Parent view = loader.load();
-            Object controller = loader.getController();
             container.getChildren().setAll(view);
 
         } catch (IOException e) {

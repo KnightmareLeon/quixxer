@@ -14,6 +14,7 @@ public class SetsNavigator extends BaseTabNavigator {
     }
 
     @Override
+    @SuppressWarnings("CallToPrintStackTrace")
     public void show(String tabId) {
         try {
             String fxmlPath = this.getFXMLPath(tabId);
