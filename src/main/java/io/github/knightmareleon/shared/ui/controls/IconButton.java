@@ -17,8 +17,8 @@ public class IconButton extends Button{
     private final String iconLiteral;
     private final String iconStyleClass;
 
+    @SuppressWarnings("LeakingThisInConstructor")
     public IconButton(@NamedArg("iconLiteral") String iconLiteral, @NamedArg("iconStyleClass") String iconStyleClass) {
-
         this.iconLiteral = iconLiteral;
         this.iconStyleClass = iconStyleClass;
 
@@ -40,6 +40,10 @@ public class IconButton extends Button{
         this.icon.setIconLiteral(this.iconLiteral);
         this.icon.getStyleClass().add(this.iconStyleClass);
         this.setGraphic(this.icon);
+    }
+
+    public void setOnAction() {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
 }

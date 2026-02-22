@@ -25,6 +25,7 @@ public class TestIconButton extends Button{
     private final String headerText;
     private final String descText;
 
+    @SuppressWarnings("LeakingThisInConstructor")
     public TestIconButton(@NamedArg("iconLiteral") String iconLiteral, @NamedArg("headerText") String headerText, @NamedArg("descText") String descText) {
 
         this.iconLiteral = iconLiteral;
