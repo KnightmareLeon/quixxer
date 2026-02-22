@@ -8,6 +8,7 @@ import io.github.knightmareleon.features.sets.components.SetsPage;
 import io.github.knightmareleon.features.sets.components.controls.QuestionField;
 import io.github.knightmareleon.shared.models.Question;
 import io.github.knightmareleon.shared.models.StudySet;
+import io.github.knightmareleon.shared.utils.Result;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -103,6 +104,15 @@ public class SetsCreateController implements SetsPage{
             questions
         );
 
-        service.saveStudySet(studySet);
+        
+        Result<StudySet> result = service.saveStudySet(studySet);
+        
+        if(result.isSuccess()){
+            System.out.println(result.getValue());
+        } else {
+            for(String error : result.getErrorMessages()){
+                System.out.println(error);
+            }
+        }
     }
 }

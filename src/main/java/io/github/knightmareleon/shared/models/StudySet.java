@@ -99,4 +99,31 @@ public class StudySet {
     public void incrementTakes(){
         this.totalTakes++;
     }
+
+    @Override
+    public String toString(){
+        String questionString = "Questions: \n";
+        for (Question question : questions){
+            questionString += question.toString() + "\n";
+        }
+
+        return
+        String.format(
+            """
+            Title: %s,
+            Subject: %s,
+            Image: %s,
+            Created On: %s,
+            Last Taken On: %s,
+            Total Takes: %d,
+            %s
+            """,
+            this.title, 
+            this.subject,
+            this.imgpath,
+            this.createdOn.toString(),
+            this.lastTakeOn == null ? "Not yet taken." : this.lastTakeOn.toString(),
+            this.totalTakes,
+            questionString);
+    }
 }
