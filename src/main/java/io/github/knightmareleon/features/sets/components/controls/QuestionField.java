@@ -15,6 +15,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -25,6 +26,7 @@ import javafx.scene.layout.VBox;
 
 public class QuestionField extends VBox{
 
+    @FXML private Label questionError;
     @FXML private TextArea question;
     @FXML private IconButton closeQuestionButton;
     @FXML private ComboBox<String> qTypePicker;
@@ -42,6 +44,7 @@ public class QuestionField extends VBox{
 
     @FXML private Button addChoiceButton = new Button();
 
+    @SuppressWarnings("LeakingThisInConstructor")
     public QuestionField() {
 
         FXMLLoader loader;
@@ -172,10 +175,19 @@ public class QuestionField extends VBox{
 
             return answerIndices;
         }
-        return new ArrayList<Integer>();
+        return new ArrayList<>();
     }
 
     public void setCloseButtonAction(EventHandler<ActionEvent> closeAction){
         this.closeQuestionButton.setOnAction(closeAction);
+    }
+
+    public void setErrorVisible(boolean visible){
+        this.questionError.setVisible(visible);
+        if(visible){
+            this.getStyleClass().add("error-border");
+        } else {
+            this.getStyleClass().remove("error-border");
+        }
     }
 }

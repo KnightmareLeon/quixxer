@@ -21,8 +21,15 @@
     spacing="12"
     fillWidth="true"
     maxWidth="1136">
-    <HBox alignment="CENTER">
+    <HBox 
+        alignment="CENTER_LEFT"
+        spacing="12">
         <Label text="Question" styleClass="standard-font"/>
+        <Label
+            fx:id="questionError"
+            text="*Please fill in all the fields in this question."
+            styleClass="standard-font,,error-font"
+            visible="false"/>
         <Region HBox.hgrow="ALWAYS"/>
         <IconButton 
             fx:id="closeQuestionButton"

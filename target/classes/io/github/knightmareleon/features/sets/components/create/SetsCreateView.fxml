@@ -20,6 +20,7 @@
     fx:controller="io.github.knightmareleon.features.sets.components.create.SetsCreateController"
     fx:id="vbox"
     alignment="CENTER"
+    stylesheets="/io/github/knightmareleon/css/error.css"
     styleClass="standard-dark-bg"
     style="-fx-padding: 48; -fx-border-radius: 53; -fx-background-radius: 53;"
     spacing="24"
@@ -61,15 +62,31 @@
             style="-fx-padding: 0 24 0 0"
             spacing="12"
             fillWidth="true">
-            <Label text="Set Title"
-                styleClass="standard-header-font"/>
+            <HBox 
+                spacing="12"
+                alignment="CENTER_LEFT">
+                <Label text="Set Title"
+                    styleClass="standard-header-font"/>
+                <Label fx:id="titleErrorLabel"
+                    text="*Please fill in this field."
+                    styleClass="standard-font,error-font"
+                    visible="false"/>
+            </HBox>
             <TextField
                 fx:id="setTitle"
                 styleClass="border-radius-15,standard-font"
                 style="-fx-text-fill: black !important"
                 minHeight="44"/>
-            <Label text="Subject"
-                styleClass="standard-header-font"/>
+            <HBox 
+                spacing="12"
+                alignment="CENTER_LEFT">
+                <Label text="Subject"
+                    styleClass="standard-header-font"/>
+                <Label fx:id="subjectErrorLabel"
+                    text="*Please fill in this field."
+                    styleClass="standard-font,error-font"
+                    visible="false"/>
+            </HBox>
             <ComboBox fx:id="subjectPicker" 
                 styleClass="border-radius-15, standard-font"
                 minHeight="44">

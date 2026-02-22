@@ -12,11 +12,11 @@ public class SetsCreateService {
     public Result<StudySet> saveStudySet(StudySet studySet){
         List<String> errorMessages = new ArrayList<>();
         if(studySet.getTitle() == null || studySet.getTitle().isBlank()){
-            errorMessages.add("Study set must have a title.");
+            errorMessages.add("Title Missing");
         }
 
         if(studySet.getSubject() == null || studySet.getSubject().isBlank()){
-            errorMessages.add("Study set must have a subject.");
+            errorMessages.add("Subject Missing");
         }
 
         if(studySet.getQuestions().isEmpty()){
@@ -26,15 +26,16 @@ public class SetsCreateService {
         for(int i = 0; i < studySet.getQuestions().size(); i++){
             Question question = studySet.getQuestions().get(i);
             if(question.question().isBlank()){
-                errorMessages.add("Question #" + i + " must not be empty.");
+                errorMessages.add("" + i);
             }
 
-            if( question.questionType().equals("Identification") ||
+            else if( question.questionType().equals("Identification") ||
                 question.questionType().equals("Enumeration")
             ){
                 for(String choice : question.choices()){
                     if(choice == null || choice.isBlank()){
-                        errorMessages.add("Choices must not be empty in Question #" + i);
+                        errorMessages.add("" + i);
+                        break;
                     }
                 }
             }

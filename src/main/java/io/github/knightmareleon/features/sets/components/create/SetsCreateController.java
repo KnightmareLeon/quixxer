@@ -2,6 +2,7 @@ package io.github.knightmareleon.features.sets.components.create;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import io.github.knightmareleon.features.sets.components.SetsNavigator;
 import io.github.knightmareleon.features.sets.components.SetsPage;
@@ -12,7 +13,10 @@ import io.github.knightmareleon.shared.utils.Result;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 
@@ -21,7 +25,10 @@ public class SetsCreateController implements SetsPage{
     private final SetsCreateService service = new SetsCreateService();
     private SetsNavigator navigator;
 
+    @FXML private Label titleErrorLabel;
     @FXML private TextField setTitle;
+
+    @FXML private Label subjectErrorLabel;
     @FXML private ComboBox<String> subjectPicker;
     private final ObservableList<String> subjects = FXCollections.observableArrayList(
         "Computer Science",
@@ -108,11 +115,75 @@ public class SetsCreateController implements SetsPage{
         Result<StudySet> result = service.saveStudySet(studySet);
         
         if(result.isSuccess()){
+            titleErrorLabel.setVisible(false);
+            subjectErrorLabel.setVisible(false);
+            for(QuestionField questionField: this.questionFields){
+                questionField.setErrorVisible(false);
+            }
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Save Result");
+            alert.setHeaderText("Study Set Saved");
+            alert.setContentText(String.format(
+                "Study set %s under subject %s has been saved successfully!",
+                result.getValue().getTitle(),
+                result.getValue().getSubject()));
+            Optional<ButtonType> alertResult = alert.showAndWait();
+            if(alertResult.isPresent() && alertResult.get() == ButtonType.OK){
+                navigator.show("main");
+            }
             System.out.println(result.getValue());
         } else {
-            for(String error : result.getErrorMessages()){
-                System.out.println(error);
+
+            boolean missingFields = false;
+
+            int index = 0;
+
+            boolean titleError = errorExists(result.getErrorMessages(), "Title Missing");
+            titleErrorLabel.setVisible(titleError);
+            if(titleError) {index++; missingFields = true;}
+
+            boolean subjectError = errorExists(result.getErrorMessages(), "Subject Missing");
+            subjectErrorLabel.setVisible(subjectError);
+            if(subjectError){index++; missingFields = true;}
+
+            int qIndex = 0;
+
+            for(int i = index; i < result.getErrorMessages().size(); i++){
+                int qErrorIndex = Integer.parseInt(result.getErrorMessages().get(i));
+                while(qIndex < qErrorIndex){
+                    this.questionFields.get(qIndex++).setErrorVisible(false);
+                }
+                qIndex = qErrorIndex + 1;
+                this.questionFields.get(qErrorIndex).setErrorVisible(true);
+                missingFields = true;
+                }
+
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Save Error");
+            String headerText = "";
+            String contentText = "";
+
+            if(missingFields){
+                headerText += "Missing required fields.";
+                contentText += "Please fill in all required fields.";
             }
+
+            alert.setHeaderText(headerText);
+            alert.setContentText(contentText);
+            alert.showAndWait();
         }
     }
+
+    private boolean errorExists(List<String> errors, String errorTarget){
+        int limit = errors.size() > 3 ? 3 : errors.size();
+
+        for(int i = 0; i < limit; i++){
+            if(errors.get(i).equals(errorTarget)){
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

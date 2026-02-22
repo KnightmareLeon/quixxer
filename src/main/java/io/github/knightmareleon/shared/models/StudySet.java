@@ -102,9 +102,9 @@ public class StudySet {
 
     @Override
     public String toString(){
-        String questionString = "Questions: \n";
+        String questionString = "Questions:";
         for (Question question : questions){
-            questionString += question.toString() + "\n";
+            questionString += "\n" + question.toString() ;
         }
 
         return
