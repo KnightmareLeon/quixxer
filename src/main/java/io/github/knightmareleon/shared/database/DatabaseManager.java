@@ -1,4 +1,4 @@
-package io.github.knightmareleon.database;
+package io.github.knightmareleon.shared.database;
 
 import java.io.IOException;
 import java.nio.file.Files;

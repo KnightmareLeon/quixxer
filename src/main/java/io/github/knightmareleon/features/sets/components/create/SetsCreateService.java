@@ -1,6 +1,6 @@
 package io.github.knightmareleon.features.sets.components.create;
 
-import io.github.knightmareleon.features.sets.components.models.StudySet;
+import io.github.knightmareleon.shared.models.StudySet;
 
 public class SetsCreateService {
     

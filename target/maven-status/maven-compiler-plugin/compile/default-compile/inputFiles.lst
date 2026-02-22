@@ -1,6 +1,4 @@
 C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\App.java
-C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\database\DatabaseManager.java
-C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\database\SchemaInitializer.java
 C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\features\dashboard\DashboardController.java
 C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\features\dashboard\DashboardDAO.java
 C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\features\dashboard\DashboardModel.java
@@ -9,11 +7,7 @@ C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightma
 C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\features\sets\components\create\SetsCreateController.java
 C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\features\sets\components\create\SetsCreateService.java
 C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\features\sets\components\main\SetsMainController.java
-C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\features\sets\components\main\SetsMainDAO.java
-C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\features\sets\components\main\SetsMainModel.java
 C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\features\sets\components\main\SetsMainService.java
-C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\features\sets\components\models\Question.java
-C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\features\sets\components\models\StudySet.java
 C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\features\sets\components\SetsNavigator.java
 C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\features\sets\components\SetsPage.java
 C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\features\sets\SetsController.java
@@ -27,6 +21,10 @@ C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightma
 C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\features\test\TestModel.java
 C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\features\test\TestService.java
 C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\RootController.java
+C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\shared\database\DatabaseManager.java
+C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\shared\database\SchemaInitializer.java
+C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\shared\models\Question.java
+C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\shared\models\StudySet.java
 C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\shared\navigator\BaseTabNavigator.java
 C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\shared\navigator\RootTabNavigator.java
 C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\shared\ui\controls\IconButton.java

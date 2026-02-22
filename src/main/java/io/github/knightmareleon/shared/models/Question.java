@@ -1,4 +1,4 @@
-package io.github.knightmareleon.features.sets.components.models;
+package io.github.knightmareleon.shared.models;
 
 import java.util.List;
 

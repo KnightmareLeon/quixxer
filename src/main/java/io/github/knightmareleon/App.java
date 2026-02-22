@@ -4,8 +4,8 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.sql.Connection;
 
-import io.github.knightmareleon.database.DatabaseManager;
-import io.github.knightmareleon.database.SchemaInitializer;
+import io.github.knightmareleon.shared.database.DatabaseManager;
+import io.github.knightmareleon.shared.database.SchemaInitializer;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

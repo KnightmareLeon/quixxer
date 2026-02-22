@@ -1,4 +1,4 @@
-package io.github.knightmareleon.database;
+package io.github.knightmareleon.shared.database;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -14,7 +14,7 @@ public class SchemaInitializer {
         try (Connection conn = DatabaseManager.getConnection();
              Statement stmt = conn.createStatement()) {
 
-            String sql = loadSqlFile("/io/github/knightmareleon/database/schema.sql");
+            String sql = loadSqlFile("/io/github/knightmareleon/shared/database/schema.sql");
 
             for (String statement : sql.split(";")) {
                 if (!statement.isBlank()) {
