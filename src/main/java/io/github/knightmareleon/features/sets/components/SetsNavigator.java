@@ -3,6 +3,7 @@ package io.github.knightmareleon.features.sets.components;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 
+import io.github.knightmareleon.features.sets.SetsService;
 import io.github.knightmareleon.shared.infrastructure.AppContext;
 import io.github.knightmareleon.shared.infrastructure.navigator.BaseTabNavigator;
 import javafx.fxml.FXMLLoader;
@@ -25,8 +26,8 @@ public class SetsNavigator extends BaseTabNavigator {
 
             loader.setControllerFactory(type -> {
                 try {
-                    return type.getConstructor(AppContext.class)
-                            .newInstance(this.getContext());
+                    return type.getConstructor(SetsService.class)
+                            .newInstance(this.getContext().getSetService());
                 } catch (NoSuchMethodException e) {
                     try {
                         return type.getDeclaredConstructor().newInstance();
@@ -58,5 +59,5 @@ public class SetsNavigator extends BaseTabNavigator {
             default -> throw new IllegalArgumentException("Unknown tab: " + tabId);
         };
     }
-    
+
 }

@@ -8,7 +8,6 @@ import io.github.knightmareleon.features.sets.SetsService;
 import io.github.knightmareleon.features.sets.components.SetsNavigator;
 import io.github.knightmareleon.features.sets.components.SetsPage;
 import io.github.knightmareleon.features.sets.components.controls.QuestionField;
-import io.github.knightmareleon.shared.infrastructure.AppContext;
 import io.github.knightmareleon.shared.models.Question;
 import io.github.knightmareleon.shared.models.StudySet;
 import io.github.knightmareleon.shared.utils.Result;
@@ -45,8 +44,8 @@ public class SetsCreateController implements SetsPage{
     @FXML private VBox questionContainer;
     private final List<QuestionField> questionFields = new ArrayList<>();
 
-    public SetsCreateController(AppContext context){
-        this.setsService = context.getStudySetService();
+    public SetsCreateController(SetsService setsService){
+        this.setsService = setsService;
     }
 
     @Override

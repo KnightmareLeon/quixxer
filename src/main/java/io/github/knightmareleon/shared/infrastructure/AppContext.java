@@ -14,7 +14,7 @@ public class AppContext {
         this.setsService = new SetsService(dao);
     }
 
-    public SetsService getStudySetService() {
+    public SetsService getSetService() {
         return this.setsService;
     }
 
