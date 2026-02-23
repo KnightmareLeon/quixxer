@@ -38,6 +38,10 @@ public class LocalSetsDao implements SetsDao{
         "(description, answer, q_id) " + 
         "VALUES (?, ?, ?)";
 
+    private final String EXISTS =
+        "SELECT COUNT(*) FROM " + this.SET_TABLE_NAME +
+        " WHERE title = ? AND subject = ?";
+
     public LocalSetsDao(Connection connection) {
         this.connection = connection;
     }
@@ -143,8 +147,25 @@ public class LocalSetsDao implements SetsDao{
     }
 
     @Override
+    @SuppressWarnings("CallToPrintStackTrace")
     public boolean exists(String title, String subject) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        try {
+            PreparedStatement existsStatement = this.connection.prepareStatement(
+                this.EXISTS
+            );
+
+            existsStatement.setString(1, title);
+            existsStatement.setString(2, subject);
+
+            existsStatement.execute();
+            ResultSet existsResult = existsStatement.getResultSet();
+            existsResult.next();
+
+            return existsResult.getLong(1) > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new DataAccessException("Failed to check if study set exits.", e);
+        }
     }
     
 }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import io.github.knightmareleon.features.sets.SetsConstants;
 import io.github.knightmareleon.features.sets.SetsService;
 import io.github.knightmareleon.features.sets.components.SetsNavigator;
 import io.github.knightmareleon.features.sets.components.SetsPage;
@@ -151,13 +152,19 @@ public class SetsCreateController implements SetsPage{
 
                 int index = 0;
 
-                boolean titleError = errorExists(result.getErrorMessages(), "Title Missing");
+                boolean titleError = errorExists(result.getErrorMessages(), SetsConstants.MISSING_TITLE_ERROR);
                 titleErrorLabel.setVisible(titleError);
                 if(titleError) {index++; missingFields = true;}
 
-                boolean subjectError = errorExists(result.getErrorMessages(), "Subject Missing");
+                boolean subjectError = errorExists(result.getErrorMessages(), SetsConstants.MISSING_SUBJECT_ERROR);
                 subjectErrorLabel.setVisible(subjectError);
                 if(subjectError){index++; missingFields = true;}
+
+                if(errorExists(result.getErrorMessages(), SetsConstants.DUPLICATE_STUDY_SET_ERROR)){
+                    index++;
+                    headerText += "Duplicate Study Set";
+                    contentText += "Combination of study set title and subject name already exits. Please try another one.";
+                }
 
                 int qIndex = 0;
 
@@ -176,6 +183,7 @@ public class SetsCreateController implements SetsPage{
                     headerText += "Missing required fields.";
                     contentText += "Please fill in all required fields.";
                 }
+
             } else {
                 headerText += "Database Error.";
                 contentText += "An error occured in the database.";
@@ -188,7 +196,7 @@ public class SetsCreateController implements SetsPage{
     }
 
     private boolean errorExists(List<String> errors, String errorTarget){
-        int limit = errors.size() > 3 ? 3 : errors.size();
+        int limit = errors.size() > 4 ? 4 : errors.size();
 
         for(int i = 0; i < limit; i++){
             if(errors.get(i).equals(errorTarget)){

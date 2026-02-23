@@ -20,15 +20,19 @@ public class SetsService {
     public Result<StudySet> saveStudySet(StudySet studySet){
         List<String> errorMessages = new ArrayList<>();
         if(studySet.getTitle() == null || studySet.getTitle().isBlank()){
-            errorMessages.add("Title Missing");
+            errorMessages.add(SetsConstants.MISSING_TITLE_ERROR);
         }
 
         if(studySet.getSubject() == null || studySet.getSubject().isBlank()){
-            errorMessages.add("Subject Missing");
+            errorMessages.add(SetsConstants.MISSING_SUBJECT_ERROR);
         }
 
         if(studySet.getQuestions().isEmpty()){
-            errorMessages.add("Study set must have at least one question.");
+            errorMessages.add(SetsConstants.MISSING_QUESTIONS_ERROR);
+        }
+
+        if(setsDao.exists(studySet.getTitle(), studySet.getSubject())){
+            errorMessages.add(SetsConstants.DUPLICATE_STUDY_SET_ERROR);
         }
 
         for(int i = 0; i < studySet.getQuestions().size(); i++){
