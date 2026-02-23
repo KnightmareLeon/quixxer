@@ -162,8 +162,8 @@ public class QuestionField extends VBox{
 
     public List<Integer> getAnswers(){
         if(this.getType().equals("True or False")){
-            return ((RadioButton) this.trueOrFalse.getSelectedToggle()).equals(trueButton) ?
-                List.of(0) : List.of(1) ;
+            return ((RadioButton) this.trueOrFalse.getSelectedToggle()).equals(this.trueButton) ?
+                List.of(1) : List.of(0) ;
         } else if (this.getType().equals("Identification")){
             List<Integer> answerIndices = new ArrayList<>();
             int i = 0;

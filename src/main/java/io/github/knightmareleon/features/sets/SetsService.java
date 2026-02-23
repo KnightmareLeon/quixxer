@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.github.knightmareleon.shared.daos.SetsDao;
+import io.github.knightmareleon.shared.exceptions.DataAccessException;
 import io.github.knightmareleon.shared.models.Question;
 import io.github.knightmareleon.shared.models.StudySet;
 import io.github.knightmareleon.shared.utils.Result;
@@ -49,6 +50,14 @@ public class SetsService {
         }
 
         studySet.setDateCreatedOn();
+
+        if(errorMessages.isEmpty()){
+            try {
+                this.setsDao.save(studySet);
+            } catch (DataAccessException e) {
+                errorMessages.add("Database error.");
+            }
+        }
 
         return errorMessages.isEmpty() ? Result.success(studySet) : Result.error(errorMessages);
     }

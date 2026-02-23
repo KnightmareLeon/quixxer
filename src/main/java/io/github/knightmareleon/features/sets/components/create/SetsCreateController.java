@@ -140,39 +140,46 @@ public class SetsCreateController implements SetsPage{
             }
             System.out.println(result.getValue());
         } else {
-
-            boolean missingFields = false;
-
-            int index = 0;
-
-            boolean titleError = errorExists(result.getErrorMessages(), "Title Missing");
-            titleErrorLabel.setVisible(titleError);
-            if(titleError) {index++; missingFields = true;}
-
-            boolean subjectError = errorExists(result.getErrorMessages(), "Subject Missing");
-            subjectErrorLabel.setVisible(subjectError);
-            if(subjectError){index++; missingFields = true;}
-
-            int qIndex = 0;
-
-            for(int i = index; i < result.getErrorMessages().size(); i++){
-                int qErrorIndex = Integer.parseInt(result.getErrorMessages().get(i));
-                while(qIndex < qErrorIndex){
-                    this.questionFields.get(qIndex++).setErrorVisible(false);
-                }
-                qIndex = qErrorIndex + 1;
-                this.questionFields.get(qErrorIndex).setErrorVisible(true);
-                missingFields = true;
-                }
-
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Save Error");
+
             String headerText = "";
             String contentText = "";
 
-            if(missingFields){
-                headerText += "Missing required fields.";
-                contentText += "Please fill in all required fields.";
+            if (!result.getErrorMessages().get(0).equals("Database error.")){
+
+                boolean missingFields = false;
+
+                int index = 0;
+
+                boolean titleError = errorExists(result.getErrorMessages(), "Title Missing");
+                titleErrorLabel.setVisible(titleError);
+                if(titleError) {index++; missingFields = true;}
+
+                boolean subjectError = errorExists(result.getErrorMessages(), "Subject Missing");
+                subjectErrorLabel.setVisible(subjectError);
+                if(subjectError){index++; missingFields = true;}
+
+                int qIndex = 0;
+
+                for(int i = index; i < result.getErrorMessages().size(); i++){
+                    int qErrorIndex = Integer.parseInt(result.getErrorMessages().get(i));
+                    while(qIndex < qErrorIndex){
+                        this.questionFields.get(qIndex++).setErrorVisible(false);
+                    }
+                    qIndex = qErrorIndex + 1;
+                    this.questionFields.get(qErrorIndex).setErrorVisible(true);
+                    missingFields = true;
+                    }
+                    
+
+                if(missingFields){
+                    headerText += "Missing required fields.";
+                    contentText += "Please fill in all required fields.";
+                }
+            } else {
+                headerText += "Database Error.";
+                contentText += "An error occured in the database.";
             }
 
             alert.setHeaderText(headerText);

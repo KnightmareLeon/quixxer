@@ -20,7 +20,7 @@ public class App extends Application {
     public void start(Stage stage) throws Exception{
 
         Connection connection = DatabaseManager.getConnection();
-        SchemaInitializer.initialize();
+        SchemaInitializer.initialize(connection);
 
         Font.loadFont(getClass().getResourceAsStream("/io/github/knightmareleon/fonts/Inter_24pt-ExtraLight.ttf"), 16);
         Font.loadFont(getClass().getResourceAsStream("/io/github/knightmareleon/fonts/Inter-VariableFont_opsz,wght.ttf"), 16);

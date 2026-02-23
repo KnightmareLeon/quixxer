@@ -17,7 +17,7 @@ public class DatabaseManager {
     private DatabaseManager() {}
 
     public static Connection getConnection() throws SQLException {
-        if (connection == null || connection.isClosed()) {
+        if (DatabaseManager.connection == null || DatabaseManager.connection.isClosed()) {
             Path dir = Paths.get(System.getProperty("user.home"),
                     "." + APP_NAME);
             try {
@@ -25,13 +25,13 @@ public class DatabaseManager {
             } catch (IOException ignored) {}
 
             String url = "jdbc:sqlite:" + dir.resolve("app.db");
-            connection = DriverManager.getConnection(url);
+            DatabaseManager.connection = DriverManager.getConnection(url);
 
             try (Statement stmt = connection.createStatement()) {
                 stmt.execute("PRAGMA foreign_keys = ON;");
             }
             System.out.println("Connected to database successfully!");
         }
-        return connection;
+        return DatabaseManager.connection;
     }
 }

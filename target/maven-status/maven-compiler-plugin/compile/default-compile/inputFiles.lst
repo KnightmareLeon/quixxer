@@ -22,6 +22,7 @@ C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightma
 C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\RootController.java
 C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\shared\daos\LocalSetsDao.java
 C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\shared\daos\SetsDao.java
+C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\shared\exceptions\DataAccessException.java
 C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\shared\infrastructure\AppContext.java
 C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\shared\infrastructure\database\DatabaseManager.java
 C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\shared\infrastructure\database\SchemaInitializer.java

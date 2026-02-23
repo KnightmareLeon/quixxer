@@ -10,9 +10,9 @@ public class SchemaInitializer {
     
     private SchemaInitializer() {}
 
-    public static void initialize() throws SQLException, IOException {
-        try (Connection conn = DatabaseManager.getConnection();
-             Statement stmt = conn.createStatement()) {
+    public static void initialize(Connection connection) throws SQLException, IOException {
+        try (
+            Statement stmt = connection.createStatement()) {
 
             String sql = loadSqlFile("/io/github/knightmareleon/shared/infrastructure/database/schema.sql");
 
