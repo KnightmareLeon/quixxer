@@ -7,9 +7,9 @@ import org.kordamp.ikonli.javafx.FontIcon;
 import javafx.beans.NamedArg;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Button;
+import javafx.scene.control.ToggleButton;
 
-public class IconButton extends Button{
+public class IconToggleButton extends ToggleButton {
 
     @FXML
     private FontIcon icon = new FontIcon();
@@ -18,12 +18,12 @@ public class IconButton extends Button{
     private final String iconStyleClass;
 
     @SuppressWarnings("LeakingThisInConstructor")
-    public IconButton(@NamedArg("iconLiteral") String iconLiteral, @NamedArg("iconStyleClass") String iconStyleClass) {
+    public IconToggleButton(@NamedArg("iconLiteral") String iconLiteral, @NamedArg("iconStyleClass") String iconStyleClass) {
         this.iconLiteral = iconLiteral;
         this.iconStyleClass = iconStyleClass;
 
         FXMLLoader loader = new FXMLLoader(
-            getClass().getResource("IconButton.fxml")
+            getClass().getResource("IconToggleButton.fxml")
         );
 
         loader.setRoot(this);
@@ -41,5 +41,4 @@ public class IconButton extends Button{
         this.icon.getStyleClass().add(this.iconStyleClass);
         this.setGraphic(this.icon);
     }
-
 }

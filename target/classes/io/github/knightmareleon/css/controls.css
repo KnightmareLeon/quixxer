@@ -30,3 +30,7 @@
 .combo-box-gray-bg .list-cell {
     -fx-background-color: #323949
 }
+
+.white-border:selected {
+    -fx-border-color: white;
+}

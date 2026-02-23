@@ -10,6 +10,7 @@
 <?import javafx.scene.control.ScrollPane?>
 
 <?import io.github.knightmareleon.shared.ui.controls.IconButton?>
+<?import io.github.knightmareleon.shared.ui.controls.IconToggleButton?>
 
 <VBox xmlns:fx="http://javafx.com/fxml/1"
     fx:controller="io.github.knightmareleon.features.sets.components.main.SetsMainController"
@@ -22,13 +23,15 @@
     maxWidth="1136">
     <HBox maxHeight="48">
         <HBox>
-            <IconButton
+            <IconToggleButton
+                fx:id="cardViewButton"
                 iconLiteral="fas-th-large"
                 iconStyleClass="icon-base-color"
                 styleClass="icon-button-base-bg"
                 prefHeight="48"
                 prefWidth="48"/>
-            <IconButton
+            <IconToggleButton
+                fx:id="listViewButton"
                 iconLiteral="fas-bars"
                 iconStyleClass="icon-base-color"
                 styleClass="icon-button-base-bg"

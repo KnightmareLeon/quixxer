@@ -64,8 +64,8 @@ public class QuestionField extends VBox{
         this.addChoiceButton.setMaxWidth(Double.MAX_VALUE);
         this.qTypePicker.setItems(this.qTypes);
 
-        this.trueButton.setToggleGroup(trueOrFalse);
-        this.falseButton.setToggleGroup(trueOrFalse);
+        this.trueButton.setToggleGroup(this.trueOrFalse);
+        this.falseButton.setToggleGroup(this.trueOrFalse);
         this.trueButton.setSelected(true);
 
         this.trueButton.getStyleClass().add("standard-font");
