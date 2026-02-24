@@ -19,6 +19,18 @@
     -fx-background-color: #181820;
 }
 
+.icon-button-transparent-bg {
+    -fx-background-color: transparent;
+}
+
+.icon-button-transparent-bg:hover {
+    -fx-background-color: #2B2B36;
+}
+
+.icon-button-transparent-bg:pressed {
+    -fx-background-color: #181820;
+}
+
 .icon-base-color {
     -fx-icon-color: white;
 }

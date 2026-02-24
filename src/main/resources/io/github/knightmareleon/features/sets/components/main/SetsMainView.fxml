@@ -65,10 +65,9 @@
         fitToHeight="true"
         styleClass="standard-dark-bg"
         VBox.vgrow="ALWAYS">
-        <VBox fx:id="vbox"
-            alignment="CENTER"
+        <VBox fx:id="setsList"
+            alignment="TOP_LEFT"
             styleClass="standard-dark-bg"
-            style="-fx-padding: 48"
             spacing="48"
             fillWidth="true">
         </VBox>

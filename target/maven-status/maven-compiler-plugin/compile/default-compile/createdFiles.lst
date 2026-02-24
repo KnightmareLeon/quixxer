@@ -5,6 +5,7 @@ io\github\knightmareleon\features\dashboard\DashboardModel.class
 io\github\knightmareleon\features\dashboard\DashboardService.class
 io\github\knightmareleon\shared\infrastructure\navigator\BaseTabNavigator.class
 io\github\knightmareleon\features\dashboard\DashboardDAO.class
+io\github\knightmareleon\features\sets\components\controls\SetCardForm.class
 io\github\knightmareleon\shared\infrastructure\AppContext.class
 io\github\knightmareleon\features\test\TestDAO.class
 io\github\knightmareleon\features\sets\components\controls\QuestionField.class

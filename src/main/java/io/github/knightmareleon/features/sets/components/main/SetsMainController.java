@@ -3,9 +3,11 @@ package io.github.knightmareleon.features.sets.components.main;
 import io.github.knightmareleon.features.sets.SetsService;
 import io.github.knightmareleon.features.sets.components.SetsNavigator;
 import io.github.knightmareleon.features.sets.components.SetsPage;
+import io.github.knightmareleon.features.sets.components.controls.SetCardForm;
 import io.github.knightmareleon.shared.ui.controls.IconToggleButton;
 import javafx.fxml.FXML;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.layout.VBox;
 
 public class SetsMainController implements SetsPage{
 
@@ -14,6 +16,7 @@ public class SetsMainController implements SetsPage{
 
     @FXML private IconToggleButton cardViewButton;
     @FXML private IconToggleButton listViewButton;
+    @FXML private VBox setsList;
 
     public SetsMainController(SetsService setsService){
         this.setsService = setsService;
@@ -37,6 +40,7 @@ public class SetsMainController implements SetsPage{
             if (newVal == null) oldVal.setSelected(true);
         });
 
+        this.setsList.getChildren().add(new SetCardForm("dashicons-book-alt", "Sample", "Subject", 100));
     }
 
     @FXML

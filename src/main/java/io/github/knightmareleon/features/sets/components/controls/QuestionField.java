@@ -59,6 +59,7 @@ public class QuestionField extends VBox{
             throw new RuntimeException(e);
         }
     }
+
     @FXML
     public void initialize(){
         this.addChoiceButton.setMaxWidth(Double.MAX_VALUE);
