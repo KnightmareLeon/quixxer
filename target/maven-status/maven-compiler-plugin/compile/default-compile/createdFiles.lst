@@ -1,6 +1,7 @@
 io\github\knightmareleon\features\settings\SettingsController.class
 io\github\knightmareleon\features\sets\SetsService.class
 io\github\knightmareleon\features\settings\SettingsService.class
+io\github\knightmareleon\features\sets\components\pages\SetsCreateController.class
 io\github\knightmareleon\features\dashboard\DashboardModel.class
 io\github\knightmareleon\features\dashboard\DashboardService.class
 io\github\knightmareleon\shared\infrastructure\navigator\BaseTabNavigator.class
@@ -14,12 +15,12 @@ io\github\knightmareleon\shared\daos\SetsDao.class
 io\github\knightmareleon\shared\daos\LocalSetsDao.class
 io\github\knightmareleon\shared\ui\controls\IconToggleButton.class
 io\github\knightmareleon\features\test\components\TestIconButton.class
+io\github\knightmareleon\features\sets\components\pages\SetsMainController.class
 io\github\knightmareleon\features\sets\components\SetsPage.class
 io\github\knightmareleon\features\sets\components\SetsNavigator.class
 io\github\knightmareleon\features\settings\SettingsDAO.class
 io\github\knightmareleon\shared\ui\header\HeaderController.class
 io\github\knightmareleon\shared\infrastructure\database\DatabaseManager.class
-io\github\knightmareleon\features\sets\components\main\SetsMainController.class
 io\github\knightmareleon\RootController.class
 io\github\knightmareleon\features\dashboard\DashboardController.class
 io\github\knightmareleon\features\sets\SetsConstants.class
@@ -33,6 +34,5 @@ io\github\knightmareleon\App.class
 io\github\knightmareleon\features\settings\SettingsModel.class
 io\github\knightmareleon\features\test\TestController.class
 io\github\knightmareleon\shared\utils\Result.class
-io\github\knightmareleon\features\sets\components\create\SetsCreateController.class
 io\github\knightmareleon\shared\exceptions\DataAccessException.class
 io\github\knightmareleon\features\test\TestService.class

@@ -1,4 +1,4 @@
-package io.github.knightmareleon.features.sets.components.main;
+package io.github.knightmareleon.features.sets.components.pages;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,9 +21,10 @@ public class SetsMainController implements SetsPage{
     private final SetsService setsService;
 
     private final List<StudySet> studySets = new ArrayList<>();
-    private VBox setsLeftCol = new VBox(24);
-    private VBox setsRightCol = new VBox(24);
-    private VBox setsList = new VBox(24);
+    private final List<SetCardForm> studySetCards = new ArrayList<>();
+    private final VBox setsLeftCol = new VBox(24);
+    private final VBox setsRightCol = new VBox(24);
+    private final VBox setsList = new VBox(24);
 
     @FXML private IconToggleButton cardViewButton;
     @FXML private IconToggleButton listViewButton;

@@ -1,4 +1,4 @@
-package io.github.knightmareleon.features.sets.components.create;
+package io.github.knightmareleon.features.sets.components.pages;
 
 import java.util.ArrayList;
 import java.util.List;

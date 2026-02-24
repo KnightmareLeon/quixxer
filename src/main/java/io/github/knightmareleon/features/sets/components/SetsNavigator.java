@@ -54,8 +54,8 @@ public class SetsNavigator extends BaseTabNavigator {
     @Override
     public String getFXMLPath(String tabId) {
         return switch (tabId) {
-            case "main" -> "/io/github/knightmareleon/features/sets/components/main/SetsMainView.fxml";
-            case "create" -> "/io/github/knightmareleon/features/sets/components/create/SetsCreateView.fxml";
+            case "main" -> "/io/github/knightmareleon/features/sets/components/pages/SetsMainView.fxml";
+            case "create" -> "/io/github/knightmareleon/features/sets/components/pages/SetsCreateView.fxml";
             default -> throw new IllegalArgumentException("Unknown tab: " + tabId);
         };
     }

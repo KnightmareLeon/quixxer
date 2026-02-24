@@ -17,7 +17,7 @@
 
 <VBox
     xmlns:fx="http://javafx.com/fxml/1"
-    fx:controller="io.github.knightmareleon.features.sets.components.create.SetsCreateController"
+    fx:controller="io.github.knightmareleon.features.sets.components.pages.SetsCreateController"
     fx:id="vbox"
     alignment="CENTER"
     stylesheets="/io/github/knightmareleon/css/error.css"
