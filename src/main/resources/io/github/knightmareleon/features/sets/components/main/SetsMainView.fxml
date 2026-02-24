@@ -57,7 +57,7 @@
                 style="-fx-text-fill: black !important"/>
         </HBox>
     </HBox>
-    <ScrollPane fx:id="scrollPane"
+    <ScrollPane fx:id="setsPane"
         maxWidth="1136"
         hbarPolicy="AS_NEEDED"
         vbarPolicy="AS_NEEDED"
@@ -65,11 +65,11 @@
         fitToHeight="true"
         styleClass="standard-dark-bg"
         VBox.vgrow="ALWAYS">
-        <VBox fx:id="setsList"
+        <HBox fx:id="setsContainer"
+            spacing="24"
             alignment="TOP_LEFT"
-            styleClass="standard-dark-bg"
-            spacing="48"
-            fillWidth="true">
-        </VBox>
+            styleClass="standard-dark-bg">
+
+        </HBox>
     </ScrollPane>
 </VBox>

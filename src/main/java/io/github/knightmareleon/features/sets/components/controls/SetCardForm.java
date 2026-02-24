@@ -49,6 +49,6 @@ public class SetCardForm extends HBox{
         this.img.setIconSize(100);
         this.titleLabel.setText(this.title);
         this.subjectLabel.setText(this.subject);
-        this.questionLabel.setText(this.totalQuestions + "Questions");
+        this.questionLabel.setText(this.totalQuestions + " Questions");
     }
 }

@@ -13,12 +13,15 @@
     xmlns:fx="http://javafx.com/fxml/1"
     stylesheets="/io/github/knightmareleon/css/controls.css"
     styleClass="set-standard-bg, border-radius-15"
-    minHeight="100"
+    minHeight="144"
+    maxHeight="144"
     spacing="24"
     style="-fx-padding: 24;"
 >
     <FontIcon fx:id="img"/>
-    <VBox spacing="18">
+    <VBox 
+        spacing="18"
+        HBox.hgrow="ALWAYS">
         <Label styleClass="standard-font" fx:id="titleLabel" />
         <Label styleClass="standard-font" fx:id="subjectLabel" />
         <Label styleClass="standard-font" fx:id="questionLabel" />
