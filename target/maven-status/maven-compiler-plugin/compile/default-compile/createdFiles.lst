@@ -14,6 +14,7 @@ io\github\knightmareleon\shared\models\StudySet.class
 io\github\knightmareleon\shared\daos\SetsDao.class
 io\github\knightmareleon\shared\daos\LocalSetsDao.class
 io\github\knightmareleon\shared\ui\controls\IconToggleButton.class
+io\github\knightmareleon\features\sets\components\controls\SetListForm.class
 io\github\knightmareleon\features\test\components\TestIconButton.class
 io\github\knightmareleon\features\sets\components\pages\SetsMainController.class
 io\github\knightmareleon\features\sets\components\SetsPage.class

@@ -7,6 +7,7 @@ import io.github.knightmareleon.features.sets.SetsService;
 import io.github.knightmareleon.features.sets.components.SetsNavigator;
 import io.github.knightmareleon.features.sets.components.SetsPage;
 import io.github.knightmareleon.features.sets.components.controls.SetCardForm;
+import io.github.knightmareleon.features.sets.components.controls.SetListForm;
 import io.github.knightmareleon.shared.models.StudySet;
 import io.github.knightmareleon.shared.ui.controls.IconToggleButton;
 import javafx.fxml.FXML;
@@ -46,6 +47,7 @@ public class SetsMainController implements SetsPage{
         this.setsRightCol.setFillWidth(true);
         HBox.setHgrow(this.setsLeftCol, Priority.ALWAYS);
         HBox.setHgrow(this.setsRightCol, Priority.ALWAYS);
+        HBox.setHgrow(this.setsList, Priority.ALWAYS);
 
         ToggleGroup viewToggleGroup = new ToggleGroup();
         
@@ -63,12 +65,17 @@ public class SetsMainController implements SetsPage{
                 SetCardForm set1 = new SetCardForm("dashicons-book-alt", "Sample", "Subject", 100);
                 SetCardForm set2 = new SetCardForm("dashicons-book-alt", "Sample", "Subject", 100);
                 SetCardForm set3 = new SetCardForm("dashicons-book-alt", "Sample", "Subject", 100);
-                setsLeftCol.getChildren().addAll(set1,set2);
-                setsRightCol.getChildren().add(set3);
+                this.setsLeftCol.getChildren().addAll(set1,set2);
+                this.setsRightCol.getChildren().add(set3);
                 this.setsContainer.getChildren().addAll(this.setsLeftCol,this.setsRightCol);
             } else {
-                setsLeftCol.getChildren().clear();
-                setsRightCol.getChildren().clear();
+                this.setsLeftCol.getChildren().clear();
+                this.setsRightCol.getChildren().clear();
+                SetListForm set1 = new SetListForm("dashicons-book-alt", "Sample", "Subject", 100);
+                SetListForm set2 = new SetListForm("dashicons-book-alt", "Sample", "Subject", 100);
+                SetListForm set3 = new SetListForm("dashicons-book-alt", "Sample", "Subject", 100);
+                this.setsList.getChildren().addAll(set1,set2,set3);
+                this.setsContainer.getChildren().add(this.setsList);
             }
 
         });
@@ -81,5 +88,4 @@ public class SetsMainController implements SetsPage{
     private void onCreateSetsClicked() {
         navigator.show("create");
     }
-
 }
