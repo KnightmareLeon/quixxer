@@ -42,6 +42,28 @@ public class StudySet {
             this.imgpath = imgpath;
             this.totalTakes = totalTakes;
             this.questions = questions;
+            this.createdOn = Instant.now();
+            this.lastTakeOn = null;
+    }
+
+        public StudySet(
+        int id,
+        String title, 
+        String subject, 
+        String imgpath, 
+        int totalTakes,
+        List<Question> questions,
+        Instant createdOn,
+        Instant lastTakeOn) {
+
+            this.id = id;
+            this.title = title;
+            this.subject = subject;
+            this.imgpath = imgpath;
+            this.totalTakes = totalTakes;
+            this.questions = questions;
+            this.createdOn = createdOn;
+            this.lastTakeOn = lastTakeOn;
     }
 
     public int id(){
@@ -86,14 +108,6 @@ public class StudySet {
 
     public void setImgpath(String imgpath){
         this.imgpath = imgpath;
-    }
-
-    public void setDateCreatedOn(){
-        this.createdOn = Instant.now();
-    }
-
-    public void setDateLastCreatedOn(){
-        this.lastTakeOn = Instant.now();
     }
 
     public void incrementTakes(){

@@ -21,8 +21,10 @@ public class SetsMainController implements SetsPage{
     private SetsNavigator navigator;
     private final SetsService setsService;
 
-    private final List<StudySet> studySets = new ArrayList<>();
+    private List<StudySet> studySets;
     private final List<SetCardForm> studySetCards = new ArrayList<>();
+    private final List<SetListForm> studySetList = new ArrayList<>();
+
     private final VBox setsLeftCol = new VBox(24);
     private final VBox setsRightCol = new VBox(24);
     private final VBox setsList = new VBox(24);
@@ -43,6 +45,25 @@ public class SetsMainController implements SetsPage{
 
     @FXML
     public void initialize(){
+        this.studySets = this.setsService.getStudySets(1).getValue();
+        for(StudySet studySet : this.studySets){
+            System.out.println(studySet);
+            studySetCards.add(new SetCardForm(
+                studySet.getimgpath().equals("default") ? 
+                "dashicons-book-alt" : studySet.getimgpath(), 
+                studySet.getTitle(), 
+                studySet.getSubject(),
+                studySet.getQuestions().size()
+            ));
+            studySetList.add(new SetListForm(                
+                studySet.getimgpath().equals("default") ? 
+                "dashicons-book-alt" : studySet.getimgpath(), 
+                studySet.getTitle(), 
+                studySet.getSubject(),
+                studySet.getQuestions().size()
+            ));
+        }
+
         this.setsLeftCol.setFillWidth(true);
         this.setsRightCol.setFillWidth(true);
         HBox.setHgrow(this.setsLeftCol, Priority.ALWAYS);
@@ -62,19 +83,19 @@ public class SetsMainController implements SetsPage{
             this.setsContainer.getChildren().clear();
             if((IconToggleButton) newVal == this.cardViewButton){
                 this.setsList.getChildren().clear();
-                SetCardForm set1 = new SetCardForm("dashicons-book-alt", "Sample", "Subject", 100);
-                SetCardForm set2 = new SetCardForm("dashicons-book-alt", "Sample", "Subject", 100);
-                SetCardForm set3 = new SetCardForm("dashicons-book-alt", "Sample", "Subject", 100);
-                this.setsLeftCol.getChildren().addAll(set1,set2);
-                this.setsRightCol.getChildren().add(set3);
+                for(int i = 0; i < studySetCards.size(); i++){
+                    if(i % 2 != 0){
+                        this.setsLeftCol.getChildren().add(studySetCards.get(i));
+                    } else {
+                        this.setsRightCol.getChildren().add(studySetCards.get(i));
+                    }
+                    
+                }
                 this.setsContainer.getChildren().addAll(this.setsLeftCol,this.setsRightCol);
             } else {
                 this.setsLeftCol.getChildren().clear();
                 this.setsRightCol.getChildren().clear();
-                SetListForm set1 = new SetListForm("dashicons-book-alt", "Sample", "Subject", 100);
-                SetListForm set2 = new SetListForm("dashicons-book-alt", "Sample", "Subject", 100);
-                SetListForm set3 = new SetListForm("dashicons-book-alt", "Sample", "Subject", 100);
-                this.setsList.getChildren().addAll(set1,set2,set3);
+                this.setsList.getChildren().addAll(this.studySetList);
                 this.setsContainer.getChildren().add(this.setsList);
             }
 

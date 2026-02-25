@@ -12,9 +12,17 @@ import io.github.knightmareleon.shared.utils.Result;
 public class SetsService {
     
     private final SetsDao setsDao;
+    private final int MAX_SET_TOTAL_PER_PAGE = 10;
+
+    private int totalPages;
 
     public SetsService(SetsDao setsDao){
         this.setsDao = setsDao;
+        try {
+            this.totalPages = (int) Math.ceil((double)(this.setsDao.totalRows()) / (double)(this.MAX_SET_TOTAL_PER_PAGE));
+        } catch (DataAccessException e) {
+            
+        }
     }
     
     public Result<StudySet> saveStudySet(StudySet studySet){
@@ -53,8 +61,6 @@ public class SetsService {
             }
         }
 
-        studySet.setDateCreatedOn();
-
         if(errorMessages.isEmpty()){
             try {
                 this.setsDao.save(studySet);
@@ -64,5 +70,23 @@ public class SetsService {
         }
 
         return errorMessages.isEmpty() ? Result.success(studySet) : Result.error(errorMessages);
+    }
+
+    public Result<List<StudySet>> getStudySets(int page){ 
+        
+        if(page < 1) page = 1;
+
+        try {
+            if(page > this.totalPages) page = this.totalPages;
+            System.out.println((page - 1) * this.MAX_SET_TOTAL_PER_PAGE + "");
+            List<StudySet> studySets = this.setsDao.list(
+                this.MAX_SET_TOTAL_PER_PAGE, 
+                (page - 1) * this.MAX_SET_TOTAL_PER_PAGE
+            );
+            return Result.success(studySets);
+        } catch (DataAccessException e) {
+            return Result.error("Error fetching study sets.");
+        }
+
     }
 }
