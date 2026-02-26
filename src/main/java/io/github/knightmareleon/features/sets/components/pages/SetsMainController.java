@@ -79,6 +79,9 @@ public class SetsMainController implements SetsPage{
                 oldVal.setSelected(true);
                 return;
             }
+            if (oldVal == null && !this.setsContainer.getChildren().isEmpty()) {
+                return;
+            }
             this.setsContainer.getChildren().clear();
             if((IconToggleButton) newVal == this.cardViewButton){
                 this.setsList.getChildren().clear();

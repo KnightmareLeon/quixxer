@@ -21,7 +21,9 @@
     spacing="24"
     fillWidth="true"
     maxWidth="1136">
-    <HBox maxHeight="48">
+    <HBox
+        minHeight="48" 
+        maxHeight="48">
         <HBox>
             <IconToggleButton
                 fx:id="cardViewButton"
