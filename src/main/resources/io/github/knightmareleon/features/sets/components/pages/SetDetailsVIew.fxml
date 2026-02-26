@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+
+<?import javafx.scene.control.Label?>
+
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<?import io.github.knightmareleon.shared.ui.controls.IconButton?>
+
+<VBox
+    xmlns:fx="http://javafx.com/fxml/1"
+    fx:controller="io.github.knightmareleon.features.sets.components.pages.SetDetailsController"
+    fx:id="vbox"
+    alignment="CENTER"
+    stylesheets="/io/github/knightmareleon/css/error.css"
+    styleClass="standard-dark-bg"
+    style="-fx-padding: 48; -fx-border-radius: 53; -fx-background-radius: 53;"
+    spacing="24"
+    fillWidth="true"
+    maxWidth="1136">
+    <HBox 
+        spacing="12"
+        alignment="CENTER">
+        <FontIcon iconLiteral="bi-folder-plus" iconSize="32" iconColor="white"/>
+        <Label text="Set"
+            styleClass="standard-header-font"/>
+        <Region HBox.hgrow="ALWAYS" />
+        <IconButton 
+            iconLiteral="bi-box-arrow-left"
+            styleClass="set-standard-bg"
+            iconStyleClass="icon-base-color"
+            minHeight="48"
+            minWidth="48"
+            onAction="#onBackPageClicked"/>
+    </HBox>
+</VBox>

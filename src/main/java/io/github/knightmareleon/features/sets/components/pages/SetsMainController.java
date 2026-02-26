@@ -47,20 +47,29 @@ public class SetsMainController implements SetsPage{
     public void initialize(){
         this.studySets = this.setsService.getStudySets(1).getValue();
         for(StudySet studySet : this.studySets){
-            studySetCards.add(new SetCardForm(
+            SetCardForm setCardForm = new SetCardForm(
                 studySet.getimgpath().equals("default") ? 
                 "dashicons-book-alt" : studySet.getimgpath(), 
                 studySet.getTitle(), 
                 studySet.getSubject(),
                 studySet.getQuestions().size()
-            ));
-            studySetList.add(new SetListForm(                
+            );
+            SetListForm setListForm = new SetListForm(                
                 studySet.getimgpath().equals("default") ? 
                 "dashicons-book-alt" : studySet.getimgpath(), 
                 studySet.getTitle(), 
                 studySet.getSubject(),
                 studySet.getQuestions().size()
-            ));
+            );
+
+            setCardForm.setOnMouseClicked(e -> {
+                this.onSetClicked(studySet);
+            });
+            setListForm.setOnMouseClicked(e -> {
+                this.onSetClicked(studySet);
+            });
+            studySetCards.add(setCardForm);
+            studySetList.add(setListForm);
         }
 
         this.setsLeftCol.setFillWidth(true);
@@ -110,5 +119,10 @@ public class SetsMainController implements SetsPage{
     @SuppressWarnings("unused")
     private void onCreateSetsClicked() {
         navigator.show("create");
+    }
+
+    @FXML
+    private void onSetClicked(StudySet studySet){
+        navigator.show("details", studySet);
     }
 }

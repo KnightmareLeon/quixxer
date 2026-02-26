@@ -3,8 +3,10 @@ package io.github.knightmareleon.features.sets.components;
 import java.io.IOException;
 
 import io.github.knightmareleon.features.sets.SetsService;
+import io.github.knightmareleon.features.sets.components.pages.SetDetailsController;
 import io.github.knightmareleon.shared.infrastructure.AppContext;
 import io.github.knightmareleon.shared.infrastructure.navigator.BaseTabNavigator;
+import io.github.knightmareleon.shared.models.StudySet;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.layout.Pane;
@@ -17,7 +19,7 @@ public class SetsNavigator extends BaseTabNavigator {
 
     @Override
     @SuppressWarnings("CallToPrintStackTrace")
-    public void show(String tabId) {
+    public void show(String tabId, Object... objects) {
         try {
             FXMLLoader loader = this.getLoader(tabId);
 
@@ -26,6 +28,11 @@ public class SetsNavigator extends BaseTabNavigator {
 
             if (controller instanceof SetsPage page) {
                 page.setSetsNavigator(this);
+            }
+            if (controller instanceof SetDetailsController setDetailsController && 
+                objects[0] instanceof StudySet studySet
+            ){
+                setDetailsController.setStudySet(studySet);
             }
             this.getContainer().getChildren().setAll(view);
 
@@ -39,6 +46,7 @@ public class SetsNavigator extends BaseTabNavigator {
         return switch (tabId) {
             case "main" -> "/io/github/knightmareleon/features/sets/components/pages/SetsMainView.fxml";
             case "create" -> "/io/github/knightmareleon/features/sets/components/pages/SetsCreateView.fxml";
+            case "details" -> "/io/github/knightmareleon/features/sets/components/pages/SetDetailsView.fxml";
             default -> throw new IllegalArgumentException("Unknown tab: " + tabId);
         };
     }

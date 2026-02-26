@@ -97,7 +97,7 @@ public class StudySet {
     @Override
     public String toString(){
         String questionString = "Questions:";
-        for (Question question : questions){
+        for (Question question : this.questions){
             questionString += "\n" + question.toString() ;
         }
 

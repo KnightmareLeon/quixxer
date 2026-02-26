@@ -65,4 +65,15 @@ public class Question{
     public void setType(QuestionType type){
         this.type = type;
     }
+
+    @Override
+    public String toString(){
+        return String.format(
+            " Question: %s | Type: %s |" + 
+            " Choices: %s | Answers: %s", 
+            this.description,
+            this.type,
+            this.choices,
+            this.answerIndices);
+    }
 }

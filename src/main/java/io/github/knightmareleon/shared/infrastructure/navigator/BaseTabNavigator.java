@@ -18,7 +18,7 @@ public abstract class BaseTabNavigator {
     }
 
     @SuppressWarnings("CallToPrintStackTrace")
-    public void show(String tabId) {
+    public void show(String tabId, Object... objects) {
         try {
             FXMLLoader loader = this.getLoader(tabId);
 
