@@ -9,64 +9,40 @@ public class StudySet {
     private String title; 
     private String subject;
     private String imgpath;
-    private Instant createdOn;
+    private final Instant createdOn;
     private Instant lastTakeOn;
     private int totalTakes;
     private final List<Question> questions;
 
-    public StudySet(
-        String title, 
-        String subject, 
-        String imgpath, 
-        List<Question> questions) {
+    public StudySet(int id,
+            String title, 
+            String subject, 
+            String imgpath, 
+            int totalTakes,
+            List<Question> questions,
+            Instant createdOn,
+            Instant lastTakeOn) {
 
-            this.id = 0;
-            this.title = title;
-            this.subject = subject;
-            this.imgpath = imgpath;
-            this.totalTakes = 0;
-            this.questions = questions;
+        this.id = id;
+        this.title = title;
+        this.subject = subject;
+        this.imgpath = imgpath;
+        this.totalTakes = totalTakes;
+        this.questions = questions;
+        this.createdOn = createdOn;
+        this.lastTakeOn = lastTakeOn;
     }
 
-    public StudySet(
-        int id,
-        String title, 
-        String subject, 
-        String imgpath, 
-        int totalTakes,
-        List<Question> questions) {
+    public StudySet(String title, 
+            String subject, 
+            String imgpath, 
+            List<Question> questions) {
 
-            this.id = id;
-            this.title = title;
-            this.subject = subject;
-            this.imgpath = imgpath;
-            this.totalTakes = totalTakes;
-            this.questions = questions;
-            this.createdOn = Instant.now();
-            this.lastTakeOn = null;
+        this(0, title, subject, imgpath, 0, 
+            questions, Instant.now(), null);
     }
 
-        public StudySet(
-        int id,
-        String title, 
-        String subject, 
-        String imgpath, 
-        int totalTakes,
-        List<Question> questions,
-        Instant createdOn,
-        Instant lastTakeOn) {
-
-            this.id = id;
-            this.title = title;
-            this.subject = subject;
-            this.imgpath = imgpath;
-            this.totalTakes = totalTakes;
-            this.questions = questions;
-            this.createdOn = createdOn;
-            this.lastTakeOn = lastTakeOn;
-    }
-
-    public int id(){
+    public int getId(){
         return this.id;
     }
 
@@ -112,6 +88,10 @@ public class StudySet {
 
     public void incrementTakes(){
         this.totalTakes++;
+    }
+
+    public void setLastTakenOn(){
+        this.lastTakeOn = Instant.now();
     }
 
     @Override

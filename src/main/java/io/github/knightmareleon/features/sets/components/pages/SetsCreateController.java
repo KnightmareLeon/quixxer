@@ -9,6 +9,7 @@ import io.github.knightmareleon.features.sets.SetsService;
 import io.github.knightmareleon.features.sets.components.SetsNavigator;
 import io.github.knightmareleon.features.sets.components.SetsPage;
 import io.github.knightmareleon.features.sets.components.controls.QuestionField;
+import io.github.knightmareleon.shared.constants.QuestionType;
 import io.github.knightmareleon.shared.models.Question;
 import io.github.knightmareleon.shared.models.StudySet;
 import io.github.knightmareleon.shared.utils.Result;
@@ -88,12 +89,15 @@ public class SetsCreateController implements SetsPage{
         
         for (QuestionField questionField : this.questionFields) {
             String question = questionField.getQuestion();
-            String qType = questionField.getType();
+            QuestionType qType = switch(questionField.getType()) {
+                case "True or False" -> QuestionType.TRUE_OR_FALSE;
+                case "Enumeration"-> QuestionType.ENUMERATION;
+                default -> QuestionType.IDENTIFICATION;
+            };
             List<Integer> answers = questionField.getAnswers();
             List<String> trueOrFalse = List.of("True","False");
             if(questionField.getType().equals("True or False")){
                 questions.add(new Question(
-                    0,
                     question,
                     qType,
                     trueOrFalse,
@@ -101,7 +105,6 @@ public class SetsCreateController implements SetsPage{
                 ));
             } else {
                 questions.add(new Question(
-                    0,
                     question,
                     qType,
                     questionField.getChoices(),

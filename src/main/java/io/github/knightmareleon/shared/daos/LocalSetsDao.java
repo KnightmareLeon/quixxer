@@ -8,6 +8,7 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.github.knightmareleon.shared.constants.QuestionType;
 import io.github.knightmareleon.shared.exceptions.DataAccessException;
 import io.github.knightmareleon.shared.models.Question;
 import io.github.knightmareleon.shared.models.StudySet;
@@ -92,26 +93,26 @@ public class LocalSetsDao implements SetsDao{
             int setID = (int) setIDRS.getLong(1);
 
             for (Question question : studySet.getQuestions()){
-                switch (question.questionType()) {
-                    case "True or False" -> {
+                switch (question.getType()) {
+                    case QuestionType.TRUE_OR_FALSE -> {
                         PreparedStatement tofstmt = this.connection.prepareStatement(
                                 this.INSERT_TOF_QUESTION
                         );  
-                        
-                        int is_true = question.answerIndices().get(0);
-                        tofstmt.setString(1, question.question());
+
+                        int is_true = question.getAnswerIndices().get(0);
+                        tofstmt.setString(1, question.getDescription());
                         tofstmt.setInt(2, is_true);
                         tofstmt.setInt(3, setID);
 
                         tofstmt.executeUpdate();
                     }
-                    case "Enumeration" -> {
+                    case QuestionType.ENUMERATION -> {
                         PreparedStatement enumstmt = this.connection.prepareStatement(
-                                this.INSERT_STD_QUESTION
+                            this.INSERT_STD_QUESTION
                         );  
                         
-                        enumstmt.setInt(1,1);
-                        enumstmt.setString(2,question.question());
+                        enumstmt.setInt(1, QuestionType.ENUMERATION.getCode());
+                        enumstmt.setString(2, question.getDescription());
                         enumstmt.setInt(3, setID);
                         
                         enumstmt.executeUpdate();
@@ -120,9 +121,9 @@ public class LocalSetsDao implements SetsDao{
                         enumIDRS.next();
                         int enumID = (int) enumIDRS.getLong(1);
 
-                        for(String choice : question.choices()){
+                        for(String choice : question.getChoices()){
                             PreparedStatement choicestmt = this.connection.prepareStatement(
-                                    this.INSERT_CHOICE
+                                this.INSERT_CHOICE
                             );
                             
                             choicestmt.setString(1, choice);
@@ -137,8 +138,8 @@ public class LocalSetsDao implements SetsDao{
                                 this.INSERT_STD_QUESTION
                         );  
 
-                        idnstmt.setInt(1,0);
-                        idnstmt.setString(2,question.question());
+                        idnstmt.setInt(1,QuestionType.IDENTIFICATION.getCode());
+                        idnstmt.setString(2,question.getDescription());
                         idnstmt.setInt(3, setID);
 
                         idnstmt.executeUpdate();
@@ -147,13 +148,13 @@ public class LocalSetsDao implements SetsDao{
                         idnIDRS.next();
                         int idnID = (int) idnIDRS.getLong(1);
 
-                        for(int i = 0; i < question.choices().size(); i++){
+                        for(int i = 0; i < question.getChoices().size(); i++){
                             PreparedStatement choicestmt = this.connection.prepareStatement(
                                     this.INSERT_CHOICE
                             );
                             
-                            choicestmt.setString(1, question.choices().get(i));
-                            choicestmt.setInt(2, question.answerIndices().contains(i) ? 1 : 0);
+                            choicestmt.setString(1, question.getChoices().get(i));
+                            choicestmt.setInt(2, question.getAnswerIndices().contains(i) ? 1 : 0);
                             choicestmt.setInt(3, idnID);
 
                             choicestmt.executeUpdate();
@@ -248,7 +249,8 @@ public class LocalSetsDao implements SetsDao{
                     questionList.add(new Question(
                         q_id,
                         stdQsSet.getString("description"),
-                        stdQsSet.getInt("type") == 0 ? "Identification" : "Enumeration",
+                        stdQsSet.getInt("type") == QuestionType.IDENTIFICATION.getCode() ? 
+                            QuestionType.IDENTIFICATION : QuestionType.ENUMERATION,
                         choices,
                         answers
                     ));
@@ -264,7 +266,7 @@ public class LocalSetsDao implements SetsDao{
                     questionList.add(new Question(
                         tofQsSet.getInt("id"),
                         tofQsSet.getString("description"),
-                        "TRUE OR FALSE",
+                        QuestionType.TRUE_OR_FALSE,
                         List.of("True", "False"),
                         List.of(answer)
                     ));

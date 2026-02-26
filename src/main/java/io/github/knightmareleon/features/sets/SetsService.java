@@ -3,6 +3,7 @@ package io.github.knightmareleon.features.sets;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.github.knightmareleon.shared.constants.QuestionType;
 import io.github.knightmareleon.shared.daos.SetsDao;
 import io.github.knightmareleon.shared.exceptions.DataAccessException;
 import io.github.knightmareleon.shared.models.Question;
@@ -45,14 +46,14 @@ public class SetsService {
 
         for(int i = 0; i < studySet.getQuestions().size(); i++){
             Question question = studySet.getQuestions().get(i);
-            if(question.question().isBlank()){
+            if(question.getDescription().isBlank()){
                 errorMessages.add("" + i);
             }
 
-            else if( question.questionType().equals("Identification") ||
-                question.questionType().equals("Enumeration")
+            else if( question.getType() == QuestionType.IDENTIFICATION ||
+                question.getType() == QuestionType.ENUMERATION
             ){
-                for(String choice : question.choices()){
+                for(String choice : question.getChoices()){
                     if(choice == null || choice.isBlank()){
                         errorMessages.add("" + i);
                         break;
@@ -78,7 +79,6 @@ public class SetsService {
 
         try {
             if(page > this.totalPages) page = this.totalPages;
-            System.out.println((page - 1) * this.MAX_SET_TOTAL_PER_PAGE + "");
             List<StudySet> studySets = this.setsDao.list(
                 this.MAX_SET_TOTAL_PER_PAGE, 
                 (page - 1) * this.MAX_SET_TOTAL_PER_PAGE

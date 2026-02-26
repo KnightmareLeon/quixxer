@@ -47,7 +47,6 @@ public class SetsMainController implements SetsPage{
     public void initialize(){
         this.studySets = this.setsService.getStudySets(1).getValue();
         for(StudySet studySet : this.studySets){
-            System.out.println(studySet);
             studySetCards.add(new SetCardForm(
                 studySet.getimgpath().equals("default") ? 
                 "dashicons-book-alt" : studySet.getimgpath(), 
@@ -91,7 +90,7 @@ public class SetsMainController implements SetsPage{
                     }
                     
                 }
-                this.setsContainer.getChildren().addAll(this.setsLeftCol,this.setsRightCol);
+                this.setsContainer.getChildren().addAll(this.setsRightCol, this.setsLeftCol);
             } else {
                 this.setsLeftCol.getChildren().clear();
                 this.setsRightCol.getChildren().clear();
