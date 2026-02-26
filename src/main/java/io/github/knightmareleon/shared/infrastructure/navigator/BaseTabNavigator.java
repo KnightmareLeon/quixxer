@@ -1,7 +1,6 @@
 package io.github.knightmareleon.shared.infrastructure.navigator;
 
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 
 import io.github.knightmareleon.shared.infrastructure.AppContext;
 import javafx.fxml.FXMLLoader;
@@ -21,27 +20,11 @@ public abstract class BaseTabNavigator {
     @SuppressWarnings("CallToPrintStackTrace")
     public void show(String tabId) {
         try {
-            String fxmlPath = this.getFXMLPath(tabId);
-
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
-            
-            loader.setControllerFactory(type -> {
-                try {
-                    return type.getConstructor(AppContext.class)
-                            .newInstance(this.context);
-                } catch (NoSuchMethodException e) {
-                    try {
-                        return type.getDeclaredConstructor().newInstance();
-                    } catch (IllegalAccessException | IllegalArgumentException | InstantiationException | NoSuchMethodException | InvocationTargetException ex) {
-                        throw new RuntimeException(ex);
-                    }
-                } catch (IllegalAccessException | IllegalArgumentException | InstantiationException | InvocationTargetException e) {
-                    throw new RuntimeException(e);
-                }
-            });
+            FXMLLoader loader = this.getLoader(tabId);
 
             Parent view = loader.load();
-            container.getChildren().setAll(view);
+            
+            this.container.getChildren().setAll(view);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -54,6 +37,34 @@ public abstract class BaseTabNavigator {
 
     protected AppContext getContext(){
         return this.context;
+    }
+
+    protected FXMLLoader getLoader(String tabId){
+        String fxmlPath = this.getFXMLPath(tabId);
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+
+        loader.setControllerFactory(this::navigatorControllerFactory);
+
+        return loader;
+    }
+
+    protected <T> T navigatorControllerFactory(Class<T> type) {
+        try {
+            return type
+                    .getConstructor(AppContext.class)
+                    .newInstance(this.getContext());
+        } catch (NoSuchMethodException e) {
+            try {
+                return type
+                        .getDeclaredConstructor()
+                        .newInstance();
+            } catch (ReflectiveOperationException ex) {
+                throw new RuntimeException("Failed to create controller: " + type.getName(), ex);
+            }
+        } catch (ReflectiveOperationException e) {
+            throw new RuntimeException("Failed to create controller: " + type.getName(), e);
+        }
     }
 
     public abstract String getFXMLPath(String tabId);
