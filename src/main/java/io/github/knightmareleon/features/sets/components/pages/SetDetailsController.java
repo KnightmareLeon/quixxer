@@ -7,14 +7,21 @@ import io.github.knightmareleon.features.sets.components.controls.SetDetailsCard
 import io.github.knightmareleon.shared.constants.QuestionType;
 import io.github.knightmareleon.shared.models.Question;
 import io.github.knightmareleon.shared.models.StudySet;
+import io.github.knightmareleon.shared.ui.controls.IconToggleButton;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.ToggleGroup;
+import javafx.scene.layout.VBox;
 
-public class SetDetailsController implements SetsPage {
+public class SetDetailsController extends VBox implements SetsPage {
 
     private final SetsService setsService;
     private SetsNavigator navigator;
     private StudySet studySet;
+
+    private final ToggleGroup setTabs = new ToggleGroup();
+    @FXML private IconToggleButton detailsToggleButton;
+    @FXML private IconToggleButton questionToggleButton;
 
     @FXML private Label setName;
     @FXML private SetDetailsCard subjectCard;
@@ -24,6 +31,8 @@ public class SetDetailsController implements SetsPage {
     @FXML private SetDetailsCard identificationTotalCard;
     @FXML private SetDetailsCard enumerationTotalCard;
     @FXML private SetDetailsCard tofTotalCard;
+
+    @FXML private VBox detailsTab;
 
     public SetDetailsController(SetsService setsService){
         this.setsService = setsService;
@@ -50,14 +59,9 @@ public class SetDetailsController implements SetsPage {
 
         for(Question question : this.studySet.getQuestions()){
             switch(question.getType()){
-                case QuestionType.IDENTIFICATION:
-                    identificationTotal++;
-                    break;
-                case QuestionType.ENUMERATION:
-                    enumerationTotal++;
-                    break;
-                default:
-                    tofTotal++;
+                case QuestionType.IDENTIFICATION -> identificationTotal++;
+                case QuestionType.ENUMERATION -> enumerationTotal++;
+                default -> tofTotal++;
             }
         }
 
@@ -68,7 +72,23 @@ public class SetDetailsController implements SetsPage {
 
     @FXML
     public void initialize(){
-        
+        this.detailsToggleButton.setToggleGroup(this.setTabs);
+        this.questionToggleButton.setToggleGroup(this.setTabs);
+
+        setTabs.selectedToggleProperty().addListener((obsVal, oldVal, newVal) -> {
+            if (newVal == null) {
+                oldVal.setSelected(true);
+                return;
+            }
+            if((IconToggleButton) newVal == this.detailsToggleButton){
+                this.detailsTab.setVisible(true);
+            } else {
+                this.detailsTab.setVisible(false);
+            }
+
+        });
+
+        this.detailsToggleButton.setSelected(true);
     }
 
     @FXML

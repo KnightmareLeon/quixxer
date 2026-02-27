@@ -5,7 +5,6 @@
 <?import javafx.scene.layout.Region?>
 
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ToggleButton?>
 
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
@@ -32,6 +31,7 @@
         <Label fx:id="setName"
             styleClass="standard-header-font"/>
         <IconToggleButton 
+            fx:id="detailsToggleButton"
             text="Details"
             iconLiteral="bi-box-arrow-left"
             styleClass="icon-button-transparent-bg"
@@ -39,6 +39,7 @@
             minHeight="48"
             minWidth="48"/>
         <IconToggleButton
+            fx:id="questionToggleButton"
             text="Questions"
             iconLiteral="bi-box-arrow-left"
             styleClass="icon-button-transparent-bg"
@@ -67,10 +68,12 @@
             onAction="#onBackPageClicked"/>
     </HBox>
     <VBox
+        fx:id="detailsTab"
         alignment="CENTER"
         spacing="24"
         fillWidth="true"
-        VBox.vgrow="ALWAYS">
+        VBox.vgrow="ALWAYS"
+        visible="false">
         <Label 
             text="Set Details"
             styleClass="standard-header-font"/>
