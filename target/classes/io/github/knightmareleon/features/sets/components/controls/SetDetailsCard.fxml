@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+
+<?import javafx.scene.control.Label?>
+
+<fx:root 
+    type="VBox"
+    xmlns:fx="http://javafx.com/fxml/1"
+    stylesheets="/io/github/knightmareleon/css/controls.css"
+    fillWidth="true"
+    HBox.hgrow="ALWAYS"
+    alignment="CENTER"
+    styleClass="set-standard-bg-no-hover,border-radius-15"
+    spacing="12"
+    maxWidth="99999999999999">
+    <Label
+        fx:id="headerLabel"
+        style="-fx-font-size: 18 !important"
+        styleClass="standard-header-font"/>
+    <Label
+        fx:id="dataLabel"
+        style="-fx-font-size: 12 !important"
+        styleClass="standard-font"/>
+</fx:root>

@@ -30,7 +30,7 @@ public class SetsNavigator extends BaseTabNavigator {
                 page.setSetsNavigator(this);
             }
             if (controller instanceof SetDetailsController setDetailsController && 
-                objects[0] instanceof StudySet studySet
+                objects.length > 0 && objects[0] instanceof StudySet studySet
             ){
                 setDetailsController.setStudySet(studySet);
             }

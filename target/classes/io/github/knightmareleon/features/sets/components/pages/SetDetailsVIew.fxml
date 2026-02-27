@@ -12,6 +12,8 @@
 <?import io.github.knightmareleon.shared.ui.controls.IconButton?>
 <?import io.github.knightmareleon.shared.ui.controls.IconToggleButton?>
 
+<?import io.github.knightmareleon.features.sets.components.controls.SetDetailsCard?>
+
 <VBox
     xmlns:fx="http://javafx.com/fxml/1"
     fx:controller="io.github.knightmareleon.features.sets.components.pages.SetDetailsController"
@@ -74,52 +76,51 @@
             styleClass="standard-header-font"/>
         <HBox
             spacing="24"
-            fillHeight="true">
-            <VBox
-                fillWidth="true"
-                HBox.hgrow="ALWAYS"
-                alignment="CENTER"
-                styleClass="set-standard-bg-no-hover,border-radius-15"
-                maxWidth="99999999999999">
-                <Label
-                    text="Subject"
-                    styleClass="standard-header-font"/>
-                <Label
-                    fx:id="subjectLabel"
-                    styleClass="standard-font"/>
-            </VBox>
-            <VBox
-                fillWidth="true"
-                HBox.hgrow="ALWAYS"
-                alignment="CENTER"
-                styleClass="set-standard-bg-no-hover,border-radius-15"
-                maxWidth="99999999999999">
-                <Label
-                    text="Created On"
-                    styleClass="standard-header-font"/>
-                <Label
-                    fx:id="createdOnLabel"
-                    styleClass="standard-font"/>
-            </VBox>
-            <VBox
-                fillWidth="true"
-                HBox.hgrow="ALWAYS"
-                alignment="CENTER"
-                styleClass="set-standard-bg-no-hover,border-radius-15"
-                maxWidth="99999999999999">
-                <Label
-                    text="Last Taken On"
-                    styleClass="standard-header-font"/>
-                <Label
-                    fx:id="lastTakeOnLabel"
-                    styleClass="standard-font"/>
-            </VBox>
+            fillHeight="true"
+            VBox.vgrow="ALWAYS">
+            <SetDetailsCard 
+                fx:id="subjectCard"
+                headerText="Subject"/>
+            <SetDetailsCard 
+                fx:id="createdOnCard"
+                headerText="Created On"/>
+            <SetDetailsCard 
+                fx:id="lastTakenOnCard"
+                headerText="Last Taken On"/>
         </HBox>
         <Label 
             text="Questions"
             styleClass="standard-header-font"/>
+        <HBox
+            spacing="24"
+            fillHeight="true"
+            VBox.vgrow="ALWAYS">
+            <SetDetailsCard 
+                fx:id="totalQuestionsCard"
+                headerText="Overall Total"/>
+            <SetDetailsCard 
+                fx:id="identificationTotalCard"
+                headerText="Identification Total"/>
+            <SetDetailsCard 
+                fx:id="enumerationTotalCard"
+                headerText="Enumeration Total"/>
+            <SetDetailsCard 
+                fx:id="tofTotalCard"
+                headerText="True or False Total"/>
+        </HBox>
         <Label 
             text="Statistics"
             styleClass="standard-header-font"/>
+        <HBox
+            spacing="24"
+            fillHeight="true"
+            VBox.vgrow="ALWAYS">
+            <SetDetailsCard 
+                fx:id="totalTimesCard"
+                headerText="Total Times Taken"/>
+            <SetDetailsCard 
+                fx:id="averageScoreCard"
+                headerText="Average Score"/>
+        </HBox>
     </VBox>
 </VBox>

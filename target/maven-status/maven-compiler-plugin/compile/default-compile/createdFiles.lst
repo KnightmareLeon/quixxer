@@ -23,6 +23,7 @@ io\github\knightmareleon\features\sets\components\SetsNavigator.class
 io\github\knightmareleon\features\settings\SettingsDAO.class
 io\github\knightmareleon\shared\ui\header\HeaderController.class
 io\github\knightmareleon\shared\infrastructure\database\DatabaseManager.class
+io\github\knightmareleon\features\sets\components\controls\SetDetailsCard.class
 io\github\knightmareleon\RootController.class
 io\github\knightmareleon\features\dashboard\DashboardController.class
 io\github\knightmareleon\features\sets\SetsConstants.class
@@ -39,4 +40,5 @@ io\github\knightmareleon\features\test\TestController.class
 io\github\knightmareleon\shared\daos\LocalSetsDao$1.class
 io\github\knightmareleon\shared\utils\Result.class
 io\github\knightmareleon\shared\exceptions\DataAccessException.class
+io\github\knightmareleon\features\sets\components\pages\SetDetailsController$1.class
 io\github\knightmareleon\features\test\TestService.class
