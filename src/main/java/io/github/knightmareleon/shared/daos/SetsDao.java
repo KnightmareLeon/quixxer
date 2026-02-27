@@ -9,5 +9,6 @@ public interface SetsDao {
     boolean exists(String title, String subject);
     int totalRows();
     List<StudySet> list(int limit, int offset);
+    void delete(int studySetID);
 
 }

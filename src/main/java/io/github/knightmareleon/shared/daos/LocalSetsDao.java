@@ -65,6 +65,10 @@ public class LocalSetsDao implements SetsDao{
         "SELECT * FROM " + this.TOF_QUESTION_TABLE_NAME + 
         " WHERE set_id = ?";
 
+    private final String DELETE_SET =
+        "DELETE FROM " + this.SET_TABLE_NAME + 
+        " WHERE id = ?";
+
     public LocalSetsDao(Connection connection) {
         this.connection = connection;
     }
@@ -288,6 +292,20 @@ public class LocalSetsDao implements SetsDao{
         } catch (SQLException e) {
             e.printStackTrace();
             throw new DataAccessException("Failed to get list of sets", e );
+        }
+    }
+
+    @Override
+    public void delete(int studySetID){
+        try {
+            PreparedStatement deleteStatement = this.connection.prepareStatement(
+                this.DELETE_SET
+            );
+
+            deleteStatement.setInt(1, studySetID);
+            deleteStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DataAccessException("Failed to delete study set.", e);
         }
     }
 }

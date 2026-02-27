@@ -1,5 +1,7 @@
 package io.github.knightmareleon.features.sets.components.pages;
 
+import java.util.Optional;
+
 import io.github.knightmareleon.features.sets.SetsService;
 import io.github.knightmareleon.features.sets.components.SetsNavigator;
 import io.github.knightmareleon.features.sets.components.SetsPage;
@@ -9,6 +11,8 @@ import io.github.knightmareleon.shared.models.Question;
 import io.github.knightmareleon.shared.models.StudySet;
 import io.github.knightmareleon.shared.ui.controls.IconToggleButton;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.VBox;
@@ -95,5 +99,19 @@ public class SetDetailsController extends VBox implements SetsPage {
     @SuppressWarnings("unused")
     private void onBackPageClicked() {
         navigator.show("main");
+    }
+
+    @FXML
+    @SuppressWarnings("unused")
+    private void onDeleteClicked(){
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Delete");
+        alert.setHeaderText("Deleting Study Set " + this.studySet.getTitle());
+        alert.setContentText("Are you sure you want to delete this?");
+        Optional<ButtonType> alertResult = alert.showAndWait();
+        if(alertResult.isPresent() && alertResult.get() == ButtonType.OK){
+            this.setsService.deleteStudyResult(this.studySet.getId());
+            navigator.show("main");
+        }
     }
 }

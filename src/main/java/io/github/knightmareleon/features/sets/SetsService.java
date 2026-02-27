@@ -89,4 +89,13 @@ public class SetsService {
         }
 
     }
+
+    public Result<String> deleteStudyResult(int studySetID){
+        try {
+            this.setsDao.delete(studySetID);
+            return Result.success("Delete successful for study set.");
+        } catch (DataAccessException e) {
+            return Result.error("Failed to delete study set.");
+        }
+    }
 }
