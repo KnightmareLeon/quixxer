@@ -5,10 +5,12 @@
 <?import javafx.scene.layout.Region?>
 
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ToggleButton?>
 
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
 <?import io.github.knightmareleon.shared.ui.controls.IconButton?>
+<?import io.github.knightmareleon.shared.ui.controls.IconToggleButton?>
 
 <VBox
     xmlns:fx="http://javafx.com/fxml/1"
@@ -24,10 +26,36 @@
     <HBox 
         spacing="12"
         alignment="CENTER">
-        <FontIcon iconLiteral="bi-folder-plus" iconSize="32" iconColor="white"/>
-        <Label text="Set"
+        <FontIcon iconLiteral="dashicons-book-alt" iconSize="32" iconColor="white"/>
+        <Label fx:id="setName"
             styleClass="standard-header-font"/>
+        <IconToggleButton 
+            text="Details"
+            iconLiteral="bi-box-arrow-left"
+            styleClass="icon-button-transparent-bg"
+            iconStyleClass="icon-base-color"
+            minHeight="48"
+            minWidth="48"/>
+        <IconToggleButton
+            text="Questions"
+            iconLiteral="bi-box-arrow-left"
+            styleClass="icon-button-transparent-bg"
+            iconStyleClass="icon-base-color"
+            minHeight="48"
+            minWidth="48"/>
         <Region HBox.hgrow="ALWAYS" />
+        <IconButton 
+            iconLiteral="bi-pencil-square"
+            styleClass="set-standard-bg"
+            iconStyleClass="icon-base-color"
+            minHeight="48"
+            minWidth="48"/>
+        <IconButton 
+            iconLiteral="bi-trash-fill"
+            styleClass="set-standard-bg"
+            iconStyleClass="icon-base-color"
+            minHeight="48"
+            minWidth="48"/>
         <IconButton 
             iconLiteral="bi-box-arrow-left"
             styleClass="set-standard-bg"
@@ -36,4 +64,62 @@
             minWidth="48"
             onAction="#onBackPageClicked"/>
     </HBox>
+    <VBox
+        alignment="CENTER"
+        spacing="24"
+        fillWidth="true"
+        VBox.vgrow="ALWAYS">
+        <Label 
+            text="Set Details"
+            styleClass="standard-header-font"/>
+        <HBox
+            spacing="24"
+            fillHeight="true">
+            <VBox
+                fillWidth="true"
+                HBox.hgrow="ALWAYS"
+                alignment="CENTER"
+                styleClass="set-standard-bg-no-hover,border-radius-15"
+                maxWidth="99999999999999">
+                <Label
+                    text="Subject"
+                    styleClass="standard-header-font"/>
+                <Label
+                    fx:id="subjectLabel"
+                    styleClass="standard-font"/>
+            </VBox>
+            <VBox
+                fillWidth="true"
+                HBox.hgrow="ALWAYS"
+                alignment="CENTER"
+                styleClass="set-standard-bg-no-hover,border-radius-15"
+                maxWidth="99999999999999">
+                <Label
+                    text="Created On"
+                    styleClass="standard-header-font"/>
+                <Label
+                    fx:id="createdOnLabel"
+                    styleClass="standard-font"/>
+            </VBox>
+            <VBox
+                fillWidth="true"
+                HBox.hgrow="ALWAYS"
+                alignment="CENTER"
+                styleClass="set-standard-bg-no-hover,border-radius-15"
+                maxWidth="99999999999999">
+                <Label
+                    text="Last Taken On"
+                    styleClass="standard-header-font"/>
+                <Label
+                    fx:id="lastTakeOnLabel"
+                    styleClass="standard-font"/>
+            </VBox>
+        </HBox>
+        <Label 
+            text="Questions"
+            styleClass="standard-header-font"/>
+        <Label 
+            text="Statistics"
+            styleClass="standard-header-font"/>
+    </VBox>
 </VBox>
