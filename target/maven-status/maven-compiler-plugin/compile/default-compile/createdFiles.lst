@@ -21,6 +21,7 @@ io\github\knightmareleon\features\sets\components\pages\SetsMainController.class
 io\github\knightmareleon\features\sets\components\SetsPage.class
 io\github\knightmareleon\features\sets\components\SetsNavigator.class
 io\github\knightmareleon\features\settings\SettingsDAO.class
+io\github\knightmareleon\shared\ui\controls\StandardAlert.class
 io\github\knightmareleon\shared\ui\header\HeaderController.class
 io\github\knightmareleon\shared\infrastructure\database\DatabaseManager.class
 io\github\knightmareleon\features\sets\components\controls\SetDetailsCard.class

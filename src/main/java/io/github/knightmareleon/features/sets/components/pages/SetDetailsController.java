@@ -10,6 +10,7 @@ import io.github.knightmareleon.shared.constants.QuestionType;
 import io.github.knightmareleon.shared.models.Question;
 import io.github.knightmareleon.shared.models.StudySet;
 import io.github.knightmareleon.shared.ui.controls.IconToggleButton;
+import io.github.knightmareleon.shared.ui.controls.StandardAlert;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
@@ -104,7 +105,7 @@ public class SetDetailsController extends VBox implements SetsPage {
     @FXML
     @SuppressWarnings("unused")
     private void onDeleteClicked(){
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        Alert alert = new StandardAlert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Delete");
         alert.setHeaderText("Deleting Study Set " + this.studySet.getTitle());
         alert.setContentText("Are you sure you want to delete this?");

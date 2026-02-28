@@ -1,15 +1,31 @@
 .standard-dark-bg {
-    -fx-background-color: #212129;;
+    -fx-background-color: #212129;
 }
 
 .standard-gray-bg {
-    -fx-background-color: #323949
+    -fx-background-color: #323949;
 }
 
 .standard-font {
     -fx-font-family: "Inter 24pt ExtraLight";
     -fx-text-fill: white;
     -fx-font-size: 1.5em;
+}
+
+.standard-alert{
+    -fx-background-color: #212129;
+    -fx-font-family: "Inter 24pt ExtraLight";
+}
+
+.standard-alert.dialog-pane:header .header-panel{
+    -fx-background-color: #212129;
+    -fx-font-family: "Inter 24pt ExtraLight";
+    -fx-text-fill: white;
+    -fx-font-size: 1.5em;
+}
+
+.standard-alert .label {
+    -fx-text-fill: white;
 }
 
 .standard-header-font{

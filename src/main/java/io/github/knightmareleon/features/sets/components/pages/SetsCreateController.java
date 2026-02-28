@@ -12,6 +12,7 @@ import io.github.knightmareleon.features.sets.components.controls.QuestionField;
 import io.github.knightmareleon.shared.constants.QuestionType;
 import io.github.knightmareleon.shared.models.Question;
 import io.github.knightmareleon.shared.models.StudySet;
+import io.github.knightmareleon.shared.ui.controls.StandardAlert;
 import io.github.knightmareleon.shared.utils.Result;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -130,7 +131,7 @@ public class SetsCreateController implements SetsPage{
                 questionField.setErrorVisible(false);
             }
 
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            Alert alert = new StandardAlert(Alert.AlertType.INFORMATION);
             alert.setTitle("Save Result");
             alert.setHeaderText("Study Set Saved");
             alert.setContentText(String.format(
@@ -143,7 +144,7 @@ public class SetsCreateController implements SetsPage{
             }
             System.out.println(result.getValue());
         } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
+            Alert alert = new StandardAlert(Alert.AlertType.ERROR);
             alert.setTitle("Save Error");
 
             String headerText = "";
