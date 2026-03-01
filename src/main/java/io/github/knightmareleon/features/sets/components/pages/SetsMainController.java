@@ -95,14 +95,21 @@ public class SetsMainController implements SetsPage{
             if((IconToggleButton) newVal == this.cardViewButton){
                 this.setsList.getChildren().clear();
                 for(int i = 0; i < studySetCards.size(); i++){
-                    if(i % 2 != 0){
+                    if(i % 2 == 0){
                         this.setsLeftCol.getChildren().add(studySetCards.get(i));
                     } else {
                         this.setsRightCol.getChildren().add(studySetCards.get(i));
                     }
                     
                 }
-                this.setsContainer.getChildren().addAll(this.setsRightCol, this.setsLeftCol);
+
+                if(studySetCards.size() == 1){
+                    SetCardForm blank = new SetCardForm("dashicons-book-alt", null, null, 0);
+                    blank.setVisible(false);
+                    this.setsRightCol.getChildren().add(blank);
+                }
+
+                this.setsContainer.getChildren().addAll(this.setsLeftCol, this.setsRightCol);
             } else {
                 this.setsLeftCol.getChildren().clear();
                 this.setsRightCol.getChildren().clear();
