@@ -5,9 +5,8 @@ import java.util.Optional;
 import io.github.knightmareleon.features.sets.SetsService;
 import io.github.knightmareleon.features.sets.components.SetsNavigator;
 import io.github.knightmareleon.features.sets.components.SetsPage;
-import io.github.knightmareleon.features.sets.components.controls.SetDetailsCard;
-import io.github.knightmareleon.shared.constants.QuestionType;
-import io.github.knightmareleon.shared.models.Question;
+import io.github.knightmareleon.features.sets.components.tabs.SetDetailsTab;
+import io.github.knightmareleon.features.sets.components.tabs.SetQuestionsTab;
 import io.github.knightmareleon.shared.models.StudySet;
 import io.github.knightmareleon.shared.ui.controls.IconToggleButton;
 import io.github.knightmareleon.shared.ui.controls.StandardAlert;
@@ -29,15 +28,10 @@ public class SetDetailsController extends VBox implements SetsPage {
     @FXML private IconToggleButton questionToggleButton;
 
     @FXML private Label setName;
-    @FXML private SetDetailsCard subjectCard;
-    @FXML private SetDetailsCard createdOnCard;
-    @FXML private SetDetailsCard lastTakenOnCard;
-    @FXML private SetDetailsCard totalQuestionsCard;
-    @FXML private SetDetailsCard identificationTotalCard;
-    @FXML private SetDetailsCard enumerationTotalCard;
-    @FXML private SetDetailsCard tofTotalCard;
+    @FXML private VBox tabsContainer;
 
-    @FXML private VBox detailsTab;
+    private SetDetailsTab detailsTab;
+    private SetQuestionsTab questionsTab;
 
     public SetDetailsController(SetsService setsService){
         this.setsService = setsService;
@@ -49,34 +43,12 @@ public class SetDetailsController extends VBox implements SetsPage {
     }
 
     public void setStudySet(StudySet studySet){
-        System.out.println("Retrieved study set:\n" + studySet );
         this.studySet = studySet;
         this.setName.setText(this.studySet.getTitle());
-        this.subjectCard.setDataText(this.studySet.getSubject());
-        this.createdOnCard.setDataText(this.studySet.getDateCreatedOn().toString());
-        this.lastTakenOnCard.setDataText(this.studySet.getDataLastTakeOn() == null ? 
-            "Not yet taken." : this.studySet.getDataLastTakeOn().toString());
-        this.totalQuestionsCard.setDataText(this.studySet.getQuestions().size() + "");
-        
-        int identificationTotal = 0;
-        int enumerationTotal = 0;
-        int tofTotal = 0;
 
-        for(Question question : this.studySet.getQuestions()){
-            switch(question.getType()){
-                case QuestionType.IDENTIFICATION -> identificationTotal++;
-                case QuestionType.ENUMERATION -> enumerationTotal++;
-                default -> tofTotal++;
-            }
-        }
+        this.detailsTab = new SetDetailsTab(studySet);
+        this.questionsTab = new SetQuestionsTab(studySet);
 
-        this.identificationTotalCard.setDataText(identificationTotal + "");
-        this.enumerationTotalCard.setDataText(enumerationTotal + "");
-        this.tofTotalCard.setDataText(tofTotal + "");
-    }
-
-    @FXML
-    public void initialize(){
         this.detailsToggleButton.setToggleGroup(this.setTabs);
         this.questionToggleButton.setToggleGroup(this.setTabs);
 
@@ -85,15 +57,24 @@ public class SetDetailsController extends VBox implements SetsPage {
                 oldVal.setSelected(true);
                 return;
             }
+            if (oldVal == null && !this.tabsContainer.getChildren().isEmpty()) {
+                return;
+            }
+            this.tabsContainer.getChildren().clear();
             if((IconToggleButton) newVal == this.detailsToggleButton){
-                this.detailsTab.setVisible(true);
+                this.tabsContainer.getChildren().add(this.detailsTab);
             } else {
-                this.detailsTab.setVisible(false);
+                this.tabsContainer.getChildren().add(this.questionsTab);
             }
 
         });
 
         this.detailsToggleButton.setSelected(true);
+        this.questionsTab.setTabMaxHeight(Double.MAX_VALUE);
+    }
+
+    @FXML
+    public void initialize(){
     }
 
     @FXML

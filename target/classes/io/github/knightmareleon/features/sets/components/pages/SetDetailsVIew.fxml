@@ -5,6 +5,8 @@
 <?import javafx.scene.layout.Region?>
 
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.Tab?>
 
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
@@ -69,62 +71,11 @@
             onAction="#onBackPageClicked"/>
     </HBox>
     <VBox
-        fx:id="detailsTab"
+        fx:id="tabsContainer"
         alignment="CENTER"
         spacing="24"
         fillWidth="true"
-        VBox.vgrow="ALWAYS"
-        visible="false">
-        <Label 
-            text="Set Details"
-            styleClass="standard-header-font"/>
-        <HBox
-            spacing="24"
-            fillHeight="true"
-            VBox.vgrow="ALWAYS">
-            <SetDetailsCard 
-                fx:id="subjectCard"
-                headerText="Subject"/>
-            <SetDetailsCard 
-                fx:id="createdOnCard"
-                headerText="Created On"/>
-            <SetDetailsCard 
-                fx:id="lastTakenOnCard"
-                headerText="Last Taken On"/>
-        </HBox>
-        <Label 
-            text="Questions"
-            styleClass="standard-header-font"/>
-        <HBox
-            spacing="24"
-            fillHeight="true"
-            VBox.vgrow="ALWAYS">
-            <SetDetailsCard 
-                fx:id="totalQuestionsCard"
-                headerText="Overall Total"/>
-            <SetDetailsCard 
-                fx:id="identificationTotalCard"
-                headerText="Identification Total"/>
-            <SetDetailsCard 
-                fx:id="enumerationTotalCard"
-                headerText="Enumeration Total"/>
-            <SetDetailsCard 
-                fx:id="tofTotalCard"
-                headerText="True or False Total"/>
-        </HBox>
-        <Label 
-            text="Statistics"
-            styleClass="standard-header-font"/>
-        <HBox
-            spacing="24"
-            fillHeight="true"
-            VBox.vgrow="ALWAYS">
-            <SetDetailsCard 
-                fx:id="totalTimesCard"
-                headerText="Total Times Taken"/>
-            <SetDetailsCard 
-                fx:id="averageScoreCard"
-                headerText="Average Score"/>
-        </HBox>
+        VBox.vgrow="ALWAYS">
+
     </VBox>
 </VBox>

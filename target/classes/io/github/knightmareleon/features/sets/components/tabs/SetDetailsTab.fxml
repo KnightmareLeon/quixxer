@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.HBox?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+
+<?import io.github.knightmareleon.features.sets.components.controls.SetDetailsCard?>
+
+<fx:root type="VBox"
+    xmlns:fx="http://javafx.com/fxml/1"
+    fx:id="detailsTab"
+    stylesheets="/io/github/knightmareleon/css/controls.css"
+    alignment="CENTER"
+    spacing="24"
+    fillWidth="true"
+    VBox.vgrow="ALWAYS">
+    <Label 
+        text="Set Details"
+        styleClass="standard-header-font"/>
+    <HBox
+        spacing="24"
+        fillHeight="true"
+        VBox.vgrow="ALWAYS">
+        <SetDetailsCard 
+            fx:id="subjectCard"
+            headerText="Subject"/>
+        <SetDetailsCard 
+            fx:id="createdOnCard"
+            headerText="Created On"/>
+        <SetDetailsCard 
+            fx:id="lastTakenOnCard"
+            headerText="Last Taken On"/>
+    </HBox>
+    <Label 
+        text="Questions"
+        styleClass="standard-header-font"/>
+    <HBox
+        spacing="24"
+        fillHeight="true"
+        VBox.vgrow="ALWAYS">
+        <SetDetailsCard 
+            fx:id="totalQuestionsCard"
+            headerText="Overall Total"/>
+        <SetDetailsCard 
+            fx:id="identificationTotalCard"
+            headerText="Identification Total"/>
+        <SetDetailsCard 
+            fx:id="enumerationTotalCard"
+            headerText="Enumeration Total"/>
+        <SetDetailsCard 
+            fx:id="tofTotalCard"
+            headerText="True or False Total"/>
+    </HBox>
+    <Label 
+        text="Statistics"
+        styleClass="standard-header-font"/>
+    <HBox
+        spacing="24"
+        fillHeight="true"
+        VBox.vgrow="ALWAYS">
+        <SetDetailsCard 
+            fx:id="totalTimesCard"
+            headerText="Total Times Taken"/>
+        <SetDetailsCard 
+            fx:id="averageScoreCard"
+            headerText="Average Score"/>
+    </HBox>
+</fx:root>
