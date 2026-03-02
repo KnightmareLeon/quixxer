@@ -12,28 +12,44 @@
     VBox.vgrow="ALWAYS"
     >
     <tabs>
-        <Tab 
+        <Tab
             text="Identification"
             closable="false"
             styleClass="set-standard-bg,standard-font">
             <content>
-
+                <VBox 
+                    fx:id="identTab"
+                    style="-fx-padding: 24 0 24 0"
+                    spacing="24"
+                    fillWidth="true">
+                </VBox>
             </content>
         </Tab>
+
         <Tab 
             text="Enumeration"
             closable="false"
             styleClass="set-standard-bg,standard-font">
             <content>
-
+                <VBox 
+                    fx:id="emumTab"
+                    style="-fx-padding: 24"
+                    spacing="24"
+                    fillWidth="true">
+                </VBox>
             </content>
         </Tab>
-        <Tab 
+        <Tab
             text="True or False"
             closable="false"
             styleClass="set-standard-bg,standard-font">
             <content>
-
+                <VBox 
+                    fx:id="tofTab"
+                    style="-fx-padding: 24"
+                    spacing="24"
+                    fillWidth="true">
+                </VBox>
             </content>
         </Tab>
     </tabs>

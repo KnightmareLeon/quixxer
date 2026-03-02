@@ -25,12 +25,14 @@ io\github\knightmareleon\features\settings\SettingsDAO.class
 io\github\knightmareleon\shared\ui\controls\StandardAlert.class
 io\github\knightmareleon\shared\ui\header\HeaderController.class
 io\github\knightmareleon\shared\infrastructure\database\DatabaseManager.class
+io\github\knightmareleon\features\sets\components\controls\BaseQuestionDetail.class
 io\github\knightmareleon\features\sets\components\controls\SetDetailsCard.class
 io\github\knightmareleon\RootController.class
 io\github\knightmareleon\features\dashboard\DashboardController.class
 io\github\knightmareleon\features\sets\SetsConstants.class
 io\github\knightmareleon\features\test\TestModel.class
 io\github\knightmareleon\features\sets\SetsController.class
+io\github\knightmareleon\features\sets\components\tabs\SetQuestionsTab$1.class
 io\github\knightmareleon\shared\infrastructure\navigator\RootTabNavigator.class
 io\github\knightmareleon\features\sets\components\tabs\SetDetailsTab$1.class
 io\github\knightmareleon\shared\models\Question.class
@@ -42,6 +44,7 @@ io\github\knightmareleon\shared\constants\QuestionType.class
 io\github\knightmareleon\features\sets\components\tabs\SetQuestionsTab.class
 io\github\knightmareleon\features\test\TestController.class
 io\github\knightmareleon\shared\daos\LocalSetsDao$1.class
+io\github\knightmareleon\features\sets\components\controls\IdentificationQuestionDetail.class
 io\github\knightmareleon\shared\utils\Result.class
 io\github\knightmareleon\shared\exceptions\DataAccessException.class
 io\github\knightmareleon\features\test\TestService.class
