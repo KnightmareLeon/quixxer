@@ -22,7 +22,9 @@ public class IdentificationQuestionDetail extends BaseQuestionDetail {
                 this.choiceLabels.get(i).setStyle(
                     "-fx-text-fill: green !important"
                 );
-                answerIndex++;
+                if(answerIndex < answers.size() - 1){
+                    answerIndex++;
+                }
             }
         }
     }
