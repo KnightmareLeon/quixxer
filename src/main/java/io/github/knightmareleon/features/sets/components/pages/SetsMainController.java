@@ -5,7 +5,6 @@ import java.util.List;
 
 import io.github.knightmareleon.features.sets.SetsService;
 import io.github.knightmareleon.features.sets.components.SetsNavigator;
-import io.github.knightmareleon.features.sets.components.SetsPage;
 import io.github.knightmareleon.features.sets.components.controls.SetCardForm;
 import io.github.knightmareleon.features.sets.components.controls.SetListForm;
 import io.github.knightmareleon.shared.models.StudySet;

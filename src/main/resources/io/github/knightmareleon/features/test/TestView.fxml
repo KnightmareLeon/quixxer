@@ -6,63 +6,12 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Button?>
-<?import io.github.knightmareleon.features.test.components.TestIconButton?>
 
 <StackPane xmlns:fx="http://javafx.com/fxml/1"
            fx:controller="io.github.knightmareleon.features.test.TestController"
-           fx:id="maintestcontainer"
+           fx:id="mainContainer"
            style="-fx-padding: 44 0 44 0"
            stylesheets="@../../css/test.css"
            styleClass="standard-gray-bg">
-    <ScrollPane fx:id="scrollPane"
-            maxWidth="1136"
-            hbarPolicy="AS_NEEDED"
-            vbarPolicy="AS_NEEDED"
-            fitToWidth="true"
-            styleClass="standard-dark-bg"
-            style="-fx-background-radius: 53 0 0 53; -fx-border-radius: 53 0 0 53;">
-        <VBox fx:id="vbox"
-              alignment="CENTER"
-              styleClass="standard-dark-bg"
-              style="-fx-padding: 48; -fx-background-radius: 53 0 0 53; -fx-border-radius: 53 0 0 53;"
-              spacing="48"
-              fillWidth="true">
-            <TestIconButton
-                iconLiteral="fas-border-all"
-                headerText="MULTIPLE CHOICE"
-                descText="Test your skills by answering multiple choice questions."
-                styleClass="mul-choice-bg">
-            </TestIconButton>
-            <TestIconButton
-                iconLiteral="bi-card-text"
-                headerText="FLASHCARDS"
-                descText="Efficiently memorize information by using flashcards."
-                styleClass="fc-test-bg">
-            </TestIconButton>
-            <TestIconButton
-                iconLiteral="bi-arrows-angle-contract"
-                headerText="MATCHING TYPE"
-                descText="Recognize patterns and similarities between two pieces of information."
-                styleClass="match-type-test-bg">
-            </TestIconButton>
-            <TestIconButton
-                iconLiteral="bi-diagram-3-fill"
-                headerText="ENUMERATION"
-                descText="List down lists of items to remember organized details of a concept."
-                styleClass="enum-test-bg">
-            </TestIconButton>
-            <TestIconButton
-                iconLiteral="bi-octagon-half"
-                headerText="TRUE OR FALSE"
-                descText="Assess yourself with a simple true or false test."
-                styleClass="tof-test-bg">
-            </TestIconButton>
-            <TestIconButton
-                iconLiteral="fas-chart-pie"
-                headerText="COMBINED"
-                descText="Combine multiple test types for the ultimate test of knowledge."
-                styleClass="combined-test-bg">
-            </TestIconButton>
-        </VBox>
-    </ScrollPane>
+
 </StackPane>

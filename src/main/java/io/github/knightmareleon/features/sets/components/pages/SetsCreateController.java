@@ -7,7 +7,6 @@ import java.util.Optional;
 import io.github.knightmareleon.features.sets.SetsConstants;
 import io.github.knightmareleon.features.sets.SetsService;
 import io.github.knightmareleon.features.sets.components.SetsNavigator;
-import io.github.knightmareleon.features.sets.components.SetsPage;
 import io.github.knightmareleon.features.sets.components.controls.QuestionField;
 import io.github.knightmareleon.shared.constants.QuestionType;
 import io.github.knightmareleon.shared.models.Question;

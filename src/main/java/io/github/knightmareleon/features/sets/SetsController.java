@@ -25,8 +25,4 @@ public class SetsController{
 
         System.out.println("Sets loaded");
     }
-
-    public SetsNavigator getNavigator(){
-        return this.navigator;
-    }
 }

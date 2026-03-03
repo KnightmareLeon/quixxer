@@ -1,4 +1,4 @@
-package io.github.knightmareleon.features.test.components;
+package io.github.knightmareleon.features.test.components.controls;
 
 import java.io.IOException;
 
