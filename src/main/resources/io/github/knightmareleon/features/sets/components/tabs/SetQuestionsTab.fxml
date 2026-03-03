@@ -32,8 +32,8 @@
             styleClass="set-standard-bg,standard-font">
             <content>
                 <VBox 
-                    fx:id="emumTab"
-                    style="-fx-padding: 24"
+                    fx:id="enumTab"
+                    style="-fx-padding: 24 0 24 0"
                     spacing="24"
                     fillWidth="true">
                 </VBox>
@@ -46,7 +46,7 @@
             <content>
                 <VBox 
                     fx:id="tofTab"
-                    style="-fx-padding: 24"
+                    style="-fx-padding: 24 0 24 0"
                     spacing="24"
                     fillWidth="true">
                 </VBox>

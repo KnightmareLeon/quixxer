@@ -39,6 +39,12 @@ public abstract class BaseQuestionDetail extends VBox {
             choiceLabel.getStyleClass().addAll("standard-font","set-standard-bg-no-hover");
             choiceLabel.setPadding(new Insets(6));
             choiceLabel.setMaxWidth(Double.MAX_VALUE);
+            choiceLabel.setBorder(new Border(
+            new BorderStroke(Color.TRANSPARENT, 
+                BorderStrokeStyle.NONE, 
+                new CornerRadii(15), 
+                BorderWidths.DEFAULT)));
+            choiceLabel.setStyle("-fx-background-radius: 15;" + choiceLabel.getStyle());
         }
         this.getChildren().addAll(
             this.questionHeaderLabel,

@@ -2,7 +2,9 @@ package io.github.knightmareleon.features.sets.components.tabs;
 
 import java.io.IOException;
 
+import io.github.knightmareleon.features.sets.components.controls.EnumerationQuestionDetail;
 import io.github.knightmareleon.features.sets.components.controls.IdentificationQuestionDetail;
+import io.github.knightmareleon.features.sets.components.controls.TrueOrFalseQuestionDetail;
 import io.github.knightmareleon.shared.constants.QuestionType;
 import io.github.knightmareleon.shared.models.Question;
 import io.github.knightmareleon.shared.models.StudySet;
@@ -41,15 +43,17 @@ public class SetQuestionsTab extends TabPane{
     public void initialize(){
         for(Question question: this.studySet.getQuestions()){
             switch(question.getType()){
-                case QuestionType.IDENTIFICATION:
-                    identTab.getChildren().add(
+                case QuestionType.IDENTIFICATION -> identTab.getChildren().add(
                         new IdentificationQuestionDetail(question)
                     );
-                    break;
-                case QuestionType.ENUMERATION:
-                    break;
-                default:
-                    break;
+                case QuestionType.ENUMERATION -> { enumTab.getChildren().add(
+                        new EnumerationQuestionDetail(question)
+                    );
+                }
+                default -> { tofTab.getChildren().add(
+                        new TrueOrFalseQuestionDetail(question)
+                    );
+                }
             }
         }
     }
