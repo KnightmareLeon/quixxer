@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.Label?>
 
@@ -17,12 +18,21 @@
             closable="false"
             styleClass="set-standard-bg,standard-font">
             <content>
-                <VBox 
-                    fx:id="identTab"
-                    style="-fx-padding: 24 0 24 0"
-                    spacing="24"
-                    fillWidth="true">
-                </VBox>
+                <ScrollPane
+                    maxWidth="1136"
+                    hbarPolicy="AS_NEEDED"
+                    vbarPolicy="AS_NEEDED"
+                    fitToWidth="true"
+                    fitToHeight="true"
+                    styleClass="standard-dark-bg">
+                    <VBox 
+                        fx:id="identTab"
+                        style="-fx-padding: 24 0 24 0"
+                        spacing="24"
+                        fillWidth="true"
+                        styleClass="standard-dark-bg">
+                    </VBox>
+                </ScrollPane>
             </content>
         </Tab>
 
@@ -31,12 +41,21 @@
             closable="false"
             styleClass="set-standard-bg,standard-font">
             <content>
-                <VBox 
-                    fx:id="enumTab"
-                    style="-fx-padding: 24 0 24 0"
-                    spacing="24"
-                    fillWidth="true">
-                </VBox>
+                <ScrollPane
+                    maxWidth="1136"
+                    hbarPolicy="AS_NEEDED"
+                    vbarPolicy="AS_NEEDED"
+                    fitToWidth="true"
+                    fitToHeight="true"
+                    styleClass="standard-dark-bg">
+                    <VBox 
+                        fx:id="enumTab"
+                        style="-fx-padding: 24 0 24 0"
+                        spacing="24"
+                        fillWidth="true"
+                        styleClass="standard-dark-bg">
+                    </VBox>
+                </ScrollPane>
             </content>
         </Tab>
         <Tab
@@ -44,12 +63,21 @@
             closable="false"
             styleClass="set-standard-bg,standard-font">
             <content>
-                <VBox 
-                    fx:id="tofTab"
-                    style="-fx-padding: 24 0 24 0"
-                    spacing="24"
-                    fillWidth="true">
-                </VBox>
+                <ScrollPane
+                    maxWidth="1136"
+                    hbarPolicy="AS_NEEDED"
+                    vbarPolicy="AS_NEEDED"
+                    fitToWidth="true"
+                    fitToHeight="true"
+                    styleClass="standard-dark-bg">
+                    <VBox 
+                        fx:id="tofTab"
+                        style="-fx-padding: 24 0 24 0"
+                        spacing="24"
+                        fillWidth="true"
+                        styleClass="standard-dark-bg">
+                    </VBox>
+                </ScrollPane>
             </content>
         </Tab>
     </tabs>
