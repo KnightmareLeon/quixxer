@@ -3,18 +3,17 @@ package io.github.knightmareleon.features.test.components.pages;
 import io.github.knightmareleon.features.test.components.TestNavigator;
 import javafx.fxml.FXML;
 
-public class TestMainController implements TestPage{
-
-    private TestNavigator testNavigator;
+public class TestSetsPickerController implements TestPage{
+    TestNavigator navigator;
 
     @Override
     public void setTestNavigator(TestNavigator testNavigator) {
-        this.testNavigator = testNavigator;
+        this.navigator = testNavigator;
     }
 
     @FXML
     @SuppressWarnings("unused")
-    private void onTestIconClicked(){
-        this.testNavigator.show("sets");
+    private void onBackPageClicked() {
+        navigator.show("main");
     }
 }

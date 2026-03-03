@@ -44,6 +44,7 @@ io\github\knightmareleon\shared\ui\controls\IconButton.class
 io\github\knightmareleon\App.class
 io\github\knightmareleon\features\settings\SettingsModel.class
 io\github\knightmareleon\shared\constants\QuestionType.class
+io\github\knightmareleon\features\test\components\pages\TestSetsPickerController.class
 io\github\knightmareleon\features\sets\components\tabs\SetQuestionsTab.class
 io\github\knightmareleon\features\test\TestController.class
 io\github\knightmareleon\shared\daos\LocalSetsDao$1.class

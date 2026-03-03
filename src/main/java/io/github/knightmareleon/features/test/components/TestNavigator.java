@@ -39,6 +39,7 @@ public class TestNavigator extends BaseTabNavigator {
     public String getFXMLPath(String tabId) {
         return switch (tabId) {
             case "main" -> "/io/github/knightmareleon/features/test/components/pages/TestMainView.fxml";
+            case "sets" -> "/io/github/knightmareleon/features/test/components/pages/TestSetsPickerView.fxml";
             default -> throw new IllegalArgumentException("Unknown tab: " + tabId);
         };
     }
