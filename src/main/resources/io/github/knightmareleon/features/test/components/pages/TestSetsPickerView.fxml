@@ -70,7 +70,7 @@
             spacing="24"
             alignment="TOP_LEFT"
             styleClass="standard-dark-bg">
-            <Label text="Magic Picker"/>
+            <Label fx:id="testLabel" styleClass="standard-font"/>
         </HBox>
     </ScrollPane>
 </VBox>

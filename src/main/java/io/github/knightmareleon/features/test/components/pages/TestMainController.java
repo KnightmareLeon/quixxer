@@ -1,5 +1,6 @@
 package io.github.knightmareleon.features.test.components.pages;
 
+import io.github.knightmareleon.features.test.TestType;
 import io.github.knightmareleon.features.test.components.TestNavigator;
 import javafx.fxml.FXML;
 
@@ -12,9 +13,45 @@ public class TestMainController implements TestPage{
         this.testNavigator = testNavigator;
     }
 
+
     @FXML
     @SuppressWarnings("unused")
-    private void onTestIconClicked(){
-        this.testNavigator.show("sets");
+    private void onMultipleChoiceClicked(){
+        this.onTestIconClicked(TestType.MULTIPLE_CHOICE);
+    }
+
+    @FXML
+    @SuppressWarnings("unused")
+    private void onFlashcardClicked(){
+        this.onTestIconClicked(TestType.FLASHCARD);
+    }
+
+    @FXML
+    @SuppressWarnings("unused")
+    private void onMatchingTypeClicked(){
+        this.onTestIconClicked(TestType.MATCHING_TYPE);
+    }
+
+    @FXML
+    @SuppressWarnings("unused")
+    private void onEnumerationClicked(){
+        this.onTestIconClicked(TestType.ENUMERATION);
+    }
+
+    @FXML
+    @SuppressWarnings("unused")
+    private void onTrueOrFalseClicked(){
+        this.onTestIconClicked(TestType.TRUE_OR_FALSE);
+    }
+
+    @FXML
+    @SuppressWarnings("unused")
+    private void onCombinedClicked(){
+        this.onTestIconClicked(TestType.COMBINED);
+    }
+
+    private void onTestIconClicked(TestType type){
+        System.out.println("Button clicked" + type);
+        this.testNavigator.show("sets", type);
     }
 }

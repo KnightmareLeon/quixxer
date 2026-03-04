@@ -13,6 +13,7 @@ io\github\knightmareleon\features\sets\components\controls\QuestionField.class
 io\github\knightmareleon\features\sets\components\pages\SetDetailsController.class
 io\github\knightmareleon\features\sets\components\pages\SetsPage.class
 io\github\knightmareleon\shared\models\StudySet.class
+io\github\knightmareleon\features\test\TestType.class
 io\github\knightmareleon\shared\daos\SetsDao.class
 io\github\knightmareleon\shared\daos\LocalSetsDao.class
 io\github\knightmareleon\shared\ui\controls\IconToggleButton.class
@@ -51,4 +52,5 @@ io\github\knightmareleon\shared\daos\LocalSetsDao$1.class
 io\github\knightmareleon\features\sets\components\controls\IdentificationQuestionDetail.class
 io\github\knightmareleon\shared\utils\Result.class
 io\github\knightmareleon\shared\exceptions\DataAccessException.class
+io\github\knightmareleon\features\test\components\pages\TestSetsPickerController$1.class
 io\github\knightmareleon\features\test\TestService.class

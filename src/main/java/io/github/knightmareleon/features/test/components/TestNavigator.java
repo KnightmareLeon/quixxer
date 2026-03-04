@@ -3,7 +3,9 @@ package io.github.knightmareleon.features.test.components;
 import java.io.IOException;
 
 import io.github.knightmareleon.features.test.TestService;
+import io.github.knightmareleon.features.test.TestType;
 import io.github.knightmareleon.features.test.components.pages.TestPage;
+import io.github.knightmareleon.features.test.components.pages.TestSetsPickerController;
 import io.github.knightmareleon.shared.infrastructure.AppContext;
 import io.github.knightmareleon.shared.infrastructure.navigator.BaseTabNavigator;
 import javafx.fxml.FXMLLoader;
@@ -16,7 +18,7 @@ public class TestNavigator extends BaseTabNavigator {
         super(container, context);
     }
 
-        @Override
+    @Override
     @SuppressWarnings("CallToPrintStackTrace")
     public void show(String tabId, Object... objects) {
         try {
@@ -27,6 +29,16 @@ public class TestNavigator extends BaseTabNavigator {
 
             if (controller instanceof TestPage page) {
                 page.setTestNavigator(this);
+            }
+            if(objects.length > 0
+            ){
+                System.out.println(objects[0]);
+            }
+            if (controller instanceof TestSetsPickerController page &&
+                objects.length > 0 && objects[0] instanceof TestType type
+            ){
+                System.out.println("Type set.");
+                page.setTestType(type);
             }
             this.getContainer().getChildren().setAll(view);
 
