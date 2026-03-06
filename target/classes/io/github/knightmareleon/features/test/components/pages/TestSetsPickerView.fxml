@@ -70,7 +70,6 @@
             spacing="24"
             alignment="TOP_LEFT"
             styleClass="standard-dark-bg">
-            <Label fx:id="testLabel" styleClass="standard-font"/>
         </HBox>
     </ScrollPane>
 </VBox>

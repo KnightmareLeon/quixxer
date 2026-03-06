@@ -66,6 +66,11 @@ public class LocalSetsDao implements SetsDao{
         "SELECT * FROM " + this.TOF_QUESTION_TABLE_NAME + 
         " WHERE set_id = ?";
 
+    private final String SETS_WITH_TOF_ONLY_LIST = 
+        "SELECT DISTINCT s_set.id, s_set.title, s_set.subject, s_set.imgpath, s_set.total_takes, " +
+        " s_set.created_on, s_set.last_taken_on FROM " + 
+        this.SET_TABLE_NAME + " s_set INNER JOIN tof_question ON s_set.id = tof_question.set_id"
+        +  " LIMIT ? OFFSET ?";
     private final String DELETE_SET =
         "DELETE FROM " + this.SET_TABLE_NAME + 
         " WHERE id = ?";
@@ -227,7 +232,7 @@ public class LocalSetsDao implements SetsDao{
                 String lastTakenOn = setListResult.getString("last_taken_on");
 
                 List<Question> questionList = new ArrayList<>();
-                questionList.addAll(this.listStandarQuestions(setId));
+                questionList.addAll(this.listStandardQuestions(setId));
                 questionList.addAll(this.listTrueOrFalseQuestions(setId));
 
                 setList.add(new StudySet(
@@ -250,7 +255,7 @@ public class LocalSetsDao implements SetsDao{
     }
 
     @SuppressWarnings("CallToPrintStackTrace")
-    private List<Question> listStandarQuestions(int setId){
+    private List<Question> listStandardQuestions(int setId){
         try {
             List<Question> questionList = new ArrayList<>();
             PreparedStatement stdQuestionStatement = this.connection.prepareStatement(
@@ -324,20 +329,20 @@ public class LocalSetsDao implements SetsDao{
     }
 
     @Override
-    public List<StudySet> listByTest(int offset, int limit, TestType type){
+    public List<StudySet> listByTest(int limit, int offset, TestType type){
         switch(type){
-            case TestType.TRUE_OR_FALSE: return this.listTrueOrFalseSets(offset, limit);
+            case TestType.TRUE_OR_FALSE: return this.listTrueOrFalseSets(limit, offset);
             default: throw new IllegalArgumentException("Test not supported.");
         }
     }
 
-    private List<StudySet> listTrueOrFalseSets(int offset, int limit){
+    @SuppressWarnings("CallToPrintStackTrace")
+    private List<StudySet> listTrueOrFalseSets(int limit, int offset){
         try {
             List<StudySet> setList = new ArrayList<>();
             PreparedStatement setListStatement = this.connection.prepareStatement(
-                this.SET_LIST
+                this.SETS_WITH_TOF_ONLY_LIST
             );
-
             setListStatement.setInt(1, limit);
             setListStatement.setInt(2, offset);
             ResultSet setListResult = setListStatement.executeQuery();
