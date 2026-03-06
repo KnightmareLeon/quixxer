@@ -8,6 +8,7 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.github.knightmareleon.features.test.TestType;
 import io.github.knightmareleon.shared.constants.QuestionType;
 import io.github.knightmareleon.shared.exceptions.DataAccessException;
 import io.github.knightmareleon.shared.models.Question;
@@ -213,7 +214,9 @@ public class LocalSetsDao implements SetsDao{
     public List<StudySet> list(int limit, int offset){
         try {
             List<StudySet> setList = new ArrayList<>();
-            PreparedStatement setListStatement = this.connection.prepareStatement(this.SET_LIST);
+            PreparedStatement setListStatement = this.connection.prepareStatement(
+                this.SET_LIST
+            );
 
             setListStatement.setInt(1, limit);
             setListStatement.setInt(2, offset);
@@ -223,58 +226,128 @@ public class LocalSetsDao implements SetsDao{
                 int setId = setListResult.getInt("id");
                 String lastTakenOn = setListResult.getString("last_taken_on");
 
-                PreparedStatement stdQuestionStatement = this.connection.prepareStatement(
-                    this.STD_QUESTION_LIST);
-                stdQuestionStatement.setInt(1,setId);
-                ResultSet stdQsSet = stdQuestionStatement.executeQuery();
+                List<Question> questionList = new ArrayList<>();
+                questionList.addAll(this.listStandarQuestions(setId));
+                questionList.addAll(this.listTrueOrFalseQuestions(setId));
+
+                setList.add(new StudySet(
+                    setId,
+                    setListResult.getString("title"),
+                    setListResult.getString("subject"),
+                    setListResult.getString("imgpath"),
+                    setListResult.getInt("total_takes"),
+                    questionList,
+                    Instant.parse(setListResult.getString("created_on")),
+                    lastTakenOn == null ? null : Instant.parse(lastTakenOn)
+                ));
+            }
+
+            return setList;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new DataAccessException("Failed to get list of sets", e );
+        }
+    }
+
+    @SuppressWarnings("CallToPrintStackTrace")
+    private List<Question> listStandarQuestions(int setId){
+        try {
+            List<Question> questionList = new ArrayList<>();
+            PreparedStatement stdQuestionStatement = this.connection.prepareStatement(
+                this.STD_QUESTION_LIST);
+            stdQuestionStatement.setInt(1,setId);
+            ResultSet stdQsSet = stdQuestionStatement.executeQuery();
+
+            while(stdQsSet.next()){
+                int q_id = setId;
+
+                PreparedStatement choiceStatement = this.connection.prepareStatement(
+                    this.CHOICES_LIST);
+                choiceStatement.setInt(1, q_id);
+                ResultSet choiceSet = choiceStatement.executeQuery();
+                
+                List<String> choices = new ArrayList<>();
+                List<Integer> answers = new ArrayList<>();
+                
+                int index = 0;
+                while(choiceSet.next()){
+
+                    choices.add(choiceSet.getString("description"));
+                    if(choiceSet.getInt("answer") == 1){
+                        answers.add(index++);
+                    }
+                }
+                
+                questionList.add(new Question(
+                    q_id,
+                    stdQsSet.getString("description"),
+                    stdQsSet.getInt("type") == QuestionType.IDENTIFICATION.getCode() ? 
+                        QuestionType.IDENTIFICATION : QuestionType.ENUMERATION,
+                    choices,
+                    answers
+                ));
+            }
+
+            return questionList;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new DataAccessException("Failed to get list of standard question list", e );
+        }
+
+    }
+
+    @SuppressWarnings("CallToPrintStackTrace")
+    private List<Question> listTrueOrFalseQuestions(int setId){
+        try {
+            List<Question> questionList = new ArrayList<>();
+            PreparedStatement tofStatement = this.connection.prepareStatement(
+                this.TOF_QUESTION_LIST);
+            tofStatement.setInt(1, setId);
+            ResultSet tofQsSet = tofStatement.executeQuery();
+
+            while(tofQsSet.next()){
+                Integer answer = tofQsSet.getInt("is_true");
+                questionList.add(new Question(
+                    tofQsSet.getInt("id"),
+                    tofQsSet.getString("description"),
+                    QuestionType.TRUE_OR_FALSE,
+                    List.of("True", "False"),
+                    List.of(answer)
+                ));
+            }
+
+            return questionList;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new DataAccessException("Failed to get list of true or false question list", e );
+        }
+    }
+
+    @Override
+    public List<StudySet> listByTest(int offset, int limit, TestType type){
+        switch(type){
+            case TestType.TRUE_OR_FALSE: return this.listTrueOrFalseSets(offset, limit);
+            default: throw new IllegalArgumentException("Test not supported.");
+        }
+    }
+
+    private List<StudySet> listTrueOrFalseSets(int offset, int limit){
+        try {
+            List<StudySet> setList = new ArrayList<>();
+            PreparedStatement setListStatement = this.connection.prepareStatement(
+                this.SET_LIST
+            );
+
+            setListStatement.setInt(1, limit);
+            setListStatement.setInt(2, offset);
+            ResultSet setListResult = setListStatement.executeQuery();
+            while(setListResult.next()){
+                
+                int setId = setListResult.getInt("id");
+                String lastTakenOn = setListResult.getString("last_taken_on");
 
                 List<Question> questionList = new ArrayList<>();
-
-                while(stdQsSet.next()){
-                    int q_id = stdQsSet.getInt("id");
-
-                    PreparedStatement choiceStatement = this.connection.prepareStatement(
-                        this.CHOICES_LIST);
-                    choiceStatement.setInt(1, q_id);
-                    ResultSet choiceSet = choiceStatement.executeQuery();
-                    
-                    List<String> choices = new ArrayList<>();
-                    List<Integer> answers = new ArrayList<>();
-                    
-                    int index = 0;
-                    while(choiceSet.next()){
-
-                        choices.add(choiceSet.getString("description"));
-                        if(choiceSet.getInt("answer") == 1){
-                            answers.add(index++);
-                        }
-                    }
-                    
-                    questionList.add(new Question(
-                        q_id,
-                        stdQsSet.getString("description"),
-                        stdQsSet.getInt("type") == QuestionType.IDENTIFICATION.getCode() ? 
-                            QuestionType.IDENTIFICATION : QuestionType.ENUMERATION,
-                        choices,
-                        answers
-                    ));
-                }
-
-                PreparedStatement tofStatement = this.connection.prepareStatement(
-                    this.TOF_QUESTION_LIST);
-                tofStatement.setInt(1, setId);
-                ResultSet tofQsSet = tofStatement.executeQuery();
-
-                while(tofQsSet.next()){
-                    Integer answer = tofQsSet.getInt("is_true");
-                    questionList.add(new Question(
-                        tofQsSet.getInt("id"),
-                        tofQsSet.getString("description"),
-                        QuestionType.TRUE_OR_FALSE,
-                        List.of("True", "False"),
-                        List.of(answer)
-                    ));
-                }
+                questionList.addAll(this.listTrueOrFalseQuestions(setId));
 
                 setList.add(new StudySet(
                     setId,

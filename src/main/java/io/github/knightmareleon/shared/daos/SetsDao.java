@@ -2,6 +2,7 @@ package io.github.knightmareleon.shared.daos;
 
 import java.util.List;
 
+import io.github.knightmareleon.features.test.TestType;
 import io.github.knightmareleon.shared.models.StudySet;
 
 public interface SetsDao {
@@ -9,6 +10,7 @@ public interface SetsDao {
     boolean exists(String title, String subject);
     int totalRows();
     List<StudySet> list(int limit, int offset);
+    List<StudySet> listByTest(int limit, int offset, TestType testType);
     void delete(int studySetID);
 
 }
