@@ -78,9 +78,19 @@ public class LocalSetsDao implements SetsDao{
         this.SET_TABLE_NAME + " s_set INNER JOIN standard_question std_q ON s_set.id = std_q.set_id " + 
         " WHERE std_q.type = 1 " +
         "LIMIT ? OFFSET ?";
+    
+    private final String SETS_WITH_FLASHCARD_ONLY_LIST =
+        "SELECT DISTINCT s_set.id, s_set.title, s_set.subject, s_set.imgpath, s_set.total_takes, " +
+        "s_set.created_on, s_set.last_taken_on FROM " +
+        this.SET_TABLE_NAME + " s_set INNER JOIN standard_question std_q ON s_set.id = std_q.set_id " + 
+        " WHERE std_q.type = 1 " +
+        "LIMIT ? OFFSET ?";
 
     private final String ENUM_QUESTION_LIST =
-    "SELECT * FROM " + this.STD_QUESTION_TABLE_NAME + " WHERE set_id = ? AND type = 1";
+        "SELECT * FROM " + this.STD_QUESTION_TABLE_NAME + " WHERE set_id = ? AND type = 1";
+
+    private final String FLASHCARD_QUESTION_LIST =
+        "SELECT * FROM " + this.STD_QUESTION_TABLE_NAME + " WHERE set_id = ? AND type = 1";
 
     private final String DELETE_SET =
         "DELETE FROM " + this.SET_TABLE_NAME + 
@@ -275,7 +285,7 @@ public class LocalSetsDao implements SetsDao{
             ResultSet stdQsSet = stdQuestionStatement.executeQuery();
 
             while(stdQsSet.next()){
-                int q_id = setId;
+                int q_id = stdQsSet.getInt("id");
 
                 PreparedStatement choiceStatement = this.connection.prepareStatement(
                     this.CHOICES_LIST);
@@ -349,7 +359,7 @@ public class LocalSetsDao implements SetsDao{
             ResultSet stdQsSet = stdQuestionStatement.executeQuery();
 
             while(stdQsSet.next()){
-                int q_id = setId;
+                int q_id = stdQsSet.getInt("id");
 
                 PreparedStatement choiceStatement = this.connection.prepareStatement(
                     this.CHOICES_LIST);
@@ -384,15 +394,6 @@ public class LocalSetsDao implements SetsDao{
             throw new DataAccessException("Failed to get list of standard question list", e );
         }
 
-    }
-
-    @Override
-    public List<StudySet> listByTest(int limit, int offset, TestType type){
-        return switch(type){
-            case TestType.ENUMERATION -> this.listEnumerationSets(limit, offset);
-            case TestType.TRUE_OR_FALSE -> this.listTrueOrFalseSets(limit, offset);
-            default -> throw new IllegalArgumentException("Test not supported.");
-        };
     }
 
     @SuppressWarnings("CallToPrintStackTrace")
@@ -467,6 +468,52 @@ public class LocalSetsDao implements SetsDao{
             e.printStackTrace();
             throw new DataAccessException("Failed to get list of sets", e );
         }
+    }
+
+    @SuppressWarnings("CallToPrintStackTrace")
+    private List<StudySet> listFlashcardSets(int limit, int offset){
+        try {
+            List<StudySet> setList = new ArrayList<>();
+            PreparedStatement setListStatement = this.connection.prepareStatement(
+                this.SETS_WITH_ENUM_ONLY_LIST
+            );
+            setListStatement.setInt(1, limit);
+            setListStatement.setInt(2, offset);
+            ResultSet setListResult = setListStatement.executeQuery();
+            while(setListResult.next()){
+                
+                int setId = setListResult.getInt("id");
+                String lastTakenOn = setListResult.getString("last_taken_on");
+
+                List<Question> questionList = new ArrayList<>();
+                questionList.addAll(this.listEnumerationQuestions(setId));
+
+                setList.add(new StudySet(
+                    setId,
+                    setListResult.getString("title"),
+                    setListResult.getString("subject"),
+                    setListResult.getString("imgpath"),
+                    setListResult.getInt("total_takes"),
+                    questionList,
+                    Instant.parse(setListResult.getString("created_on")),
+                    lastTakenOn == null ? null : Instant.parse(lastTakenOn)
+                ));
+            }
+
+            return setList;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new DataAccessException("Failed to get list of sets", e );
+        }
+    }
+
+    @Override
+    public List<StudySet> listByTest(int limit, int offset, TestType type){
+        return switch(type){
+            case TestType.ENUMERATION -> this.listEnumerationSets(limit, offset);
+            case TestType.TRUE_OR_FALSE -> this.listTrueOrFalseSets(limit, offset);
+            default -> throw new IllegalArgumentException("Test not supported.");
+        };
     }
 
     @Override
