@@ -71,6 +71,17 @@ public class LocalSetsDao implements SetsDao{
         " s_set.created_on, s_set.last_taken_on FROM " + 
         this.SET_TABLE_NAME + " s_set INNER JOIN tof_question ON s_set.id = tof_question.set_id"
         +  " LIMIT ? OFFSET ?";
+
+    private final String SETS_WITH_ENUM_ONLY_LIST =
+        "SELECT DISTINCT s_set.id, s_set.title, s_set.subject, s_set.imgpath, s_set.total_takes, " +
+        "s_set.created_on, s_set.last_taken_on FROM " +
+        this.SET_TABLE_NAME + " s_set INNER JOIN standard_question std_q ON s_set.id = std_q.set_id " + 
+        " WHERE std_q.type = 1 " +
+        "LIMIT ? OFFSET ?";
+
+    private final String ENUM_QUESTION_LIST =
+    "SELECT * FROM " + this.STD_QUESTION_TABLE_NAME + " WHERE set_id = ? AND type = 1";
+
     private final String DELETE_SET =
         "DELETE FROM " + this.SET_TABLE_NAME + 
         " WHERE id = ?";
@@ -328,12 +339,60 @@ public class LocalSetsDao implements SetsDao{
         }
     }
 
+    @SuppressWarnings("CallToPrintStackTrace")
+    private List<Question> listEnumerationQuestions(int setId){
+        try {
+            List<Question> questionList = new ArrayList<>();
+            PreparedStatement stdQuestionStatement = this.connection.prepareStatement(
+                this.ENUM_QUESTION_LIST);
+            stdQuestionStatement.setInt(1,setId);
+            ResultSet stdQsSet = stdQuestionStatement.executeQuery();
+
+            while(stdQsSet.next()){
+                int q_id = setId;
+
+                PreparedStatement choiceStatement = this.connection.prepareStatement(
+                    this.CHOICES_LIST);
+                choiceStatement.setInt(1, q_id);
+                ResultSet choiceSet = choiceStatement.executeQuery();
+                
+                List<String> choices = new ArrayList<>();
+                List<Integer> answers = new ArrayList<>();
+                
+                int index = 0;
+                while(choiceSet.next()){
+
+                    choices.add(choiceSet.getString("description"));
+                    if(choiceSet.getInt("answer") == 1){
+                        answers.add(index++);
+                    }
+                }
+                
+                questionList.add(new Question(
+                    q_id,
+                    stdQsSet.getString("description"),
+                    stdQsSet.getInt("type") == QuestionType.IDENTIFICATION.getCode() ? 
+                        QuestionType.IDENTIFICATION : QuestionType.ENUMERATION,
+                    choices,
+                    answers
+                ));
+            }
+
+            return questionList;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new DataAccessException("Failed to get list of standard question list", e );
+        }
+
+    }
+
     @Override
     public List<StudySet> listByTest(int limit, int offset, TestType type){
-        switch(type){
-            case TestType.TRUE_OR_FALSE: return this.listTrueOrFalseSets(limit, offset);
-            default: throw new IllegalArgumentException("Test not supported.");
-        }
+        return switch(type){
+            case TestType.ENUMERATION -> this.listEnumerationSets(limit, offset);
+            case TestType.TRUE_OR_FALSE -> this.listTrueOrFalseSets(limit, offset);
+            default -> throw new IllegalArgumentException("Test not supported.");
+        };
     }
 
     @SuppressWarnings("CallToPrintStackTrace")
@@ -353,6 +412,43 @@ public class LocalSetsDao implements SetsDao{
 
                 List<Question> questionList = new ArrayList<>();
                 questionList.addAll(this.listTrueOrFalseQuestions(setId));
+
+                setList.add(new StudySet(
+                    setId,
+                    setListResult.getString("title"),
+                    setListResult.getString("subject"),
+                    setListResult.getString("imgpath"),
+                    setListResult.getInt("total_takes"),
+                    questionList,
+                    Instant.parse(setListResult.getString("created_on")),
+                    lastTakenOn == null ? null : Instant.parse(lastTakenOn)
+                ));
+            }
+
+            return setList;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new DataAccessException("Failed to get list of sets", e );
+        }
+    }
+
+    @SuppressWarnings("CallToPrintStackTrace")
+    private List<StudySet> listEnumerationSets(int limit, int offset){
+        try {
+            List<StudySet> setList = new ArrayList<>();
+            PreparedStatement setListStatement = this.connection.prepareStatement(
+                this.SETS_WITH_ENUM_ONLY_LIST
+            );
+            setListStatement.setInt(1, limit);
+            setListStatement.setInt(2, offset);
+            ResultSet setListResult = setListStatement.executeQuery();
+            while(setListResult.next()){
+                
+                int setId = setListResult.getInt("id");
+                String lastTakenOn = setListResult.getString("last_taken_on");
+
+                List<Question> questionList = new ArrayList<>();
+                questionList.addAll(this.listEnumerationQuestions(setId));
 
                 setList.add(new StudySet(
                     setId,

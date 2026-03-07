@@ -21,7 +21,6 @@ public class TestSetsPickerController implements TestPage{
     private TestNavigator navigator;
     private final TestService testService;
 
-    private TestType type;
     private List<StudySet> studySets;
     private final List<SetCardForm> studySetCards = new ArrayList<>();
     private final List<SetListForm> studySetList = new ArrayList<>();
@@ -45,25 +44,10 @@ public class TestSetsPickerController implements TestPage{
 
 
     public void setTestType(TestType type){
-        this.type = type;
-        switch(this.type){
-            case TestType.MULTIPLE_CHOICE:
-                break;
-            case TestType.FLASHCARD:
-                break;
-            case TestType.MATCHING_TYPE:
-                break;
-            case TestType.ENUMERATION:
-                break;
-            case TestType.TRUE_OR_FALSE:
-                this.studySets = this.testService.getSetsWithTrueOrFalseOnly(
-                    1).getValue();
-                break;
-            case TestType.COMBINED:
-                break;
-            default:
-                break;
-        }
+        this.studySets = this.testService.getSetsByTestType(
+            1, type)
+            .getValue();
+
         for(StudySet studySet : this.studySets){
             SetCardForm setCardForm = new SetCardForm(
                 studySet.getimgpath().equals("default") ? 

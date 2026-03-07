@@ -22,7 +22,7 @@ public class TestService {
         } 
     }
 
-    public Result<List<StudySet>> getSetsWithTrueOrFalseOnly (int page){
+    public Result<List<StudySet>> getSetsByTestType (int page, TestType type){
         if(page < 1) page = 1;
 
         try {
@@ -30,7 +30,7 @@ public class TestService {
             List<StudySet> sets = this.setsDao.listByTest(
                 this.MAX_SET_TOTAL_PER_PAGE, 
                 (page - 1) * this.MAX_SET_TOTAL_PER_PAGE, 
-                TestType.TRUE_OR_FALSE);
+                type);
             return Result.success(sets);
         } catch (DataAccessException e) {
             return Result.error("Error getting sets with only true or false questions.");

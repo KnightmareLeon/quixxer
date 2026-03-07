@@ -51,7 +51,6 @@ public class TestMainController implements TestPage{
     }
 
     private void onTestIconClicked(TestType type){
-        System.out.println("Button clicked" + type);
         this.testNavigator.show("sets", type);
     }
 }
