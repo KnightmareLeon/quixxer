@@ -80,17 +80,34 @@ public class LocalSetsDao implements SetsDao{
         "LIMIT ? OFFSET ?";
     
     private final String SETS_WITH_FLASHCARD_ONLY_LIST =
-        "SELECT DISTINCT s_set.id, s_set.title, s_set.subject, s_set.imgpath, s_set.total_takes, " +
-        "s_set.created_on, s_set.last_taken_on FROM " +
-        this.SET_TABLE_NAME + " s_set INNER JOIN standard_question std_q ON s_set.id = std_q.set_id " + 
-        " WHERE std_q.type = 1 " +
-        "LIMIT ? OFFSET ?";
+        String.format("""
+        SELECT DISTINCT s_set.id, s_set.title, s_set.subject, s_set.imgpath, s_set.total_takes, 
+        s_set.created_on, s_set.last_taken_on FROM
+        %s s_set 
+        INNER JOIN standard_question std_q ON s_set.id = std_q.set_id
+        INNER JOIN choice ON std_q.id = choice.q_id
+        WHERE std_q.type = 0 AND choice.answer = 1
+        GROUP BY s_set.id, std_q.id
+        HAVING COUNT(std_q.id) = 1
+        LIMIT ? OFFSET ?;
+        """, this.SET_TABLE_NAME);
 
     private final String ENUM_QUESTION_LIST =
         "SELECT * FROM " + this.STD_QUESTION_TABLE_NAME + " WHERE set_id = ? AND type = 1";
 
     private final String FLASHCARD_QUESTION_LIST =
-        "SELECT * FROM " + this.STD_QUESTION_TABLE_NAME + " WHERE set_id = ? AND type = 1";
+        String.format("""
+        SELECT
+            std_q.id AS que_id, 
+            std_q.description AS q_desc,
+            c.id AS c_id,
+            c.description AS c_desc
+        FROM %s std_q
+        INNER JOIN %s c on std_q.id = c.q_id 
+        WHERE type = 0 AND set_id = ?
+        GROUP BY std_q.id
+        HAVING COUNT(CASE WHEN answer = 1 THEN 1 END) = 1;
+        """, this.STD_QUESTION_TABLE_NAME, this.CHOICE_TABLE_NAME);
 
     private final String DELETE_SET =
         "DELETE FROM " + this.SET_TABLE_NAME + 
@@ -381,10 +398,36 @@ public class LocalSetsDao implements SetsDao{
                 questionList.add(new Question(
                     q_id,
                     stdQsSet.getString("description"),
-                    stdQsSet.getInt("type") == QuestionType.IDENTIFICATION.getCode() ? 
-                        QuestionType.IDENTIFICATION : QuestionType.ENUMERATION,
+                    QuestionType.ENUMERATION,
                     choices,
                     answers
+                ));
+            }
+
+            return questionList;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new DataAccessException("Failed to get list of standard question list", e );
+        }
+
+    }
+
+    @SuppressWarnings("CallToPrintStackTrace")
+    private List<Question> listFlashcardQuestions(int setId){
+        try {
+            List<Question> questionList = new ArrayList<>();
+            PreparedStatement stdQuestionStatement = this.connection.prepareStatement(
+                this.FLASHCARD_QUESTION_LIST);
+            stdQuestionStatement.setInt(1,setId);
+            ResultSet fcSet = stdQuestionStatement.executeQuery();
+
+            while(fcSet.next()){
+                questionList.add(new Question(
+                    fcSet.getInt("que_id"),
+                    fcSet.getString("q_desc"),
+                    QuestionType.IDENTIFICATION,
+                    List.of(fcSet.getString("c_desc")),
+                    List.of(0)
                 ));
             }
 
@@ -475,7 +518,7 @@ public class LocalSetsDao implements SetsDao{
         try {
             List<StudySet> setList = new ArrayList<>();
             PreparedStatement setListStatement = this.connection.prepareStatement(
-                this.SETS_WITH_ENUM_ONLY_LIST
+                this.SETS_WITH_FLASHCARD_ONLY_LIST
             );
             setListStatement.setInt(1, limit);
             setListStatement.setInt(2, offset);
@@ -486,7 +529,7 @@ public class LocalSetsDao implements SetsDao{
                 String lastTakenOn = setListResult.getString("last_taken_on");
 
                 List<Question> questionList = new ArrayList<>();
-                questionList.addAll(this.listEnumerationQuestions(setId));
+                questionList.addAll(this.listFlashcardQuestions(setId));
 
                 setList.add(new StudySet(
                     setId,
@@ -510,6 +553,7 @@ public class LocalSetsDao implements SetsDao{
     @Override
     public List<StudySet> listByTest(int limit, int offset, TestType type){
         return switch(type){
+            case TestType.FLASHCARD -> this.listFlashcardSets(limit, offset);
             case TestType.ENUMERATION -> this.listEnumerationSets(limit, offset);
             case TestType.TRUE_OR_FALSE -> this.listTrueOrFalseSets(limit, offset);
             default -> throw new IllegalArgumentException("Test not supported.");

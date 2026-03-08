@@ -30,14 +30,9 @@ public class TestNavigator extends BaseTabNavigator {
             if (controller instanceof TestPage page) {
                 page.setTestNavigator(this);
             }
-            if(objects.length > 0
-            ){
-                System.out.println(objects[0]);
-            }
             if (controller instanceof TestSetsPickerController page &&
                 objects.length > 0 && objects[0] instanceof TestType type
             ){
-                System.out.println("Type set.");
                 page.setTestType(type);
             }
             this.getContainer().getChildren().setAll(view);
