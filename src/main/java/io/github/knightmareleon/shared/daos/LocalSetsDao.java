@@ -413,7 +413,7 @@ public class LocalSetsDao implements SetsDao{
     }
 
     @SuppressWarnings("CallToPrintStackTrace")
-    private List<Question> listFlashcardQuestions(int setId){
+    private List<Question> listOneAnswerQuestions(int setId){
         try {
             List<Question> questionList = new ArrayList<>();
             PreparedStatement stdQuestionStatement = this.connection.prepareStatement(
@@ -514,7 +514,7 @@ public class LocalSetsDao implements SetsDao{
     }
 
     @SuppressWarnings("CallToPrintStackTrace")
-    private List<StudySet> listFlashcardSets(int limit, int offset){
+    private List<StudySet> listOneAnswerSets(int limit, int offset){
         try {
             List<StudySet> setList = new ArrayList<>();
             PreparedStatement setListStatement = this.connection.prepareStatement(
@@ -529,7 +529,7 @@ public class LocalSetsDao implements SetsDao{
                 String lastTakenOn = setListResult.getString("last_taken_on");
 
                 List<Question> questionList = new ArrayList<>();
-                questionList.addAll(this.listFlashcardQuestions(setId));
+                questionList.addAll(this.listOneAnswerQuestions(setId));
 
                 setList.add(new StudySet(
                     setId,
@@ -553,7 +553,8 @@ public class LocalSetsDao implements SetsDao{
     @Override
     public List<StudySet> listByTest(int limit, int offset, TestType type){
         return switch(type){
-            case TestType.FLASHCARD -> this.listFlashcardSets(limit, offset);
+            case TestType.FLASHCARD -> this.listOneAnswerSets(limit, offset);
+            case TestType.MATCHING_TYPE -> this.listOneAnswerSets(limit, offset);
             case TestType.ENUMERATION -> this.listEnumerationSets(limit, offset);
             case TestType.TRUE_OR_FALSE -> this.listTrueOrFalseSets(limit, offset);
             default -> throw new IllegalArgumentException("Test not supported.");
