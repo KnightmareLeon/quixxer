@@ -79,23 +79,36 @@ public class LocalSetsDao implements SetsDao{
         " WHERE std_q.type = 1 " +
         "LIMIT ? OFFSET ?";
     
-    private final String SETS_WITH_FLASHCARD_ONLY_LIST =
+    private final String SETS_WITH_ONE_ANSWER_LIST =
         String.format("""
         SELECT DISTINCT s_set.id, s_set.title, s_set.subject, s_set.imgpath, s_set.total_takes, 
         s_set.created_on, s_set.last_taken_on FROM
         %s s_set 
-        INNER JOIN standard_question std_q ON s_set.id = std_q.set_id
-        INNER JOIN choice ON std_q.id = choice.q_id
+        INNER JOIN %s std_q ON s_set.id = std_q.set_id
+        INNER JOIN %s ON std_q.id = choice.q_id
         WHERE std_q.type = 0 AND choice.answer = 1
         GROUP BY s_set.id, std_q.id
         HAVING COUNT(std_q.id) = 1
         LIMIT ? OFFSET ?;
-        """, this.SET_TABLE_NAME);
+        """, this.SET_TABLE_NAME, this.STD_QUESTION_TABLE_NAME, this.CHOICE_TABLE_NAME);
+    
+    private final String SETS_MULTIPLE_CHOICE_LIST =
+        String.format("""
+        SELECT s_set.id, s_set.title, s_set.subject, s_set.imgpath, s_set.total_takes, 
+        s_set.created_on, s_set.last_taken_on FROM
+        %s s_set 
+        INNER JOIN %s std_q ON s_set.id = std_q.set_id
+        INNER JOIN %s ON std_q.id = choice.q_id
+        WHERE std_q.type = 0
+        GROUP BY s_set.id, std_q.id
+        HAVING COUNT(choice.q_id) > 1
+        LIMIT ? OFFSET ?;
+        """, this.SET_TABLE_NAME, this.STD_QUESTION_TABLE_NAME, this.CHOICE_TABLE_NAME);
 
     private final String ENUM_QUESTION_LIST =
         "SELECT * FROM " + this.STD_QUESTION_TABLE_NAME + " WHERE set_id = ? AND type = 1";
 
-    private final String FLASHCARD_QUESTION_LIST =
+    private final String ONE_ANSWER_QUESTION_LIST =
         String.format("""
         SELECT
             std_q.id AS que_id, 
@@ -107,6 +120,15 @@ public class LocalSetsDao implements SetsDao{
         WHERE type = 0 AND set_id = ?
         GROUP BY std_q.id
         HAVING COUNT(CASE WHEN answer = 1 THEN 1 END) = 1;
+        """, this.STD_QUESTION_TABLE_NAME, this.CHOICE_TABLE_NAME);
+    
+    private final String MULTIPLE_CHOICE_QUESTIONS_LIST =
+        String.format("""
+        SELECT std_q.id, std_q.description FROM %s std_q
+        INNER JOIN %s ON std_q.id = choice.q_id
+        WHERE type = 0 AND std_q.set_id = ?
+        GROUP BY std_q.id
+        HAVING COUNT(choice.q_id) > 1
         """, this.STD_QUESTION_TABLE_NAME, this.CHOICE_TABLE_NAME);
 
     private final String DELETE_SET =
@@ -370,13 +392,13 @@ public class LocalSetsDao implements SetsDao{
     private List<Question> listEnumerationQuestions(int setId){
         try {
             List<Question> questionList = new ArrayList<>();
-            PreparedStatement stdQuestionStatement = this.connection.prepareStatement(
+            PreparedStatement enumQuestionStatement = this.connection.prepareStatement(
                 this.ENUM_QUESTION_LIST);
-            stdQuestionStatement.setInt(1,setId);
-            ResultSet stdQsSet = stdQuestionStatement.executeQuery();
+            enumQuestionStatement.setInt(1,setId);
+            ResultSet enumQsSet = enumQuestionStatement.executeQuery();
 
-            while(stdQsSet.next()){
-                int q_id = stdQsSet.getInt("id");
+            while(enumQsSet.next()){
+                int q_id = enumQsSet.getInt("id");
 
                 PreparedStatement choiceStatement = this.connection.prepareStatement(
                     this.CHOICES_LIST);
@@ -390,14 +412,12 @@ public class LocalSetsDao implements SetsDao{
                 while(choiceSet.next()){
 
                     choices.add(choiceSet.getString("description"));
-                    if(choiceSet.getInt("answer") == 1){
-                        answers.add(index++);
-                    }
+                    answers.add(index++);
                 }
                 
                 questionList.add(new Question(
                     q_id,
-                    stdQsSet.getString("description"),
+                    enumQsSet.getString("description"),
                     QuestionType.ENUMERATION,
                     choices,
                     answers
@@ -416,18 +436,65 @@ public class LocalSetsDao implements SetsDao{
     private List<Question> listOneAnswerQuestions(int setId){
         try {
             List<Question> questionList = new ArrayList<>();
-            PreparedStatement stdQuestionStatement = this.connection.prepareStatement(
-                this.FLASHCARD_QUESTION_LIST);
-            stdQuestionStatement.setInt(1,setId);
-            ResultSet fcSet = stdQuestionStatement.executeQuery();
+            PreparedStatement oneAnswerQuestionStatement = this.connection.prepareStatement(
+                this.ONE_ANSWER_QUESTION_LIST);
+            oneAnswerQuestionStatement.setInt(1,setId);
+            ResultSet oneAnswerSet = oneAnswerQuestionStatement.executeQuery();
 
-            while(fcSet.next()){
+            while(oneAnswerSet.next()){
                 questionList.add(new Question(
-                    fcSet.getInt("que_id"),
-                    fcSet.getString("q_desc"),
+                    oneAnswerSet.getInt("que_id"),
+                    oneAnswerSet.getString("q_desc"),
                     QuestionType.IDENTIFICATION,
-                    List.of(fcSet.getString("c_desc")),
+                    List.of(oneAnswerSet.getString("c_desc")),
                     List.of(0)
+                ));
+            }
+
+            return questionList;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new DataAccessException("Failed to get list of standard question list", e );
+        }
+
+    }
+
+    @SuppressWarnings("CallToPrintStackTrace")
+    private List<Question> listMultipleChoiceQuestions(int setId){
+        try {
+            List<Question> questionList = new ArrayList<>();
+            PreparedStatement mulQuestionStatement = this.connection.prepareStatement(
+                this.MULTIPLE_CHOICE_QUESTIONS_LIST);
+            mulQuestionStatement.setInt(1,setId);
+            ResultSet mulSet = mulQuestionStatement.executeQuery();
+
+            while(mulSet.next()){
+                
+                int q_id = mulSet.getInt("id");
+
+                PreparedStatement choiceStatement = this.connection.prepareStatement(
+                    this.CHOICES_LIST);
+                choiceStatement.setInt(1, q_id);
+                ResultSet choiceSet = choiceStatement.executeQuery();
+                
+                List<String> choices = new ArrayList<>();
+                List<Integer> answers = new ArrayList<>();
+
+                int index = 0;
+                while(choiceSet.next()){
+
+                    choices.add(choiceSet.getString("description"));
+                    if(choiceSet.getInt("answer") == 1){
+                        answers.add(index++);
+                    }
+                }
+
+                questionList.add(new Question(
+                    mulSet.getInt("id"),
+                    mulSet.getString("description"),
+                    QuestionType.IDENTIFICATION,
+                    choices,
+                    answers
                 ));
             }
 
@@ -518,7 +585,7 @@ public class LocalSetsDao implements SetsDao{
         try {
             List<StudySet> setList = new ArrayList<>();
             PreparedStatement setListStatement = this.connection.prepareStatement(
-                this.SETS_WITH_FLASHCARD_ONLY_LIST
+                this.SETS_WITH_ONE_ANSWER_LIST
             );
             setListStatement.setInt(1, limit);
             setListStatement.setInt(2, offset);
@@ -550,9 +617,47 @@ public class LocalSetsDao implements SetsDao{
         }
     }
 
+    @SuppressWarnings("CallToPrintStackTrace")
+    private List<StudySet> listMulitpleChoiceSets(int limit, int offset){
+        try {
+            List<StudySet> setList = new ArrayList<>();
+            PreparedStatement setListStatement = this.connection.prepareStatement(
+                this.SETS_MULTIPLE_CHOICE_LIST
+            );
+            setListStatement.setInt(1, limit);
+            setListStatement.setInt(2, offset);
+            ResultSet setListResult = setListStatement.executeQuery();
+            while(setListResult.next()){
+                
+                int setId = setListResult.getInt("id");
+                String lastTakenOn = setListResult.getString("last_taken_on");
+
+                List<Question> questionList = new ArrayList<>();
+                questionList.addAll(this.listMultipleChoiceQuestions(setId));
+
+                setList.add(new StudySet(
+                    setId,
+                    setListResult.getString("title"),
+                    setListResult.getString("subject"),
+                    setListResult.getString("imgpath"),
+                    setListResult.getInt("total_takes"),
+                    questionList,
+                    Instant.parse(setListResult.getString("created_on")),
+                    lastTakenOn == null ? null : Instant.parse(lastTakenOn)
+                ));
+            }
+
+            return setList;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new DataAccessException("Failed to get list of sets", e );
+        }
+    }
+
     @Override
     public List<StudySet> listByTest(int limit, int offset, TestType type){
         return switch(type){
+            case TestType.MULTIPLE_CHOICE -> this.listMulitpleChoiceSets(limit, offset);
             case TestType.FLASHCARD -> this.listOneAnswerSets(limit, offset);
             case TestType.MATCHING_TYPE -> this.listOneAnswerSets(limit, offset);
             case TestType.ENUMERATION -> this.listEnumerationSets(limit, offset);
