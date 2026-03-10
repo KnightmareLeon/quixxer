@@ -11,5 +11,5 @@
          maxWidth="Infinity"
          VBox.vgrow="ALWAYS"
          prefHeight="150"
-         styleClass="test-button">
+         styleClass="test-button,component-shadow">
 </fx:root>
