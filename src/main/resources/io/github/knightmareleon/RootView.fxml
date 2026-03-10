@@ -12,7 +12,8 @@
     </top>
 
     <center>
-        <StackPane fx:id="contentArea"/>
+        <StackPane fx:id="contentArea"
+        styleClass="standard-gray-bg"/>
     </center>
 
 </BorderPane>

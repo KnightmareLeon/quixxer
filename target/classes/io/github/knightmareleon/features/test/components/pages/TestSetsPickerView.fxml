@@ -15,12 +15,9 @@
 <VBox xmlns:fx="http://javafx.com/fxml/1"
     fx:controller="io.github.knightmareleon.features.test.components.pages.TestSetsPickerController"
     fx:id="vbox"
-    alignment="CENTER"
-    styleClass="standard-dark-bg"
-    style="-fx-padding: 48; -fx-border-radius: 53; -fx-background-radius: 53;"
+    style="-fx-padding:48; -fx-border-radius: 53; -fx-background-radius: 53;"
     spacing="24"
-    fillWidth="true"
-    maxWidth="1136">
+    alignment="CENTER">
     <HBox
         minHeight="48" 
         maxHeight="48">

@@ -15,12 +15,10 @@
 <VBox xmlns:fx="http://javafx.com/fxml/1"
     fx:controller="io.github.knightmareleon.features.sets.components.pages.SetsMainController"
     fx:id="vbox"
-    alignment="CENTER"
-    styleClass="standard-dark-bg"
-    style="-fx-padding: 48; -fx-border-radius: 53; -fx-background-radius: 53;"
+    alignment="CENTER_LEFT"
+    style="-fx-border-radius: 53; -fx-background-radius: 53;"
     spacing="24"
-    fillWidth="true"
-    maxWidth="1136">
+    fillWidth="true">
     <HBox
         minHeight="48" 
         maxHeight="48">

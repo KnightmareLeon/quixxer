@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.layout.StackPane?>
-
+<?import javafx.scene.layout.VBox?>
 <StackPane xmlns:fx="http://javafx.com/fxml/1"
-           fx:id="mainContainer"
-           fx:controller="io.github.knightmareleon.features.sets.SetsController"
-           stylesheets="@../../css/sets.css"
-           style="-fx-padding: 44 0 44 0"
-           styleClass="standard-gray-bg">
+    fx:controller="io.github.knightmareleon.features.sets.SetsController"
+    stylesheets="@../../css/sets.css"
+    style="-fx-padding: 44 0 44 0"
+    styleClass="standard-gray-bg">
+    <VBox xmlns:fx="http://javafx.com/fxml/1"
+        fx:id="mainContainer"
+        alignment="TOP_LEFT"
+        styleClass="standard-dark-bg"
+        style="-fx-padding: 48; -fx-border-radius: 53; -fx-background-radius: 53;"
+        spacing="24"
+        fillWidth="true"
+        maxWidth="1136" />
 </StackPane>

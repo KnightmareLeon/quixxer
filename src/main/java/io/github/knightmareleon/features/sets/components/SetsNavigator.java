@@ -36,7 +36,7 @@ public class SetsNavigator extends BaseTabNavigator {
                 setDetailsController.setStudySet(studySet);
             }
             this.getContainer().getChildren().setAll(view);
-
+            this.setTransition(view);
         } catch (IOException e) {
             e.printStackTrace();
         }

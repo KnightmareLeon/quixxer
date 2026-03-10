@@ -3,11 +3,11 @@ package io.github.knightmareleon.features.sets;
 import io.github.knightmareleon.features.sets.components.SetsNavigator;
 import io.github.knightmareleon.shared.infrastructure.AppContext;
 import javafx.fxml.FXML;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 
 public class SetsController{
 
-    @FXML private StackPane mainContainer;
+    @FXML private VBox mainContainer;
 
     private SetsNavigator navigator;
 

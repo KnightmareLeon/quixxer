@@ -36,7 +36,7 @@ public class TestNavigator extends BaseTabNavigator {
                 page.setTestType(type);
             }
             this.getContainer().getChildren().setAll(view);
-
+            this.setTransition(view);
         } catch (IOException e) {
             e.printStackTrace();
         }

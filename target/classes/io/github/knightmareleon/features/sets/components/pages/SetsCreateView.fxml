@@ -18,14 +18,11 @@
 <VBox
     xmlns:fx="http://javafx.com/fxml/1"
     fx:controller="io.github.knightmareleon.features.sets.components.pages.SetsCreateController"
-    fx:id="vbox"
+    fx:id="vbox"    
     alignment="CENTER"
-    stylesheets="/io/github/knightmareleon/css/error.css"
-    styleClass="standard-dark-bg"
-    style="-fx-padding: 48; -fx-border-radius: 53; -fx-background-radius: 53;"
+    style="-fx-border-radius: 53; -fx-background-radius: 53;"
     spacing="24"
-    fillWidth="true"
-    maxWidth="1136">
+    fillWidth="true">
     <HBox 
         spacing="12"
         alignment="CENTER">
