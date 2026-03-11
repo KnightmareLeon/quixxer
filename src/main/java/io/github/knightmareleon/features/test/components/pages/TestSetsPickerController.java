@@ -6,6 +6,7 @@ import java.util.List;
 import io.github.knightmareleon.features.test.TestService;
 import io.github.knightmareleon.features.test.TestType;
 import io.github.knightmareleon.features.test.components.TestNavigator;
+import io.github.knightmareleon.features.test.components.TestTypeReceiver;
 import io.github.knightmareleon.shared.models.StudySet;
 import io.github.knightmareleon.shared.ui.controls.IconToggleButton;
 import io.github.knightmareleon.shared.ui.controls.SetCardForm;
@@ -16,7 +17,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
-public class TestSetsPickerController implements TestPage{
+public class TestSetsPickerController implements TestPage, TestTypeReceiver{
 
     private TestNavigator navigator;
     private final TestService testService;
@@ -42,8 +43,12 @@ public class TestSetsPickerController implements TestPage{
         this.navigator = testNavigator;
     }
 
+    @Override
+    public void receiveTestType(TestType testType){
+        this.setTestType(testType);
+    }
 
-    public void setTestType(TestType type){
+    private void setTestType(TestType type){
         this.studySets = this.testService.getSetsByTestType(
             1, type)
             .getValue();

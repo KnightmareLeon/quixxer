@@ -3,11 +3,11 @@ package io.github.knightmareleon.features.sets.components;
 import java.io.IOException;
 
 import io.github.knightmareleon.features.sets.SetsService;
-import io.github.knightmareleon.features.sets.components.pages.SetDetailsController;
 import io.github.knightmareleon.features.sets.components.pages.SetsPage;
 import io.github.knightmareleon.shared.infrastructure.AppContext;
 import io.github.knightmareleon.shared.infrastructure.navigator.BaseTabNavigator;
 import io.github.knightmareleon.shared.models.StudySet;
+import io.github.knightmareleon.shared.utils.StudySetReceiver;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.layout.Pane;
@@ -30,11 +30,13 @@ public class SetsNavigator extends BaseTabNavigator {
             if (controller instanceof SetsPage page) {
                 page.setSetsNavigator(this);
             }
-            if (controller instanceof SetDetailsController setDetailsController && 
-                objects.length > 0 && objects[0] instanceof StudySet studySet
-            ){
-                setDetailsController.setStudySet(studySet);
+
+            for(Object object: objects){
+                if (controller instanceof StudySetReceiver receiver && object instanceof StudySet studySet){
+                    receiver.receiveStudySet(studySet);
+                }
             }
+
             this.getContainer().getChildren().setAll(view);
             this.setTransition(view);
         } catch (IOException e) {

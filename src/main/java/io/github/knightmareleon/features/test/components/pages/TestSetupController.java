@@ -1,0 +1,14 @@
+package io.github.knightmareleon.features.test.components.pages;
+
+import io.github.knightmareleon.features.test.components.TestNavigator;
+
+public class TestSetupController implements TestPage{
+
+    private TestNavigator testNavigator;
+
+    @Override
+    public void setTestNavigator(TestNavigator testNavigator) {
+        this.testNavigator = testNavigator;
+    }
+
+}

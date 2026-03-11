@@ -5,7 +5,6 @@ import java.io.IOException;
 import io.github.knightmareleon.features.test.TestService;
 import io.github.knightmareleon.features.test.TestType;
 import io.github.knightmareleon.features.test.components.pages.TestPage;
-import io.github.knightmareleon.features.test.components.pages.TestSetsPickerController;
 import io.github.knightmareleon.shared.infrastructure.AppContext;
 import io.github.knightmareleon.shared.infrastructure.navigator.BaseTabNavigator;
 import javafx.fxml.FXMLLoader;
@@ -30,10 +29,11 @@ public class TestNavigator extends BaseTabNavigator {
             if (controller instanceof TestPage page) {
                 page.setTestNavigator(this);
             }
-            if (controller instanceof TestSetsPickerController page &&
-                objects.length > 0 && objects[0] instanceof TestType type
-            ){
-                page.setTestType(type);
+            for (Object object : objects) {
+                if(controller instanceof TestTypeReceiver receiver && 
+                    object instanceof TestType testType){
+                        receiver.receiveTestType(testType);
+                    }
             }
             this.getContainer().getChildren().setAll(view);
             this.setTransition(view);

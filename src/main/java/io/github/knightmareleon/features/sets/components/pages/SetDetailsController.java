@@ -9,6 +9,7 @@ import io.github.knightmareleon.features.sets.components.tabs.SetQuestionsTab;
 import io.github.knightmareleon.shared.models.StudySet;
 import io.github.knightmareleon.shared.ui.controls.IconToggleButton;
 import io.github.knightmareleon.shared.ui.controls.StandardAlert;
+import io.github.knightmareleon.shared.utils.StudySetReceiver;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
@@ -16,7 +17,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.VBox;
 
-public class SetDetailsController extends VBox implements SetsPage {
+public class SetDetailsController extends VBox implements SetsPage, StudySetReceiver {
 
     private final SetsService setsService;
     private SetsNavigator navigator;
@@ -41,7 +42,12 @@ public class SetDetailsController extends VBox implements SetsPage {
         this.navigator = navigator;
     }
 
-    public void setStudySet(StudySet studySet){
+    @Override
+    public void receiveStudySet(StudySet data){
+        this.setStudySet(data);
+    }
+
+    private void setStudySet(StudySet studySet){
         this.studySet = studySet;
         this.setName.setText(this.studySet.getTitle());
 
