@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import io.github.knightmareleon.features.sets.SetsService;
 import io.github.knightmareleon.features.sets.components.pages.SetsPage;
+import io.github.knightmareleon.shared.constants.PageURL;
 import io.github.knightmareleon.shared.infrastructure.AppContext;
 import io.github.knightmareleon.shared.infrastructure.navigator.BaseTabNavigator;
 import io.github.knightmareleon.shared.models.StudySet;
@@ -20,9 +21,9 @@ public class SetsNavigator extends BaseTabNavigator {
 
     @Override
     @SuppressWarnings("CallToPrintStackTrace")
-    public void show(String tabId, Object... objects) {
+    public void show(PageURL pageURL, Object... objects) {
         try {
-            FXMLLoader loader = this.getLoader(tabId);
+            FXMLLoader loader = this.getLoader(pageURL);
 
             Parent view = loader.load();
             Object controller = loader.getController();
@@ -42,16 +43,6 @@ public class SetsNavigator extends BaseTabNavigator {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    @Override
-    public String getFXMLPath(String tabId) {
-        return switch (tabId) {
-            case "main" -> "/io/github/knightmareleon/features/sets/components/pages/SetsMainView.fxml";
-            case "create" -> "/io/github/knightmareleon/features/sets/components/pages/SetsCreateView.fxml";
-            case "details" -> "/io/github/knightmareleon/features/sets/components/pages/SetDetailsView.fxml";
-            default -> throw new IllegalArgumentException("Unknown tab: " + tabId);
-        };
     }
 
     @Override

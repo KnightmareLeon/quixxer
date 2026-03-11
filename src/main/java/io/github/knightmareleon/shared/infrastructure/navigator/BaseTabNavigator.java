@@ -2,6 +2,7 @@ package io.github.knightmareleon.shared.infrastructure.navigator;
 
 import java.io.IOException;
 
+import io.github.knightmareleon.shared.constants.PageURL;
 import io.github.knightmareleon.shared.infrastructure.AppContext;
 import javafx.animation.FadeTransition;
 import javafx.fxml.FXMLLoader;
@@ -21,9 +22,9 @@ public abstract class BaseTabNavigator {
     }
 
     @SuppressWarnings("CallToPrintStackTrace")
-    public void show(String tabId, Object... objects) {
+    public void show(PageURL pageURL, Object... objects) {
         try {
-            FXMLLoader loader = this.getLoader(tabId);
+            FXMLLoader loader = this.getLoader(pageURL);
 
             Parent view = loader.load();
             
@@ -42,8 +43,8 @@ public abstract class BaseTabNavigator {
         return this.context;
     }
 
-    protected FXMLLoader getLoader(String tabId){
-        String fxmlPath = this.getFXMLPath(tabId);
+    protected FXMLLoader getLoader(PageURL pageURL){
+        String fxmlPath = this.getFXMLPath(pageURL);
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
 
@@ -77,5 +78,8 @@ public abstract class BaseTabNavigator {
         fadeTransition.setAutoReverse(false);
         fadeTransition.play();
     }
-    public abstract String getFXMLPath(String tabId);
+
+    protected String getFXMLPath(PageURL pageURL){
+        return pageURL.getURL();
+    }
 }

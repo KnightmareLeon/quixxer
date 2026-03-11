@@ -4,9 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import io.github.knightmareleon.features.sets.SetsConstants;
 import io.github.knightmareleon.features.sets.SetsService;
 import io.github.knightmareleon.features.sets.components.SetsNavigator;
+import io.github.knightmareleon.features.sets.components.constants.SetsConstants;
+import io.github.knightmareleon.features.sets.components.constants.SetsPageURL;
 import io.github.knightmareleon.features.sets.components.controls.QuestionField;
 import io.github.knightmareleon.shared.constants.QuestionType;
 import io.github.knightmareleon.shared.models.Question;
@@ -64,7 +65,7 @@ public class SetsCreateController implements SetsPage{
     @FXML
     @SuppressWarnings("unused")
     private void onBackPageClicked() {
-        navigator.show("main");
+        navigator.show(SetsPageURL.MAIN);
     }
 
     @FXML
@@ -139,7 +140,7 @@ public class SetsCreateController implements SetsPage{
                 result.getValue().getSubject()));
             Optional<ButtonType> alertResult = alert.showAndWait();
             if(alertResult.isPresent() && alertResult.get() == ButtonType.OK){
-                navigator.show("main");
+                navigator.show(SetsPageURL.MAIN);
             }
             System.out.println(result.getValue());
         } else {

@@ -3,6 +3,8 @@ C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightma
 C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\features\dashboard\DashboardDAO.java
 C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\features\dashboard\DashboardModel.java
 C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\features\dashboard\DashboardService.java
+C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\features\sets\components\constants\SetsConstants.java
+C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\features\sets\components\constants\SetsPageURL.java
 C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\features\sets\components\controls\BaseQuestionDetail.java
 C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\features\sets\components\controls\EnumerationQuestionDetail.java
 C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\features\sets\components\controls\IdentificationQuestionDetail.java
@@ -16,13 +18,14 @@ C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightma
 C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\features\sets\components\SetsNavigator.java
 C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\features\sets\components\tabs\SetDetailsTab.java
 C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\features\sets\components\tabs\SetQuestionsTab.java
-C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\features\sets\SetsConstants.java
 C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\features\sets\SetsController.java
 C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\features\sets\SetsService.java
 C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\features\settings\SettingsController.java
 C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\features\settings\SettingsDAO.java
 C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\features\settings\SettingsModel.java
 C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\features\settings\SettingsService.java
+C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\features\test\components\constants\TestPageURL.java
+C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\features\test\components\constants\TestType.java
 C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\features\test\components\controls\TestIconButton.java
 C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\features\test\components\pages\TestMainController.java
 C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\features\test\components\pages\TestPage.java
@@ -32,8 +35,9 @@ C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightma
 C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\features\test\components\TestTypeReceiver.java
 C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\features\test\TestController.java
 C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\features\test\TestService.java
-C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\features\test\TestType.java
 C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\RootController.java
+C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\shared\constants\MainPageURL.java
+C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\shared\constants\PageURL.java
 C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\shared\constants\QuestionType.java
 C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\shared\daos\LocalSetsDao.java
 C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\shared\daos\SetsDao.java

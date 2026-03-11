@@ -1,6 +1,7 @@
 package io.github.knightmareleon.features.sets;
 
 import io.github.knightmareleon.features.sets.components.SetsNavigator;
+import io.github.knightmareleon.features.sets.components.constants.SetsPageURL;
 import io.github.knightmareleon.shared.infrastructure.AppContext;
 import javafx.fxml.FXML;
 import javafx.scene.layout.VBox;
@@ -21,7 +22,7 @@ public class SetsController{
     public void initialize() {
         this.navigator = new SetsNavigator(this.mainContainer, this.context);
 
-        navigator.show("main");
+        navigator.show(SetsPageURL.MAIN);
 
         System.out.println("Sets loaded");
     }

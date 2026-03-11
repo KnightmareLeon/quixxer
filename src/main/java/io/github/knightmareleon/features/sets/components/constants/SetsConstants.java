@@ -1,4 +1,4 @@
-package io.github.knightmareleon.features.sets;
+package io.github.knightmareleon.features.sets.components.constants;
 
 public class SetsConstants {
     public static final String MISSING_TITLE_ERROR = "Missing Title";

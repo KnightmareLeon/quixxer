@@ -3,10 +3,13 @@ package io.github.knightmareleon.features.test.components;
 import java.io.IOException;
 
 import io.github.knightmareleon.features.test.TestService;
-import io.github.knightmareleon.features.test.TestType;
+import io.github.knightmareleon.features.test.components.constants.TestType;
 import io.github.knightmareleon.features.test.components.pages.TestPage;
+import io.github.knightmareleon.shared.constants.PageURL;
 import io.github.knightmareleon.shared.infrastructure.AppContext;
 import io.github.knightmareleon.shared.infrastructure.navigator.BaseTabNavigator;
+import io.github.knightmareleon.shared.models.StudySet;
+import io.github.knightmareleon.shared.utils.StudySetReceiver;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.layout.Pane;
@@ -19,9 +22,9 @@ public class TestNavigator extends BaseTabNavigator {
 
     @Override
     @SuppressWarnings("CallToPrintStackTrace")
-    public void show(String tabId, Object... objects) {
+    public void show(PageURL pageURL, Object... objects) {
         try {
-            FXMLLoader loader = this.getLoader(tabId);
+            FXMLLoader loader = this.getLoader(pageURL);
 
             Parent view = loader.load();
             Object controller = loader.getController();
@@ -33,22 +36,17 @@ public class TestNavigator extends BaseTabNavigator {
                 if(controller instanceof TestTypeReceiver receiver && 
                     object instanceof TestType testType){
                         receiver.receiveTestType(testType);
-                    }
+                }
+                if(controller instanceof StudySetReceiver receiver && 
+                    object instanceof StudySet studySet){
+                        receiver.receiveStudySet(studySet);
+                }
             }
             this.getContainer().getChildren().setAll(view);
             this.setTransition(view);
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    @Override
-    public String getFXMLPath(String tabId) {
-        return switch (tabId) {
-            case "main" -> "/io/github/knightmareleon/features/test/components/pages/TestMainView.fxml";
-            case "sets" -> "/io/github/knightmareleon/features/test/components/pages/TestSetsPickerView.fxml";
-            default -> throw new IllegalArgumentException("Unknown tab: " + tabId);
-        };
     }
 
     @Override

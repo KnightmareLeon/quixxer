@@ -4,9 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.github.knightmareleon.features.test.TestService;
-import io.github.knightmareleon.features.test.TestType;
 import io.github.knightmareleon.features.test.components.TestNavigator;
 import io.github.knightmareleon.features.test.components.TestTypeReceiver;
+import io.github.knightmareleon.features.test.components.constants.TestPageURL;
+import io.github.knightmareleon.features.test.components.constants.TestType;
 import io.github.knightmareleon.shared.models.StudySet;
 import io.github.knightmareleon.shared.ui.controls.IconToggleButton;
 import io.github.knightmareleon.shared.ui.controls.SetCardForm;
@@ -68,6 +69,13 @@ public class TestSetsPickerController implements TestPage, TestTypeReceiver{
                 studySet.getSubject(),
                 studySet.getQuestions().size()
             );
+
+            setCardForm.setOnMouseClicked(e -> {
+                this.onSetClicked(studySet, type);
+            });
+            setListForm.setOnMouseClicked(e -> {
+                this.onSetClicked(studySet, type);
+            });
 
             studySetCards.add(setCardForm);
             studySetList.add(setListForm);
@@ -131,6 +139,10 @@ public class TestSetsPickerController implements TestPage, TestTypeReceiver{
     @FXML
     @SuppressWarnings("unused")
     private void onBackPageClicked() {
-        navigator.show("main");
+        navigator.show(TestPageURL.MAIN);
+    }
+
+    private void onSetClicked(StudySet studySet, TestType type){
+        navigator.show(TestPageURL.SETUP, studySet, type);
     }
 }

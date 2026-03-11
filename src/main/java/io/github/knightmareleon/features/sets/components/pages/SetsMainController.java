@@ -5,6 +5,7 @@ import java.util.List;
 
 import io.github.knightmareleon.features.sets.SetsService;
 import io.github.knightmareleon.features.sets.components.SetsNavigator;
+import io.github.knightmareleon.features.sets.components.constants.SetsPageURL;
 import io.github.knightmareleon.shared.models.StudySet;
 import io.github.knightmareleon.shared.ui.controls.IconToggleButton;
 import io.github.knightmareleon.shared.ui.controls.SetCardForm;
@@ -124,11 +125,10 @@ public class SetsMainController implements SetsPage{
     @FXML
     @SuppressWarnings("unused")
     private void onCreateSetsClicked() {
-        navigator.show("create");
+        navigator.show(SetsPageURL.CREATE);
     }
 
-    @FXML
     private void onSetClicked(StudySet studySet){
-        navigator.show("details", studySet);
+        navigator.show(SetsPageURL.DETAILS, studySet);
     }
 }

@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import io.github.knightmareleon.features.sets.SetsService;
 import io.github.knightmareleon.features.sets.components.SetsNavigator;
+import io.github.knightmareleon.features.sets.components.constants.SetsPageURL;
 import io.github.knightmareleon.features.sets.components.tabs.SetDetailsTab;
 import io.github.knightmareleon.features.sets.components.tabs.SetQuestionsTab;
 import io.github.knightmareleon.shared.models.StudySet;
@@ -85,7 +86,7 @@ public class SetDetailsController extends VBox implements SetsPage, StudySetRece
     @FXML
     @SuppressWarnings("unused")
     private void onBackPageClicked() {
-        navigator.show("main");
+        navigator.show(SetsPageURL.MAIN);
     }
 
     @FXML
@@ -98,7 +99,7 @@ public class SetDetailsController extends VBox implements SetsPage, StudySetRece
         Optional<ButtonType> alertResult = alert.showAndWait();
         if(alertResult.isPresent() && alertResult.get() == ButtonType.OK){
             this.setsService.deleteStudyResult(this.studySet.getId());
-            navigator.show("main");
+            navigator.show(SetsPageURL.MAIN);
         }
     }
 }

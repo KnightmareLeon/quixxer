@@ -1,7 +1,8 @@
 package io.github.knightmareleon.features.test.components.pages;
 
-import io.github.knightmareleon.features.test.TestType;
 import io.github.knightmareleon.features.test.components.TestNavigator;
+import io.github.knightmareleon.features.test.components.constants.TestPageURL;
+import io.github.knightmareleon.features.test.components.constants.TestType;
 import javafx.fxml.FXML;
 
 public class TestMainController implements TestPage{
@@ -51,6 +52,6 @@ public class TestMainController implements TestPage{
     }
 
     private void onTestIconClicked(TestType type){
-        this.testNavigator.show("sets", type);
+        this.testNavigator.show(TestPageURL.SETS, type);
     }
 }

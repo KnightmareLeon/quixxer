@@ -1,5 +1,6 @@
 package io.github.knightmareleon;
 
+import io.github.knightmareleon.shared.constants.MainPageURL;
 import io.github.knightmareleon.shared.infrastructure.AppContext;
 import io.github.knightmareleon.shared.infrastructure.navigator.RootTabNavigator;
 import io.github.knightmareleon.shared.ui.header.HeaderController;
@@ -29,6 +30,6 @@ public class RootController {
             navigator.show(tabId);
         });
 
-        navigator.show("dashboard");
+        navigator.show(MainPageURL.DASHBOARD);
     }
 }

@@ -8,7 +8,7 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
-import io.github.knightmareleon.features.test.TestType;
+import io.github.knightmareleon.features.test.components.constants.TestType;
 import io.github.knightmareleon.shared.constants.QuestionType;
 import io.github.knightmareleon.shared.exceptions.DataAccessException;
 import io.github.knightmareleon.shared.models.Question;
