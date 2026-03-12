@@ -32,7 +32,7 @@
         <IconToggleButton 
             fx:id="detailsToggleButton"
             text="Details"
-            iconLiteral="bi-box-arrow-left"
+            iconLiteral="fas-clipboard-list"
             styleClass="icon-button-transparent-bg"
             iconStyleClass="icon-base-color"
             minHeight="48"
@@ -40,7 +40,7 @@
         <IconToggleButton
             fx:id="questionToggleButton"
             text="Questions"
-            iconLiteral="bi-box-arrow-left"
+            iconLiteral="far-folder-open"
             styleClass="icon-button-transparent-bg"
             iconStyleClass="icon-base-color"
             minHeight="48"
