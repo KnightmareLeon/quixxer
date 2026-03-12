@@ -86,6 +86,7 @@
             </HBox>
             <ComboBox fx:id="subjectPicker" 
                 styleClass="border-radius-15, standard-font"
+                style="-fx-text-base-color: black !important"
                 minHeight="44">
             </ComboBox>
             <Label text="Questions"

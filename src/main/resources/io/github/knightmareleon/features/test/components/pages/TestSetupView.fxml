@@ -7,6 +7,7 @@
 <?import javafx.scene.control.Label?>
 
 <?import io.github.knightmareleon.shared.ui.controls.IconButton?>
+<?import io.github.knightmareleon.shared.ui.controls.NaturalNumberField?>
 
 <VBox xmlns:fx="http://javafx.com/fxml/1"
     fx:controller="io.github.knightmareleon.features.test.components.pages.TestSetupController"
@@ -32,4 +33,14 @@
     <Label 
         text="Test Constraints"
         styleClass="standard-header-font"/>
+    <HBox
+        alignment="CENTER_LEFT"
+        spacing="12">
+        <Label 
+            text="Max Questions"
+            styleClass="standard-font"
+            labelFor="$totalQuestions"/>
+        <NaturalNumberField 
+            fx:id="totalQuestions"/>
+    </HBox>
 </VBox>

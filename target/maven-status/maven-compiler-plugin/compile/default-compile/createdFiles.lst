@@ -41,6 +41,7 @@ io\github\knightmareleon\features\test\components\pages\TestPage.class
 io\github\knightmareleon\features\sets\components\tabs\SetQuestionsTab$1.class
 io\github\knightmareleon\shared\infrastructure\navigator\RootTabNavigator.class
 io\github\knightmareleon\shared\utils\StudySetReceiver.class
+io\github\knightmareleon\shared\ui\controls\NaturalNumberField.class
 io\github\knightmareleon\features\sets\components\tabs\SetDetailsTab$1.class
 io\github\knightmareleon\features\test\components\controls\TestIconButton.class
 io\github\knightmareleon\shared\constants\MainPageURL.class

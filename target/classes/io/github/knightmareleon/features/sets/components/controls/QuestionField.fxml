@@ -48,7 +48,8 @@
         text="Type" 
         styleClass="standard-font"/>
     <ComboBox fx:id="qTypePicker" 
-        styleClass="border-radius-15, standard-font"/>
+        styleClass="border-radius-15, standard-font"
+        style="-fx-text-base-color: black !important"/>
     <Label 
         text="Choices" 
         styleClass="standard-font"/>
