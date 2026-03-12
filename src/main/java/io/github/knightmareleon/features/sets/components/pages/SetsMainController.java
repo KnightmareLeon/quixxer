@@ -10,6 +10,7 @@ import io.github.knightmareleon.shared.models.StudySet;
 import io.github.knightmareleon.shared.ui.controls.IconToggleButton;
 import io.github.knightmareleon.shared.ui.controls.SetCardForm;
 import io.github.knightmareleon.shared.ui.controls.SetListForm;
+import io.github.knightmareleon.shared.utils.Transitions;
 import javafx.fxml.FXML;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.HBox;
@@ -110,11 +111,14 @@ public class SetsMainController implements SetsPage{
                 }
 
                 this.setsContainer.getChildren().addAll(this.setsLeftCol, this.setsRightCol);
+                Transitions.standardFadeTransition(this.setsLeftCol);
+                Transitions.standardFadeTransition(this.setsRightCol);
             } else {
                 this.setsLeftCol.getChildren().clear();
                 this.setsRightCol.getChildren().clear();
                 this.setsList.getChildren().addAll(this.studySetList);
                 this.setsContainer.getChildren().add(this.setsList);
+                Transitions.standardFadeTransition(this.setsList);
             }
 
         });

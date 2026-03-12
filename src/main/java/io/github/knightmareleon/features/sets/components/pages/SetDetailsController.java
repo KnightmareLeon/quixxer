@@ -11,6 +11,7 @@ import io.github.knightmareleon.shared.models.StudySet;
 import io.github.knightmareleon.shared.ui.controls.IconToggleButton;
 import io.github.knightmareleon.shared.ui.controls.StandardAlert;
 import io.github.knightmareleon.shared.utils.StudySetReceiver;
+import io.github.knightmareleon.shared.utils.Transitions;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
@@ -69,8 +70,10 @@ public class SetDetailsController extends VBox implements SetsPage, StudySetRece
             this.tabsContainer.getChildren().clear();
             if((IconToggleButton) newVal == this.detailsToggleButton){
                 this.tabsContainer.getChildren().add(this.detailsTab);
+                Transitions.standardFadeTransition(this.detailsTab);
             } else {
                 this.tabsContainer.getChildren().add(this.questionsTab);
+                Transitions.standardFadeTransition(this.questionsTab);
             }
 
         });

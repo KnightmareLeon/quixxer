@@ -4,12 +4,11 @@ import java.io.IOException;
 
 import io.github.knightmareleon.shared.constants.PageURL;
 import io.github.knightmareleon.shared.infrastructure.AppContext;
-import javafx.animation.FadeTransition;
+import io.github.knightmareleon.shared.utils.Transitions;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.layout.Pane;
-import javafx.util.Duration;
 
 public abstract class BaseTabNavigator {
     
@@ -72,11 +71,7 @@ public abstract class BaseTabNavigator {
     }
 
     protected void setTransition(Node node){
-        FadeTransition fadeTransition = new FadeTransition(Duration.seconds(0.5), node);
-        fadeTransition.setFromValue(0.3);
-        fadeTransition.setToValue(1);
-        fadeTransition.setAutoReverse(false);
-        fadeTransition.play();
+        Transitions.standardFadeTransition(node);
     }
 
     protected String getFXMLPath(PageURL pageURL){
