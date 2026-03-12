@@ -20,7 +20,11 @@
     style="-fx-padding: 24;"
 >
     <FontIcon fx:id="img"/>
-    <Label styleClass="standard-font" fx:id="titleLabel" />
+    <Label 
+        fx:id="titleLabel" 
+        styleClass="standard-header-font"
+        style="-fx-font-size: 20"
+        />
     <VBox 
         spacing="18">
         <Label styleClass="standard-font" fx:id="subjectLabel" />

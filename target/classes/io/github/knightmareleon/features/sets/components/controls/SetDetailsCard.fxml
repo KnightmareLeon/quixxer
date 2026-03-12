@@ -9,6 +9,7 @@
     type="VBox"
     xmlns:fx="http://javafx.com/fxml/1"
     stylesheets="/io/github/knightmareleon/css/controls.css"
+    style="-fx-padding:10"
     fillWidth="true"
     HBox.hgrow="ALWAYS"
     alignment="CENTER"

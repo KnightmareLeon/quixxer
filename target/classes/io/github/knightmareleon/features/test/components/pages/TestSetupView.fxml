@@ -13,10 +13,11 @@
     fx:id="vbox"
     style="-fx-padding:48; -fx-border-radius: 53; -fx-background-radius: 53;"
     spacing="24"
-    alignment="CENTER">
+    alignment="TOP_LEFT">
     <HBox
         minHeight="48" 
-        maxHeight="48">
+        maxHeight="48"
+        alignment="CENTER_LEFT">
         <Label fx:id="setupTitle" 
             styleClass="standard-header-font"/>
         <Region HBox.hgrow="ALWAYS" />
@@ -28,4 +29,7 @@
         minWidth="48"
         onAction="#onBackPageClicked"/>
     </HBox>
+    <Label 
+        text="Test Constraints"
+        styleClass="standard-header-font"/>
 </VBox>

@@ -20,9 +20,13 @@
 >
     <FontIcon fx:id="img"/>
     <VBox 
-        spacing="18"
+        spacing="12"
         HBox.hgrow="ALWAYS">
-        <Label styleClass="standard-font" fx:id="titleLabel" />
+        <Label 
+            fx:id="titleLabel" 
+            styleClass="standard-header-font"
+            style="-fx-font-size: 19"
+            />
         <Label styleClass="standard-font" fx:id="subjectLabel" />
         <Label styleClass="standard-font" fx:id="questionLabel" />
     </VBox>

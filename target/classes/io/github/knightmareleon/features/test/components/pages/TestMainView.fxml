@@ -4,6 +4,8 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.layout.HBox?>
 
+<?import javafx.scene.control.Label?>
+
 <?import io.github.knightmareleon.features.test.components.controls.TestIconButton?>
 
 <VBox
@@ -18,11 +20,14 @@
             styleClass="standard-dark-bg"
             style="-fx-background-radius: 53 0 0 53; -fx-border-radius: 53 0 0 53;">
         <VBox fx:id="vbox"
-                alignment="CENTER"
+                alignment="CENTER_LEFT"
                 styleClass="standard-dark-bg"
                 style="-fx-padding: 48; -fx-background-radius: 53 0 0 53; -fx-border-radius: 53 0 0 53;"
                 spacing="48"
                 fillWidth="true">
+            <Label text="Tests" 
+                styleClass="standard-header-font"
+                style="-fx-font-size: 48px"/>
             <TestIconButton
                 iconLiteral="fas-border-all"
                 headerText="MULTIPLE CHOICE"
