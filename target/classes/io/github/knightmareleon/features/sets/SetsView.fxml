@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.VBox?>
 <StackPane xmlns:fx="http://javafx.com/fxml/1"
     fx:controller="io.github.knightmareleon.features.sets.SetsController"
-    stylesheets="@../../css/sets.css"
+    stylesheets="@../../css/sets.css,/io/github/knightmareleon/css/controls.css"
     style="-fx-padding: 44 0 44 0"
     styleClass="standard-gray-bg">
     <VBox xmlns:fx="http://javafx.com/fxml/1"

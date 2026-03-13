@@ -16,7 +16,7 @@
         <Tab
             text="Identification"
             closable="false"
-            styleClass="set-standard-bg,standard-font">
+            styleClass="component-standard-bg,standard-font">
             <content>
                 <ScrollPane
                     maxWidth="1136"
@@ -39,7 +39,7 @@
         <Tab 
             text="Enumeration"
             closable="false"
-            styleClass="set-standard-bg,standard-font">
+            styleClass="component-standard-bg,standard-font">
             <content>
                 <ScrollPane
                     maxWidth="1136"
@@ -61,7 +61,7 @@
         <Tab
             text="True or False"
             closable="false"
-            styleClass="set-standard-bg,standard-font">
+            styleClass="component-standard-bg,standard-font">
             <content>
                 <ScrollPane
                     maxWidth="1136"

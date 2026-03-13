@@ -34,7 +34,7 @@
         <IconButton 
             fx:id="closeQuestionButton"
             iconLiteral="bi-x"
-            styleClass="set-standard-bg"
+            styleClass="component-standard-bg"
             iconStyleClass="icon-base-color"
             minHeight="32"
             minWidth="32"/>
@@ -61,7 +61,7 @@
     <Button 
         fx:id="addChoiceButton" 
         text="+ Add Choice" 
-        styleClass="set-standard-bg,set-button,standard-font"
+        styleClass="component-standard-bg,set-button,standard-font"
         onAction="#addChoice"
     />
 </fx:root>

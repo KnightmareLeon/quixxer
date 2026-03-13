@@ -18,7 +18,7 @@
 <VBox
     xmlns:fx="http://javafx.com/fxml/1"
     fx:controller="io.github.knightmareleon.features.sets.components.pages.SetsCreateController"
-    fx:id="vbox"    
+    fx:id="vbox"
     alignment="CENTER"
     style="-fx-border-radius: 53; -fx-background-radius: 53;"
     spacing="24"
@@ -32,14 +32,14 @@
         <Region HBox.hgrow="ALWAYS" />
         <IconButton 
             iconLiteral="fas-save"
-            styleClass="set-standard-bg"
+            styleClass="component-standard-bg"
             iconStyleClass="icon-base-color"
             minHeight="48"
             minWidth="48"
             onAction="#saveSet"/>
         <IconButton 
             iconLiteral="bi-box-arrow-left"
-            styleClass="set-standard-bg"
+            styleClass="component-standard-bg"
             iconStyleClass="icon-base-color"
             minHeight="48"
             minWidth="48"
@@ -99,7 +99,7 @@
                 fx:id="addQuestion"
                 text="+ Add Question"
                 maxWidth="1000000"
-                styleClass="set-standard-bg,set-button,standard-font"
+                styleClass="component-standard-bg,set-button,standard-font"
                 onAction="#addQuestion"/>
         </VBox>
 

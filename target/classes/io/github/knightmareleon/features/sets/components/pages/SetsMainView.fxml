@@ -44,7 +44,7 @@
                 text=" Create Set"
                 iconLiteral="bi-folder-plus"
                 iconStyleClass="icon-base-color"
-                styleClass="set-standard-bg"
+                styleClass="component-standard-bg"
                 prefHeight="48"
                 maxWidth="256"
                 onAction="#onCreateSetsClicked"/>

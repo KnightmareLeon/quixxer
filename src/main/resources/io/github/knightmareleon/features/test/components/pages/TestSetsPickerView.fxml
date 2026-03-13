@@ -48,7 +48,7 @@
                 style="-fx-text-fill: black !important"/>
             <IconButton 
                 iconLiteral="bi-box-arrow-left"
-                styleClass="set-standard-bg"
+                styleClass="component-standard-bg"
                 iconStyleClass="icon-base-color"
                 minHeight="48"
                 minWidth="48"

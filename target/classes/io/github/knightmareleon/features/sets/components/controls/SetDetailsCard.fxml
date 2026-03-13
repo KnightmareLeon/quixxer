@@ -13,7 +13,7 @@
     fillWidth="true"
     HBox.hgrow="ALWAYS"
     alignment="CENTER"
-    styleClass="set-standard-bg-no-hover,border-radius-15"
+    styleClass="component-standard-bg-no-hover,border-radius-15"
     spacing="12"
     maxWidth="99999999999999">
     <Label
