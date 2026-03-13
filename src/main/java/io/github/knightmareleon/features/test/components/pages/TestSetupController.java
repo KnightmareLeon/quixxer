@@ -5,6 +5,7 @@ import io.github.knightmareleon.features.test.components.TestTypeReceiver;
 import io.github.knightmareleon.features.test.components.constants.TestPageURL;
 import io.github.knightmareleon.features.test.components.constants.TestType;
 import io.github.knightmareleon.shared.models.StudySet;
+import io.github.knightmareleon.shared.ui.controls.NaturalNumberField;
 import io.github.knightmareleon.shared.utils.StudySetReceiver;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -16,6 +17,8 @@ public class TestSetupController implements TestPage, StudySetReceiver, TestType
     private StudySet studySet;
 
     @FXML private Label setupTitle;
+    @FXML private NaturalNumberField totalQuestions;
+    @FXML private Label totalQuestionsMax;
 
     @Override
     public void setTestNavigator(TestNavigator testNavigator) {
@@ -25,7 +28,9 @@ public class TestSetupController implements TestPage, StudySetReceiver, TestType
     @Override
     public void receiveStudySet(StudySet studySet) {
         this.studySet = studySet;
-        System.out.println("Preparing study set " + this.studySet.getTitle());
+        int maxTotalQuestions = this.studySet.getQuestions().size();
+        this.totalQuestions.setMaxNumber(maxTotalQuestions);
+        this.totalQuestionsMax.setText(" / " + maxTotalQuestions);
     }
 
     @Override

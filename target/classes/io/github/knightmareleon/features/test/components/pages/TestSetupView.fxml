@@ -41,6 +41,10 @@
             styleClass="standard-font"
             labelFor="$totalQuestions"/>
         <NaturalNumberField 
-            fx:id="totalQuestions"/>
+            fx:id="totalQuestions"
+            styleClass="standard-font"
+            style="-fx-text-fill: black !important;"/>
+        <Label fx:id="totalQuestionsMax"
+            styleClass="standard-font"/>
     </HBox>
 </VBox>
