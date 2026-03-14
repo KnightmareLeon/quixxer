@@ -11,6 +11,7 @@ import java.util.List;
 import io.github.knightmareleon.features.test.components.constants.TestType;
 import io.github.knightmareleon.shared.constants.QuestionType;
 import io.github.knightmareleon.shared.exceptions.DataAccessException;
+import io.github.knightmareleon.shared.models.Choice;
 import io.github.knightmareleon.shared.models.Question;
 import io.github.knightmareleon.shared.models.StudySet;
 
@@ -169,7 +170,7 @@ public class LocalSetsDao implements SetsDao{
                                 this.INSERT_TOF_QUESTION
                         );  
 
-                        int is_true = question.getAnswerIndices().get(0);
+                        int is_true = question.getChoices().get(0).isAnswer() ? 1 : 0;
                         tofstmt.setString(1, question.getDescription());
                         tofstmt.setInt(2, is_true);
                         tofstmt.setInt(3, setID);
@@ -191,12 +192,12 @@ public class LocalSetsDao implements SetsDao{
                         enumIDRS.next();
                         int enumID = (int) enumIDRS.getLong(1);
 
-                        for(String choice : question.getChoices()){
+                        for(Choice choice : question.getChoices()){
                             PreparedStatement choicestmt = this.connection.prepareStatement(
                                 this.INSERT_CHOICE
                             );
                             
-                            choicestmt.setString(1, choice);
+                            choicestmt.setString(1, choice.getDescription());
                             choicestmt.setInt(2, 1);
                             choicestmt.setInt(3, enumID);
 
@@ -222,9 +223,9 @@ public class LocalSetsDao implements SetsDao{
                             PreparedStatement choicestmt = this.connection.prepareStatement(
                                     this.INSERT_CHOICE
                             );
-                            
-                            choicestmt.setString(1, question.getChoices().get(i));
-                            choicestmt.setInt(2, question.getAnswerIndices().contains(i) ? 1 : 0);
+                            Choice choice = question.getChoices().get(i);
+                            choicestmt.setString(1, choice.getDescription());
+                            choicestmt.setInt(2, choice.isAnswer() ? 1 : 0);
                             choicestmt.setInt(3, idnID);
 
                             choicestmt.executeUpdate();
@@ -331,16 +332,15 @@ public class LocalSetsDao implements SetsDao{
                 choiceStatement.setInt(1, q_id);
                 ResultSet choiceSet = choiceStatement.executeQuery();
                 
-                List<String> choices = new ArrayList<>();
-                List<Integer> answers = new ArrayList<>();
-                
-                int index = 0;
+                List<Choice> choices = new ArrayList<>();
+
                 while(choiceSet.next()){
 
-                    choices.add(choiceSet.getString("description"));
-                    if(choiceSet.getInt("answer") == 1){
-                        answers.add(index++);
-                    }
+                    choices.add(new Choice(
+                        choiceSet.getString("description"),
+                        choiceSet.getInt("answer") == 1
+                    ));
+
                 }
                 
                 questionList.add(new Question(
@@ -348,8 +348,7 @@ public class LocalSetsDao implements SetsDao{
                     stdQsSet.getString("description"),
                     stdQsSet.getInt("type") == QuestionType.IDENTIFICATION.getCode() ? 
                         QuestionType.IDENTIFICATION : QuestionType.ENUMERATION,
-                    choices,
-                    answers
+                    choices
                 ));
             }
 
@@ -371,13 +370,15 @@ public class LocalSetsDao implements SetsDao{
             ResultSet tofQsSet = tofStatement.executeQuery();
 
             while(tofQsSet.next()){
-                Integer answer = tofQsSet.getInt("is_true");
+                boolean answer = tofQsSet.getInt("is_true") == 1;
                 questionList.add(new Question(
                     tofQsSet.getInt("id"),
                     tofQsSet.getString("description"),
                     QuestionType.TRUE_OR_FALSE,
-                    List.of("True", "False"),
-                    List.of(answer)
+                    List.of(
+                        new Choice("True", answer),
+                        new Choice("False", answer)
+                    )
                 ));
             }
 
@@ -405,22 +406,21 @@ public class LocalSetsDao implements SetsDao{
                 choiceStatement.setInt(1, q_id);
                 ResultSet choiceSet = choiceStatement.executeQuery();
                 
-                List<String> choices = new ArrayList<>();
-                List<Integer> answers = new ArrayList<>();
-                
-                int index = 0;
+                List<Choice> choices = new ArrayList<>();
+
                 while(choiceSet.next()){
 
-                    choices.add(choiceSet.getString("description"));
-                    answers.add(index++);
+                    choices.add(new Choice(
+                        choiceSet.getString("description"),
+                        true
+                ));
                 }
                 
                 questionList.add(new Question(
                     q_id,
                     enumQsSet.getString("description"),
                     QuestionType.ENUMERATION,
-                    choices,
-                    answers
+                    choices
                 ));
             }
 
@@ -446,8 +446,11 @@ public class LocalSetsDao implements SetsDao{
                     oneAnswerSet.getInt("que_id"),
                     oneAnswerSet.getString("q_desc"),
                     QuestionType.IDENTIFICATION,
-                    List.of(oneAnswerSet.getString("c_desc")),
-                    List.of(0)
+                    List.of(
+                        new Choice(
+                            oneAnswerSet.getString("c_desc"), 
+                            true)
+                    )
                 ));
             }
 
@@ -477,24 +480,22 @@ public class LocalSetsDao implements SetsDao{
                 choiceStatement.setInt(1, q_id);
                 ResultSet choiceSet = choiceStatement.executeQuery();
                 
-                List<String> choices = new ArrayList<>();
-                List<Integer> answers = new ArrayList<>();
+                List<Choice> choices = new ArrayList<>();
 
-                int index = 0;
                 while(choiceSet.next()){
 
-                    choices.add(choiceSet.getString("description"));
-                    if(choiceSet.getInt("answer") == 1){
-                        answers.add(index++);
-                    }
+                    choices.add(
+                        new Choice(
+                            choiceSet.getString("description"),
+                            choiceSet.getInt("answer") == 1
+                    ));
                 }
 
                 questionList.add(new Question(
                     mulSet.getInt("id"),
                     mulSet.getString("description"),
                     QuestionType.IDENTIFICATION,
-                    choices,
-                    answers
+                    choices
                 ));
             }
 

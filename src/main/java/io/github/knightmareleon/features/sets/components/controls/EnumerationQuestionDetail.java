@@ -2,6 +2,7 @@ package io.github.knightmareleon.features.sets.components.controls;
 
 import java.util.List;
 
+import io.github.knightmareleon.shared.models.Choice;
 import io.github.knightmareleon.shared.models.Question;
 import javafx.scene.control.Label;
 
@@ -13,9 +14,9 @@ public class EnumerationQuestionDetail extends BaseQuestionDetail {
     
     @Override
     public void setChoices(Question question){
-        List<String> questionChoices = question.getChoices();
+        List<Choice> questionChoices = question.getChoices();
         for(int i = 0; i < questionChoices.size(); i++){
-            this.choiceLabels.add(new Label(questionChoices.get(i)));
+            this.choiceLabels.add(new Label(questionChoices.get(i).getDescription()));
         }
     }
 }

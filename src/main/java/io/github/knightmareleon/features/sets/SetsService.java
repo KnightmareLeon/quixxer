@@ -7,6 +7,7 @@ import io.github.knightmareleon.features.sets.components.constants.SetsConstants
 import io.github.knightmareleon.shared.constants.QuestionType;
 import io.github.knightmareleon.shared.daos.SetsDao;
 import io.github.knightmareleon.shared.exceptions.DataAccessException;
+import io.github.knightmareleon.shared.models.Choice;
 import io.github.knightmareleon.shared.models.Question;
 import io.github.knightmareleon.shared.models.StudySet;
 import io.github.knightmareleon.shared.utils.Result;
@@ -54,8 +55,8 @@ public class SetsService {
             else if( question.getType() == QuestionType.IDENTIFICATION ||
                 question.getType() == QuestionType.ENUMERATION
             ){
-                for(String choice : question.getChoices()){
-                    if(choice == null || choice.isBlank()){
+                for(Choice choice : question.getChoices()){
+                    if(choice.getDescription() == null || choice.getDescription().isBlank()){
                         errorMessages.add("" + i);
                         break;
                     }

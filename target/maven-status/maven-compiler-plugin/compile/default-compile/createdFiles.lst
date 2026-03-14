@@ -16,6 +16,7 @@ io\github\knightmareleon\features\sets\components\controls\QuestionField.class
 io\github\knightmareleon\features\sets\components\pages\SetDetailsController.class
 io\github\knightmareleon\features\sets\components\pages\SetsPage.class
 io\github\knightmareleon\shared\models\StudySet.class
+io\github\knightmareleon\shared\models\TestData.class
 io\github\knightmareleon\shared\daos\SetsDao.class
 io\github\knightmareleon\shared\daos\LocalSetsDao.class
 io\github\knightmareleon\shared\ui\controls\IconToggleButton.class
@@ -32,6 +33,7 @@ io\github\knightmareleon\shared\infrastructure\database\DatabaseManager.class
 io\github\knightmareleon\features\sets\components\controls\BaseQuestionDetail.class
 io\github\knightmareleon\features\sets\components\controls\SetDetailsCard.class
 io\github\knightmareleon\RootController.class
+io\github\knightmareleon\shared\models\Choice.class
 io\github\knightmareleon\features\sets\components\controls\EnumerationQuestionDetail.class
 io\github\knightmareleon\shared\ui\controls\SetListForm.class
 io\github\knightmareleon\features\dashboard\DashboardController.class

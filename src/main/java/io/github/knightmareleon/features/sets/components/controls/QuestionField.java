@@ -86,7 +86,7 @@ public class QuestionField extends VBox{
             } else {
                 addChoiceButton.setVisible(false);
 
-                choices.getChildren().addAll(trueButton, falseButton);
+                choices.getChildren().addAll(this.trueButton, this.falseButton);
             }
 
         });
@@ -151,6 +151,7 @@ public class QuestionField extends VBox{
     public List<String> getChoices(){
         List<String> choiceList = new ArrayList<>();
         if(this.getType().equals("True or False")){
+            choiceList = List.of("True", "False");
             return choiceList;
         }
         int index = this.getType().equals("Identification") ? 1 : 0;
@@ -162,21 +163,31 @@ public class QuestionField extends VBox{
     }
 
     public List<Integer> getAnswers(){
-        if(this.getType().equals("True or False")){
-            return ((RadioButton) this.trueOrFalse.getSelectedToggle()).equals(this.trueButton) ?
-                List.of(1) : List.of(0) ;
-        } else if (this.getType().equals("Identification")){
-            List<Integer> answerIndices = new ArrayList<>();
-            int i = 0;
-            for (HBox row : this.choiceRows) {
-                if(((CheckBox)row.getChildren().get(0)).isSelected()) {
-                    answerIndices.add(i++);
+        String type = this.getType();
+        List<Integer> answerIndices = new ArrayList<>();
+        switch(type){
+            case "True or False" -> {
+                return ((RadioButton) this.trueOrFalse.getSelectedToggle()).equals(this.trueButton) ?
+                        List.of(0) : List.of(1) ;
+            }
+            case "Identification" -> {
+                int i = 0;
+                for (HBox row : this.choiceRows) {
+                    if(((CheckBox)row.getChildren().get(0)).isSelected()) {
+                        answerIndices.add(i++);
+                    }
                 }
             }
+            case "Enumeration" -> {
+                for(int j = 0; j < this.choiceRows.size(); j++){
+                    answerIndices.add(j);
+                }
+            }
+            default -> {
+            }
 
-            return answerIndices;
         }
-        return new ArrayList<>();
+        return answerIndices;
     }
 
     public void setCloseButtonAction(EventHandler<ActionEvent> closeAction){

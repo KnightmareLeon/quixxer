@@ -14,7 +14,7 @@ public class TrueOrFalseQuestionDetail extends BaseQuestionDetail {
     public void setChoices(Question question) {
         this.choiceLabels.add(new Label("True"));
         this.choiceLabels.add(new Label("False"));
-        this.choiceLabels.get(question.getAnswerIndices().get(0) == 1 ? 0 : 1).setStyle(
+        this.choiceLabels.get(question.getChoices().get(0).isAnswer() ? 0 : 1).setStyle(
             "-fx-text-fill: green !important"
         );
     }

@@ -9,33 +9,28 @@ public class Question{
     private final int id;
     private String description; 
     private QuestionType type; 
-    private final List<String> choices; 
-    private final List<Integer> answerIndices;
+    private final List<Choice> choices;
 
     public Question(int id, 
         String description,
         QuestionType type,
-        List<String> choices,
-        List<Integer> answerIndices){
+        List<Choice> choices){
         
         this.id = id;
         this.description = description;
         this.type = type;
         this.choices = choices;
-        this.answerIndices = answerIndices;
 
     }
 
     public Question(String description,
         QuestionType type,
-        List<String> choices,
-        List<Integer> answerIndices){
+        List<Choice> choices){
         
         this.id = 0;
         this.description = description;
         this.type = type;
         this.choices = choices;
-        this.answerIndices = answerIndices;
     }
 
     public int getId(){
@@ -50,12 +45,8 @@ public class Question{
         return this.type;
     }
 
-    public List<String> getChoices(){
+    public List<Choice> getChoices(){
         return this.choices;
-    }
-
-    public List<Integer> getAnswerIndices(){
-        return this.answerIndices;
     }
 
     public void setDescription(String description){
@@ -70,10 +61,9 @@ public class Question{
     public String toString(){
         return String.format(
             " Question: %s | Type: %s |" + 
-            " Choices: %s | Answers: %s", 
+            " Choices: %s ", 
             this.description,
             this.type,
-            this.choices,
-            this.answerIndices);
+            this.choices);
     }
 }
