@@ -54,4 +54,8 @@ public class TestData {
     public int getScore(){
         return this.score;
     }
+
+    public String getStudySetTitle(){
+        return this.studySet.getTitle();
+    }
 }

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+
+<?import javafx.scene.control.Label?>
+
+<?import io.github.knightmareleon.shared.ui.controls.IconButton?>
+
+<VBox xmlns:fx="http://javafx.com/fxml/1"
+    fx:controller="io.github.knightmareleon.features.test.components.pages.TestPlayerController"
+    fx:id="vbox"
+    style="-fx-padding:48; -fx-border-radius: 53; -fx-background-radius: 53;"
+    spacing="24"
+    alignment="CENTER"
+    VBox.vgrow="ALWAYS">
+    <HBox
+        minHeight="48" 
+        maxHeight="48"
+        alignment="CENTER_LEFT">
+        <Label fx:id="testPlayerTitle" 
+            styleClass="standard-header-font"/>
+        <Region HBox.hgrow="ALWAYS" />
+        <IconButton 
+        iconLiteral="bi-box-arrow-left"
+        styleClass="component-standard-bg"
+        iconStyleClass="icon-base-color"
+        minHeight="48"
+        minWidth="48"
+        onAction="#onBackPageClicked"/>
+    </HBox>
+</VBox>

@@ -87,5 +87,6 @@
     <Button
         text="Start"
         maxWidth="Infinity"
-        styleClass="component-standard-bg,standard-font,border-radius-15" />
+        styleClass="component-standard-bg,standard-font,border-radius-15"
+        onAction="#onStartClicked" />
 </VBox>
