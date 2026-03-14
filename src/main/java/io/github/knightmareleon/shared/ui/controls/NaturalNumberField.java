@@ -45,5 +45,6 @@ public class NaturalNumberField extends TextField {
     public void setMaxNumber(int maxNumber){
         if(maxNumber < 1) return;
         this.maxNumber = maxNumber > Integer.MAX_VALUE ? Integer.MAX_VALUE : maxNumber;
+        this.setText(""  + maxNumber);
     }
 }

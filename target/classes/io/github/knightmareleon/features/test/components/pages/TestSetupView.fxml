@@ -79,6 +79,10 @@
             fx:id="tenMinButton"
             styleClass="component-standard-bg,white-border,standard-font"/>
     </HBox>
+    <ToggleButton 
+        text="Shuffled"
+        fx:id="shuffleToggleButton"
+        styleClass="component-standard-bg,white-border,standard-font"/>
     <Region VBox.vgrow="ALWAYS"/>
     <Button
         text="Start"

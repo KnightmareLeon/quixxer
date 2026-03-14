@@ -17,7 +17,8 @@
     fx:id="vbox"
     style="-fx-padding:48; -fx-border-radius: 53; -fx-background-radius: 53;"
     spacing="24"
-    alignment="CENTER">
+    alignment="CENTER"
+    VBox.vgrow="ALWAYS">
     <HBox
         minHeight="48" 
         maxHeight="48">
