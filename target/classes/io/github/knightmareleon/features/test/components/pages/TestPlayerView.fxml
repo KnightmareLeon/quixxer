@@ -4,8 +4,10 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
 
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
 
 <?import io.github.knightmareleon.shared.ui.controls.IconButton?>
 
@@ -14,7 +16,7 @@
     fx:id="vbox"
     style="-fx-padding:48; -fx-border-radius: 53; -fx-background-radius: 53;"
     spacing="24"
-    alignment="CENTER"
+    alignment="CENTER_LEFT"
     VBox.vgrow="ALWAYS">
     <HBox
         minHeight="48" 
@@ -31,6 +33,19 @@
         minWidth="48"
         onAction="#onBackPageClicked"/>
     </HBox>
+    <StackPane>
+        <ProgressBar 
+            fx:id="incorrectProgressBar"
+            maxWidth="Infinity"
+            styleClass="scoreBar"
+            style="-fx-accent: red"/>
+        <ProgressBar 
+            fx:id="correctProgressBar"
+            maxWidth="Infinity"
+            styleClass="scoreBar"
+            style="-fx-accent: green"/>
+    </StackPane>
+    <Label fx:id="mainContentHeaderLabel" styleClass="standard-header-font"/>
     <BorderPane
         fx:id="mainContentPane"
         VBox.vgrow="ALWAYS">

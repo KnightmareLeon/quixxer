@@ -7,10 +7,12 @@ import io.github.knightmareleon.features.test.components.constants.TestType;
 import io.github.knightmareleon.shared.models.Question;
 import io.github.knightmareleon.shared.models.TestData;
 import io.github.knightmareleon.shared.ui.controls.StandardAlert;
+import io.github.knightmareleon.shared.utils.Transitions;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.BorderPane;
@@ -24,7 +26,13 @@ public class TestPlayerController implements TestPage, TestDataReceiver{
     private TestData testData;
 
     @FXML private Label testPlayerTitle;
+    @FXML private Label mainContentHeaderLabel;
+
+    @FXML private ProgressBar incorrectProgressBar;
+    @FXML private ProgressBar correctProgressBar;
+
     @FXML private BorderPane mainContentPane;
+
     @Override
     public void setTestNavigator(TestNavigator testNavigator) {
         this.testNavigator = testNavigator;
@@ -48,18 +56,28 @@ public class TestPlayerController implements TestPage, TestDataReceiver{
         }
         Question question = this.testData.getQuestionsUsed().get(nextQuestionIndex);
         Label questionLabel = new Label(question.getDescription());
+        this.mainContentHeaderLabel.setText("Question " + (nextQuestionIndex + 1) );
         questionLabel.getStyleClass().add("standard-font");
         this.mainContentPane.setCenter(questionLabel);
         this.addAnswerFields(question, nextQuestionIndex);
     }
 
     private void handleQuestionResult(Question question, boolean correct, int currentIndex){
-        System.out.println(correct);
         if(correct) this.testData.incrementScore();
+        final int currentScore = this.testData.getScore();
+        final double correctProgress = (double)currentScore / this.testData.getQuestionsUsed().size();
+        final double incorrectProgress = (double)(currentIndex + 1 - currentScore) 
+        / this.testData.getQuestionsUsed().size() + correctProgress;
+        final double transitionDuration = 0.5;
+        Transitions.timelineTransition(this.correctProgressBar.progressProperty(), correctProgress, transitionDuration);
+        Transitions.timelineTransition(this.incorrectProgressBar.progressProperty(), incorrectProgress, transitionDuration);
+        correctProgressBar.setProgress(correctProgress);
+        incorrectProgressBar.setProgress(incorrectProgress);
         this.handleNextQuestion(currentIndex + 1);
     }
 
     private void handleEnd(){
+        Transitions.timelineTransition(this.mainContentHeaderLabel.textProperty(), "Test Results", 0.5);
         Label scoreLabel = new Label("Final Score: " + this.testData.getScore());
         scoreLabel.getStyleClass().add("standard-font");
         this.mainContentPane.setCenter(scoreLabel);
@@ -107,10 +125,16 @@ public class TestPlayerController implements TestPage, TestDataReceiver{
                 VBox answerFieldContainer = new VBox(24, trueFalseContainer, submitButton);
                 answerFieldContainer.setFillWidth(true);
                 this.mainContentPane.setBottom(answerFieldContainer);
+                Transitions.standardFadeTransition(answerFieldContainer);
             }
         }
     }
 
+    @FXML
+    public void initialize(){
+        this.incorrectProgressBar.setProgress(0.0001);
+        this.correctProgressBar.setProgress(0.0001);
+    }
     @FXML
     @SuppressWarnings("unused")
     private void onBackPageClicked(){

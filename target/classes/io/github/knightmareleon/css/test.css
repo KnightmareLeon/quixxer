@@ -89,3 +89,16 @@
     -fx-background-radius: 53 0 0 53;
     -fx-border-radius: 53 0 0 53;
 }
+
+.scoreBar{
+    transition: all 0.15s ease-in-out;
+}
+
+.scoreBar .track {
+    -fx-background-color: transparent;
+}
+
+.scoreBar .track, .scoreBar .bar {
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+}
