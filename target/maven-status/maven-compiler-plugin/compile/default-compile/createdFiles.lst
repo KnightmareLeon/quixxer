@@ -1,6 +1,7 @@
 io\github\knightmareleon\features\settings\SettingsController.class
 io\github\knightmareleon\shared\constants\PageURL.class
 io\github\knightmareleon\features\sets\SetsService.class
+io\github\knightmareleon\shared\ui\controls\SetsLister.class
 io\github\knightmareleon\features\sets\components\pages\SetsCreateController.class
 io\github\knightmareleon\features\dashboard\DashboardService.class
 io\github\knightmareleon\shared\ui\controls\SetCardForm.class

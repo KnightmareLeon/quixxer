@@ -11,6 +11,7 @@
 
 <?import io.github.knightmareleon.shared.ui.controls.IconButton?>
 <?import io.github.knightmareleon.shared.ui.controls.IconToggleButton?>
+<?import io.github.knightmareleon.shared.ui.controls.SetsLister?>
 
 <VBox xmlns:fx="http://javafx.com/fxml/1"
     fx:controller="io.github.knightmareleon.features.test.components.pages.TestSetsPickerController"
@@ -56,18 +57,6 @@
                 onAction="#onBackPageClicked"/>
         </HBox>
     </HBox>
-    <ScrollPane fx:id="setsPane"
-        maxWidth="1136"
-        hbarPolicy="AS_NEEDED"
-        vbarPolicy="AS_NEEDED"
-        fitToWidth="true"
-        fitToHeight="true"
-        styleClass="standard-dark-bg"
-        VBox.vgrow="ALWAYS">
-        <HBox fx:id="setsContainer"
-            spacing="24"
-            alignment="TOP_LEFT"
-            styleClass="standard-dark-bg">
-        </HBox>
-    </ScrollPane>
+    <SetsLister 
+        fx:id="setsLister" />
 </VBox>
