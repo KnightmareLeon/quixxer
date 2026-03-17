@@ -28,6 +28,7 @@ public class SetsMainController implements SetsPage{
     @FXML private IconToggleButton listViewButton;
 
     @FXML private Pagination pagination;
+    private int currentPage = 1;
 
     public SetsMainController(SetsService setsService){
         this.setsService = setsService;
@@ -40,7 +41,50 @@ public class SetsMainController implements SetsPage{
 
     @FXML
     public void initialize(){
-        this.studySets = this.setsService.getStudySets(1).getValue();
+        this.createStudySetComponents();
+        this.setsLister.init(
+            this.studySetCards, 
+            this.studySetList,
+            this.cardViewButton,
+            this.listViewButton
+        );
+        this.pagination.init(this.setsService.getTotalPages());
+        this.pagination.setFirstPageButtonAction(e -> {
+            this.currentPage = 1;
+            this.createStudySetComponents();
+            this.setsLister.refresh();
+        });
+        this.pagination.setPrevPageButtonAction(e -> {
+            this.currentPage--;
+            this.createStudySetComponents();
+            this.setsLister.refresh();
+        });
+        this.pagination.setNextPageButtonAction(e -> {
+            this.currentPage++;
+            this.createStudySetComponents();
+            this.setsLister.refresh();
+        });
+        this.pagination.setLastPageButtonAction(e -> {
+            this.currentPage = this.setsService.getTotalPages();
+            this.createStudySetComponents();
+            this.setsLister.refresh();
+        });
+    }
+
+    @FXML
+    @SuppressWarnings("unused")
+    private void onCreateSetsClicked() {
+        navigator.show(SetsPageURL.CREATE);
+    }
+
+    private void onSetClicked(StudySet studySet){
+        navigator.show(SetsPageURL.DETAILS, studySet);
+    }
+
+    private void createStudySetComponents(){
+        this.studySets = this.setsService.getStudySets(this.currentPage).getValue();
+        this.studySetCards.clear();
+        this.studySetList.clear();
         for(StudySet studySet : this.studySets){
             SetCardForm setCardForm = new SetCardForm(
                 studySet.getimgpath().equals("default") ? 
@@ -67,22 +111,5 @@ public class SetsMainController implements SetsPage{
             studySetCards.add(setCardForm);
             studySetList.add(setListForm);
         }
-        this.setsLister.init(
-            this.studySetCards, 
-            this.studySetList,
-            this.cardViewButton,
-            this.listViewButton
-        );
-        this.pagination.init(1);
-    }
-
-    @FXML
-    @SuppressWarnings("unused")
-    private void onCreateSetsClicked() {
-        navigator.show(SetsPageURL.CREATE);
-    }
-
-    private void onSetClicked(StudySet studySet){
-        navigator.show(SetsPageURL.DETAILS, studySet);
     }
 }

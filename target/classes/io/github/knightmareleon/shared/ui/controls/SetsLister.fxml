@@ -8,16 +8,17 @@
     type="ScrollPane"
     xmlns:fx="http://javafx.com/fxml/1"
     maxWidth="1136"
+    maxHeight="Infinity"
     hbarPolicy="AS_NEEDED"
     vbarPolicy="AS_NEEDED"
     fitToWidth="true"
     fitToHeight="true"
-    styleClass="standard-dark-bg"
-    VBox.vgrow="ALWAYS">
+    styleClass="standard-dark-bg">
     <HBox fx:id="setsContainer"
         spacing="24"
         alignment="TOP_LEFT"
-        styleClass="standard-dark-bg">
+        styleClass="standard-dark-bg"
+        maxHeight="Infinity">
 
     </HBox>
 </fx:root>

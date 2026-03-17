@@ -11,8 +11,7 @@
     type="HBox"
     xmlns:fx="http://javafx.com/fxml"
     spacing="12"
-    alignment="CENTER"
-    fillHeight="true">
+    alignment="CENTER">
     <Button 
         fx:id="firstPageButton" 
         text="&lt;&lt;"

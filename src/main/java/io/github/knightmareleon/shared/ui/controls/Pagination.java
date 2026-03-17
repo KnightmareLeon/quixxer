@@ -57,7 +57,7 @@ public class Pagination extends HBox{
         this.firstPageButton.addEventHandler(ActionEvent.ACTION, this::onFirstPageButtonClicked);
         this.prevPageButton.addEventHandler(ActionEvent.ACTION, this::onPrevPageButtonClicked);
         this.nextPageButton.addEventHandler(ActionEvent.ACTION, this::onNextPageButtonClicked);
-        this.nextPageButton.addEventHandler(ActionEvent.ACTION, this::onLastPageButtonClicked);
+        this.lastPageButton.addEventHandler(ActionEvent.ACTION, this::onLastPageButtonClicked);
         this.pageField.textProperty().addListener((obs, oldVal, newVal) -> {
             int currentPage = Integer.parseInt(newVal);
             this.disablePrevButtons(currentPage);

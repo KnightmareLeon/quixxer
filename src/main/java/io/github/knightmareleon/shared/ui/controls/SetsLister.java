@@ -54,6 +54,8 @@ public class SetsLister extends ScrollPane{
         this.setsRightCol.setFillWidth(true);
         this.setsLeftCol.setMaxWidth(Double.MAX_VALUE);
         this.setsRightCol.setMaxWidth(Double.MAX_VALUE);
+        this.setsLeftCol.setMaxHeight(Double.MAX_VALUE);
+        this.setsRightCol.setMaxHeight(Double.MAX_VALUE);
         this.setsIconContainer.add(this.setsLeftCol, 0, 0);
         this.setsIconContainer.add(this.setsRightCol, 1, 0);
         this.setsLeftColCons.setPercentWidth(50);
@@ -80,28 +82,49 @@ public class SetsLister extends ScrollPane{
             }
             this.setsContainer.getChildren().clear();
             if((IconToggleButton) newVal == this.cardViewButton){
-                this.setsList.getChildren().clear();
-                for(int i = 0; i < this.studySetCards.size(); i++){
-                    if(i % 2 == 0){
-                        this.setsLeftCol.getChildren().add(studySetCards.get(i));
-                    } else {
-                        this.setsRightCol.getChildren().add(studySetCards.get(i));
-                    }
-                    
-                }
-
-                this.setsContainer.getChildren().add(this.setsIconContainer);
-                Transitions.standardFadeTransition(this.setsIconContainer);
+                this.setToIconView();
             } else {
-                this.setsLeftCol.getChildren().clear();
-                this.setsRightCol.getChildren().clear();
-                this.setsList.getChildren().addAll(this.studySetList);
-                this.setsContainer.getChildren().add(this.setsList);
-                Transitions.standardFadeTransition(this.setsList);
+                this.setToListView();
             }
 
         });
 
         this.cardViewButton.setSelected(true);
+
+    }
+
+    private void setToIconView(){
+        this.setsList.getChildren().clear();
+        for(int i = 0; i < this.studySetCards.size(); i++){
+            if(i % 2 == 0){
+                this.setsLeftCol.getChildren().add(studySetCards.get(i));
+            } else {
+                this.setsRightCol.getChildren().add(studySetCards.get(i));
+            }
+            
+        }
+
+        this.setsContainer.getChildren().add(this.setsIconContainer);
+        Transitions.standardFadeTransition(this.setsIconContainer);
+    }
+
+    private void setToListView(){
+        this.setsLeftCol.getChildren().clear();
+        this.setsRightCol.getChildren().clear();
+        this.setsList.getChildren().addAll(this.studySetList);
+        this.setsContainer.getChildren().add(this.setsList);
+        Transitions.standardFadeTransition(this.setsList);
+    }
+
+    public void refresh(){
+        this.setsContainer.getChildren().clear();
+        if(this.cardViewButton.isSelected()){
+            this.setsLeftCol.getChildren().clear();
+            this.setsRightCol.getChildren().clear();
+            this.setToIconView();
+        } else {
+            this.setsList.getChildren().clear();
+            this.setToListView();
+        }
     }
 }

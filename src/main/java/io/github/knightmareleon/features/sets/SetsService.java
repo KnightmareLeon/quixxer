@@ -17,12 +17,12 @@ public class SetsService {
     private final SetsDao setsDao;
     private final int MAX_SET_TOTAL_PER_PAGE = 10;
 
-    private int totalPages;
+    private int totalStudySets;
 
     public SetsService(SetsDao setsDao){
         this.setsDao = setsDao;
         try {
-            this.totalPages = (int) Math.ceil((double)(this.setsDao.totalRows()) / (double)(this.MAX_SET_TOTAL_PER_PAGE));
+            this.totalStudySets = this.setsDao.totalRows();
         } catch (DataAccessException e) {
             
         }
@@ -67,6 +67,7 @@ public class SetsService {
         if(errorMessages.isEmpty()){
             try {
                 this.setsDao.save(studySet);
+                this.totalStudySets++;
             } catch (DataAccessException e) {
                 errorMessages.add("Database error.");
             }
@@ -80,7 +81,7 @@ public class SetsService {
         if(page < 1) page = 1;
 
         try {
-            if(page > this.totalPages) page = this.totalPages;
+            if(page > this.getTotalPages()) page = this.getTotalPages();
             List<StudySet> studySets = this.setsDao.list(
                 this.MAX_SET_TOTAL_PER_PAGE, 
                 (page - 1) * this.MAX_SET_TOTAL_PER_PAGE
@@ -95,9 +96,14 @@ public class SetsService {
     public Result<String> deleteStudyResult(int studySetID){
         try {
             this.setsDao.delete(studySetID);
+            this.totalStudySets--;
             return Result.success("Delete successful for study set.");
         } catch (DataAccessException e) {
             return Result.error("Failed to delete study set.");
         }
+    }
+
+    public int getTotalPages(){
+        return (int) Math.ceil((double)(this.totalStudySets) / (double)(this.MAX_SET_TOTAL_PER_PAGE));
     }
 }

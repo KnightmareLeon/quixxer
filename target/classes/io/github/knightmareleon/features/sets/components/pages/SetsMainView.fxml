@@ -19,7 +19,9 @@
     alignment="CENTER_LEFT"
     style="-fx-border-radius: 53; -fx-background-radius: 53;"
     spacing="24"
-    fillWidth="true">
+    fillWidth="true"
+    maxHeight="Infinity"
+    VBox.vgrow="ALWAYS">
     <HBox
         minHeight="48" 
         maxHeight="48">
@@ -59,7 +61,9 @@
         </HBox>
     </HBox>
     <SetsLister 
-        fx:id="setsLister"/>
+        fx:id="setsLister"
+        VBox.vgrow="ALWAYS"
+        />
     <Pagination 
         fx:id="pagination"/>
 </VBox>
