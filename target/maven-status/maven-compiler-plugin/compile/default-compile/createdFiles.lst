@@ -14,6 +14,7 @@ io\github\knightmareleon\shared\ui\controls\IconToggleButton.class
 io\github\knightmareleon\features\sets\components\constants\SetsConstants.class
 io\github\knightmareleon\features\sets\components\controls\TrueOrFalseQuestionDetail.class
 io\github\knightmareleon\features\sets\components\pages\SetsMainController.class
+io\github\knightmareleon\shared\ui\controls\Pagination.class
 io\github\knightmareleon\features\sets\components\SetsNavigator.class
 io\github\knightmareleon\features\test\components\pages\TestSetupController.class
 io\github\knightmareleon\shared\infrastructure\database\DatabaseManager.class

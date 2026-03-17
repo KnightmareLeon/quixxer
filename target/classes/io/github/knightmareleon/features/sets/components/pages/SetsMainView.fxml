@@ -11,6 +11,7 @@
 <?import io.github.knightmareleon.shared.ui.controls.IconButton?>
 <?import io.github.knightmareleon.shared.ui.controls.IconToggleButton?>
 <?import io.github.knightmareleon.shared.ui.controls.SetsLister?>
+<?import io.github.knightmareleon.shared.ui.controls.Pagination?>
 
 <VBox xmlns:fx="http://javafx.com/fxml/1"
     fx:controller="io.github.knightmareleon.features.sets.components.pages.SetsMainController"
@@ -59,4 +60,6 @@
     </HBox>
     <SetsLister 
         fx:id="setsLister"/>
+    <Pagination 
+        fx:id="pagination"/>
 </VBox>

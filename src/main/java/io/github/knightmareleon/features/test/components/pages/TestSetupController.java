@@ -48,6 +48,7 @@ public class TestSetupController implements TestPage, StudySetReceiver, TestType
         this.studySet = studySet;
         int maxTotalQuestions = this.studySet.getQuestions().size();
         this.totalQuestions.setMaxNumber(maxTotalQuestions);
+        this.totalQuestions.setTextToMax();
         this.totalQuestionsMax.setText(" / " + maxTotalQuestions);
     }
 

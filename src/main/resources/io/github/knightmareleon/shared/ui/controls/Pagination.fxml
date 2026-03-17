@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.HBox?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+
+<?import io.github.knightmareleon.shared.ui.controls.NaturalNumberField?>
+
+<fx:root 
+    type="HBox"
+    xmlns:fx="http://javafx.com/fxml"
+    spacing="12"
+    alignment="CENTER"
+    fillHeight="true">
+    <Button 
+        fx:id="firstPageButton" 
+        text="&lt;&lt;"
+        styleClass="standard-font,component-standard-bg"/>
+    <Button 
+        fx:id="prevPageButton" 
+        text="&lt;"
+        styleClass="standard-font,component-standard-bg"/>
+    <NaturalNumberField fx:id="pageField"/>
+    <Label 
+        fx:id="totalPageLabel"/>
+    <Button
+        fx:id="nextPageButton"
+        text="&gt;"
+        styleClass="standard-font,component-standard-bg"/>
+    <Button 
+        fx:id="lastPageButton" 
+        text="&gt;&gt;"
+        styleClass="standard-font,component-standard-bg"/>
+</fx:root>
