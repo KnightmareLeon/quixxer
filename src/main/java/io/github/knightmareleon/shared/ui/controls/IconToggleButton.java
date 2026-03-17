@@ -1,9 +1,8 @@
 package io.github.knightmareleon.shared.ui.controls;
 
-import java.io.IOException;
-
 import org.kordamp.ikonli.javafx.FontIcon;
 
+import io.github.knightmareleon.shared.utils.ControllerRootSetter;
 import javafx.beans.NamedArg;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,8 +10,7 @@ import javafx.scene.control.ToggleButton;
 
 public class IconToggleButton extends ToggleButton {
 
-    @FXML
-    private FontIcon icon = new FontIcon();
+    private final FontIcon icon = new FontIcon();
 
     private final String iconLiteral;
     private final String iconStyleClass;
@@ -26,13 +24,8 @@ public class IconToggleButton extends ToggleButton {
             getClass().getResource("IconToggleButton.fxml")
         );
 
-        loader.setRoot(this);
-        loader.setController(this);
-        try {
-            loader.load();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        ControllerRootSetter.set(this, loader);
+
     }
 
     @FXML

@@ -1,8 +1,8 @@
 package io.github.knightmareleon.shared.ui.controls;
 
-import java.io.IOException;
 import java.util.List;
 
+import io.github.knightmareleon.shared.utils.ControllerRootSetter;
 import io.github.knightmareleon.shared.utils.Transitions;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -37,13 +37,7 @@ public class SetsLister extends ScrollPane{
             getClass().getResource("SetsLister.fxml")
         );
 
-        loader.setRoot(this);
-        loader.setController(this);
-        try {
-            loader.load();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        ControllerRootSetter.set(this, loader);
     }
 
     public void init(

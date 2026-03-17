@@ -1,9 +1,8 @@
 package io.github.knightmareleon.shared.ui.controls;
 
-import java.io.IOException;
-
 import org.kordamp.ikonli.javafx.FontIcon;
 
+import io.github.knightmareleon.shared.utils.ControllerRootSetter;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
@@ -18,7 +17,7 @@ public class SetCardForm extends HBox{
     @FXML private Label questionLabel;
     @FXML private IconButton actionsButton;
 
-    private String iconLiteral;
+    private final String iconLiteral;
     private String title;
     private String subject;
     private int totalQuestions;
@@ -31,17 +30,11 @@ public class SetCardForm extends HBox{
         this.subject = subject;
         this.totalQuestions = totalQuestions;
 
-        FXMLLoader loader;
-        loader = new FXMLLoader(
+        FXMLLoader loader = new FXMLLoader(
                 getClass().getResource("SetCardForm.fxml")
         );
-        loader.setRoot(this);
-        loader.setController(this);
-        try {
-            loader.load();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        
+        ControllerRootSetter.set(this, loader);
     }
 
     @FXML

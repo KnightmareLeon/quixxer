@@ -64,6 +64,7 @@ io\github\knightmareleon\features\settings\SettingsModel.class
 io\github\knightmareleon\features\sets\components\constants\SetsPageURL.class
 io\github\knightmareleon\features\test\components\TestDataReceiver.class
 io\github\knightmareleon\features\sets\components\controls\IdentificationQuestionDetail.class
+io\github\knightmareleon\shared\utils\ControllerRootSetter.class
 io\github\knightmareleon\shared\utils\Result.class
 io\github\knightmareleon\features\test\components\pages\TestPlayerController.class
 io\github\knightmareleon\shared\exceptions\DataAccessException.class
