@@ -9,6 +9,7 @@ public interface SetsDao {
     void save(StudySet studySet);
     boolean exists(String title, String subject);
     int totalRows();
+    int totalRowsByTest(TestType testType);
     List<StudySet> list(int limit, int offset);
     List<StudySet> listByTest(int limit, int offset, TestType testType);
     void delete(int studySetID);

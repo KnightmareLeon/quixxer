@@ -83,27 +83,35 @@ public class LocalSetsDao implements SetsDao{
     private final String SETS_WITH_ONE_ANSWER_LIST =
         String.format("""
         SELECT DISTINCT s_set.id, s_set.title, s_set.subject, s_set.imgpath, s_set.total_takes, 
-        s_set.created_on, s_set.last_taken_on FROM
-        %s s_set 
-        INNER JOIN %s std_q ON s_set.id = std_q.set_id
-        INNER JOIN %s ON std_q.id = choice.q_id
-        WHERE std_q.type = 0 AND choice.answer = 1
-        GROUP BY s_set.id, std_q.id
-        HAVING COUNT(std_q.id) = 1
-        LIMIT ? OFFSET ?;
+        s_set.created_on, s_set.last_taken_on 
+        FROM %s s_set 
+        JOIN %s std_q 
+            ON s_set.id = std_q.set_id
+        WHERE std_q.type = 0
+        AND EXISTS (
+            SELECT 1
+            FROM %s c
+            WHERE c.q_id = std_q.id
+            GROUP BY c.q_id
+            HAVING SUM(c.answer = 1) = 1
+        ) LIMIT ? OFFSET ?;
         """, this.SET_TABLE_NAME, this.STD_QUESTION_TABLE_NAME, this.CHOICE_TABLE_NAME);
     
     private final String SETS_MULTIPLE_CHOICE_LIST =
         String.format("""
-        SELECT s_set.id, s_set.title, s_set.subject, s_set.imgpath, s_set.total_takes, 
-        s_set.created_on, s_set.last_taken_on FROM
-        %s s_set 
-        INNER JOIN %s std_q ON s_set.id = std_q.set_id
-        INNER JOIN %s ON std_q.id = choice.q_id
+        SELECT DISTINCT s_set.id, s_set.title, s_set.subject, s_set.imgpath, s_set.total_takes, 
+        s_set.created_on, s_set.last_taken_on 
+        FROM %s s_set
+        JOIN %s std_q 
+            ON s_set.id = std_q.set_id
         WHERE std_q.type = 0
-        GROUP BY s_set.id, std_q.id
-        HAVING COUNT(choice.q_id) > 1
-        LIMIT ? OFFSET ?;
+        AND EXISTS (
+            SELECT 1
+            FROM %s c
+            WHERE c.q_id = std_q.id
+            GROUP BY c.q_id
+            HAVING COUNT(*) > 1
+        ) LIMIT ? OFFSET ?;
         """, this.SET_TABLE_NAME, this.STD_QUESTION_TABLE_NAME, this.CHOICE_TABLE_NAME);
 
     private final String ENUM_QUESTION_LIST =
@@ -135,6 +143,50 @@ public class LocalSetsDao implements SetsDao{
     private final String DELETE_SET =
         "DELETE FROM " + this.SET_TABLE_NAME + 
         " WHERE id = ?";
+    
+    private final String TOTAL_SETS_WITH_TOF_ONLY =
+        "SELECT COUNT(DISTINCT s_set.id) AS total " +
+        "FROM " + this.SET_TABLE_NAME + " s_set INNER JOIN " + this.TOF_QUESTION_TABLE_NAME +
+        " ON s_set.id = tof_question.set_id";
+
+    private final String TOTAL_SETS_WITH_ENUM_ONLY = 
+        "SELECT COUNT(DISTINCT s_set.id) AS total FROM " +
+        this.SET_TABLE_NAME + " s_set INNER JOIN " +  this.STD_QUESTION_TABLE_NAME + 
+        " std_q ON s_set.id = std_q.set_id WHERE std_q.type = 1 ";
+    
+    private final String TOTAL_SETS_WITH_ONE_ANSWER_ONLY =
+    String.format("""
+        SELECT COUNT(id) FROM(
+        SELECT DISTINCT s_set.id
+        FROM %s s_set 
+        JOIN %s std_q 
+            ON s_set.id = std_q.set_id
+        WHERE std_q.type = 0
+        AND EXISTS (
+            SELECT 1
+            FROM %s c
+            WHERE c.q_id = std_q.id
+            GROUP BY c.q_id
+            HAVING SUM(c.answer = 1) = 1
+        )) AS total;
+    """, this.SET_TABLE_NAME, this.STD_QUESTION_TABLE_NAME, this.CHOICE_TABLE_NAME);
+
+    private final String TOTAL_SETS_WITH_MULTIPLE_CHOICE =
+    String.format("""
+        SELECT COUNT(id) FROM(
+        SELECT DISTINCT s_set.id
+        FROM %s s_set
+        JOIN %s std_q 
+            ON s_set.id = std_q.set_id
+        WHERE std_q.type = 0
+        AND EXISTS (
+            SELECT 1
+            FROM %s c
+            WHERE c.q_id = std_q.id
+            GROUP BY c.q_id
+            HAVING COUNT(*) > 1
+        )) AS total;
+    """, this.SET_TABLE_NAME, this.STD_QUESTION_TABLE_NAME, this.CHOICE_TABLE_NAME);
 
     public LocalSetsDao(Connection connection) {
         this.connection = connection;
@@ -665,6 +717,29 @@ public class LocalSetsDao implements SetsDao{
             case TestType.TRUE_OR_FALSE -> this.listTrueOrFalseSets(limit, offset);
             default -> throw new IllegalArgumentException("Test not supported.");
         };
+    }
+
+    @Override
+    @SuppressWarnings("CallToPrintStackTrace")
+    public int totalRowsByTest(TestType testType){
+        try {
+            PreparedStatement totalStatement = this.connection.prepareStatement(
+                switch(testType){
+                    case TestType.ENUMERATION -> this.TOTAL_SETS_WITH_ENUM_ONLY;
+                    case TestType.FLASHCARD -> this.TOTAL_SETS_WITH_ONE_ANSWER_ONLY;
+                    case TestType.MATCHING_TYPE -> this.TOTAL_SETS_WITH_ONE_ANSWER_ONLY;
+                    case TestType.MULTIPLE_CHOICE -> this.TOTAL_SETS_WITH_MULTIPLE_CHOICE;
+                    case TestType.TRUE_OR_FALSE -> this.TOTAL_SETS_WITH_TOF_ONLY;
+                    default -> this.TOTAL_ROWS;
+                }
+            );
+
+            ResultSet totalSet = totalStatement.executeQuery();
+            return (int)totalSet.getLong(1);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new DataAccessException("Failed to get total number of rows", e);
+        }
     }
 
     @Override

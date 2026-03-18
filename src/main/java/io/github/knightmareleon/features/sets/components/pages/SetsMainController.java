@@ -8,7 +8,7 @@ import io.github.knightmareleon.features.sets.components.SetsNavigator;
 import io.github.knightmareleon.features.sets.components.constants.SetsPageURL;
 import io.github.knightmareleon.shared.models.StudySet;
 import io.github.knightmareleon.shared.ui.controls.IconToggleButton;
-import io.github.knightmareleon.shared.ui.controls.Pagination;
+import io.github.knightmareleon.shared.ui.controls.Paginator;
 import io.github.knightmareleon.shared.ui.controls.SetCardForm;
 import io.github.knightmareleon.shared.ui.controls.SetListForm;
 import io.github.knightmareleon.shared.ui.controls.SetsLister;
@@ -27,7 +27,7 @@ public class SetsMainController implements SetsPage{
     @FXML private IconToggleButton cardViewButton;
     @FXML private IconToggleButton listViewButton;
 
-    @FXML private Pagination pagination;
+    @FXML private Paginator pagination;
     private int currentPage = 1;
 
     public SetsMainController(SetsService setsService){

@@ -20,9 +20,13 @@
         fx:id="prevPageButton" 
         text="&lt;"
         styleClass="standard-font,component-standard-bg"/>
-    <NaturalNumberField fx:id="pageField"/>
+    <NaturalNumberField 
+        fx:id="pageField"
+        styleClass="standard-font"
+        style="-fx-text-fill: black !important"/>
     <Label 
-        fx:id="totalPageLabel"/>
+        fx:id="totalPageLabel"
+        styleClass="standard-font"/>
     <Button
         fx:id="nextPageButton"
         text="&gt;"

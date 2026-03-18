@@ -10,7 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 
-public class Pagination extends HBox{
+public class Paginator extends HBox{
     
     @FXML private Button firstPageButton;
     @FXML private Button prevPageButton;
@@ -21,10 +21,10 @@ public class Pagination extends HBox{
 
     private int totalPages;
     @SuppressWarnings("LeakingThisInConstructor")
-    public Pagination(){
+    public Paginator(){
 
         FXMLLoader loader = new FXMLLoader(
-            getClass().getResource("Pagination.fxml")
+            getClass().getResource("Paginator.fxml")
         );
         ControllerRootSetter.set(this, loader);
         

@@ -12,7 +12,7 @@
 <?import io.github.knightmareleon.shared.ui.controls.IconButton?>
 <?import io.github.knightmareleon.shared.ui.controls.IconToggleButton?>
 <?import io.github.knightmareleon.shared.ui.controls.SetsLister?>
-
+<?import io.github.knightmareleon.shared.ui.controls.Paginator?>
 <VBox xmlns:fx="http://javafx.com/fxml/1"
     fx:controller="io.github.knightmareleon.features.test.components.pages.TestSetsPickerController"
     fx:id="vbox"
@@ -58,5 +58,8 @@
         </HBox>
     </HBox>
     <SetsLister 
-        fx:id="setsLister" />
+        fx:id="setsLister"
+        VBox.vgrow="ALWAYS"/>
+    <Paginator
+        fx:id="paginator"/>
 </VBox>

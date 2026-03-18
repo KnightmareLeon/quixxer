@@ -14,7 +14,6 @@ io\github\knightmareleon\shared\ui\controls\IconToggleButton.class
 io\github\knightmareleon\features\sets\components\constants\SetsConstants.class
 io\github\knightmareleon\features\sets\components\controls\TrueOrFalseQuestionDetail.class
 io\github\knightmareleon\features\sets\components\pages\SetsMainController.class
-io\github\knightmareleon\shared\ui\controls\Pagination.class
 io\github\knightmareleon\features\sets\components\SetsNavigator.class
 io\github\knightmareleon\features\test\components\pages\TestSetupController.class
 io\github\knightmareleon\shared\infrastructure\database\DatabaseManager.class
@@ -63,6 +62,7 @@ io\github\knightmareleon\shared\infrastructure\database\SchemaInitializer.class
 io\github\knightmareleon\shared\ui\controls\IconButton.class
 io\github\knightmareleon\features\settings\SettingsModel.class
 io\github\knightmareleon\features\sets\components\constants\SetsPageURL.class
+io\github\knightmareleon\shared\ui\controls\Paginator.class
 io\github\knightmareleon\features\test\components\TestDataReceiver.class
 io\github\knightmareleon\features\sets\components\controls\IdentificationQuestionDetail.class
 io\github\knightmareleon\shared\utils\ControllerRootSetter.class
