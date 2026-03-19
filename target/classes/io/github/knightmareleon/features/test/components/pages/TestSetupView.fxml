@@ -83,6 +83,10 @@
         text="Shuffled"
         fx:id="shuffleToggleButton"
         styleClass="component-standard-bg,white-border,standard-font"/>
+    <ToggleButton
+        text="Continuous"
+        fx:id="continuousToggleButton"
+        styleClass="component-standard-bg,white-border,standard-font"/>
     <Region VBox.vgrow="ALWAYS"/>
     <Button
         text="Start"

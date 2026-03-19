@@ -1,9 +1,13 @@
 package io.github.knightmareleon.features.test.components.pages;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import io.github.knightmareleon.features.test.components.TestDataReceiver;
 import io.github.knightmareleon.features.test.components.TestNavigator;
 import io.github.knightmareleon.features.test.components.constants.TestPageURL;
 import io.github.knightmareleon.features.test.components.constants.TestType;
+import io.github.knightmareleon.shared.models.Choice;
 import io.github.knightmareleon.shared.models.Question;
 import io.github.knightmareleon.shared.models.TestData;
 import io.github.knightmareleon.shared.ui.controls.StandardAlert;
@@ -19,6 +23,10 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
+import javafx.scene.text.TextFlow;
 
 public class TestPlayerController implements TestPage, TestDataReceiver{
 
@@ -73,7 +81,52 @@ public class TestPlayerController implements TestPage, TestDataReceiver{
         Transitions.timelineTransition(this.incorrectProgressBar.progressProperty(), incorrectProgress, transitionDuration);
         correctProgressBar.setProgress(correctProgress);
         incorrectProgressBar.setProgress(incorrectProgress);
-        this.handleNextQuestion(currentIndex + 1);
+        if(!this.testData.isContinuous()){
+            this.showQuestionResult(question, correct, currentIndex);
+        } else {
+            this.handleNextQuestion(currentIndex + 1);
+        }
+    }
+
+    private void showQuestionResult(Question question, boolean correct, int currentIndex){
+        Text correctText = new Text(correct ? "You are correct!\n" : "Sadly, you missed it!\n");
+        correctText.getStyleClass().add("standard-font");
+        correctText.setFill(Color.WHITE);
+        List<Choice> allCorrectAnswer = new ArrayList<>();
+        for(Choice choice: question.getChoices()){
+            if(choice.isAnswer()){
+                allCorrectAnswer.add(choice);
+            }
+        }
+
+        Text correctAnswersHeaderText = new Text(allCorrectAnswer.size() < 2 ?
+            "The correct answer is:\n" :
+            "The correct answers are:\n" 
+        );
+        correctAnswersHeaderText.getStyleClass().add("standard-font");
+        correctAnswersHeaderText.setFill(Color.WHITE);
+        correctText.wrappingWidthProperty().bind(this.mainContentPane.widthProperty());
+        correctAnswersHeaderText.wrappingWidthProperty().bind(this.mainContentPane.widthProperty());
+        TextFlow questionResultContainer = new TextFlow(correctText, correctAnswersHeaderText);
+        for(Choice correctChoice : allCorrectAnswer){
+            Text correctAnswerText = new Text(correctChoice.getDescription() + "\n");
+            correctAnswerText.wrappingWidthProperty().bind(this.mainContentPane.widthProperty());
+            correctAnswerText.getStyleClass().add("standard-font");
+            correctAnswerText.setFill(Color.WHITE);
+            questionResultContainer.getChildren().add(correctAnswerText);
+        }
+        questionResultContainer.setTextAlignment(TextAlignment.CENTER);
+        questionResultContainer.getStyleClass().add("standard-font");
+        this.mainContentPane.setCenter(questionResultContainer);
+
+        Button nextButton = new Button("Next Question");
+        nextButton.getStyleClass().addAll("standard-font","component-standard-bg","border-radius-15");
+        nextButton.setMaxWidth(Double.MAX_VALUE);
+        nextButton.setOnAction(e -> {
+            this.handleNextQuestion(currentIndex + 1);
+        });
+        this.mainContentPane.setBottom(nextButton);
+
     }
 
     private void handleEnd(){

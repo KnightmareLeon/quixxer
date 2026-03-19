@@ -429,7 +429,7 @@ public class LocalSetsDao implements SetsDao{
                     QuestionType.TRUE_OR_FALSE,
                     List.of(
                         new Choice("True", answer),
-                        new Choice("False", answer)
+                        new Choice("False", !answer)
                     )
                 ));
             }

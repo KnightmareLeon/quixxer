@@ -37,6 +37,7 @@ public class TestSetupController implements TestPage, StudySetReceiver, TestType
 
     private final ToggleGroup timeToggleGroup = new ToggleGroup();
     @FXML private ToggleButton shuffleToggleButton;
+    @FXML private ToggleButton continuousToggleButton;
 
     @Override
     public void setTestNavigator(TestNavigator testNavigator) {
@@ -103,7 +104,8 @@ public class TestSetupController implements TestPage, StudySetReceiver, TestType
                 this.timeToggleButton.isSelected(), 
                 this.timeToggleButton.isSelected() ? 
                 ((ToggleButton)timeToggleGroup.getSelectedToggle()).getText() : null,
-                this.shuffleToggleButton.isSelected()
+                this.shuffleToggleButton.isSelected(),
+                this.continuousToggleButton.isSelected()
             );
             this.testNavigator.show(TestPageURL.PLAY, testData);
         }

@@ -13,16 +13,18 @@ public class TestData {
 
     private final boolean timed;
     private final String timeCategory;
+    private final boolean continuous;
 
     private int score = 0;
 
     public TestData(TestType type, StudySet studySet, int totalQuestionsUsed,
-                    boolean timed, String timeCategory, boolean shuffled){
+                    boolean timed, String timeCategory, boolean shuffled, boolean continuous){
         this.type = type;
         this.studySet = studySet;
         this.timed = timed;
         this.timeCategory = timeCategory;
         this.setQuestionsUsed(this.studySet.getQuestions(), shuffled, totalQuestionsUsed);
+        this.continuous = continuous;
     }
 
     private void setQuestionsUsed(List<Question> questionsList, boolean shuffled, int totalToBeUsed){
@@ -49,6 +51,10 @@ public class TestData {
 
     public void incrementScore(){
         this.score++;
+    }
+
+    public boolean isContinuous(){
+        return this.continuous;
     }
 
     public int getScore(){
