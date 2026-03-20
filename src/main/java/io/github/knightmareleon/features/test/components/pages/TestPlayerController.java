@@ -11,7 +11,9 @@ import io.github.knightmareleon.shared.models.Choice;
 import io.github.knightmareleon.shared.models.Question;
 import io.github.knightmareleon.shared.models.TestData;
 import io.github.knightmareleon.shared.ui.controls.StandardAlert;
+import io.github.knightmareleon.shared.utils.Converter;
 import io.github.knightmareleon.shared.utils.Transitions;
+import javafx.animation.AnimationTimer;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -22,6 +24,7 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -34,7 +37,9 @@ public class TestPlayerController implements TestPage, TestDataReceiver{
     private TestData testData;
 
     @FXML private Label testPlayerTitle;
+    @FXML private HBox mainContentHeader;
     @FXML private Label mainContentHeaderLabel;
+    private final Label timeLabel = new Label();
 
     @FXML private ProgressBar incorrectProgressBar;
     @FXML private ProgressBar correctProgressBar;
@@ -54,23 +59,64 @@ public class TestPlayerController implements TestPage, TestDataReceiver{
 
     private void initWithTestData(){
         this.testPlayerTitle.setText(this.testData.getStudySetTitle() + " Test");
+
+        if(this.testData.isTimed()){
+            Region space = new Region();
+            space.setMaxWidth(Double.MAX_VALUE);
+            HBox.setHgrow(space, Priority.ALWAYS);
+
+            this.timeLabel.getStyleClass().add("standard-font");
+            this.timeLabel.setText(this.testData.getTimeText());
+            this.mainContentHeader.getChildren().addAll(space,this.timeLabel);
+        }
+
         this.handleNextQuestion(0);
     }
 
     private void handleNextQuestion(int nextQuestionIndex){
+
         if(nextQuestionIndex > this.testData.getQuestionsUsed().size() - 1){
             handleEnd();
             return;
         }
+
         Question question = this.testData.getQuestionsUsed().get(nextQuestionIndex);
         Label questionLabel = new Label(question.getDescription());
+
         this.mainContentHeaderLabel.setText("Question " + (nextQuestionIndex + 1) );
         questionLabel.getStyleClass().add("standard-font");
         this.mainContentPane.setCenter(questionLabel);
-        this.addAnswerFields(question, nextQuestionIndex);
+
+        this.addAnswerFields(
+            question, 
+            nextQuestionIndex,
+            this.testData.isTimed() ?
+            new AnimationTimer() {
+                long lastRun = 0;
+                int currentSeconds = testData.getSeconds();
+
+                @Override
+                public void handle(long now){
+                    if (this.lastRun == 0) {this.lastRun = now;}
+                    if (((now - this.lastRun) / 1e9) >= 1){
+                        System.out.println(currentSeconds);
+                        this.lastRun = now;
+                        timeLabel.setText(
+                            Converter.minuteTextForm(--this.currentSeconds)
+                        );
+                    }
+                    if (this.currentSeconds == 0){
+                        handleQuestionResult(question, false, nextQuestionIndex, this);
+                    }
+                }
+            } : null
+        
+        );
+
     }
 
-    private void handleQuestionResult(Question question, boolean correct, int currentIndex){
+    private void handleQuestionResult(Question question, boolean correct, int currentIndex, AnimationTimer timer){
+        if(timer != null) timer.stop();
         if(correct) this.testData.incrementScore();
         final int currentScore = this.testData.getScore();
         final double correctProgress = (double)currentScore / this.testData.getQuestionsUsed().size();
@@ -84,6 +130,7 @@ public class TestPlayerController implements TestPage, TestDataReceiver{
         if(!this.testData.isContinuous()){
             this.showQuestionResult(question, correct, currentIndex);
         } else {
+            if (this.testData.isTimed()) this.timeLabel.setText(this.testData.getTimeText());
             this.handleNextQuestion(currentIndex + 1);
         }
     }
@@ -92,6 +139,7 @@ public class TestPlayerController implements TestPage, TestDataReceiver{
         Text correctText = new Text(correct ? "You are correct!\n" : "Sadly, you missed it!\n");
         correctText.getStyleClass().add("standard-font");
         correctText.setFill(Color.WHITE);
+
         List<Choice> allCorrectAnswer = new ArrayList<>();
         for(Choice choice: question.getChoices()){
             if(choice.isAnswer()){
@@ -107,6 +155,7 @@ public class TestPlayerController implements TestPage, TestDataReceiver{
         correctAnswersHeaderText.setFill(Color.WHITE);
         correctText.wrappingWidthProperty().bind(this.mainContentPane.widthProperty());
         correctAnswersHeaderText.wrappingWidthProperty().bind(this.mainContentPane.widthProperty());
+
         TextFlow questionResultContainer = new TextFlow(correctText, correctAnswersHeaderText);
         for(Choice correctChoice : allCorrectAnswer){
             Text correctAnswerText = new Text(correctChoice.getDescription() + "\n");
@@ -123,6 +172,7 @@ public class TestPlayerController implements TestPage, TestDataReceiver{
         nextButton.getStyleClass().addAll("standard-font","component-standard-bg","border-radius-15");
         nextButton.setMaxWidth(Double.MAX_VALUE);
         nextButton.setOnAction(e -> {
+            if(this.testData.isTimed()) this.timeLabel.setText(this.testData.getTimeText());
             this.handleNextQuestion(currentIndex + 1);
         });
         this.mainContentPane.setBottom(nextButton);
@@ -131,13 +181,14 @@ public class TestPlayerController implements TestPage, TestDataReceiver{
 
     private void handleEnd(){
         Transitions.timelineTransition(this.mainContentHeaderLabel.textProperty(), "Test Results", 0.5);
+        if(this.testData.isTimed()) this.timeLabel.setText(null);
         Label scoreLabel = new Label("Final Score: " + this.testData.getScore());
         scoreLabel.getStyleClass().add("standard-font");
         this.mainContentPane.setCenter(scoreLabel);
         this.mainContentPane.setBottom(null);
     }
 
-    private void addAnswerFields(Question question, int currentIndex){
+    private void addAnswerFields(Question question, int currentIndex, AnimationTimer timer){
         switch(this.testData.getType()){
             case TestType.TRUE_OR_FALSE -> {
                 
@@ -145,17 +196,22 @@ public class TestPlayerController implements TestPage, TestDataReceiver{
                 ToggleButton trueButton = new ToggleButton("True");
                 ToggleButton falseButton = new ToggleButton("False");
                 ToggleGroup trueFalseGroup = new ToggleGroup();
+
                 trueButton.setToggleGroup(trueFalseGroup);
                 falseButton.setToggleGroup(trueFalseGroup);
+
                 HBox.setHgrow(trueButton, Priority.ALWAYS);
                 HBox.setHgrow(falseButton, Priority.ALWAYS);
+
                 trueButton.getStyleClass().addAll("standard-font","component-standard-bg","border-radius-15","white-border");
                 falseButton.getStyleClass().addAll("standard-font","component-standard-bg","border-radius-15","white-border");
                 trueButton.setMaxWidth(Double.MAX_VALUE);
                 falseButton.setMaxWidth(Double.MAX_VALUE);
+
                 trueFalseContainer.getChildren().addAll(trueButton,falseButton);
                 trueFalseContainer.setFillHeight(true);
                 trueFalseContainer.setSpacing(24);
+
                 Button submitButton = new Button("Submit");
                 submitButton.getStyleClass().addAll("standard-font","component-standard-bg","border-radius-15");
                 submitButton.setMaxWidth(Double.MAX_VALUE);
@@ -171,16 +227,21 @@ public class TestPlayerController implements TestPage, TestDataReceiver{
                             question,
                             (trueFalseGroup.getSelectedToggle() == trueButton) ==
                             (question.getChoices().get(0).isAnswer()),
-                            currentIndex
+                            currentIndex,
+                            timer
                         );
                     }
                 });
+
                 VBox answerFieldContainer = new VBox(24, trueFalseContainer, submitButton);
                 answerFieldContainer.setFillWidth(true);
                 this.mainContentPane.setBottom(answerFieldContainer);
                 Transitions.standardFadeTransition(answerFieldContainer);
             }
         }
+
+        if(this.testData.isTimed()) timer.start();
+        
     }
 
     @FXML

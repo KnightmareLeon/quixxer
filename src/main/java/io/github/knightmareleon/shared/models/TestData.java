@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.github.knightmareleon.features.test.components.constants.TestType;
+import io.github.knightmareleon.shared.constants.TimeSetting;
 
 public class TestData {
     private final TestType type;
@@ -12,17 +13,17 @@ public class TestData {
     private List<Question> questionsUsed;
 
     private final boolean timed;
-    private final String timeCategory;
+    private final TimeSetting timeSetting;
     private final boolean continuous;
 
     private int score = 0;
 
     public TestData(TestType type, StudySet studySet, int totalQuestionsUsed,
-                    boolean timed, String timeCategory, boolean shuffled, boolean continuous){
+                    boolean timed, TimeSetting timeSetting, boolean shuffled, boolean continuous){
         this.type = type;
         this.studySet = studySet;
         this.timed = timed;
-        this.timeCategory = timeCategory;
+        this.timeSetting = timeSetting;
         this.setQuestionsUsed(this.studySet.getQuestions(), shuffled, totalQuestionsUsed);
         this.continuous = continuous;
     }
@@ -45,8 +46,12 @@ public class TestData {
         return this.timed;
     }
 
-    public String getTimeCategory(){
-        return this.timeCategory;
+    public String getTimeText(){
+        return this.timeSetting.text();
+    }
+
+    public int getSeconds(){
+        return this.timeSetting.seconds();
     }
 
     public void incrementScore(){

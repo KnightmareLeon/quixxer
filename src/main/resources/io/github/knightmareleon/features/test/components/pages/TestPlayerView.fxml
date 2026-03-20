@@ -45,7 +45,13 @@
             styleClass="scoreBar"
             style="-fx-accent: green"/>
     </StackPane>
-    <Label fx:id="mainContentHeaderLabel" styleClass="standard-header-font"/>
+    <HBox
+        fillHeight="true"
+        fx:id="mainContentHeader">
+        <Label 
+            fx:id="mainContentHeaderLabel" 
+            styleClass="standard-header-font"/>
+    </HBox>
     <BorderPane
         fx:id="mainContentPane"
         VBox.vgrow="ALWAYS">

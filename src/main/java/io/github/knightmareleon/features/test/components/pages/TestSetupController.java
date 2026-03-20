@@ -10,6 +10,7 @@ import io.github.knightmareleon.shared.models.StudySet;
 import io.github.knightmareleon.shared.models.TestData;
 import io.github.knightmareleon.shared.ui.controls.NaturalNumberField;
 import io.github.knightmareleon.shared.ui.controls.StandardAlert;
+import io.github.knightmareleon.shared.utils.Converter;
 import io.github.knightmareleon.shared.utils.StudySetReceiver;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -78,6 +79,12 @@ public class TestSetupController implements TestPage, StudySetReceiver, TestType
         threeMinButton.setToggleGroup(this.timeToggleGroup);
         fiveMinButton.setToggleGroup(this.timeToggleGroup);
         tenMinButton.setToggleGroup(this.timeToggleGroup);
+        timeToggleGroup.selectedToggleProperty().addListener((obsVal, oldVal, newVal) -> {
+            if (newVal == null) {
+                oldVal.setSelected(true);
+            }
+        });
+        thirtySecButton.setSelected(true);
     }
 
     private void onTimeSelected(boolean selected){
@@ -103,7 +110,9 @@ public class TestSetupController implements TestPage, StudySetReceiver, TestType
                 Integer.parseInt(this.totalQuestions.getText()), 
                 this.timeToggleButton.isSelected(), 
                 this.timeToggleButton.isSelected() ? 
-                ((ToggleButton)timeToggleGroup.getSelectedToggle()).getText() : null,
+                Converter.toTimeSetting(
+                    ((ToggleButton)timeToggleGroup.getSelectedToggle()).getText()
+                ) : null,
                 this.shuffleToggleButton.isSelected(),
                 this.continuousToggleButton.isSelected()
             );

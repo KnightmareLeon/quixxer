@@ -22,6 +22,7 @@ io\github\knightmareleon\RootController.class
 io\github\knightmareleon\shared\models\Choice.class
 io\github\knightmareleon\shared\ui\controls\SetListForm.class
 io\github\knightmareleon\features\test\components\pages\TestMainController.class
+io\github\knightmareleon\shared\utils\Converter.class
 io\github\knightmareleon\features\sets\SetsController.class
 io\github\knightmareleon\features\test\components\pages\TestPage.class
 io\github\knightmareleon\features\sets\components\tabs\SetQuestionsTab$1.class
@@ -45,9 +46,11 @@ io\github\knightmareleon\features\dashboard\DashboardModel.class
 io\github\knightmareleon\features\sets\components\tabs\SetDetailsTab.class
 io\github\knightmareleon\shared\infrastructure\navigator\BaseTabNavigator.class
 io\github\knightmareleon\features\dashboard\DashboardDAO.class
+io\github\knightmareleon\features\test\components\pages\TestPlayerController$2.class
 io\github\knightmareleon\features\sets\components\pages\SetDetailsController.class
 io\github\knightmareleon\shared\models\StudySet.class
 io\github\knightmareleon\shared\daos\LocalSetsDao.class
+io\github\knightmareleon\shared\constants\TimeSetting.class
 io\github\knightmareleon\features\test\components\TestNavigator.class
 io\github\knightmareleon\features\settings\SettingsDAO.class
 io\github\knightmareleon\shared\ui\controls\StandardAlert.class
