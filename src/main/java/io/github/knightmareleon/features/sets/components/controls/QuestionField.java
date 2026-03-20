@@ -48,8 +48,7 @@ public class QuestionField extends VBox{
     @SuppressWarnings("LeakingThisInConstructor")
     public QuestionField() {
 
-        FXMLLoader loader;
-        loader = new FXMLLoader(
+        FXMLLoader loader = new FXMLLoader(
                 getClass().getResource("QuestionField.fxml")
         );
         ControllerRootSetter.set(this, loader);

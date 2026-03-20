@@ -21,6 +21,7 @@
     fx:id="vbox"
     alignment="CENTER"
     style="-fx-border-radius: 53; -fx-background-radius: 53;"
+    stylesheets="/io/github/knightmareleon/css/error.css"
     spacing="24"
     fillWidth="true">
     <HBox 
