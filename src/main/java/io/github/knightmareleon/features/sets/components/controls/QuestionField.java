@@ -1,10 +1,10 @@
 package io.github.knightmareleon.features.sets.components.controls;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import io.github.knightmareleon.shared.ui.controls.IconButton;
+import io.github.knightmareleon.shared.utils.ControllerRootSetter;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -30,19 +30,20 @@ public class QuestionField extends VBox{
     @FXML private TextArea question;
     @FXML private IconButton closeQuestionButton;
     @FXML private ComboBox<String> qTypePicker;
-    private ObservableList<String> qTypes = FXCollections.observableArrayList(
+
+    private final ObservableList<String> qTypes = FXCollections.observableArrayList(
         "Identification",
         "Enumeration", 
         "True or False"
     );
     @FXML private VBox choices;
-    @FXML private List<HBox> choiceRows = new ArrayList<>();
+    private final List<HBox> choiceRows = new ArrayList<>();
 
-    private ToggleGroup trueOrFalse = new ToggleGroup();
-    private RadioButton trueButton = new RadioButton("True");
-    private RadioButton falseButton = new RadioButton("False");
+    private final ToggleGroup trueOrFalse = new ToggleGroup();
+    private final RadioButton trueButton = new RadioButton("True");
+    private final RadioButton falseButton = new RadioButton("False");
 
-    @FXML private Button addChoiceButton = new Button();
+    @FXML private Button addChoiceButton;
 
     @SuppressWarnings("LeakingThisInConstructor")
     public QuestionField() {
@@ -51,13 +52,7 @@ public class QuestionField extends VBox{
         loader = new FXMLLoader(
                 getClass().getResource("QuestionField.fxml")
         );
-        loader.setRoot(this);
-        loader.setController(this);
-        try {
-            loader.load();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        ControllerRootSetter.set(this, loader);
     }
 
     @FXML
@@ -96,6 +91,10 @@ public class QuestionField extends VBox{
 
     @FXML
     private void addChoice(){
+        if (choiceRows.size() == 5 && 
+            this.qTypePicker.getValue().equals("Identification"))
+            return;
+
         HBox row = new HBox();
         TextField choiceField = new TextField();
         IconButton deleteChoiceField = new IconButton(
