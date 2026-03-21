@@ -1,12 +1,12 @@
-package io.github.knightmareleon.features.sets.components.constants;
+package io.github.knightmareleon.features.sets.constants;
 
 import io.github.knightmareleon.shared.constants.PageURL;
 
 public enum SetsPageURL implements PageURL{
     MAIN("/io/github/knightmareleon/features/sets/components/pages/SetsMainView.fxml"),
     CREATE("/io/github/knightmareleon/features/sets/components/pages/SetsCreateView.fxml"),
-    DETAILS("/io/github/knightmareleon/features/sets/components/pages/SetDetailsView.fxml");
-    ;
+    DETAILS("/io/github/knightmareleon/features/sets/components/pages/SetDetailsView.fxml"),
+    DETAILS_UPDATE("/io/github/knightmareleon/features/sets/components/pages/SetUpdateDetailsView.fxml");
 
     private final String url;
 

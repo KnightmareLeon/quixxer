@@ -1,18 +1,17 @@
 package io.github.knightmareleon.features.sets.components.tabs;
 
-import java.io.IOException;
-
 import io.github.knightmareleon.features.sets.components.controls.SetDetailsCard;
 import io.github.knightmareleon.shared.constants.QuestionType;
 import io.github.knightmareleon.shared.models.Question;
 import io.github.knightmareleon.shared.models.StudySet;
+import io.github.knightmareleon.shared.utils.ControllerRootSetter;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.VBox;
 
 public class SetDetailsTab extends VBox{
 
-    private StudySet studySet;
+    private final StudySet studySet;
 
     @FXML private SetDetailsCard subjectCard;
     @FXML private SetDetailsCard createdOnCard;
@@ -27,25 +26,18 @@ public class SetDetailsTab extends VBox{
 
         this.studySet = studySet;
 
-        FXMLLoader loader;
-        loader = new FXMLLoader(
+        FXMLLoader loader = new FXMLLoader(
                 getClass().getResource("SetDetailsTab.fxml")
         );
-        loader.setRoot(this);
-        loader.setController(this);
-        try {
-            loader.load();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        ControllerRootSetter.set(this, loader);
     }
 
     @FXML
     public void initialize(){
         this.subjectCard.setDataText(this.studySet.getSubject());
         this.createdOnCard.setDataText(this.studySet.getDateCreatedOn().toString());
-        this.lastTakenOnCard.setDataText(this.studySet.getDataLastTakeOn() == null ? 
-            "Not yet taken." : this.studySet.getDataLastTakeOn().toString());
+        this.lastTakenOnCard.setDataText(this.studySet.getDateLastTakeOn() == null ? 
+            "Not yet taken." : this.studySet.getDateLastTakeOn().toString());
         this.totalQuestionsCard.setDataText(this.studySet.getQuestions().size() + "");
         
         int identificationTotal = 0;

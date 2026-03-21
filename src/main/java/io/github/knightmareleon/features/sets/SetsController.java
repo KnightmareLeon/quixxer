@@ -1,7 +1,7 @@
 package io.github.knightmareleon.features.sets;
 
 import io.github.knightmareleon.features.sets.components.SetsNavigator;
-import io.github.knightmareleon.features.sets.components.constants.SetsPageURL;
+import io.github.knightmareleon.features.sets.constants.SetsPageURL;
 import io.github.knightmareleon.shared.infrastructure.AppContext;
 import javafx.fxml.FXML;
 import javafx.scene.layout.VBox;

@@ -11,6 +11,7 @@ import java.util.List;
 import io.github.knightmareleon.features.test.components.constants.TestType;
 import io.github.knightmareleon.shared.constants.QuestionType;
 import io.github.knightmareleon.shared.exceptions.DataAccessException;
+import io.github.knightmareleon.shared.exceptions.UniqueStudySetException;
 import io.github.knightmareleon.shared.models.Choice;
 import io.github.knightmareleon.shared.models.Question;
 import io.github.knightmareleon.shared.models.StudySet;
@@ -144,6 +145,11 @@ public class LocalSetsDao implements SetsDao{
         "DELETE FROM " + this.SET_TABLE_NAME + 
         " WHERE id = ?";
     
+    private final String UPDATE_SET_DETAILS =
+        "UPDATE " + this.SET_TABLE_NAME +
+        " SET title = ?, subject = ?" +
+        " WHERE id = ?";
+    
     private final String TOTAL_SETS_WITH_TOF_ONLY =
         "SELECT COUNT(DISTINCT s_set.id) AS total " +
         "FROM " + this.SET_TABLE_NAME + " s_set INNER JOIN " + this.TOF_QUESTION_TABLE_NAME +
@@ -205,8 +211,8 @@ public class LocalSetsDao implements SetsDao{
             stmt.setString(3, studySet.getimgpath());
             stmt.setString(4, studySet.getDateCreatedOn().toString());
             stmt.setString(5, 
-            studySet.getDataLastTakeOn() == null ? 
-                null : studySet.getDataLastTakeOn().toString()
+            studySet.getDateLastTakeOn() == null ? 
+                null : studySet.getDateLastTakeOn().toString()
             );
 
             stmt.executeUpdate();
@@ -290,6 +296,27 @@ public class LocalSetsDao implements SetsDao{
             throw new DataAccessException("Failed to save StudySet", e);
         }
 
+    }
+
+    @Override
+    @SuppressWarnings("CallToPrintStackTrace")
+    public void updateDetails(StudySet studySet){
+        try {
+            PreparedStatement stmt = this.connection.prepareStatement(
+                this.UPDATE_SET_DETAILS
+            );
+            stmt.setString(1, studySet.getTitle());
+            stmt.setString(2, studySet.getSubject());
+            stmt.setInt(3, studySet.getId());
+
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            if(e.getMessage().contains("UNIQUE constraint failed")) 
+                throw new UniqueStudySetException("Unique study set", e);
+            throw new DataAccessException("Failed to update StudySet", e);
+        } 
     }
 
     @Override

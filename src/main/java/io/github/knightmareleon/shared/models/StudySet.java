@@ -62,7 +62,7 @@ public class StudySet {
         return this.createdOn;
     }
 
-    public Instant getDataLastTakeOn(){
+    public Instant getDateLastTakeOn(){
         return this.lastTakeOn;
     }
 

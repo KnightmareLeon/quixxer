@@ -7,6 +7,7 @@ import io.github.knightmareleon.shared.models.StudySet;
 
 public interface SetsDao {
     void save(StudySet studySet);
+    void updateDetails(StudySet studySet);
     boolean exists(String title, String subject);
     int totalRows();
     int totalRowsByTest(TestType testType);

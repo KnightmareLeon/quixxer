@@ -3,8 +3,6 @@ C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightma
 C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\features\dashboard\DashboardDAO.java
 C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\features\dashboard\DashboardModel.java
 C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\features\dashboard\DashboardService.java
-C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\features\sets\components\constants\SetsConstants.java
-C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\features\sets\components\constants\SetsPageURL.java
 C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\features\sets\components\controls\BaseQuestionDetail.java
 C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\features\sets\components\controls\EnumerationQuestionDetail.java
 C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\features\sets\components\controls\IdentificationQuestionDetail.java
@@ -15,9 +13,12 @@ C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightma
 C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\features\sets\components\pages\SetsCreateController.java
 C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\features\sets\components\pages\SetsMainController.java
 C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\features\sets\components\pages\SetsPage.java
+C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\features\sets\components\pages\SetUpdateDetailsController.java
 C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\features\sets\components\SetsNavigator.java
 C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\features\sets\components\tabs\SetDetailsTab.java
 C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\features\sets\components\tabs\SetQuestionsTab.java
+C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\features\sets\constants\SetsConstants.java
+C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\features\sets\constants\SetsPageURL.java
 C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\features\sets\SetsController.java
 C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\features\sets\SetsService.java
 C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\features\settings\SettingsController.java
@@ -45,6 +46,7 @@ C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightma
 C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\shared\daos\LocalSetsDao.java
 C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\shared\daos\SetsDao.java
 C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\shared\exceptions\DataAccessException.java
+C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\shared\exceptions\UniqueStudySetException.java
 C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\shared\infrastructure\AppContext.java
 C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\shared\infrastructure\database\DatabaseManager.java
 C:\Users\Leonard\Documents\repos\github\quixxer\src\main\java\io\github\knightmareleon\shared\infrastructure\database\SchemaInitializer.java

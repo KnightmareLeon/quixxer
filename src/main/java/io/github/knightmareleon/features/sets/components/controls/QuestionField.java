@@ -195,6 +195,7 @@ public class QuestionField extends VBox{
     public void setErrorVisible(boolean visible){
         this.questionError.setVisible(visible);
         if(visible){
+            if(!this.getStyleClass().contains("error-border"))
             this.getStyleClass().add("error-border");
         } else {
             this.getStyleClass().remove("error-border");

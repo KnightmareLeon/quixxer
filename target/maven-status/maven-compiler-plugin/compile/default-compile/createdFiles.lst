@@ -11,7 +11,6 @@ io\github\knightmareleon\features\sets\components\pages\SetsPage.class
 io\github\knightmareleon\shared\models\TestData.class
 io\github\knightmareleon\shared\daos\SetsDao.class
 io\github\knightmareleon\shared\ui\controls\IconToggleButton.class
-io\github\knightmareleon\features\sets\components\constants\SetsConstants.class
 io\github\knightmareleon\features\sets\components\controls\TrueOrFalseQuestionDetail.class
 io\github\knightmareleon\features\sets\components\pages\SetsMainController.class
 io\github\knightmareleon\features\sets\components\SetsNavigator.class
@@ -37,11 +36,13 @@ io\github\knightmareleon\features\test\components\pages\TestSetsPickerController
 io\github\knightmareleon\features\sets\components\tabs\SetQuestionsTab.class
 io\github\knightmareleon\features\test\TestController.class
 io\github\knightmareleon\shared\daos\LocalSetsDao$1.class
+io\github\knightmareleon\features\sets\components\pages\SetUpdateDetailsController.class
 io\github\knightmareleon\shared\utils\Transitions.class
 io\github\knightmareleon\features\test\components\constants\TestPageURL.class
 io\github\knightmareleon\features\test\components\constants\TestType.class
 io\github\knightmareleon\features\settings\SettingsService.class
 io\github\knightmareleon\features\test\components\TestTypeReceiver.class
+io\github\knightmareleon\shared\exceptions\UniqueStudySetException.class
 io\github\knightmareleon\features\dashboard\DashboardModel.class
 io\github\knightmareleon\features\sets\components\tabs\SetDetailsTab.class
 io\github\knightmareleon\shared\infrastructure\navigator\BaseTabNavigator.class
@@ -64,10 +65,11 @@ io\github\knightmareleon\shared\models\Question.class
 io\github\knightmareleon\shared\infrastructure\database\SchemaInitializer.class
 io\github\knightmareleon\shared\ui\controls\IconButton.class
 io\github\knightmareleon\features\settings\SettingsModel.class
-io\github\knightmareleon\features\sets\components\constants\SetsPageURL.class
 io\github\knightmareleon\shared\ui\controls\Paginator.class
+io\github\knightmareleon\features\sets\constants\SetsConstants.class
 io\github\knightmareleon\features\test\components\TestDataReceiver.class
 io\github\knightmareleon\features\sets\components\controls\IdentificationQuestionDetail.class
+io\github\knightmareleon\features\sets\constants\SetsPageURL.class
 io\github\knightmareleon\shared\utils\ControllerRootSetter.class
 io\github\knightmareleon\shared\utils\Result.class
 io\github\knightmareleon\features\test\components\pages\TestPlayerController.class

@@ -5,7 +5,7 @@ import java.util.List;
 
 import io.github.knightmareleon.features.sets.SetsService;
 import io.github.knightmareleon.features.sets.components.SetsNavigator;
-import io.github.knightmareleon.features.sets.components.constants.SetsPageURL;
+import io.github.knightmareleon.features.sets.constants.SetsPageURL;
 import io.github.knightmareleon.shared.models.StudySet;
 import io.github.knightmareleon.shared.ui.controls.IconToggleButton;
 import io.github.knightmareleon.shared.ui.controls.Paginator;

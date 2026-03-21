@@ -4,9 +4,9 @@ import java.util.Optional;
 
 import io.github.knightmareleon.features.sets.SetsService;
 import io.github.knightmareleon.features.sets.components.SetsNavigator;
-import io.github.knightmareleon.features.sets.components.constants.SetsPageURL;
 import io.github.knightmareleon.features.sets.components.tabs.SetDetailsTab;
 import io.github.knightmareleon.features.sets.components.tabs.SetQuestionsTab;
+import io.github.knightmareleon.features.sets.constants.SetsPageURL;
 import io.github.knightmareleon.shared.models.StudySet;
 import io.github.knightmareleon.shared.ui.controls.IconToggleButton;
 import io.github.knightmareleon.shared.ui.controls.StandardAlert;
@@ -101,8 +101,14 @@ public class SetDetailsController extends VBox implements SetsPage, StudySetRece
         alert.setContentText("Are you sure you want to delete this?");
         Optional<ButtonType> alertResult = alert.showAndWait();
         if(alertResult.isPresent() && alertResult.get() == ButtonType.OK){
-            this.setsService.deleteStudyResult(this.studySet.getId());
+            this.setsService.deleteStudy(this.studySet.getId());
             navigator.show(SetsPageURL.MAIN);
         }
+    }
+
+    @FXML
+    @SuppressWarnings("unused")
+    private void onUpdateClicked(){
+        this.navigator.show(SetsPageURL.DETAILS_UPDATE, this.studySet);
     }
 }

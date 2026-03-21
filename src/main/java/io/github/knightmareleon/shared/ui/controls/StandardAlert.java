@@ -6,9 +6,11 @@ public class StandardAlert extends Alert {
     
     public StandardAlert(AlertType at) {
         super(at);
+
         this.getDialogPane().getStylesheets().add(
-                getClass().getResource("/io/github/knightmareleon/css/base.css").toExternalForm()
+            getClass().getResource("/io/github/knightmareleon/css/base.css").toExternalForm()
         );
+
         this.getDialogPane().getStyleClass().add("standard-alert");
     }
     

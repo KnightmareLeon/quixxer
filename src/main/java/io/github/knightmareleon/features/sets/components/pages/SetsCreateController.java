@@ -6,17 +6,15 @@ import java.util.Optional;
 
 import io.github.knightmareleon.features.sets.SetsService;
 import io.github.knightmareleon.features.sets.components.SetsNavigator;
-import io.github.knightmareleon.features.sets.components.constants.SetsConstants;
-import io.github.knightmareleon.features.sets.components.constants.SetsPageURL;
 import io.github.knightmareleon.features.sets.components.controls.QuestionField;
+import io.github.knightmareleon.features.sets.constants.SetsConstants;
+import io.github.knightmareleon.features.sets.constants.SetsPageURL;
 import io.github.knightmareleon.shared.constants.QuestionType;
 import io.github.knightmareleon.shared.models.Choice;
 import io.github.knightmareleon.shared.models.Question;
 import io.github.knightmareleon.shared.models.StudySet;
 import io.github.knightmareleon.shared.ui.controls.StandardAlert;
 import io.github.knightmareleon.shared.utils.Result;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
@@ -35,15 +33,6 @@ public class SetsCreateController implements SetsPage{
 
     @FXML private Label subjectErrorLabel;
     @FXML private ComboBox<String> subjectPicker;
-    private final ObservableList<String> subjects = FXCollections.observableArrayList(
-        "Computer Science",
-        "Physics",
-        "Biology",
-        "Chemistry",
-        "Geology",
-        "History",
-        "Language"
-    );
 
     @FXML private VBox questionContainer;
     private final List<QuestionField> questionFields = new ArrayList<>();
@@ -59,7 +48,7 @@ public class SetsCreateController implements SetsPage{
 
     @FXML
     public void initialize(){
-        this.subjectPicker.setItems(this.subjects);
+        this.subjectPicker.setItems(SetsConstants.SUBJECTS);
         this.addQuestion();
     }
 
@@ -120,16 +109,15 @@ public class SetsCreateController implements SetsPage{
         StudySet studySet = new StudySet(
             this.setTitle.getText(),
             this.subjectPicker.getValue(),
-            "default",
+            "default", //reminder to implement imgpath picker later
             questions
         );
 
         
         Result<StudySet> result = setsService.saveStudySet(studySet);
-        
+
         if(result.isSuccess()){
-            titleErrorLabel.setVisible(false);
-            subjectErrorLabel.setVisible(false);
+
             for(QuestionField questionField: this.questionFields){
                 questionField.setErrorVisible(false);
             }
@@ -145,69 +133,87 @@ public class SetsCreateController implements SetsPage{
             if(alertResult.isPresent() && alertResult.get() == ButtonType.OK){
                 navigator.show(SetsPageURL.MAIN);
             }
+            return;
+        } 
+
+        Alert alert = new StandardAlert(Alert.AlertType.ERROR);
+        alert.setTitle("Save Error");
+
+        String headerText;
+        String contentText;
+                
+        boolean missingTitle = false;
+        boolean missingSubject = false;
+        boolean missingQuestionFields = false;
+
+        if (result.getErrorMessages().get(0).equals(SetsConstants.DATABASE_ERROR)){
+            headerText = "Database Error.";
+            contentText = "An error occured in the database.";
         } else {
-            Alert alert = new StandardAlert(Alert.AlertType.ERROR);
-            alert.setTitle("Save Error");
 
-            String headerText = "";
-            String contentText = "";
+            List<String> headerStrings = new ArrayList<>();
+            List<String> contentStrings = new ArrayList<>();
 
-            if (!result.getErrorMessages().get(0).equals("Database error.")){
+            int errorIndex = 0;
 
-                boolean missingFields = false;
-
-                int index = 0;
-
-                boolean titleError = errorExists(result.getErrorMessages(), SetsConstants.MISSING_TITLE_ERROR);
-                titleErrorLabel.setVisible(titleError);
-                if(titleError) {index++; missingFields = true;}
-
-                boolean subjectError = errorExists(result.getErrorMessages(), SetsConstants.MISSING_SUBJECT_ERROR);
-                subjectErrorLabel.setVisible(subjectError);
-                if(subjectError){index++; missingFields = true;}
-
-                if(errorExists(result.getErrorMessages(), SetsConstants.DUPLICATE_STUDY_SET_ERROR)){
-                    index++;
-                    headerText += "Duplicate Study Set";
-                    contentText += "Combination of study set title and subject name already exits. Please try another one.";
-                }
-
-                int qIndex = 0;
-
-                for(int i = index; i < result.getErrorMessages().size(); i++){
-                    int qErrorIndex = Integer.parseInt(result.getErrorMessages().get(i));
-                    while(qIndex < qErrorIndex){
-                        this.questionFields.get(qIndex++).setErrorVisible(false);
-                    }
-                    qIndex = qErrorIndex + 1;
-                    this.questionFields.get(qErrorIndex).setErrorVisible(true);
-                    missingFields = true;
-                    }
-                    
-
-                if(missingFields){
-                    headerText += "Missing required fields.";
-                    contentText += "Please fill in all required fields.";
-                }
-
-            } else {
-                headerText += "Database Error.";
-                contentText += "An error occured in the database.";
+            missingTitle = errorExists(result.getErrorMessages(), SetsConstants.MISSING_TITLE_ERROR);
+            if(missingTitle) {
+                errorIndex++;
+                contentStrings.add("Please fill in the Set Title field.");
             }
 
-            alert.setHeaderText(headerText);
-            alert.setContentText(contentText);
-            alert.showAndWait();
+            missingSubject = errorExists(result.getErrorMessages(), SetsConstants.MISSING_SUBJECT_ERROR);
+            if(missingSubject) {
+                errorIndex++;
+                contentStrings.add("Please fill in the Subject field.");
+            }
+
+            if(errorExists(result.getErrorMessages(), SetsConstants.DUPLICATE_STUDY_SET_ERROR)){
+                errorIndex++;
+                headerStrings.add("Unique Study Set."); 
+                contentStrings.add(String.format(
+                    "Study Set %s with subject %s already exists"
+                    , studySet.getTitle(), studySet.getSubject()
+                ));
+            }
+
+            for(int i = 0; i < this.questionFields.size(); i++){
+                if(errorIndex > result.getErrorMessages().size() - 1) {
+                    this.questionFields.get(i).setErrorVisible(false);
+                    continue;
+                }
+                boolean hasError = Integer.parseInt(result.getErrorMessages().get(errorIndex)) == i;
+                if(hasError) {
+                    errorIndex++;
+                    contentStrings.add("Please fill in the required fields for Question #" + (i + 1));
+                    missingQuestionFields = true;
+                }
+                this.questionFields.get(i).setErrorVisible(hasError);
+            }
+
+            if (missingTitle || missingSubject || missingQuestionFields){
+                headerStrings.add("Missing required fields.");
+            }
+
+            headerText = String.join(",", headerStrings);
+            contentText = String.join("\n", contentStrings);
+
         }
+
+        titleErrorLabel.setVisible(missingTitle);
+        subjectErrorLabel.setVisible(missingSubject);
+
+        alert.setHeaderText(headerText);
+        alert.setContentText(contentText);
+        alert.showAndWait();
+
     }
 
     private boolean errorExists(List<String> errors, String errorTarget){
-        int limit = errors.size() > 4 ? 4 : errors.size();
+        int limit = errors.size() > 3 ? 3 : errors.size();
 
         for(int i = 0; i < limit; i++){
-            if(errors.get(i).equals(errorTarget)){
-                return true;
-            }
+            if(errors.get(i).equals(errorTarget)) return true;
         }
         return false;
     }

@@ -51,7 +51,8 @@
             styleClass="component-standard-bg"
             iconStyleClass="icon-base-color"
             minHeight="48"
-            minWidth="48"/>
+            minWidth="48"
+            onAction="#onUpdateClicked"/>
         <IconButton 
             iconLiteral="bi-trash-fill"
             styleClass="component-standard-bg"
