@@ -241,7 +241,6 @@ public class TestPlayerController implements TestPage, TestDataReceiver{
         }
 
         if(this.testData.isTimed()) timer.start();
-        
     }
 
     @FXML

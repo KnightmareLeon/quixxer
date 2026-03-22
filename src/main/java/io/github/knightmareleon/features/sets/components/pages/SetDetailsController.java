@@ -101,7 +101,7 @@ public class SetDetailsController extends VBox implements SetsPage, StudySetRece
         alert.setContentText("Are you sure you want to delete this?");
         Optional<ButtonType> alertResult = alert.showAndWait();
         if(alertResult.isPresent() && alertResult.get() == ButtonType.OK){
-            this.setsService.deleteStudy(this.studySet.getId());
+            this.setsService.deleteStudySet(this.studySet.getId());
             navigator.show(SetsPageURL.MAIN);
         }
     }

@@ -49,12 +49,12 @@
     <HBox 
     spacing="12"
     alignment="CENTER_LEFT">
-    <Label text="Set Title"
-        styleClass="standard-header-font"/>
-    <Label fx:id="titleErrorLabel"
-        text="*Please fill in this field."
-        styleClass="standard-font,error-font"
-        visible="false"/>
+        <Label text="Set Title"
+            styleClass="standard-header-font"/>
+        <Label fx:id="titleErrorLabel"
+            text="*Please fill in this field."
+            styleClass="standard-font,error-font"
+            visible="false"/>
     </HBox>
     <TextField
         fx:id="setTitle"

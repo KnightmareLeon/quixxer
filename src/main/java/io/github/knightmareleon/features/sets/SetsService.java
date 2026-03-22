@@ -25,7 +25,7 @@ public class SetsService {
         try {
             this.totalStudySets = this.setsDao.totalRows();
         } catch (DataAccessException e) {
-            
+
         }
     }
     
@@ -103,7 +103,7 @@ public class SetsService {
     }
 
 
-    public Result<String> deleteStudy(int studySetID){
+    public Result<String> deleteStudySet(int studySetID){
         try {
             this.setsDao.delete(studySetID);
             this.totalStudySets--;
