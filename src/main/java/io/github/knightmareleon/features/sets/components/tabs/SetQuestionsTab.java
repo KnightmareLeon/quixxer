@@ -10,6 +10,7 @@ import io.github.knightmareleon.shared.utils.ControllerRootSetter;
 import io.github.knightmareleon.shared.utils.Transitions;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.VBox;
 
@@ -41,17 +42,25 @@ public class SetQuestionsTab extends TabPane{
     public void initialize(){
         for(Question question: this.studySet.getQuestions()){
             switch(question.getType()){
-                case QuestionType.IDENTIFICATION -> identTab.getChildren().add(
+                case QuestionType.IDENTIFICATION -> 
+                    identTab.getChildren().add(
                         new IdentificationQuestionDetail(question)
                     );
-                case QuestionType.ENUMERATION -> enumTab.getChildren().add(
+                case QuestionType.ENUMERATION ->
+                    enumTab.getChildren().add(
                         new EnumerationQuestionDetail(question)
                     );
-                default -> { tofTab.getChildren().add(
+                default ->
+                    tofTab.getChildren().add(
                         new TrueOrFalseQuestionDetail(question)
                     );
-                }
             }
         }
+
+        final Button addNewIdentQuestion = new Button("Add New Idenitification Question");
+        final Button addNewEnumQuestion = new Button("Add New Enumeration Question");
+        final Button addNewTOFQuestion = new Button("Add New True or False Question");
+
+        
     }
 }

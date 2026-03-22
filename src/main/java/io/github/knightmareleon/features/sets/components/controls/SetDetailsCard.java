@@ -1,7 +1,6 @@
 package io.github.knightmareleon.features.sets.components.controls;
 
-import java.io.IOException;
-
+import io.github.knightmareleon.shared.utils.ControllerRootSetter;
 import javafx.beans.NamedArg;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,17 +19,10 @@ public class SetDetailsCard extends VBox{
 
         this.headerText = headerText;
 
-        FXMLLoader loader;
-        loader = new FXMLLoader(
+        FXMLLoader loader = new FXMLLoader(
                 getClass().getResource("SetDetailsCard.fxml")
         );
-        loader.setRoot(this);
-        loader.setController(this);
-        try {
-            loader.load();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        ControllerRootSetter.set(this, loader);
     }
 
     @FXML

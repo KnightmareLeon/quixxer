@@ -9,7 +9,7 @@ public class IdentificationQuestionDetail extends BaseQuestionDetail {
     public IdentificationQuestionDetail(Question question) {
         super(question);
     }
-    
+
     @Override
     public void setChoices(Question question){
         int index = 0;

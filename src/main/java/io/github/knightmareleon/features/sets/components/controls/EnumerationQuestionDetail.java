@@ -11,7 +11,7 @@ public class EnumerationQuestionDetail extends BaseQuestionDetail {
     public EnumerationQuestionDetail(Question question) {
         super(question);
     }
-    
+
     @Override
     public void setChoices(Question question){
         List<Choice> questionChoices = question.getChoices();

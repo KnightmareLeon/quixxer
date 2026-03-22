@@ -9,7 +9,6 @@ public class TrueOrFalseQuestionDetail extends BaseQuestionDetail {
         super(question);
     }
 
-
     @Override
     public void setChoices(Question question) {
         this.choiceLabels.add(new Label("True"));
@@ -18,5 +17,4 @@ public class TrueOrFalseQuestionDetail extends BaseQuestionDetail {
             "-fx-text-fill: green !important"
         );
     }
-    
 }

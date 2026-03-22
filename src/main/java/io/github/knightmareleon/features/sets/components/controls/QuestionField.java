@@ -3,6 +3,7 @@ package io.github.knightmareleon.features.sets.components.controls;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.github.knightmareleon.shared.constants.StandardStyleClass;
 import io.github.knightmareleon.shared.ui.controls.IconButton;
 import io.github.knightmareleon.shared.utils.ControllerRootSetter;
 import javafx.collections.FXCollections;
@@ -63,8 +64,8 @@ public class QuestionField extends VBox{
         this.falseButton.setToggleGroup(this.trueOrFalse);
         this.trueButton.setSelected(true);
 
-        this.trueButton.getStyleClass().add("standard-font");
-        this.falseButton.getStyleClass().add("standard-font");
+        this.trueButton.getStyleClass().add(StandardStyleClass.STANDARD_FONT);
+        this.falseButton.getStyleClass().add(StandardStyleClass.STANDARD_FONT);
 
         this.qTypePicker.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
             if(newVal.equals(oldVal)) {
@@ -98,7 +99,7 @@ public class QuestionField extends VBox{
         TextField choiceField = new TextField();
         IconButton deleteChoiceField = new IconButton(
             "dashicons-post-trash",
-            "icon-base-color"
+            StandardStyleClass.ICON_BASE_COLOR
         );
 
         row.setSpacing(6);
@@ -106,13 +107,17 @@ public class QuestionField extends VBox{
         row.setAlignment(Pos.CENTER);
 
         choiceField.setMinHeight(24);
-        choiceField.getStyleClass().addAll("border-radius-15","standard-font");
+        choiceField.getStyleClass().addAll(
+            StandardStyleClass.BORDER_RADIUS_15,
+            StandardStyleClass.STANDARD_FONT);
         choiceField.setStyle("-fx-text-fill: black !important");
         HBox.setHgrow(choiceField, Priority.ALWAYS);
 
         deleteChoiceField.setMinHeight(32);
         deleteChoiceField.setMinWidth(32);
-        deleteChoiceField.getStyleClass().add("icon-button-base-bg");
+        deleteChoiceField.getStyleClass().add(
+            StandardStyleClass.ICON_BUTTON_BASE_BG
+        );
 
         if(qTypePicker.getValue().equals("Identification")){
             CheckBox checkBox = new CheckBox();
@@ -194,8 +199,7 @@ public class QuestionField extends VBox{
 
     public void setErrorVisible(boolean visible){
         this.questionError.setVisible(visible);
-        if(visible){
-            if(!this.getStyleClass().contains("error-border"))
+        if(visible && !this.getStyleClass().contains("error-border")){
             this.getStyleClass().add("error-border");
         } else {
             this.getStyleClass().remove("error-border");

@@ -3,6 +3,7 @@ package io.github.knightmareleon.features.sets.components.controls;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.github.knightmareleon.shared.constants.StandardStyleClass;
 import io.github.knightmareleon.shared.models.Question;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
@@ -22,21 +23,26 @@ public abstract class BaseQuestionDetail extends VBox {
     private final Label questionLabel = new Label();
     protected final List<Label> choiceLabels = new ArrayList<>();
 
-
     public BaseQuestionDetail(Question question){
-        this.questionHeaderLabel.getStyleClass().add("standard-header-font");
-        this.choicesHeaderLabel.getStyleClass().add("standard-header-font");
+        this.questionHeaderLabel.getStyleClass().add(StandardStyleClass.STANDARD_HEADER_FONT);
+        this.choicesHeaderLabel.getStyleClass().add(StandardStyleClass.STANDARD_HEADER_FONT);
         this.questionHeaderLabel.setStyle("-fx-font-weight: bolder !important");
         this.choicesHeaderLabel.setStyle("-fx-font-weight: bolder !important");
 
         this.questionLabel.setText(question.getDescription());
-        this.questionLabel.getStyleClass().addAll("standard-font","set-standard-bg-no-hover");
+        this.questionLabel.getStyleClass().addAll(
+            StandardStyleClass.STANDARD_FONT,
+            StandardStyleClass.COMPONENT_BG_NO_HOVER
+        );
         this.questionLabel.setPadding(new Insets(6));
         this.questionLabel.setMaxWidth(Double.MAX_VALUE);
         this.initChoices(question);
         for(Label choiceLabel: this.choiceLabels){
-            choiceLabel.getStyleClass().add("standard-font");
-            choiceLabel.getStyleClass().addAll("standard-font","set-standard-bg-no-hover");
+            choiceLabel.getStyleClass().add(StandardStyleClass.STANDARD_FONT);
+            choiceLabel.getStyleClass().addAll(
+                StandardStyleClass.STANDARD_FONT,
+                StandardStyleClass.COMPONENT_BG_NO_HOVER
+            );
             choiceLabel.setPadding(new Insets(6));
             choiceLabel.setMaxWidth(Double.MAX_VALUE);
             choiceLabel.setBorder(new Border(
