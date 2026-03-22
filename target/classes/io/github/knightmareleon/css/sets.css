@@ -1,6 +1,0 @@
-.set-button {
-    -fx-cursor: hand;
-    transition: all 0.15s ease-in-out;
-    -fx-border-radius: 15;
-    -fx-background-radius: 15;
-}
