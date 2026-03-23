@@ -5,6 +5,7 @@ import java.util.List;
 
 import io.github.knightmareleon.shared.constants.StandardStyleClass;
 import io.github.knightmareleon.shared.models.Question;
+import javafx.beans.value.ObservableDoubleValue;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Border;
@@ -14,28 +15,31 @@ import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 
 public abstract class BaseQuestionDetail extends VBox {
     
     private final Label questionHeaderLabel = new Label("Question");
     private final Label choicesHeaderLabel = new Label("Choices");
 
-    private final Label questionLabel = new Label();
+    private final Text questionLabel = new Text();
     protected final List<Label> choiceLabels = new ArrayList<>();
 
-    public BaseQuestionDetail(Question question){
+    public BaseQuestionDetail(Question question, ObservableDoubleValue widthProperty){
         this.questionHeaderLabel.getStyleClass().add(StandardStyleClass.STANDARD_HEADER_FONT);
         this.choicesHeaderLabel.getStyleClass().add(StandardStyleClass.STANDARD_HEADER_FONT);
         this.questionHeaderLabel.setStyle("-fx-font-weight: bolder !important");
         this.choicesHeaderLabel.setStyle("-fx-font-weight: bolder !important");
 
         this.questionLabel.setText(question.getDescription());
-        this.questionLabel.getStyleClass().addAll(
-            StandardStyleClass.STANDARD_FONT,
-            StandardStyleClass.COMPONENT_BG_NO_HOVER
+        this.questionLabel.getStyleClass().add(
+            StandardStyleClass.STANDARD_FONT
         );
-        this.questionLabel.setPadding(new Insets(6));
-        this.questionLabel.setMaxWidth(Double.MAX_VALUE);
+        this.questionLabel.wrappingWidthProperty().bind(widthProperty);
+        this.questionLabel.setFill(Color.WHITE);
+        this.questionLabel.setTextAlignment(TextAlignment.JUSTIFY);
+
         this.initChoices(question);
         for(Label choiceLabel: this.choiceLabels){
             choiceLabel.getStyleClass().add(StandardStyleClass.STANDARD_FONT);

@@ -4,12 +4,13 @@ import java.util.List;
 
 import io.github.knightmareleon.shared.models.Choice;
 import io.github.knightmareleon.shared.models.Question;
+import javafx.beans.value.ObservableDoubleValue;
 import javafx.scene.control.Label;
 
 public class EnumerationQuestionDetail extends BaseQuestionDetail {
 
-    public EnumerationQuestionDetail(Question question) {
-        super(question);
+    public EnumerationQuestionDetail(Question question, ObservableDoubleValue widthProperty) {
+        super(question, widthProperty);
     }
 
     @Override

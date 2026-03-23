@@ -18,9 +18,9 @@ public class SetQuestionsTab extends TabPane{
     
     private final StudySet studySet;
 
-    @FXML private VBox identTab;
-    @FXML private VBox enumTab;
-    @FXML private VBox tofTab;
+    @FXML private VBox identContainer;
+    @FXML private VBox enumContainer;
+    @FXML private VBox tofContainer;
 
     @SuppressWarnings("LeakingThisInConstructor")
     public SetQuestionsTab(StudySet studySet) {
@@ -40,19 +40,29 @@ public class SetQuestionsTab extends TabPane{
 
     @FXML
     public void initialize(){
+        int paddingAdder = -64;
         for(Question question: this.studySet.getQuestions()){
             switch(question.getType()){
                 case QuestionType.IDENTIFICATION -> 
-                    identTab.getChildren().add(
-                        new IdentificationQuestionDetail(question)
+                    identContainer.getChildren().add(
+                        new IdentificationQuestionDetail(
+                            question,
+                            this.widthProperty().add(paddingAdder)
+                        )
                     );
                 case QuestionType.ENUMERATION ->
-                    enumTab.getChildren().add(
-                        new EnumerationQuestionDetail(question)
+                    enumContainer.getChildren().add(
+                        new EnumerationQuestionDetail(
+                            question,
+                            this.widthProperty().add(paddingAdder)
+                        )
                     );
                 default ->
-                    tofTab.getChildren().add(
-                        new TrueOrFalseQuestionDetail(question)
+                    tofContainer.getChildren().add(
+                        new TrueOrFalseQuestionDetail(
+                            question,
+                            this.widthProperty().add(paddingAdder)
+                        )
                     );
             }
         }

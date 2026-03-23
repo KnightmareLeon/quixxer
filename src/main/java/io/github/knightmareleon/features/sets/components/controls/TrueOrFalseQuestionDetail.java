@@ -1,12 +1,13 @@
 package io.github.knightmareleon.features.sets.components.controls;
 
 import io.github.knightmareleon.shared.models.Question;
+import javafx.beans.value.ObservableDoubleValue;
 import javafx.scene.control.Label;
 
 public class TrueOrFalseQuestionDetail extends BaseQuestionDetail {
 
-    public TrueOrFalseQuestionDetail(Question question) {
-        super(question);
+    public TrueOrFalseQuestionDetail(Question question, ObservableDoubleValue widthProperty) {
+        super(question, widthProperty);
     }
 
     @Override

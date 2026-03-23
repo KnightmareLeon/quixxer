@@ -2,12 +2,13 @@ package io.github.knightmareleon.features.sets.components.controls;
 
 import io.github.knightmareleon.shared.models.Choice;
 import io.github.knightmareleon.shared.models.Question;
+import javafx.beans.value.ObservableDoubleValue;
 import javafx.scene.control.Label;
 
 public class IdentificationQuestionDetail extends BaseQuestionDetail {
 
-    public IdentificationQuestionDetail(Question question) {
-        super(question);
+    public IdentificationQuestionDetail(Question question, ObservableDoubleValue widthProperty) {
+        super(question, widthProperty);
     }
 
     @Override

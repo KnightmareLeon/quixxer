@@ -10,10 +10,10 @@
 <fx:root type="TabPane" 
     xmlns:fx="http://javafx.com/fxml/1"
     fx:id="questionsTab"
-    VBox.vgrow="ALWAYS"
-    >
+    VBox.vgrow="ALWAYS">
     <tabs>
         <Tab
+            fx:id="identTab"
             text="Identification"
             closable="false"
             styleClass="component-standard-bg,standard-font">
@@ -26,7 +26,7 @@
                     fitToHeight="true"
                     styleClass="standard-dark-bg">
                     <VBox 
-                        fx:id="identTab"
+                        fx:id="identContainer"
                         style="-fx-padding: 24 0 24 0"
                         spacing="24"
                         fillWidth="true"
@@ -37,6 +37,7 @@
         </Tab>
 
         <Tab 
+            fx:id="enumTab"
             text="Enumeration"
             closable="false"
             styleClass="component-standard-bg,standard-font">
@@ -49,7 +50,7 @@
                     fitToHeight="true"
                     styleClass="standard-dark-bg">
                     <VBox 
-                        fx:id="enumTab"
+                        fx:id="enumContainer"
                         style="-fx-padding: 24 0 24 0"
                         spacing="24"
                         fillWidth="true"
@@ -59,6 +60,7 @@
             </content>
         </Tab>
         <Tab
+            fx:id="tofTab"
             text="True or False"
             closable="false"
             styleClass="component-standard-bg,standard-font">
@@ -71,7 +73,7 @@
                     fitToHeight="true"
                     styleClass="standard-dark-bg">
                     <VBox 
-                        fx:id="tofTab"
+                        fx:id="tofContainer"
                         style="-fx-padding: 24 0 24 0"
                         spacing="24"
                         fillWidth="true"
