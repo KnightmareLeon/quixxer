@@ -48,9 +48,8 @@ public class QuestionField extends VBox{
 
     @SuppressWarnings("LeakingThisInConstructor")
     public QuestionField() {
-
         FXMLLoader loader = new FXMLLoader(
-                getClass().getResource("QuestionField.fxml")
+            getClass().getResource("QuestionField.fxml")
         );
         ControllerRootSetter.set(this, loader);
     }
@@ -204,5 +203,10 @@ public class QuestionField extends VBox{
         } else {
             this.getStyleClass().remove("error-border");
         }
+    }
+
+    public void setClosable(boolean closable){
+        this.closeQuestionButton.setVisible(closable);
+        this.closeQuestionButton.setDisable(closable);
     }
 }

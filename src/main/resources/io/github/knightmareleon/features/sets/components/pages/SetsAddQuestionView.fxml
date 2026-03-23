@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.ScrollPane?>
+
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<?import io.github.knightmareleon.shared.ui.controls.IconButton?>
+<?import io.github.knightmareleon.features.sets.components.controls.QuestionField?>
+
+<VBox
+    xmlns:fx="http://javafx.com/fxml/1"
+    fx:controller="io.github.knightmareleon.features.sets.components.pages.SetsAddQuestionController"
+    fx:id="vbox"
+    alignment="CENTER_LEFT"
+    style="-fx-border-radius: 53; -fx-background-radius: 53;"
+    stylesheets="/io/github/knightmareleon/css/error.css"
+    spacing="24"
+    fillWidth="true">
+    <HBox 
+        spacing="12"
+        alignment="CENTER">
+        <FontIcon iconLiteral="bi-clipboard-plus" iconSize="32" iconColor="white"/>
+        <Label fx:id="addQuestionTitle"
+            styleClass="standard-header-font"/>
+        <Region HBox.hgrow="ALWAYS" />
+        <IconButton 
+            iconLiteral="fas-save"
+            styleClass="component-standard-bg"
+            iconStyleClass="icon-base-color"
+            minHeight="48"
+            minWidth="48"/>
+        <IconButton 
+            iconLiteral="bi-box-arrow-left"
+            styleClass="component-standard-bg"
+            iconStyleClass="icon-base-color"
+            minHeight="48"
+            minWidth="48"
+            onAction="#onBackPageClicked"/>
+    </HBox>
+    <QuestionField 
+        fx:id="questionField"/>
+</VBox>

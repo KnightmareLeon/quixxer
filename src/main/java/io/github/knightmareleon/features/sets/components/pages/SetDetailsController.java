@@ -54,7 +54,7 @@ public class SetDetailsController extends VBox implements SetsPage, StudySetRece
         this.setName.setText(this.studySet.getTitle());
 
         this.detailsTab = new SetDetailsTab(studySet);
-        this.questionsTab = new SetQuestionsTab(studySet);
+        this.questionsTab = new SetQuestionsTab(studySet, e -> {onAddQuestionClicked();});
 
         this.detailsToggleButton.setToggleGroup(this.setTabs);
         this.questionToggleButton.setToggleGroup(this.setTabs);
@@ -110,5 +110,11 @@ public class SetDetailsController extends VBox implements SetsPage, StudySetRece
     @SuppressWarnings("unused")
     private void onUpdateClicked(){
         this.navigator.show(SetsPageURL.DETAILS_UPDATE, this.studySet);
+    }
+
+    @FXML
+    @SuppressWarnings("unused")
+    private void onAddQuestionClicked(){
+        this.navigator.show(SetsPageURL.ADD_QUESTION, this.studySet);
     }
 }

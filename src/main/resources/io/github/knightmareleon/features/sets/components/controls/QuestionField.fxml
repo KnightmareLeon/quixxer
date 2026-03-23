@@ -42,8 +42,9 @@
     <TextArea 
         fx:id="question" 
         minHeight="96" 
-        styleClass="standard-font" 
-        style="-fx-text-fill: black !important"/>
+        styleClass="standard-font"
+        style="-fx-text-fill: black !important"
+        wrapText="true"/>
     <Label 
         text="Type" 
         styleClass="standard-font"/>

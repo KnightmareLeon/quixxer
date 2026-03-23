@@ -4,10 +4,13 @@ import io.github.knightmareleon.features.sets.components.controls.EnumerationQue
 import io.github.knightmareleon.features.sets.components.controls.IdentificationQuestionDetail;
 import io.github.knightmareleon.features.sets.components.controls.TrueOrFalseQuestionDetail;
 import io.github.knightmareleon.shared.constants.QuestionType;
+import io.github.knightmareleon.shared.constants.StandardStyleClass;
 import io.github.knightmareleon.shared.models.Question;
 import io.github.knightmareleon.shared.models.StudySet;
 import io.github.knightmareleon.shared.utils.ControllerRootSetter;
 import io.github.knightmareleon.shared.utils.Transitions;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -17,15 +20,17 @@ import javafx.scene.layout.VBox;
 public class SetQuestionsTab extends TabPane{
     
     private final StudySet studySet;
+    private final EventHandler<ActionEvent> onAddQuestionClicked;
 
     @FXML private VBox identContainer;
     @FXML private VBox enumContainer;
     @FXML private VBox tofContainer;
 
     @SuppressWarnings("LeakingThisInConstructor")
-    public SetQuestionsTab(StudySet studySet) {
+    public SetQuestionsTab(StudySet studySet, EventHandler<ActionEvent> onAddQuestionClicked) {
 
         this.studySet = studySet;
+        this.onAddQuestionClicked = onAddQuestionClicked;
 
         FXMLLoader loader = new FXMLLoader(
             getClass().getResource("SetQuestionsTab.fxml")
@@ -67,10 +72,37 @@ public class SetQuestionsTab extends TabPane{
             }
         }
 
-        final Button addNewIdentQuestion = new Button("Add New Idenitification Question");
+        final Button addNewIdentQuestion = new Button("Add New Identification Question");
         final Button addNewEnumQuestion = new Button("Add New Enumeration Question");
         final Button addNewTOFQuestion = new Button("Add New True or False Question");
 
-        
+        addNewIdentQuestion.getStyleClass().addAll(
+            StandardStyleClass.COMPONENT_BG,
+            StandardStyleClass.BORDER_RADIUS_15,
+            StandardStyleClass.STANDARD_FONT
+        );
+        addNewEnumQuestion.getStyleClass().addAll(
+            StandardStyleClass.COMPONENT_BG,
+            StandardStyleClass.BORDER_RADIUS_15,
+            StandardStyleClass.STANDARD_FONT
+        );
+        addNewTOFQuestion.getStyleClass().addAll(
+            StandardStyleClass.COMPONENT_BG,
+            StandardStyleClass.BORDER_RADIUS_15,
+            StandardStyleClass.STANDARD_FONT
+        );
+
+        addNewIdentQuestion.setMaxWidth(Double.MAX_VALUE);
+        addNewEnumQuestion.setMaxWidth(Double.MAX_VALUE);
+        addNewTOFQuestion.setMaxWidth(Double.MAX_VALUE);
+
+        addNewIdentQuestion.setOnAction(this.onAddQuestionClicked);
+        addNewEnumQuestion.setOnAction(this.onAddQuestionClicked);
+        addNewTOFQuestion.setOnAction(this.onAddQuestionClicked);
+
+        this.identContainer.getChildren().add(addNewIdentQuestion);
+        this.enumContainer.getChildren().add(addNewEnumQuestion);
+        this.tofContainer.getChildren().add(addNewTOFQuestion);
     }
+
 }

@@ -6,7 +6,8 @@ public enum SetsPageURL implements PageURL{
     MAIN("/io/github/knightmareleon/features/sets/components/pages/SetsMainView.fxml"),
     CREATE("/io/github/knightmareleon/features/sets/components/pages/SetsCreateView.fxml"),
     DETAILS("/io/github/knightmareleon/features/sets/components/pages/SetDetailsView.fxml"),
-    DETAILS_UPDATE("/io/github/knightmareleon/features/sets/components/pages/SetUpdateDetailsView.fxml");
+    DETAILS_UPDATE("/io/github/knightmareleon/features/sets/components/pages/SetUpdateDetailsView.fxml"),
+    ADD_QUESTION("/io/github/knightmareleon/features/sets/components/pages/SetsAddQuestionView.fxml");
 
     private final String url;
 
@@ -16,5 +17,4 @@ public enum SetsPageURL implements PageURL{
 
     @Override
     public String getURL() {return this.url;}
-    
 }
