@@ -296,6 +296,9 @@ public class TestPlayerController implements TestPage, TestDataReceiver{
 
                 answerFieldContainer.getChildren().setAll(trueFalseContainer,submitButton);
             }
+            default -> {
+                System.out.println("Test Type not supported.");
+            }
         }
 
         this.mainContentPane.setBottom(answerFieldContainer);
