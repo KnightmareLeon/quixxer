@@ -68,6 +68,7 @@
                     fillWidth="true"
                     VBox.vgrow="ALWAYS"
                     alignment="CENTER"
+                    minHeight="250"
                     >
                 </VBox>
             </center>

@@ -83,7 +83,10 @@ public class TestPlayerController implements TestPage, TestDataReceiver{
         }
 
         Question question = this.testData.getQuestionsUsed().get(nextQuestionIndex);
-        Label questionLabel = new Label(question.getDescription());
+        Text questionLabel = new Text(question.getDescription());
+        questionLabel.wrappingWidthProperty().bind(this.mainContentHeader.widthProperty().add(-56));
+        questionLabel.setFill(Color.WHITE);
+        questionLabel.setTextAlignment(TextAlignment.CENTER);
 
         this.mainContentHeaderLabel.setText("Question " + (nextQuestionIndex + 1) );
         questionLabel.getStyleClass().add("standard-font");
