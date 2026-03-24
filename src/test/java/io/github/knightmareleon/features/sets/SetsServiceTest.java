@@ -86,4 +86,55 @@ public class SetsServiceTest {
         this.setsService.deleteStudySet(studySet1.getId());
         assertEquals(studySet2, this.setsService.getStudySets(1).getValue().get(1));
     }
+
+    @Test
+    public void shouldHaveTwoPages(){
+        for (int i = 0; i< 10; i++) {
+            this.setsService.saveStudySet(new StudySet(
+                i + 1,
+                "Dummy Set " + i, 
+                "History", 
+                "default", 
+                0,
+                List.of(new Question(
+                    "Dummy Question", 
+                    QuestionType.IDENTIFICATION, 
+                    List.of(
+                        new Choice("Wow", true)
+                    )
+                )),
+                Instant.now(),
+                Instant.now()
+            ));
+        }
+
+        assertEquals(2, this.setsService.getTotalPages());
+    }
+
+    @Test
+    public void shouldHaveOnePage(){
+        for (int i = 0; i< 10; i++) {
+            this.setsService.saveStudySet(new StudySet(
+                i + 1,
+                "Dummy Set " + i, 
+                "History", 
+                "default", 
+                0,
+                List.of(new Question(
+                    "Dummy Question", 
+                    QuestionType.IDENTIFICATION, 
+                    List.of(
+                        new Choice("Wow", true)
+                    )
+                )),
+                Instant.now(),
+                Instant.now()
+            ));
+        }
+        for (int i = 0; i< 10; i++) {
+            this.setsService.deleteStudySet(i + 1);
+        }
+
+        assertEquals(1, this.setsService.getTotalPages());
+    }
 }
