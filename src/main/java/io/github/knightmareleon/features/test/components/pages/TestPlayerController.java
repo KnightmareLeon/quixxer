@@ -45,6 +45,7 @@ public class TestPlayerController implements TestPage, TestDataReceiver{
     @FXML private ProgressBar correctProgressBar;
 
     @FXML private BorderPane mainContentPane;
+    @FXML private VBox centralContent;
 
     @Override
     public void setTestNavigator(TestNavigator testNavigator) {
@@ -85,7 +86,7 @@ public class TestPlayerController implements TestPage, TestDataReceiver{
 
         this.mainContentHeaderLabel.setText("Question " + (nextQuestionIndex + 1) );
         questionLabel.getStyleClass().add("standard-font");
-        this.mainContentPane.setCenter(questionLabel);
+        this.centralContent.getChildren().setAll(questionLabel);
 
         this.addAnswerFields(
             question, 
@@ -166,7 +167,7 @@ public class TestPlayerController implements TestPage, TestDataReceiver{
         }
         questionResultContainer.setTextAlignment(TextAlignment.CENTER);
         questionResultContainer.getStyleClass().add("standard-font");
-        this.mainContentPane.setCenter(questionResultContainer);
+        this.centralContent.getChildren().setAll(questionResultContainer);
 
         Button nextButton = new Button("Next Question");
         nextButton.getStyleClass().addAll("standard-font","component-standard-bg","border-radius-15");
@@ -184,12 +185,15 @@ public class TestPlayerController implements TestPage, TestDataReceiver{
         if(this.testData.isTimed()) this.timeLabel.setText(null);
         Label scoreLabel = new Label("Final Score: " + this.testData.getScore());
         scoreLabel.getStyleClass().add("standard-font");
-        this.mainContentPane.setCenter(scoreLabel);
+        this.centralContent.getChildren().setAll(scoreLabel);
         this.mainContentPane.setBottom(null);
     }
 
     private void addAnswerFields(Question question, int currentIndex, AnimationTimer timer){
         switch(this.testData.getType()){
+            case TestType.MULTIPLE_CHOICE -> {
+
+            }
             case TestType.TRUE_OR_FALSE -> {
                 
                 HBox trueFalseContainer = new HBox();

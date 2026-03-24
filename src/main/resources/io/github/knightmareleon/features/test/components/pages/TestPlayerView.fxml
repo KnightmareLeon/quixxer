@@ -62,6 +62,15 @@
         <BorderPane
             fx:id="mainContentPane"
             VBox.vgrow="ALWAYS">
+            <center>
+                <VBox
+                    fx:id="centralContent"
+                    fillWidth="true"
+                    VBox.vgrow="ALWAYS"
+                    alignment="CENTER"
+                    >
+                </VBox>
+            </center>
         </BorderPane>
     </ScrollPane>
 </VBox>
