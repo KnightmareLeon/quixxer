@@ -3,14 +3,15 @@ package io.github.knightmareleon.features.test.components.pages;
 import java.util.ArrayList;
 import java.util.List;
 
-import io.github.knightmareleon.features.test.components.TestDataReceiver;
+import io.github.knightmareleon.features.test.components.TestConfigReceiver;
 import io.github.knightmareleon.features.test.components.TestNavigator;
 import io.github.knightmareleon.features.test.components.constants.TestPageURL;
 import io.github.knightmareleon.features.test.components.constants.TestType;
 import io.github.knightmareleon.shared.constants.StandardStyleClass;
 import io.github.knightmareleon.shared.models.Choice;
 import io.github.knightmareleon.shared.models.Question;
-import io.github.knightmareleon.shared.models.TestData;
+import io.github.knightmareleon.shared.models.TestConfig;
+import io.github.knightmareleon.shared.models.TestSession;
 import io.github.knightmareleon.shared.ui.controls.StandardAlert;
 import io.github.knightmareleon.shared.utils.Converter;
 import io.github.knightmareleon.shared.utils.Transitions;
@@ -32,10 +33,12 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.scene.text.TextFlow;
 
-public class TestPlayerController implements TestPage, TestDataReceiver{
+public class TestPlayerController implements TestPage, TestConfigReceiver{
 
     private TestNavigator testNavigator;
-    private TestData testData;
+    private TestConfig testConfig;
+    private final List<TestSession> testSessions = new ArrayList<>();
+    private int currentSessionIndex = 0;
 
     @FXML private Label testPlayerTitle;
     @FXML private HBox mainContentHeader;
@@ -54,51 +57,56 @@ public class TestPlayerController implements TestPage, TestDataReceiver{
     }
 
     @Override
-    public void receiveTestData(TestData testData) {
-        this.testData = testData;
-        this.initWithTestData();
+    public void receiveTestConfig(TestConfig testConfig) {
+        this.testConfig = testConfig;
+        this.testSessions.add(new TestSession(
+            this.testConfig.getQuestions(),
+            this.testConfig.isShuffled(),
+            this.testConfig.getMaxTotalQuestions())
+        );
+        this.initWithTestConfig();
     }
 
-    private void initWithTestData(){
-        this.testPlayerTitle.setText(this.testData.getStudySetTitle() + " Test");
+    private void initWithTestConfig(){
+        this.testPlayerTitle.setText(this.testConfig.getStudySetTitle() + " Test");
 
-        if(this.testData.isTimed()){
+        if(this.testConfig.isTimed()){
             Region space = new Region();
             space.setMaxWidth(Double.MAX_VALUE);
             HBox.setHgrow(space, Priority.ALWAYS);
 
-            this.timeLabel.getStyleClass().add("standard-font");
-            this.timeLabel.setText(this.testData.getTimeText());
+            this.timeLabel.getStyleClass().add(StandardStyleClass.STANDARD_FONT);
+            this.timeLabel.setText(this.testConfig.getTimeSettingText());
             this.mainContentHeader.getChildren().addAll(space,this.timeLabel);
         }
 
-        this.handleNextQuestion(0);
+        this.handleNextQuestion();
     }
 
-    private void handleNextQuestion(int nextQuestionIndex){
+    private TestSession currentTestSession(){return this.testSessions.get(this.currentSessionIndex);}
 
-        if(nextQuestionIndex > this.testData.getQuestionsUsed().size() - 1){
-            handleEnd();
-            return;
+    private void handleNextQuestion(){
+
+        if(this.currentTestSession().getCurrentIndex() >= this.currentTestSession().getTotalQuestions()){
+            handleEnd();return;
         }
 
-        Question question = this.testData.getQuestionsUsed().get(nextQuestionIndex);
+        Question question = this.currentTestSession().getCurrentQuestion();
         Text questionLabel = new Text(question.getDescription());
         questionLabel.wrappingWidthProperty().bind(this.mainContentHeader.widthProperty().add(-56));
         questionLabel.setFill(Color.WHITE);
         questionLabel.setTextAlignment(TextAlignment.CENTER);
 
-        this.mainContentHeaderLabel.setText("Question " + (nextQuestionIndex + 1) );
-        questionLabel.getStyleClass().add("standard-font");
+        this.mainContentHeaderLabel.setText("Question " + (this.currentTestSession().getCurrentIndex() + 1) );
+        questionLabel.getStyleClass().add(StandardStyleClass.STANDARD_FONT);
         this.centralContent.getChildren().setAll(questionLabel);
 
         this.addAnswerFields(
-            question, 
-            nextQuestionIndex,
-            this.testData.isTimed() ?
+            question,
+            this.testConfig.isTimed() ?
             new AnimationTimer() {
                 long lastRun = 0;
-                int currentSeconds = testData.getSeconds();
+                int currentSeconds = testConfig.getTimeSettingSeconds();
 
                 @Override
                 public void handle(long now){
@@ -111,7 +119,7 @@ public class TestPlayerController implements TestPage, TestDataReceiver{
                         );
                     }
                     if (this.currentSeconds == 0){
-                        handleQuestionResult(question, false, nextQuestionIndex, this);
+                        handleQuestionResult(question, false, this);
                     }
                 }
             } : null
@@ -120,15 +128,15 @@ public class TestPlayerController implements TestPage, TestDataReceiver{
 
     }
 
-    private void handleQuestionResult(Question question, boolean correct, int currentIndex, AnimationTimer timer){
+    private void handleQuestionResult(Question question, boolean correct, AnimationTimer timer){
         if(timer != null) timer.stop();
 
-        if(correct) this.testData.incrementScore();
-        final int currentScore = this.testData.getScore();
+        if(correct) this.currentTestSession().incrementScore();
+        final int currentScore = this.currentTestSession().getScore();
 
-        final double correctProgress = (double)currentScore / this.testData.getQuestionsUsed().size();
-        final double incorrectProgress = (double)(currentIndex + 1 - currentScore) 
-        / this.testData.getQuestionsUsed().size() + correctProgress;
+        final double correctProgress = (double)currentScore / this.testConfig.getMaxTotalQuestions();
+        final double incorrectProgress = (double)(this.currentTestSession().getCurrentIndex() + 1 - currentScore) 
+        / this.testConfig.getMaxTotalQuestions() + correctProgress;
 
         final double transitionDuration = 0.5;
         Transitions.timelineTransition(this.correctProgressBar.progressProperty(), correctProgress, transitionDuration);
@@ -137,15 +145,16 @@ public class TestPlayerController implements TestPage, TestDataReceiver{
         correctProgressBar.setProgress(correctProgress);
         incorrectProgressBar.setProgress(incorrectProgress);
 
-        if(!this.testData.isContinuous()){
-            this.showQuestionResult(question, correct, currentIndex);
+        if(!this.testConfig.isContinuous()){
+            this.showQuestionResult(question, correct);
         } else {
-            if (this.testData.isTimed()) this.timeLabel.setText(this.testData.getTimeText());
-            this.handleNextQuestion(currentIndex + 1);
+            if (this.testConfig.isTimed()) this.timeLabel.setText(this.testConfig.getTimeSettingText());
+            this.currentTestSession().getAndIncrementIndex();
+            this.handleNextQuestion();
         }
     }
 
-    private void showQuestionResult(Question question, boolean correct, int currentIndex){
+    private void showQuestionResult(Question question, boolean correct){
         Text correctText = new Text(correct ? "You are correct!\n" : "Sadly, you missed it!\n");
         correctText.getStyleClass().add(StandardStyleClass.STANDARD_FONT);
         correctText.setFill(Color.WHITE);
@@ -185,8 +194,9 @@ public class TestPlayerController implements TestPage, TestDataReceiver{
             StandardStyleClass.BORDER_RADIUS_15);
         nextButton.setMaxWidth(Double.MAX_VALUE);
         nextButton.setOnAction(e -> {
-            if(this.testData.isTimed()) this.timeLabel.setText(this.testData.getTimeText());
-            this.handleNextQuestion(currentIndex + 1);
+            if(this.testConfig.isTimed()) this.timeLabel.setText(this.testConfig.getTimeSettingText());
+            this.currentTestSession().getAndIncrementIndex();
+            this.handleNextQuestion();
         });
         this.mainContentPane.setBottom(nextButton);
 
@@ -194,22 +204,22 @@ public class TestPlayerController implements TestPage, TestDataReceiver{
 
     private void handleEnd(){
         Transitions.timelineTransition(this.mainContentHeaderLabel.textProperty(), "Test Results", 0.5);
-        if(this.testData.isTimed()) this.timeLabel.setText(null);
-        Label scoreLabel = new Label("Final Score: " + this.testData.getScore());
+        if(this.testConfig.isTimed()) this.timeLabel.setText(null);
+        Label scoreLabel = new Label("Final Score: " + this.currentTestSession().getScore());
         scoreLabel.getStyleClass().add("standard-font");
         this.centralContent.getChildren().setAll(scoreLabel);
         this.mainContentPane.setBottom(null);
     }
 
-    private void addAnswerFields(Question question, int currentIndex, AnimationTimer timer){
+    private void addAnswerFields(Question question, AnimationTimer timer){
         VBox answerFieldContainer = new VBox(24);
         answerFieldContainer.setFillWidth(true);
-        switch(this.testData.getType()){
+        switch(this.testConfig.getType()){
             case TestType.MULTIPLE_CHOICE -> {
                 int size = question.getChoices().size();
                 ToggleButton[] choiceToggleButtons = new ToggleButton[size];
                 for(int i = 0; i < size; i++){
-                    ToggleButton newToggleButton = new ToggleButton(
+                    var newToggleButton = new ToggleButton(
                         question.getChoices().get(i).getDescription()
                     );
                     newToggleButton.getStyleClass().addAll(
@@ -235,18 +245,18 @@ public class TestPlayerController implements TestPage, TestDataReceiver{
                     for(int i = 0; i < size; i++){
                         if(!question.getChoices().get(i).isAnswer() && 
                             choiceToggleButtons[i].isSelected()){
-                                this.handleQuestionResult(question, false, currentIndex, timer);
+                                this.handleQuestionResult(question, false, timer);
                                 return;
                         }
                         if(!choiceToggleButtons[i].isSelected()) totalNotSelected++;
                     }
 
                     if(totalNotSelected == size) {
-                        this.handleQuestionResult(question, false, currentIndex, timer);
+                        this.handleQuestionResult(question, false, timer);
                         return;
                     }
 
-                    this.handleQuestionResult(question, true, currentIndex, timer);
+                    this.handleQuestionResult(question, true, timer);
                 });
 
                 answerFieldContainer.getChildren().add(submitButton);
@@ -264,8 +274,16 @@ public class TestPlayerController implements TestPage, TestDataReceiver{
                 HBox.setHgrow(trueButton, Priority.ALWAYS);
                 HBox.setHgrow(falseButton, Priority.ALWAYS);
 
-                trueButton.getStyleClass().addAll("standard-font","component-standard-bg","border-radius-15","white-border");
-                falseButton.getStyleClass().addAll("standard-font","component-standard-bg","border-radius-15","white-border");
+                trueButton.getStyleClass().addAll(
+                    StandardStyleClass.STANDARD_FONT,
+                    StandardStyleClass.COMPONENT_BG,
+                    StandardStyleClass.BORDER_RADIUS_15,
+                    StandardStyleClass.WHITE_BORDER);
+                falseButton.getStyleClass().addAll(
+                    StandardStyleClass.STANDARD_FONT,
+                    StandardStyleClass.COMPONENT_BG,
+                    StandardStyleClass.BORDER_RADIUS_15,
+                    StandardStyleClass.WHITE_BORDER);
                 trueButton.setMaxWidth(Double.MAX_VALUE);
                 falseButton.setMaxWidth(Double.MAX_VALUE);
 
@@ -274,7 +292,11 @@ public class TestPlayerController implements TestPage, TestDataReceiver{
                 trueFalseContainer.setSpacing(24);
 
                 Button submitButton = new Button("Submit");
-                submitButton.getStyleClass().addAll("standard-font","component-standard-bg","border-radius-15");
+                submitButton.getStyleClass().addAll(
+                    StandardStyleClass.STANDARD_FONT,
+                    StandardStyleClass.COMPONENT_BG,
+                    StandardStyleClass.BORDER_RADIUS_15
+                );
                 submitButton.setMaxWidth(Double.MAX_VALUE);
                 submitButton.setOnAction(e -> {
                     if(trueFalseGroup.getSelectedToggle() == null){
@@ -288,7 +310,6 @@ public class TestPlayerController implements TestPage, TestDataReceiver{
                             question,
                             (trueFalseGroup.getSelectedToggle() == trueButton) ==
                             (question.getChoices().get(0).isAnswer()),
-                            currentIndex,
                             timer
                         );
                     }
@@ -304,7 +325,16 @@ public class TestPlayerController implements TestPage, TestDataReceiver{
         this.mainContentPane.setBottom(answerFieldContainer);
                 Transitions.standardFadeTransition(answerFieldContainer);
 
-        if(this.testData.isTimed()) timer.start();
+        if(this.testConfig.isTimed()) timer.start();
+    }
+
+    private void createNewSession(){
+        this.currentSessionIndex++;
+        this.testSessions.add(new TestSession(
+            this.testConfig.getQuestions(),
+            this.testConfig.isShuffled(),
+            this.testConfig.getMaxTotalQuestions())
+        );
     }
 
     @FXML
@@ -315,6 +345,6 @@ public class TestPlayerController implements TestPage, TestDataReceiver{
     @FXML
     @SuppressWarnings("unused")
     private void onBackPageClicked(){
-        this.testNavigator.show(TestPageURL.SETS, this.testData.getType());
+        this.testNavigator.show(TestPageURL.SETS, this.testConfig.getType());
     }
 }

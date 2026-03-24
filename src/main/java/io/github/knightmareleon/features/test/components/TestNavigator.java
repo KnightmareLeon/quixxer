@@ -9,7 +9,7 @@ import io.github.knightmareleon.shared.constants.PageURL;
 import io.github.knightmareleon.shared.infrastructure.AppContext;
 import io.github.knightmareleon.shared.infrastructure.navigator.BaseTabNavigator;
 import io.github.knightmareleon.shared.models.StudySet;
-import io.github.knightmareleon.shared.models.TestData;
+import io.github.knightmareleon.shared.models.TestConfig;
 import io.github.knightmareleon.shared.utils.StudySetReceiver;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -42,9 +42,9 @@ public class TestNavigator extends BaseTabNavigator {
                     object instanceof StudySet studySet){
                     receiver.receiveStudySet(studySet);
                 }
-                if(controller instanceof TestDataReceiver receiver && 
-                    object instanceof TestData testData){
-                    receiver.receiveTestData(testData);
+                if(controller instanceof TestConfigReceiver receiver && 
+                    object instanceof TestConfig testConfig){
+                    receiver.receiveTestConfig(testConfig);
                 }
             }
             this.getContainer().getChildren().setAll(view);

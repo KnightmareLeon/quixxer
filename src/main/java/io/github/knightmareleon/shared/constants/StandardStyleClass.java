@@ -13,5 +13,7 @@ public class StandardStyleClass {
     public final static String ICON_BUTTON_BASE_BG = "icon-button-base-bg";
     public final static String ICON_BUTTON_TRANSPARENT = "icon-button-transparent-bg";
     public final static String ICON_BASE_COLOR = "icon-base-color";
+
+    public final static String WHITE_BORDER = "white-border";
 }
 

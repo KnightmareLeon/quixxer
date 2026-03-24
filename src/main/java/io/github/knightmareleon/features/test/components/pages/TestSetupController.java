@@ -7,7 +7,7 @@ import io.github.knightmareleon.features.test.components.TestTypeReceiver;
 import io.github.knightmareleon.features.test.components.constants.TestPageURL;
 import io.github.knightmareleon.features.test.components.constants.TestType;
 import io.github.knightmareleon.shared.models.StudySet;
-import io.github.knightmareleon.shared.models.TestData;
+import io.github.knightmareleon.shared.models.TestConfig;
 import io.github.knightmareleon.shared.ui.controls.NaturalNumberField;
 import io.github.knightmareleon.shared.ui.controls.StandardAlert;
 import io.github.knightmareleon.shared.utils.Converter;
@@ -104,7 +104,7 @@ public class TestSetupController implements TestPage, StudySetReceiver, TestType
         alert.setContentText("Are you sure you want to start?");
         Optional<ButtonType> alertResult = alert.showAndWait();
         if(alertResult.isPresent() && alertResult.get() == ButtonType.OK){
-            TestData testData = new TestData(
+            TestConfig testConfig = new TestConfig(
                 this.testType, 
                 this.studySet, 
                 Integer.parseInt(this.totalQuestions.getText()), 
@@ -113,10 +113,10 @@ public class TestSetupController implements TestPage, StudySetReceiver, TestType
                 Converter.toTimeSetting(
                     ((ToggleButton)timeToggleGroup.getSelectedToggle()).getText()
                 ) : null,
-                this.shuffleToggleButton.isSelected(),
-                this.continuousToggleButton.isSelected()
+                this.continuousToggleButton.isSelected(),
+                this.shuffleToggleButton.isSelected()
             );
-            this.testNavigator.show(TestPageURL.PLAY, testData);
+            this.testNavigator.show(TestPageURL.PLAY, testConfig);
         }
     }
 }
