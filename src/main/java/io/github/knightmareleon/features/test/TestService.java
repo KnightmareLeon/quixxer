@@ -2,7 +2,7 @@ package io.github.knightmareleon.features.test;
 
 import java.util.List;
 
-import io.github.knightmareleon.features.test.components.constants.TestType;
+import io.github.knightmareleon.features.test.constants.TestType;
 import io.github.knightmareleon.shared.daos.SetsDao;
 import io.github.knightmareleon.shared.exceptions.DataAccessException;
 import io.github.knightmareleon.shared.models.StudySet;

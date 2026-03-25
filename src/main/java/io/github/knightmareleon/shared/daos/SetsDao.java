@@ -2,7 +2,7 @@ package io.github.knightmareleon.shared.daos;
 
 import java.util.List;
 
-import io.github.knightmareleon.features.test.components.constants.TestType;
+import io.github.knightmareleon.features.test.constants.TestType;
 import io.github.knightmareleon.shared.models.StudySet;
 
 public interface SetsDao {

@@ -1,8 +1,8 @@
 package io.github.knightmareleon.features.test.components.pages;
 
 import io.github.knightmareleon.features.test.components.TestNavigator;
-import io.github.knightmareleon.features.test.components.constants.TestPageURL;
-import io.github.knightmareleon.features.test.components.constants.TestType;
+import io.github.knightmareleon.features.test.constants.TestPageURL;
+import io.github.knightmareleon.features.test.constants.TestType;
 import javafx.fxml.FXML;
 
 public class TestMainController implements TestPage{

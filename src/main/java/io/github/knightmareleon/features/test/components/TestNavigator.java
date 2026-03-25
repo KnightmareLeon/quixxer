@@ -3,8 +3,8 @@ package io.github.knightmareleon.features.test.components;
 import java.io.IOException;
 
 import io.github.knightmareleon.features.test.TestService;
-import io.github.knightmareleon.features.test.components.constants.TestType;
 import io.github.knightmareleon.features.test.components.pages.TestPage;
+import io.github.knightmareleon.features.test.constants.TestType;
 import io.github.knightmareleon.shared.constants.PageURL;
 import io.github.knightmareleon.shared.infrastructure.AppContext;
 import io.github.knightmareleon.shared.infrastructure.navigator.BaseTabNavigator;

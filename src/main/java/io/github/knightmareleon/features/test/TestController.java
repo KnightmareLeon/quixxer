@@ -1,7 +1,7 @@
 package io.github.knightmareleon.features.test;
 
 import io.github.knightmareleon.features.test.components.TestNavigator;
-import io.github.knightmareleon.features.test.components.constants.TestPageURL;
+import io.github.knightmareleon.features.test.constants.TestPageURL;
 import io.github.knightmareleon.shared.infrastructure.AppContext;
 import javafx.fxml.FXML;
 import javafx.scene.layout.VBox;

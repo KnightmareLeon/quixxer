@@ -1,4 +1,4 @@
-package io.github.knightmareleon.features.test.components.constants;
+package io.github.knightmareleon.features.test.constants;
 
 import io.github.knightmareleon.shared.constants.PageURL;
 

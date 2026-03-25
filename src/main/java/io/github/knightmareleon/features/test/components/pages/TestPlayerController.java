@@ -5,8 +5,8 @@ import java.util.List;
 
 import io.github.knightmareleon.features.test.components.TestConfigReceiver;
 import io.github.knightmareleon.features.test.components.TestNavigator;
-import io.github.knightmareleon.features.test.components.constants.TestPageURL;
-import io.github.knightmareleon.features.test.components.constants.TestType;
+import io.github.knightmareleon.features.test.constants.TestPageURL;
+import io.github.knightmareleon.features.test.constants.TestType;
 import io.github.knightmareleon.shared.constants.StandardStyleClass;
 import io.github.knightmareleon.shared.models.Choice;
 import io.github.knightmareleon.shared.models.Question;

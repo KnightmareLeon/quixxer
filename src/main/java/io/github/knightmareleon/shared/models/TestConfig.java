@@ -3,7 +3,7 @@ package io.github.knightmareleon.shared.models;
 import java.util.ArrayList;
 import java.util.List;
 
-import io.github.knightmareleon.features.test.components.constants.TestType;
+import io.github.knightmareleon.features.test.constants.TestType;
 import io.github.knightmareleon.shared.constants.TimeSetting;
 
 public class TestConfig {

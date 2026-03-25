@@ -4,8 +4,8 @@ import java.util.Optional;
 
 import io.github.knightmareleon.features.test.components.TestNavigator;
 import io.github.knightmareleon.features.test.components.TestTypeReceiver;
-import io.github.knightmareleon.features.test.components.constants.TestPageURL;
-import io.github.knightmareleon.features.test.components.constants.TestType;
+import io.github.knightmareleon.features.test.constants.TestPageURL;
+import io.github.knightmareleon.features.test.constants.TestType;
 import io.github.knightmareleon.shared.models.StudySet;
 import io.github.knightmareleon.shared.models.TestConfig;
 import io.github.knightmareleon.shared.ui.controls.NaturalNumberField;
