@@ -112,7 +112,6 @@ public class TestPlayerController implements TestPage, TestConfigReceiver{
                 public void handle(long now){
                     if (this.lastRun == 0) {this.lastRun = now;}
                     if (((now - this.lastRun) / 1e9) >= 1){
-                        System.out.println(currentSeconds);
                         this.lastRun = now;
                         timeLabel.setText(
                             Converter.minuteTextForm(--this.currentSeconds)
@@ -205,10 +204,39 @@ public class TestPlayerController implements TestPage, TestConfigReceiver{
     private void handleEnd(){
         Transitions.timelineTransition(this.mainContentHeaderLabel.textProperty(), "Test Results", 0.5);
         if(this.testConfig.isTimed()) this.timeLabel.setText(null);
+
         Label scoreLabel = new Label("Final Score: " + this.currentTestSession().getScore());
-        scoreLabel.getStyleClass().add("standard-font");
+        scoreLabel.getStyleClass().add(StandardStyleClass.STANDARD_FONT);
+
         this.centralContent.getChildren().setAll(scoreLabel);
-        this.mainContentPane.setBottom(null);
+
+        Button newSessionButton = new Button("Attempt Again");
+        Button reviewButton = new Button("Review");
+
+        newSessionButton.getStyleClass().addAll(
+            StandardStyleClass.STANDARD_FONT,
+            StandardStyleClass.COMPONENT_BG,
+            StandardStyleClass.BORDER_RADIUS_15
+        );
+        reviewButton.getStyleClass().addAll(
+            StandardStyleClass.STANDARD_FONT,
+            StandardStyleClass.COMPONENT_BG,
+            StandardStyleClass.BORDER_RADIUS_15
+        );
+
+        newSessionButton.setOnAction(e -> {
+            this.correctProgressBar.setProgress(0);
+            this.incorrectProgressBar.setProgress(0);
+            this.createNewSession();
+            this.handleNextQuestion();
+        });
+
+        newSessionButton.setMaxWidth(Double.MAX_VALUE);
+        reviewButton.setMaxWidth(Double.MAX_VALUE);
+
+        VBox endBottomContainer = new VBox(24, newSessionButton, reviewButton);
+        endBottomContainer.setFillWidth(true);
+        this.mainContentPane.setBottom(endBottomContainer);
     }
 
     private void addAnswerFields(Question question, AnimationTimer timer){
