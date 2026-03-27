@@ -1,11 +1,13 @@
 package io.github.knightmareleon.features.test.components.pages;
 
+import java.util.HashMap;
 import java.util.Optional;
 
 import io.github.knightmareleon.features.test.components.TestNavigator;
 import io.github.knightmareleon.features.test.components.TestTypeReceiver;
 import io.github.knightmareleon.features.test.constants.TestPageURL;
 import io.github.knightmareleon.features.test.constants.TestType;
+import io.github.knightmareleon.shared.constants.StandardStyleClass;
 import io.github.knightmareleon.shared.models.StudySet;
 import io.github.knightmareleon.shared.models.TestConfig;
 import io.github.knightmareleon.shared.ui.controls.NaturalNumberField;
@@ -13,11 +15,16 @@ import io.github.knightmareleon.shared.ui.controls.StandardAlert;
 import io.github.knightmareleon.shared.utils.Converter;
 import io.github.knightmareleon.shared.utils.StudySetReceiver;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 
 public class TestSetupController implements TestPage, StudySetReceiver, TestTypeReceiver{
 
@@ -29,6 +36,8 @@ public class TestSetupController implements TestPage, StudySetReceiver, TestType
     @FXML private NaturalNumberField totalQuestions;
     @FXML private Label totalQuestionsMax;
 
+    @FXML private VBox configurationContainer;
+
     @FXML private ToggleButton timeToggleButton;
     @FXML private ToggleButton thirtySecButton;
     @FXML private ToggleButton oneMinButton;
@@ -39,6 +48,8 @@ public class TestSetupController implements TestPage, StudySetReceiver, TestType
     private final ToggleGroup timeToggleGroup = new ToggleGroup();
     @FXML private ToggleButton shuffleToggleButton;
     @FXML private ToggleButton continuousToggleButton;
+
+    private final HashMap<String,Node> extraConfigs = new HashMap<>(5);
 
     @Override
     public void setTestNavigator(TestNavigator testNavigator) {
@@ -57,7 +68,7 @@ public class TestSetupController implements TestPage, StudySetReceiver, TestType
     @Override
     public void receiveTestType(TestType testType) {
         this.testType = testType;
-        this.setupTitle.setText(testType.getName() + " Setup");
+        this.initWithTestType();
     }
 
     @FXML
@@ -80,11 +91,53 @@ public class TestSetupController implements TestPage, StudySetReceiver, TestType
         fiveMinButton.setToggleGroup(this.timeToggleGroup);
         tenMinButton.setToggleGroup(this.timeToggleGroup);
         timeToggleGroup.selectedToggleProperty().addListener((obsVal, oldVal, newVal) -> {
-            if (newVal == null) {
-                oldVal.setSelected(true);
-            }
+            if (newVal == null) oldVal.setSelected(true);
         });
         thirtySecButton.setSelected(true);
+
+    }
+
+    private void initWithTestType(){
+
+        this.setupTitle.setText(testType.getName() + " Setup");
+
+        Region space = new Region();
+        VBox.setVgrow(space, Priority.ALWAYS);
+
+        Button startButton = new Button("Start");
+        startButton.setMaxWidth(Double.MAX_VALUE);
+        startButton.getStyleClass().addAll(
+            StandardStyleClass.COMPONENT_BG,
+            StandardStyleClass.STANDARD_FONT,
+            StandardStyleClass.BORDER_RADIUS_15
+        );
+        startButton.setOnAction(e -> {this.onStartClicked();});
+
+        switch(this.testType){
+            case TestType.MULTIPLE_CHOICE -> {
+                ToggleButton randomizedButton = new ToggleButton("Randomized");
+                randomizedButton.getStyleClass().addAll(
+                    StandardStyleClass.COMPONENT_BG,
+                    StandardStyleClass.WHITE_BORDER,
+                    StandardStyleClass.STANDARD_FONT
+                );
+                this.extraConfigs.put("Randomized", randomizedButton);
+            }
+            default -> {
+
+            }
+        }
+
+        if(!extraConfigs.isEmpty()) {
+            Label extraConfigLabel = new Label(this.testType.getName() + " Configurations");
+            extraConfigLabel.getStyleClass().add(StandardStyleClass.STANDARD_HEADER_FONT);
+            this.configurationContainer.getChildren().add(extraConfigLabel);
+            this.extraConfigs.forEach((key, node) -> {
+                this.configurationContainer.getChildren().add(node);
+            });
+        }
+
+        this.configurationContainer.getChildren().addAll(space, startButton);
     }
 
     private void onTimeSelected(boolean selected){
@@ -95,8 +148,6 @@ public class TestSetupController implements TestPage, StudySetReceiver, TestType
         this.tenMinButton.setDisable(selected);
     }
 
-    @FXML
-    @SuppressWarnings("unused")
     private void onStartClicked(){
         Alert alert = new StandardAlert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Start");

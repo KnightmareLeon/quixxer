@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import io.github.knightmareleon.features.test.components.constants.TestType;
+import io.github.knightmareleon.features.test.constants.TestType;
 import io.github.knightmareleon.shared.constants.QuestionType;
 import io.github.knightmareleon.shared.models.Choice;
 import io.github.knightmareleon.shared.models.Question;

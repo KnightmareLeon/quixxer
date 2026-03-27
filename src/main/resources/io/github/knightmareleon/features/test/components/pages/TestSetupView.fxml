@@ -7,6 +7,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ScrollPane?>
 
 <?import io.github.knightmareleon.shared.ui.controls.IconButton?>
 <?import io.github.knightmareleon.shared.ui.controls.NaturalNumberField?>
@@ -34,63 +35,72 @@
         minWidth="48"
         onAction="#onBackPageClicked"/>
     </HBox>
-    <Label 
-        text="Test Constraints"
-        styleClass="standard-header-font"/>
-    <HBox
-        alignment="CENTER_LEFT"
-        spacing="12">
-        <Label 
-            text="Max Questions"
-            styleClass="standard-font"
-            labelFor="$totalQuestions"/>
-        <NaturalNumberField 
-            fx:id="totalQuestions"
-            styleClass="standard-font"
-            style="-fx-text-fill: black !important;"/>
-        <Label fx:id="totalQuestionsMax"
-            styleClass="standard-font"/>
-    </HBox>
-    <HBox
-        alignment="CENTER_LEFT"
-        spacing="12">
-        <ToggleButton 
-            text="Timed"
-            fx:id="timeToggleButton"
-            styleClass="component-standard-bg,white-border,standard-font"/>
-        <ToggleButton 
-            text="0:30"
-            fx:id="thirtySecButton"
-            styleClass="component-standard-bg,white-border,standard-font"/>
-        <ToggleButton 
-            text="1:00"
-            fx:id="oneMinButton"
-            styleClass="component-standard-bg,white-border,standard-font"/>
-        <ToggleButton 
-            text="3:00"
-            fx:id="threeMinButton"
-            styleClass="component-standard-bg,white-border,standard-font"/>
-        <ToggleButton 
-            text="5:00"
-            fx:id="fiveMinButton"
-            styleClass="component-standard-bg,white-border,standard-font"/>
-        <ToggleButton 
-            text="10:00"
-            fx:id="tenMinButton"
-            styleClass="component-standard-bg,white-border,standard-font"/>
-    </HBox>
-    <ToggleButton 
-        text="Shuffled"
-        fx:id="shuffleToggleButton"
-        styleClass="component-standard-bg,white-border,standard-font"/>
-    <ToggleButton
-        text="Continuous"
-        fx:id="continuousToggleButton"
-        styleClass="component-standard-bg,white-border,standard-font"/>
-    <Region VBox.vgrow="ALWAYS"/>
-    <Button
-        text="Start"
-        maxWidth="Infinity"
-        styleClass="component-standard-bg,standard-font,border-radius-15"
-        onAction="#onStartClicked" />
+    <ScrollPane
+        fitToWidth="true"
+        fitToHeight="true"
+        maxHeight="Infinity"
+        styleClass="standard-dark-bg"
+        hbarPolicy="AS_NEEDED"
+        VBox.vgrow="ALWAYS">
+        <VBox
+            fx:id="configurationContainer"
+            spacing="24"
+            alignment="TOP_LEFT"
+            fillWidth="true">
+            <Label 
+                text="General Test Configurations"
+                styleClass="standard-header-font"/>
+            <HBox
+                alignment="CENTER_LEFT"
+                spacing="12">
+                <Label 
+                    text="Max Questions"
+                    styleClass="standard-font"
+                    labelFor="$totalQuestions"/>
+                <NaturalNumberField 
+                    fx:id="totalQuestions"
+                    styleClass="standard-font"
+                    style="-fx-text-fill: black !important;"/>
+                <Label fx:id="totalQuestionsMax"
+                    styleClass="standard-font"/>
+            </HBox>
+            <HBox
+                alignment="CENTER_LEFT"
+                spacing="12">
+                <ToggleButton 
+                    text="Timed"
+                    fx:id="timeToggleButton"
+                    styleClass="component-standard-bg,white-border,standard-font"/>
+                <ToggleButton 
+                    text="0:30"
+                    fx:id="thirtySecButton"
+                    styleClass="component-standard-bg,white-border,standard-font"/>
+                <ToggleButton 
+                    text="1:00"
+                    fx:id="oneMinButton"
+                    styleClass="component-standard-bg,white-border,standard-font"/>
+                <ToggleButton 
+                    text="3:00"
+                    fx:id="threeMinButton"
+                    styleClass="component-standard-bg,white-border,standard-font"/>
+                <ToggleButton 
+                    text="5:00"
+                    fx:id="fiveMinButton"
+                    styleClass="component-standard-bg,white-border,standard-font"/>
+                <ToggleButton 
+                    text="10:00"
+                    fx:id="tenMinButton"
+                    styleClass="component-standard-bg,white-border,standard-font"/>
+            </HBox>
+            <ToggleButton 
+                text="Shuffled"
+                fx:id="shuffleToggleButton"
+                styleClass="component-standard-bg,white-border,standard-font"/>
+            <ToggleButton
+                text="Continuous"
+                fx:id="continuousToggleButton"
+                styleClass="component-standard-bg,white-border,standard-font"/>
+
+        </VBox>
+    </ScrollPane>
 </VBox>
