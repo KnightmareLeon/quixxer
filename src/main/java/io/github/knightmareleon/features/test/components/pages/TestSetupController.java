@@ -1,6 +1,7 @@
 package io.github.knightmareleon.features.test.components.pages;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Optional;
 
 import io.github.knightmareleon.features.test.components.TestNavigator;
@@ -15,6 +16,7 @@ import io.github.knightmareleon.shared.ui.controls.StandardAlert;
 import io.github.knightmareleon.shared.utils.Converter;
 import io.github.knightmareleon.shared.utils.StudySetReceiver;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -22,6 +24,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
@@ -49,7 +52,7 @@ public class TestSetupController implements TestPage, StudySetReceiver, TestType
     @FXML private ToggleButton shuffleToggleButton;
     @FXML private ToggleButton continuousToggleButton;
 
-    private final HashMap<String,Node> extraConfigs = new HashMap<>(5);
+    private final HashMap<String,Node> extraConfigs = new LinkedHashMap<>(5);
 
     @Override
     public void setTestNavigator(TestNavigator testNavigator) {
@@ -68,7 +71,123 @@ public class TestSetupController implements TestPage, StudySetReceiver, TestType
     @Override
     public void receiveTestType(TestType testType) {
         this.testType = testType;
-        this.initWithTestType();
+        
+        this.setupTitle.setText(testType.getName() + " Setup");
+
+        Region space = new Region();
+        VBox.setVgrow(space, Priority.ALWAYS);
+
+        Button startButton = new Button("Start");
+        startButton.setMaxWidth(Double.MAX_VALUE);
+        startButton.getStyleClass().addAll(
+            StandardStyleClass.COMPONENT_BG,
+            StandardStyleClass.STANDARD_FONT,
+            StandardStyleClass.BORDER_RADIUS_15
+        );
+        startButton.setOnAction(e -> {this.onStartClicked();});
+
+        switch(this.testType){
+            case TestType.MULTIPLE_CHOICE -> {
+                ToggleButton randomizedButton = new ToggleButton("Randomized");
+                randomizedButton.getStyleClass().addAll(
+                    StandardStyleClass.COMPONENT_BG,
+                    StandardStyleClass.WHITE_BORDER,
+                    StandardStyleClass.STANDARD_FONT
+                );
+                this.extraConfigs.put("Randomized", randomizedButton);
+            }
+            case TestType.FLASHCARD -> {
+                Label inputStyleLabel = new Label("Input Style:");
+
+                inputStyleLabel.getStyleClass().add(StandardStyleClass.STANDARD_FONT);
+
+                ToggleButton markerButton = new ToggleButton("Mark as Correct or Incorrect");
+                ToggleButton textInputButton = new ToggleButton("Text Input");
+                ToggleGroup inputStyleGroup = new ToggleGroup();
+
+                markerButton.getStyleClass().addAll(
+                    StandardStyleClass.COMPONENT_BG,
+                    StandardStyleClass.WHITE_BORDER,
+                    StandardStyleClass.STANDARD_FONT
+                );
+                textInputButton.getStyleClass().addAll(
+                    StandardStyleClass.COMPONENT_BG,
+                    StandardStyleClass.WHITE_BORDER,
+                    StandardStyleClass.STANDARD_FONT
+                );
+
+                markerButton.setToggleGroup(inputStyleGroup);
+                textInputButton.setToggleGroup(inputStyleGroup);
+
+                HBox inputStyleContainer = new HBox(24, inputStyleLabel, markerButton, textInputButton);
+                inputStyleContainer.setAlignment(Pos.CENTER_LEFT);
+
+                Label ignoreOptionsLabel = new Label("Ignore on Grading (Text Input) : ");
+                ignoreOptionsLabel.getStyleClass().add(StandardStyleClass.STANDARD_FONT);
+
+                ToggleButton casesButton = new ToggleButton("Case");
+                ToggleButton punctuationButton = new ToggleButton("Punctuation");
+                ToggleButton spacesButton = new ToggleButton("Spaces");
+
+                casesButton.getStyleClass().addAll(
+                    StandardStyleClass.COMPONENT_BG,
+                    StandardStyleClass.WHITE_BORDER,
+                    StandardStyleClass.STANDARD_FONT
+                );
+                punctuationButton.getStyleClass().addAll(
+                    StandardStyleClass.COMPONENT_BG,
+                    StandardStyleClass.WHITE_BORDER,
+                    StandardStyleClass.STANDARD_FONT
+                );
+                spacesButton.getStyleClass().addAll(
+                    StandardStyleClass.COMPONENT_BG,
+                    StandardStyleClass.WHITE_BORDER,
+                    StandardStyleClass.STANDARD_FONT
+                );
+
+                HBox ignoreOptionsContainer = new HBox(
+                    24, 
+                    ignoreOptionsLabel,
+                    casesButton,
+                    punctuationButton,
+                    spacesButton
+                );
+                ignoreOptionsContainer.setAlignment(Pos.CENTER_LEFT);
+
+                inputStyleGroup.selectedToggleProperty().addListener((obsVal, oldVal, newVal) -> {
+                    if (newVal == null) oldVal.setSelected(true);
+                });
+
+                textInputButton.selectedProperty().addListener((obs, oldVal, newVal) -> {
+                    casesButton.setDisable(oldVal);
+                    punctuationButton.setDisable(oldVal);
+                    spacesButton.setDisable(oldVal);
+                });
+
+                markerButton.setSelected(true);
+
+                casesButton.setDisable(!textInputButton.isSelected());
+                punctuationButton.setDisable(!textInputButton.isSelected());
+                spacesButton.setDisable(!textInputButton.isSelected());
+
+                this.extraConfigs.put("InputStyle", inputStyleContainer);
+                this.extraConfigs.put("Ignore", ignoreOptionsContainer);
+            }
+            default -> {
+
+            }
+        }
+
+        if(!extraConfigs.isEmpty()) {
+            Label extraConfigLabel = new Label(this.testType.getName() + " Configurations");
+            extraConfigLabel.getStyleClass().add(StandardStyleClass.STANDARD_HEADER_FONT);
+            this.configurationContainer.getChildren().add(extraConfigLabel);
+            this.extraConfigs.forEach((key, node) -> {
+                this.configurationContainer.getChildren().add(node);
+            });
+        }
+
+        this.configurationContainer.getChildren().addAll(space, startButton);
     }
 
     @FXML
@@ -95,49 +214,6 @@ public class TestSetupController implements TestPage, StudySetReceiver, TestType
         });
         thirtySecButton.setSelected(true);
 
-    }
-
-    private void initWithTestType(){
-
-        this.setupTitle.setText(testType.getName() + " Setup");
-
-        Region space = new Region();
-        VBox.setVgrow(space, Priority.ALWAYS);
-
-        Button startButton = new Button("Start");
-        startButton.setMaxWidth(Double.MAX_VALUE);
-        startButton.getStyleClass().addAll(
-            StandardStyleClass.COMPONENT_BG,
-            StandardStyleClass.STANDARD_FONT,
-            StandardStyleClass.BORDER_RADIUS_15
-        );
-        startButton.setOnAction(e -> {this.onStartClicked();});
-
-        switch(this.testType){
-            case TestType.MULTIPLE_CHOICE -> {
-                ToggleButton randomizedButton = new ToggleButton("Randomized");
-                randomizedButton.getStyleClass().addAll(
-                    StandardStyleClass.COMPONENT_BG,
-                    StandardStyleClass.WHITE_BORDER,
-                    StandardStyleClass.STANDARD_FONT
-                );
-                this.extraConfigs.put("Randomized", randomizedButton);
-            }
-            default -> {
-
-            }
-        }
-
-        if(!extraConfigs.isEmpty()) {
-            Label extraConfigLabel = new Label(this.testType.getName() + " Configurations");
-            extraConfigLabel.getStyleClass().add(StandardStyleClass.STANDARD_HEADER_FONT);
-            this.configurationContainer.getChildren().add(extraConfigLabel);
-            this.extraConfigs.forEach((key, node) -> {
-                this.configurationContainer.getChildren().add(node);
-            });
-        }
-
-        this.configurationContainer.getChildren().addAll(space, startButton);
     }
 
     private void onTimeSelected(boolean selected){
