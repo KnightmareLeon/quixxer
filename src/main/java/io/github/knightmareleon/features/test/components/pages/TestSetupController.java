@@ -231,7 +231,7 @@ public class TestSetupController implements TestPage, StudySetReceiver, TestType
         alert.setContentText("Are you sure you want to start?");
         Optional<ButtonType> alertResult = alert.showAndWait();
         if(alertResult.isPresent() && alertResult.get() == ButtonType.OK){
-            TestConfig testConfig = new TestConfig(
+            TestConfig.Builder testConfigBuilder = new TestConfig.Builder(
                 this.testType, 
                 this.studySet, 
                 Integer.parseInt(this.totalQuestions.getText()), 
@@ -243,7 +243,7 @@ public class TestSetupController implements TestPage, StudySetReceiver, TestType
                 this.continuousToggleButton.isSelected(),
                 this.shuffleToggleButton.isSelected()
             );
-            this.testNavigator.show(TestPageURL.PLAY, testConfig);
+            this.testNavigator.show(TestPageURL.PLAY, testConfigBuilder.build());
         }
     }
 }
