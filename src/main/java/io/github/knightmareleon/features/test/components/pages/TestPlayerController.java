@@ -244,6 +244,8 @@ public class TestPlayerController implements TestPage, TestConfigReceiver{
         answerFieldContainer.setFillWidth(true);
         switch(this.testConfig.getType()){
             case TestType.MULTIPLE_CHOICE -> {
+                List<Choice> choices = question.getChoices();
+                if(this.testConfig.isRandomized()) java.util.Collections.shuffle(choices);
                 int size = question.getChoices().size();
                 ToggleButton[] choiceToggleButtons = new ToggleButton[size];
                 for(int i = 0; i < size; i++){
