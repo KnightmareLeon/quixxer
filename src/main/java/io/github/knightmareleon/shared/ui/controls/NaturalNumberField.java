@@ -12,7 +12,7 @@ public class NaturalNumberField extends TextField {
 
     private int maxNumber;
     public NaturalNumberField(@NamedArg("maxNumber") int maxNumber) {
-        this.maxNumber = maxNumber;
+        this.setMaxNumber(maxNumber);
         UnaryOperator<Change> filter = change -> {
             String newText = change.getControlNewText();
 
@@ -42,9 +42,12 @@ public class NaturalNumberField extends TextField {
         this(Integer.MAX_VALUE);
     }
 
-    public void setMaxNumber(int maxNumber){
+    public final void setMaxNumber(int maxNumber){
         if(maxNumber < 1) return;
         this.maxNumber = maxNumber > Integer.MAX_VALUE ? Integer.MAX_VALUE : maxNumber;
+        this.setPrefColumnCount(
+            ((int)Math.log10(this.maxNumber)) + 1
+        );
     }
 
     public void setTextToMax(){
