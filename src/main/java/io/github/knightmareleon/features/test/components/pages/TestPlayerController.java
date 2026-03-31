@@ -249,7 +249,7 @@ public class TestPlayerController implements TestPage, TestConfigReceiver{
                 int size = question.getChoices().size();
                 ToggleButton[] choiceToggleButtons = new ToggleButton[size];
                 for(int i = 0; i < size; i++){
-                    var newToggleButton = new ToggleButton(
+                    ToggleButton newToggleButton = new ToggleButton(
                         question.getChoices().get(i).getDescription()
                     );
                     newToggleButton.getStyleClass().addAll(
@@ -290,6 +290,33 @@ public class TestPlayerController implements TestPage, TestConfigReceiver{
                 });
 
                 answerFieldContainer.getChildren().add(submitButton);
+            }
+            case TestType.FLASHCARD -> {
+                ToggleButton markRightButton = new ToggleButton("Mark Right");
+                markRightButton.getStyleClass().addAll(
+                    StandardStyleClass.STANDARD_FONT,
+                    StandardStyleClass.COMPONENT_BG,
+                    StandardStyleClass.BORDER_RADIUS_15
+                );
+                markRightButton.setMaxWidth(Double.MAX_VALUE);
+
+                Button submitButton = new Button("Submit");
+                submitButton.getStyleClass().addAll(
+                    StandardStyleClass.STANDARD_FONT,
+                    StandardStyleClass.COMPONENT_BG,
+                    StandardStyleClass.BORDER_RADIUS_15
+                );
+                submitButton.setStyle("-fx-font-weight: bolder");
+                submitButton.setMaxWidth(Double.MAX_VALUE);
+                submitButton.setOnAction(e -> {
+                    this.handleQuestionResult(
+                        question,
+                        markRightButton.isSelected(),
+                        timer
+                    );
+                });
+
+                answerFieldContainer.getChildren().setAll(markRightButton, submitButton);
             }
             case TestType.TRUE_OR_FALSE -> {
 

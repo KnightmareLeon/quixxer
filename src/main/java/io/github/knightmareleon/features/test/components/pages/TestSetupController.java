@@ -243,7 +243,8 @@ public class TestSetupController implements TestPage, StudySetReceiver, TestType
                 this.continuousToggleButton.isSelected(),
                 this.shuffleToggleButton.isSelected()
             );
-            if(((ToggleButton)this.extraConfigs.get("Randomized")).isSelected())
+            
+            if(this.testType == TestType.MULTIPLE_CHOICE && ((ToggleButton)this.extraConfigs.get("Randomized")).isSelected())
                 testConfigBuilder.setRandomized(true);
             this.testNavigator.show(TestPageURL.PLAY, testConfigBuilder.build());
         }
