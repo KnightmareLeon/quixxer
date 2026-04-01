@@ -244,8 +244,23 @@ public class TestSetupController implements TestPage, StudySetReceiver, TestType
                 this.shuffleToggleButton.isSelected()
             );
             
-            if(this.testType == TestType.MULTIPLE_CHOICE && ((ToggleButton)this.extraConfigs.get("Randomized")).isSelected())
+            if(this.testType == TestType.MULTIPLE_CHOICE 
+                && ((ToggleButton)this.extraConfigs.get("Randomized")).isSelected())
                 testConfigBuilder.setRandomized(true);
+            if(this.testType == TestType.FLASHCARD && 
+                ((ToggleButton)((HBox)this.extraConfigs.get("InputStyle"))
+                .getChildren().get(2)).isSelected())
+            {
+                testConfigBuilder.setIfTextInput(true);
+                HBox ignoreOptionsContainer = (HBox)this.extraConfigs.get("Ignore");
+                ToggleButton casesButton = (ToggleButton) ignoreOptionsContainer.getChildren().get(1);
+                ToggleButton punctuationButton = (ToggleButton) ignoreOptionsContainer.getChildren().get(2);
+                ToggleButton spacesButton = (ToggleButton) ignoreOptionsContainer.getChildren().get(3);
+
+                testConfigBuilder.setIgnoreCases(casesButton.isSelected());
+                testConfigBuilder.setIgnorePunctuation(punctuationButton.isSelected());
+                testConfigBuilder.setIgnoreSpaces(spacesButton.isSelected());
+            }
             this.testNavigator.show(TestPageURL.PLAY, testConfigBuilder.build());
         }
     }

@@ -21,6 +21,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.BorderPane;
@@ -292,13 +293,6 @@ public class TestPlayerController implements TestPage, TestConfigReceiver{
                 answerFieldContainer.getChildren().add(submitButton);
             }
             case TestType.FLASHCARD -> {
-                ToggleButton markRightButton = new ToggleButton("Mark Right");
-                markRightButton.getStyleClass().addAll(
-                    StandardStyleClass.STANDARD_FONT,
-                    StandardStyleClass.COMPONENT_BG,
-                    StandardStyleClass.BORDER_RADIUS_15
-                );
-                markRightButton.setMaxWidth(Double.MAX_VALUE);
 
                 Button submitButton = new Button("Submit");
                 submitButton.getStyleClass().addAll(
@@ -308,15 +302,62 @@ public class TestPlayerController implements TestPage, TestConfigReceiver{
                 );
                 submitButton.setStyle("-fx-font-weight: bolder");
                 submitButton.setMaxWidth(Double.MAX_VALUE);
-                submitButton.setOnAction(e -> {
-                    this.handleQuestionResult(
-                        question,
-                        markRightButton.isSelected(),
-                        timer
-                    );
-                });
 
-                answerFieldContainer.getChildren().setAll(markRightButton, submitButton);
+                if(!this.testConfig.isInTextInputMode()){
+                    ToggleButton markRightButton = new ToggleButton("Mark Right");
+                    markRightButton.getStyleClass().addAll(
+                        StandardStyleClass.STANDARD_FONT,
+                        StandardStyleClass.COMPONENT_BG,
+                        StandardStyleClass.BORDER_RADIUS_15
+                    );
+                    markRightButton.setMaxWidth(Double.MAX_VALUE);
+
+                    submitButton.setOnAction(e -> {
+                    this.handleQuestionResult(
+                            question,
+                            markRightButton.isSelected(),
+                            timer
+                        );
+                    });
+
+                    answerFieldContainer.getChildren().add(markRightButton);
+                } else {
+                    TextField inputTextField = new TextField();
+                    inputTextField.getStyleClass().add(
+                        StandardStyleClass.STANDARD_FONT
+                    );
+                    inputTextField.setMaxWidth(Double.MAX_VALUE);
+                    inputTextField.setStyle(
+                        "-fx-text-fill: black !important" + 
+                        "-fx-text-base-color: black !important;"
+                    );
+                    submitButton.setOnAction(e -> {
+                        String answer = inputTextField.getText();
+                        String correctAnswer = question.getChoices().get(0).getDescription();
+                        if(this.testConfig.ignoreCases()) {
+                            answer = answer.toLowerCase();
+                            correctAnswer = correctAnswer.toLowerCase();
+                        }
+                        if(this.testConfig.ignorePunctuation()){
+                            answer = answer.replaceAll("\\p{Punct}", "");
+                            correctAnswer = correctAnswer.replaceAll("\\p{Punct}", "");
+                        }
+                        if(this.testConfig.ignoreSpaces()){
+                            answer = answer.replaceAll("\\s+", "");
+                            correctAnswer = correctAnswer.replaceAll("\\s+", "");
+                        }
+                        handleQuestionResult(
+                            question,
+                            answer.equals(correctAnswer),
+                            timer
+                        );
+                    });
+
+                    answerFieldContainer.getChildren().add(inputTextField);
+                }
+
+
+                answerFieldContainer.getChildren().add(submitButton);
             }
             case TestType.TRUE_OR_FALSE -> {
 
