@@ -328,8 +328,8 @@ public class TestPlayerController implements TestPage, TestConfigReceiver{
                     );
                     inputTextField.setMaxWidth(Double.MAX_VALUE);
                     inputTextField.setStyle(
-                        "-fx-text-fill: black !important" + 
-                        "-fx-text-base-color: black !important;"
+                        "-fx-text-fill: black !important; " + 
+                        "-fx-text-base-color: black !important"
                     );
                     submitButton.setOnAction(e -> {
                         String answer = inputTextField.getText();
