@@ -5,6 +5,7 @@ import java.util.List;
 
 import io.github.knightmareleon.shared.constants.StandardStyleClass;
 import io.github.knightmareleon.shared.models.Question;
+import io.github.knightmareleon.shared.ui.controls.IconButton;
 import javafx.beans.value.ObservableDoubleValue;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
@@ -13,6 +14,9 @@ import javafx.scene.layout.BorderStroke;
 import javafx.scene.layout.BorderStrokeStyle;
 import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -20,9 +24,11 @@ import javafx.scene.text.TextAlignment;
 
 public abstract class BaseQuestionDetail extends VBox {
     
+    private final HBox questionHeaderContainer = new HBox();
     private final Label questionHeaderLabel = new Label("Question");
     private final Label choicesHeaderLabel = new Label("Choices");
 
+    private final IconButton deleteButton = new IconButton("bi-trash-fill", "icon-base-color" );
     private final Text questionLabel = new Text();
     protected final List<Label> choiceLabels = new ArrayList<>();
 
@@ -56,8 +62,24 @@ public abstract class BaseQuestionDetail extends VBox {
                 BorderWidths.DEFAULT)));
             choiceLabel.setStyle("-fx-background-radius: 15;" + choiceLabel.getStyle());
         }
-        this.getChildren().addAll(
+
+        Region space = new Region();
+        HBox.setHgrow(space, Priority.ALWAYS);
+        space.setMaxWidth(Double.MAX_VALUE);
+
+        this.deleteButton.setMinHeight(48);
+        this.deleteButton.setMinWidth(48);
+        this.deleteButton.getStyleClass().add(
+            StandardStyleClass.COMPONENT_BG
+        );
+
+        this.questionHeaderContainer.getChildren().addAll(
             this.questionHeaderLabel,
+            space,
+            this.deleteButton  
+        );
+        this.getChildren().addAll(
+            this.questionHeaderContainer,
             this.questionLabel,
             this.choicesHeaderLabel);
         this.getChildren().addAll(
