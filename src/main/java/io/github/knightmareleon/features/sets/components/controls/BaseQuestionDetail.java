@@ -24,11 +24,18 @@ import javafx.scene.text.TextAlignment;
 
 public abstract class BaseQuestionDetail extends VBox {
     
-    private final HBox questionHeaderContainer = new HBox();
+    private final HBox questionHeaderContainer = new HBox(12);
     private final Label questionHeaderLabel = new Label("Question");
     private final Label choicesHeaderLabel = new Label("Choices");
 
-    private final IconButton deleteButton = new IconButton("bi-trash-fill", "icon-base-color" );
+    private final IconButton deleteButton = new IconButton(
+        "bi-trash-fill",
+        "icon-base-color"
+    );
+    private final IconButton editButton = new IconButton(
+        "bi-pencil-square",
+        "icon-base-color"
+    );
     private final Text questionLabel = new Text();
     protected final List<Label> choiceLabels = new ArrayList<>();
 
@@ -73,11 +80,19 @@ public abstract class BaseQuestionDetail extends VBox {
             StandardStyleClass.COMPONENT_BG
         );
 
+        this.editButton.setMinHeight(48);
+        this.editButton.setMinWidth(48);
+        this.editButton.getStyleClass().add(
+            StandardStyleClass.COMPONENT_BG
+        );
+
         this.questionHeaderContainer.getChildren().addAll(
             this.questionHeaderLabel,
             space,
-            this.deleteButton  
+            this.editButton,
+            this.deleteButton
         );
+
         this.getChildren().addAll(
             this.questionHeaderContainer,
             this.questionLabel,
