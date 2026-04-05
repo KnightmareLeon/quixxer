@@ -222,74 +222,7 @@ public class LocalSetsDao implements SetsDao{
             int setID = (int) setIDRS.getLong(1);
 
             for (Question question : studySet.getQuestions()){
-                switch (question.getType()) {
-                    case QuestionType.TRUE_OR_FALSE -> {
-                        PreparedStatement tofstmt = this.connection.prepareStatement(
-                                this.INSERT_TOF_QUESTION
-                        );  
-
-                        int is_true = question.getChoices().get(0).isAnswer() ? 1 : 0;
-                        tofstmt.setString(1, question.getDescription());
-                        tofstmt.setInt(2, is_true);
-                        tofstmt.setInt(3, setID);
-
-                        tofstmt.executeUpdate();
-                    }
-                    case QuestionType.ENUMERATION -> {
-                        PreparedStatement enumstmt = this.connection.prepareStatement(
-                            this.INSERT_STD_QUESTION
-                        );  
-                        
-                        enumstmt.setInt(1, QuestionType.ENUMERATION.getCode());
-                        enumstmt.setString(2, question.getDescription());
-                        enumstmt.setInt(3, setID);
-                        
-                        enumstmt.executeUpdate();
-
-                        ResultSet enumIDRS = enumstmt.getGeneratedKeys();
-                        enumIDRS.next();
-                        int enumID = (int) enumIDRS.getLong(1);
-
-                        for(Choice choice : question.getChoices()){
-                            PreparedStatement choicestmt = this.connection.prepareStatement(
-                                this.INSERT_CHOICE
-                            );
-                            
-                            choicestmt.setString(1, choice.getDescription());
-                            choicestmt.setInt(2, 1);
-                            choicestmt.setInt(3, enumID);
-
-                            choicestmt.executeUpdate();
-                        }
-                    }
-                    default -> {
-                        PreparedStatement idnstmt = this.connection.prepareStatement(
-                                this.INSERT_STD_QUESTION
-                        );  
-
-                        idnstmt.setInt(1,QuestionType.IDENTIFICATION.getCode());
-                        idnstmt.setString(2,question.getDescription());
-                        idnstmt.setInt(3, setID);
-
-                        idnstmt.executeUpdate();
-
-                        ResultSet idnIDRS = idnstmt.getGeneratedKeys();
-                        idnIDRS.next();
-                        int idnID = (int) idnIDRS.getLong(1);
-
-                        for(int i = 0; i < question.getChoices().size(); i++){
-                            PreparedStatement choicestmt = this.connection.prepareStatement(
-                                    this.INSERT_CHOICE
-                            );
-                            Choice choice = question.getChoices().get(i);
-                            choicestmt.setString(1, choice.getDescription());
-                            choicestmt.setInt(2, choice.isAnswer() ? 1 : 0);
-                            choicestmt.setInt(3, idnID);
-
-                            choicestmt.executeUpdate();
-                        }
-                    }
-                }
+                this.addQuestion(setID, question);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -781,5 +714,95 @@ public class LocalSetsDao implements SetsDao{
         } catch (SQLException e) {
             throw new DataAccessException("Failed to delete study set.", e);
         }
+    }
+
+    @Override
+    public int addQuestion(int studySetID, Question question) {
+        try{
+            int generatedKey;
+            switch (question.getType()) {
+                case QuestionType.TRUE_OR_FALSE -> {
+                    PreparedStatement tofstmt = this.connection.prepareStatement(
+                            this.INSERT_TOF_QUESTION
+                    );  
+
+                    int is_true = question.getChoices().get(0).isAnswer() ? 1 : 0;
+                    tofstmt.setString(1, question.getDescription());
+                    tofstmt.setInt(2, is_true);
+                    tofstmt.setInt(3, studySetID);
+
+                    tofstmt.executeUpdate();
+
+                    ResultSet tofIDRS = tofstmt.getGeneratedKeys();
+                    tofIDRS.next();
+                    generatedKey = (int) tofIDRS.getLong(1);
+                }
+                case QuestionType.ENUMERATION -> {
+                    PreparedStatement enumstmt = this.connection.prepareStatement(
+                        this.INSERT_STD_QUESTION
+                    );  
+                    
+                    enumstmt.setInt(1, QuestionType.ENUMERATION.getCode());
+                    enumstmt.setString(2, question.getDescription());
+                    enumstmt.setInt(3, studySetID);
+                    
+                    enumstmt.executeUpdate();
+
+                    ResultSet enumIDRS = enumstmt.getGeneratedKeys();
+                    enumIDRS.next();
+                    int enumID = (int) enumIDRS.getLong(1);
+                    generatedKey = enumID;
+
+                    for(Choice choice : question.getChoices()){
+                        PreparedStatement choicestmt = this.connection.prepareStatement(
+                            this.INSERT_CHOICE
+                        );
+                        
+                        choicestmt.setString(1, choice.getDescription());
+                        choicestmt.setInt(2, 1);
+                        choicestmt.setInt(3, enumID);
+
+                        choicestmt.executeUpdate();
+                    }
+                }
+                default -> {
+                    PreparedStatement idnstmt = this.connection.prepareStatement(
+                            this.INSERT_STD_QUESTION
+                    );  
+
+                    idnstmt.setInt(1,QuestionType.IDENTIFICATION.getCode());
+                    idnstmt.setString(2,question.getDescription());
+                    idnstmt.setInt(3, studySetID);
+
+                    idnstmt.executeUpdate();
+
+                    ResultSet idnIDRS = idnstmt.getGeneratedKeys();
+                    idnIDRS.next();
+                    int idnID = (int) idnIDRS.getLong(1);
+                    generatedKey = idnID;
+
+                    for(int i = 0; i < question.getChoices().size(); i++){
+                        PreparedStatement choicestmt = this.connection.prepareStatement(
+                                this.INSERT_CHOICE
+                        );
+                        Choice choice = question.getChoices().get(i);
+                        choicestmt.setString(1, choice.getDescription());
+                        choicestmt.setInt(2, choice.isAnswer() ? 1 : 0);
+                        choicestmt.setInt(3, idnID);
+
+                        choicestmt.executeUpdate();
+                    }
+                }
+            }
+
+            return generatedKey;
+        } catch (SQLException e){
+            throw new DataAccessException("Failed to insert question", e);
+        }
+    }
+
+    @Override
+    public void deleteQuestion(int questionID) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }
