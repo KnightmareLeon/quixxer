@@ -16,6 +16,7 @@ public interface SetsDao {
     List<StudySet> listByTest(int limit, int offset, TestType testType);
     void delete(int studySetID);
     int addQuestion(int studySetID, Question question);
-    void deleteQuestion(int questionID);
+    void deleteStandardQuestion(int questionID);
+    void deleteTOFQuestion(int questionID);
 
 }

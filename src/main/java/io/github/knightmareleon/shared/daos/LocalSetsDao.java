@@ -193,6 +193,12 @@ public class LocalSetsDao implements SetsDao{
             HAVING COUNT(*) > 1
         )) AS total;
     """, this.SET_TABLE_NAME, this.STD_QUESTION_TABLE_NAME, this.CHOICE_TABLE_NAME);
+    
+    private final String DELETE_STANDARD_QUESTION  = 
+    "DELETE FROM " + this.STD_QUESTION_TABLE_NAME + " WHERE id = ?";
+
+    private final String DELETE_TOF_QUESTION  = 
+    "DELETE FROM " + this.TOF_QUESTION_TABLE_NAME + " WHERE id = ?";
 
     public LocalSetsDao(Connection connection) {
         this.connection = connection;
@@ -802,7 +808,30 @@ public class LocalSetsDao implements SetsDao{
     }
 
     @Override
-    public void deleteQuestion(int questionID) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public void deleteStandardQuestion(int questionID) {
+        try {
+            PreparedStatement deleteStmt = this.connection.prepareStatement(
+                this.DELETE_STANDARD_QUESTION
+            );
+
+            deleteStmt.setInt(1, questionID);
+            deleteStmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new DataAccessException("Failed to delete standard question.", e);
+        }
+    }
+
+    @Override
+    public void deleteTOFQuestion(int questionID) {
+        try {
+            PreparedStatement deleteStmt = this.connection.prepareStatement(
+                this.DELETE_TOF_QUESTION
+            );
+
+            deleteStmt.setInt(1, questionID);
+            deleteStmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new DataAccessException("Failed to delete standard question.", e);
+        }
     }
 }
