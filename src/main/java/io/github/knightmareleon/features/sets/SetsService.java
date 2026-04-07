@@ -113,6 +113,20 @@ public class SetsService {
         }
     }
 
+    public Result<String> deleteQuestionResult(int questionID, QuestionType questionType){
+        try {
+            if(questionType == QuestionType.TRUE_OR_FALSE){
+                this.setsDao.deleteTOFQuestion(questionID);
+            } else {
+                this.setsDao.deleteStandardQuestion(questionID);
+            }
+
+            return Result.success("Successfully deleted question.");
+
+        } catch (DataAccessException e) {
+            return Result.error("Failed to delete question.");
+        }
+    }
     public int getTotalPages(){
         return (int) Math.ceil((double)(this.totalStudySets) / (double)(this.MAX_SET_TOTAL_PER_PAGE));
     }

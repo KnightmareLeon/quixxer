@@ -7,6 +7,8 @@ import io.github.knightmareleon.shared.constants.StandardStyleClass;
 import io.github.knightmareleon.shared.models.Question;
 import io.github.knightmareleon.shared.ui.controls.IconButton;
 import javafx.beans.value.ObservableDoubleValue;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Border;
@@ -117,4 +119,8 @@ public abstract class BaseQuestionDetail extends VBox {
     }
 
     public abstract void setChoices(Question question);
+
+    public void setDeleteButtonAction(EventHandler<ActionEvent> eh){
+        this.deleteButton.setOnAction(eh);
+    }
 }

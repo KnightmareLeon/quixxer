@@ -95,5 +95,20 @@ public class MockSetsDao implements SetsDao {
             }
         }
     }
+
+    @Override
+    public int addQuestion(int studySetID, Question question) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void deleteStandardQuestion(int questionID) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void deleteTOFQuestion(int questionID) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
     
 }

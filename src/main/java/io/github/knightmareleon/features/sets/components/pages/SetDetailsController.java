@@ -54,7 +54,11 @@ public class SetDetailsController extends VBox implements SetsPage, StudySetRece
         this.setName.setText(this.studySet.getTitle());
 
         this.detailsTab = new SetDetailsTab(studySet);
-        this.questionsTab = new SetQuestionsTab(studySet, e -> {onAddQuestionClicked();});
+        this.questionsTab = new SetQuestionsTab(
+            this.setsService,
+            studySet,
+            e -> {onAddQuestionClicked();}
+        );
 
         this.detailsToggleButton.setToggleGroup(this.setTabs);
         this.questionToggleButton.setToggleGroup(this.setTabs);
