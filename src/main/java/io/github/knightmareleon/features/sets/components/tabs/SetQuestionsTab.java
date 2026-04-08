@@ -5,9 +5,9 @@ import java.util.Optional;
 import io.github.knightmareleon.features.sets.SetsService;
 import io.github.knightmareleon.features.sets.components.controls.EnumerationQuestionDetail;
 import io.github.knightmareleon.features.sets.components.controls.IdentificationQuestionDetail;
+import io.github.knightmareleon.features.sets.components.controls.QuestionField;
 import io.github.knightmareleon.features.sets.components.controls.TrueOrFalseQuestionDetail;
 import io.github.knightmareleon.shared.constants.QuestionType;
-import io.github.knightmareleon.shared.constants.StandardStyleClass;
 import io.github.knightmareleon.shared.models.Question;
 import io.github.knightmareleon.shared.models.StudySet;
 import io.github.knightmareleon.shared.ui.controls.StandardAlert;
@@ -34,6 +34,10 @@ public class SetQuestionsTab extends TabPane{
     @FXML private VBox enumContainer;
     @FXML private VBox tofContainer;
 
+    @FXML private Button newIdnQstButton;
+    @FXML private Button newEnmQstButton;
+    @FXML private Button newTofQstButton;
+    
     @SuppressWarnings("LeakingThisInConstructor")
     public SetQuestionsTab(
         SetsService setsService,
@@ -178,42 +182,51 @@ public class SetQuestionsTab extends TabPane{
                     tofContainer.getChildren().add(
                         tofQstDetail
                     );
-                
                 }
             }
         }
 
-        final Button addNewIdentQuestion = new Button("Add New Identification Question");
-        final Button addNewEnumQuestion = new Button("Add New Enumeration Question");
-        final Button addNewTOFQuestion = new Button("Add New True or False Question");
+        newIdnQstButton.setOnAction(e -> {
+            if(!identContainer.getChildren().isEmpty()){
+                if(identContainer.getChildren().getLast() instanceof QuestionField) return;
+            }
 
-        addNewIdentQuestion.getStyleClass().addAll(
-            StandardStyleClass.COMPONENT_BG,
-            StandardStyleClass.BORDER_RADIUS_15,
-            StandardStyleClass.STANDARD_FONT
-        );
-        addNewEnumQuestion.getStyleClass().addAll(
-            StandardStyleClass.COMPONENT_BG,
-            StandardStyleClass.BORDER_RADIUS_15,
-            StandardStyleClass.STANDARD_FONT
-        );
-        addNewTOFQuestion.getStyleClass().addAll(
-            StandardStyleClass.COMPONENT_BG,
-            StandardStyleClass.BORDER_RADIUS_15,
-            StandardStyleClass.STANDARD_FONT
-        );
+            QuestionField newIdentQuestion = new QuestionField();
+            newIdentQuestion.setCloseButtonAction(eh -> {
+                this.identContainer.getChildren().removeLast();
+            });
+            newIdentQuestion.lockQuestionType(QuestionType.IDENTIFICATION);
 
-        addNewIdentQuestion.setMaxWidth(Double.MAX_VALUE);
-        addNewEnumQuestion.setMaxWidth(Double.MAX_VALUE);
-        addNewTOFQuestion.setMaxWidth(Double.MAX_VALUE);
+            this.identContainer.getChildren().add(newIdentQuestion);
+        });
 
-        addNewIdentQuestion.setOnAction(this.onAddQuestionClicked);
-        addNewEnumQuestion.setOnAction(this.onAddQuestionClicked);
-        addNewTOFQuestion.setOnAction(this.onAddQuestionClicked);
+        newEnmQstButton.setOnAction(e -> {
+            if(!enumContainer.getChildren().isEmpty()){
+                if(enumContainer.getChildren().getLast() instanceof QuestionField) return;
+            }
 
-        this.identContainer.getChildren().add(addNewIdentQuestion);
-        this.enumContainer.getChildren().add(addNewEnumQuestion);
-        this.tofContainer.getChildren().add(addNewTOFQuestion);
+            QuestionField newEnmQuestion = new QuestionField();
+            newEnmQuestion.setCloseButtonAction(eh -> {
+                this.identContainer.getChildren().removeLast();
+            });
+            newEnmQuestion.lockQuestionType(QuestionType.ENUMERATION);
+
+            this.enumContainer.getChildren().add(newEnmQuestion);
+        });
+
+        newTofQstButton.setOnAction(e -> {
+            if(!tofContainer.getChildren().isEmpty()){
+                if(tofContainer.getChildren().getLast() instanceof QuestionField) return;
+            }
+            
+            QuestionField newTofQuestion = new QuestionField();
+            newTofQuestion.setCloseButtonAction(eh -> {
+                this.identContainer.getChildren().removeLast();
+            });
+            newTofQuestion.lockQuestionType(QuestionType.TRUE_OR_FALSE);
+
+            this.tofContainer.getChildren().add(newTofQuestion);
+        });
     }
 
 }

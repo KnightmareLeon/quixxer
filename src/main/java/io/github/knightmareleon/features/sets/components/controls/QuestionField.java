@@ -3,6 +3,7 @@ package io.github.knightmareleon.features.sets.components.controls;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.github.knightmareleon.shared.constants.QuestionType;
 import io.github.knightmareleon.shared.constants.StandardStyleClass;
 import io.github.knightmareleon.shared.ui.controls.IconButton;
 import io.github.knightmareleon.shared.utils.ControllerRootSetter;
@@ -208,5 +209,14 @@ public class QuestionField extends VBox{
     public void setClosable(boolean closable){
         this.closeQuestionButton.setVisible(closable);
         this.closeQuestionButton.setDisable(closable);
+    }
+
+    public void lockQuestionType(QuestionType questionType){
+        if(questionType == null){
+            this.qTypePicker.setDisable(false);
+            return;
+        }
+        this.qTypePicker.setValue(questionType.getName());
+        this.qTypePicker.setDisable(true);
     }
 }
