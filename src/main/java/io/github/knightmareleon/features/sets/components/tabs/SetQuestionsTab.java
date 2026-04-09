@@ -196,6 +196,7 @@ public class SetQuestionsTab extends TabPane{
                 this.identContainer.getChildren().removeLast();
             });
             newIdentQuestion.lockQuestionType(QuestionType.IDENTIFICATION);
+            newIdentQuestion.setSaveVisible(true);
 
             this.identContainer.getChildren().add(newIdentQuestion);
         });
@@ -210,6 +211,7 @@ public class SetQuestionsTab extends TabPane{
                 this.identContainer.getChildren().removeLast();
             });
             newEnmQuestion.lockQuestionType(QuestionType.ENUMERATION);
+            newEnmQuestion.setSaveVisible(true);
 
             this.enumContainer.getChildren().add(newEnmQuestion);
         });
@@ -224,6 +226,7 @@ public class SetQuestionsTab extends TabPane{
                 this.identContainer.getChildren().removeLast();
             });
             newTofQuestion.lockQuestionType(QuestionType.TRUE_OR_FALSE);
+            newTofQuestion.setSaveVisible(true);
 
             this.tofContainer.getChildren().add(newTofQuestion);
         });

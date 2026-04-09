@@ -30,6 +30,7 @@ public class QuestionField extends VBox{
 
     @FXML private Label questionError;
     @FXML private TextArea question;
+    @FXML private IconButton saveButton;
     @FXML private IconButton closeQuestionButton;
     @FXML private ComboBox<String> qTypePicker;
 
@@ -218,5 +219,9 @@ public class QuestionField extends VBox{
         }
         this.qTypePicker.setValue(questionType.getName());
         this.qTypePicker.setDisable(true);
+    }
+
+    public void setSaveVisible(boolean value){
+        this.saveButton.setVisible(value);
     }
 }
