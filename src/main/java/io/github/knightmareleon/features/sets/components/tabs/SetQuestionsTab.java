@@ -186,49 +186,25 @@ public class SetQuestionsTab extends TabPane{
             }
         }
 
-        newIdnQstButton.setOnAction(e -> {
-            if(!identContainer.getChildren().isEmpty()){
-                if(identContainer.getChildren().getLast() instanceof QuestionField) return;
-            }
+        this.initNewQuestionButton(this.newIdnQstButton, this.identContainer, QuestionType.IDENTIFICATION);
+        this.initNewQuestionButton(this.newEnmQstButton, this.enumContainer, QuestionType.ENUMERATION);
+        this.initNewQuestionButton(this.newTofQstButton, this.tofContainer, QuestionType.TRUE_OR_FALSE);
+    }
 
-            QuestionField newIdentQuestion = new QuestionField();
-            newIdentQuestion.setCloseButtonAction(eh -> {
-                this.identContainer.getChildren().removeLast();
-            });
-            newIdentQuestion.lockQuestionType(QuestionType.IDENTIFICATION);
-            newIdentQuestion.setSaveVisible(true);
-
-            this.identContainer.getChildren().add(newIdentQuestion);
-        });
-
-        newEnmQstButton.setOnAction(e -> {
-            if(!enumContainer.getChildren().isEmpty()){
-                if(enumContainer.getChildren().getLast() instanceof QuestionField) return;
-            }
-
-            QuestionField newEnmQuestion = new QuestionField();
-            newEnmQuestion.setCloseButtonAction(eh -> {
-                this.identContainer.getChildren().removeLast();
-            });
-            newEnmQuestion.lockQuestionType(QuestionType.ENUMERATION);
-            newEnmQuestion.setSaveVisible(true);
-
-            this.enumContainer.getChildren().add(newEnmQuestion);
-        });
-
-        newTofQstButton.setOnAction(e -> {
-            if(!tofContainer.getChildren().isEmpty()){
-                if(tofContainer.getChildren().getLast() instanceof QuestionField) return;
+    public void initNewQuestionButton(Button button, VBox container, QuestionType questionType){
+        button.setOnAction(e -> {
+            if(!container.getChildren().isEmpty()){
+                if(container.getChildren().getLast() instanceof QuestionField) return;
             }
             
-            QuestionField newTofQuestion = new QuestionField();
-            newTofQuestion.setCloseButtonAction(eh -> {
-                this.identContainer.getChildren().removeLast();
+            QuestionField newQuestion = new QuestionField();
+            newQuestion.setCloseButtonAction(eh -> {
+                container.getChildren().removeLast();
             });
-            newTofQuestion.lockQuestionType(QuestionType.TRUE_OR_FALSE);
-            newTofQuestion.setSaveVisible(true);
+            newQuestion.lockQuestionType(questionType);
+            newQuestion.setSaveVisible(true);
 
-            this.tofContainer.getChildren().add(newTofQuestion);
+            container.getChildren().add(newQuestion);
         });
     }
 
