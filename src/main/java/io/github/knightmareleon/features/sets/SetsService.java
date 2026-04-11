@@ -113,7 +113,7 @@ public class SetsService {
         }
     }
 
-    public Result<String> deleteQuestionResult(int questionID, QuestionType questionType){
+    public Result<String> deleteQuestion(int questionID, QuestionType questionType){
         try {
             if(questionType == QuestionType.TRUE_OR_FALSE){
                 this.setsDao.deleteTOFQuestion(questionID);
@@ -127,6 +127,16 @@ public class SetsService {
             return Result.error("Failed to delete question.");
         }
     }
+
+    public Result<Integer> addQuestion(int studySetID, Question question){
+        try {
+            Integer questionID = this.setsDao.addQuestion(studySetID, question);
+            return Result.success(questionID);
+        } catch (DataAccessException e) {
+            return Result.error("Failed to delete question.");
+        }
+    }
+
     public int getTotalPages(){
         return (int) Math.ceil((double)(this.totalStudySets) / (double)(this.MAX_SET_TOTAL_PER_PAGE));
     }

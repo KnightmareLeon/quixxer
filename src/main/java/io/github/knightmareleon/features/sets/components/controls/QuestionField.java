@@ -224,4 +224,8 @@ public class QuestionField extends VBox{
     public void setSaveVisible(boolean value){
         this.saveButton.setVisible(value);
     }
+
+    public void setSaveButtonAction(EventHandler<ActionEvent> eh){
+        this.saveButton.setOnAction(eh);
+    }
 }

@@ -3,6 +3,7 @@ package io.github.knightmareleon.features.sets.components.tabs;
 import java.util.Optional;
 
 import io.github.knightmareleon.features.sets.SetsService;
+import io.github.knightmareleon.features.sets.components.controls.BaseQuestionDetail;
 import io.github.knightmareleon.features.sets.components.controls.EnumerationQuestionDetail;
 import io.github.knightmareleon.features.sets.components.controls.IdentificationQuestionDetail;
 import io.github.knightmareleon.features.sets.components.controls.QuestionField;
@@ -38,6 +39,8 @@ public class SetQuestionsTab extends TabPane{
     @FXML private Button newEnmQstButton;
     @FXML private Button newTofQstButton;
     
+    private final int PADDING_ADDER = -64;
+
     @SuppressWarnings("LeakingThisInConstructor")
     public SetQuestionsTab(
         SetsService setsService,
@@ -63,127 +66,8 @@ public class SetQuestionsTab extends TabPane{
 
     @FXML
     public void initialize(){
-        int paddingAdder = -64;
         for(Question question: this.studySet.getQuestions()){
-            switch(question.getType()){
-                case QuestionType.IDENTIFICATION -> {
-                    IdentificationQuestionDetail idntQstDetail = 
-                        new IdentificationQuestionDetail(
-                            question,
-                            this.widthProperty().add(paddingAdder)
-                        );
-                    
-                    idntQstDetail.setDeleteButtonAction(e -> {
-                        if(this.studySet.getQuestions().size() <= 1) {
-                            Alert alert = new StandardAlert(Alert.AlertType.ERROR);
-                            alert.setTitle("Invalid Delete");
-                            alert.setHeaderText("Cannot Delete Question");
-                            alert.setContentText("Cannot delete the last remaining question of this study set.");
-                            alert.showAndWait();
-                            return;
-                        }
-
-                        Alert alert = new StandardAlert(Alert.AlertType.CONFIRMATION);
-                        alert.setTitle("Delete");
-                        alert.setHeaderText("Deleting Question");
-                        alert.setContentText("Are you sure you want to delete this question?");
-                        Optional<ButtonType> alertResult = alert.showAndWait();
-                        if(alertResult.isPresent() && alertResult.get() == ButtonType.OK){
-                            Result<String> result = this.setsService.deleteQuestionResult(
-                                question.getId(), 
-                                question.getType()
-                            );
-
-                            if(result.isSuccess()){
-                                this.studySet.getQuestions().remove(question);
-                                this.identContainer.getChildren().remove(idntQstDetail);
-                            }
-                        }
-                    });
-
-                    this.identContainer.getChildren().add(
-                        idntQstDetail
-                    );
-                }
-                case QuestionType.ENUMERATION -> {
-                    EnumerationQuestionDetail enumQstDetail = new EnumerationQuestionDetail(
-                        question, 
-                        this.widthProperty().add(paddingAdder)
-                    );
-
-                    enumQstDetail.setDeleteButtonAction(e -> {
-                        if(this.studySet.getQuestions().size() <= 1) {
-                            Alert alert = new StandardAlert(Alert.AlertType.ERROR);
-                            alert.setTitle("Invalid Delete");
-                            alert.setHeaderText("Cannot Delete Question");
-                            alert.setContentText("Cannot delete the last remaining question of this study set.");
-                            alert.showAndWait();
-                            return;
-                        }
-
-                        Alert alert = new StandardAlert(Alert.AlertType.CONFIRMATION);
-                        alert.setTitle("Delete");
-                        alert.setHeaderText("Deleting Question");
-                        alert.setContentText("Are you sure you want to delete this question?");
-                        Optional<ButtonType> alertResult = alert.showAndWait();
-                        if(alertResult.isPresent() && alertResult.get() == ButtonType.OK){
-                            Result<String> result = this.setsService.deleteQuestionResult(
-                                question.getId(), 
-                                question.getType()
-                            );
-
-                            if(result.isSuccess()){
-                                this.studySet.getQuestions().remove(question);
-                                this.enumContainer.getChildren().remove(enumQstDetail);
-                            }
-                        }
-
-                    });
-
-                    enumContainer.getChildren().add(
-                        enumQstDetail
-                    );
-                }
-                default -> {
-                    TrueOrFalseQuestionDetail tofQstDetail = new TrueOrFalseQuestionDetail(
-                        question,
-                        this.widthProperty().add(paddingAdder)
-                    );
-
-                    tofQstDetail.setDeleteButtonAction(e -> {
-                        if(this.studySet.getQuestions().size() <= 1) {
-                            Alert alert = new StandardAlert(Alert.AlertType.ERROR);
-                            alert.setTitle("Invalid Delete");
-                            alert.setHeaderText("Cannot Delete Question");
-                            alert.setContentText("Cannot delete the last remaining question of this study set.");
-                            alert.showAndWait();
-                            return;
-                        }
-
-                        Alert alert = new StandardAlert(Alert.AlertType.CONFIRMATION);
-                        alert.setTitle("Delete");
-                        alert.setHeaderText("Deleting Question");
-                        alert.setContentText("Are you sure you want to delete this question?");
-                        Optional<ButtonType> alertResult = alert.showAndWait();
-                        
-                        if(alertResult.isPresent() && alertResult.get() == ButtonType.OK){
-                            Result<String> result = this.setsService.deleteQuestionResult(
-                                question.getId(), 
-                                question.getType()
-                            );
-
-                            if(result.isSuccess()){
-                                this.studySet.getQuestions().remove(question);
-                                this.tofContainer.getChildren().remove(tofQstDetail);
-                            }
-                        }
-                    });
-    
-                    tofContainer.getChildren().add(
-                        tofQstDetail
-                    );
-                }
-            }
+            this.addQuestionDetail(question);
         }
 
         this.initNewQuestionButton(this.newIdnQstButton, this.identContainer, QuestionType.IDENTIFICATION);
@@ -191,16 +75,77 @@ public class SetQuestionsTab extends TabPane{
         this.initNewQuestionButton(this.newTofQstButton, this.tofContainer, QuestionType.TRUE_OR_FALSE);
     }
 
-    public void initNewQuestionButton(Button button, VBox container, QuestionType questionType){
+    private void addQuestionDetail(Question question){
+        BaseQuestionDetail qstDetail = switch(question.getType()){
+            case ENUMERATION -> new EnumerationQuestionDetail(
+                question,
+                this.widthProperty().add(this.PADDING_ADDER)
+            );
+            case IDENTIFICATION -> new IdentificationQuestionDetail(
+                question, 
+                this.widthProperty().add(this.PADDING_ADDER)
+            );
+            default ->  new TrueOrFalseQuestionDetail(
+                question, 
+                this.widthProperty().add(this.PADDING_ADDER)
+            );
+        };
+        
+        VBox container = switch(question.getType()){
+            case ENUMERATION -> this.enumContainer;
+            case IDENTIFICATION -> this.identContainer;
+            default ->  this.tofContainer;
+        };
+
+        qstDetail.setDeleteButtonAction(e -> {
+            if(this.studySet.getQuestions().size() <= 1) {
+                Alert alert = new StandardAlert(Alert.AlertType.ERROR);
+                alert.setTitle("Invalid Delete");
+                alert.setHeaderText("Cannot Delete Question");
+                alert.setContentText("Cannot delete the last remaining question of this study set.");
+                alert.showAndWait();
+                return;
+            }
+
+            Alert alert = new StandardAlert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Delete");
+            alert.setHeaderText("Deleting Question");
+            alert.setContentText("Are you sure you want to delete this question?");
+            Optional<ButtonType> alertResult = alert.showAndWait();
+            if(alertResult.isPresent() && alertResult.get() == ButtonType.OK){
+                Result<String> result = this.setsService.deleteQuestion(
+                    question.getId(), 
+                    question.getType()
+                );
+
+                if(result.isSuccess()){
+                    this.studySet.getQuestions().remove(question);
+                    container.getChildren().remove(qstDetail);
+                }
+            }
+        });
+
+        container.getChildren().add(
+            qstDetail
+        );
+    }
+
+    private void initNewQuestionButton(Button button, VBox container, QuestionType questionType){
         button.setOnAction(e -> {
             if(!container.getChildren().isEmpty()){
                 if(container.getChildren().getLast() instanceof QuestionField) return;
             }
             
             QuestionField newQuestion = new QuestionField();
+
             newQuestion.setCloseButtonAction(eh -> {
                 container.getChildren().removeLast();
             });
+
+            newQuestion.setSaveButtonAction(eh -> {
+                container.getChildren().removeLast();
+            });
+
             newQuestion.lockQuestionType(questionType);
             newQuestion.setSaveVisible(true);
 
