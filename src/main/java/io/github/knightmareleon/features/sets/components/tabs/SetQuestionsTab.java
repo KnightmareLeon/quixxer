@@ -1,5 +1,7 @@
 package io.github.knightmareleon.features.sets.components.tabs;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import io.github.knightmareleon.features.sets.SetsService;
@@ -9,6 +11,7 @@ import io.github.knightmareleon.features.sets.components.controls.Identification
 import io.github.knightmareleon.features.sets.components.controls.QuestionField;
 import io.github.knightmareleon.features.sets.components.controls.TrueOrFalseQuestionDetail;
 import io.github.knightmareleon.shared.constants.QuestionType;
+import io.github.knightmareleon.shared.models.Choice;
 import io.github.knightmareleon.shared.models.Question;
 import io.github.knightmareleon.shared.models.StudySet;
 import io.github.knightmareleon.shared.ui.controls.StandardAlert;
@@ -136,20 +139,61 @@ public class SetQuestionsTab extends TabPane{
                 if(container.getChildren().getLast() instanceof QuestionField) return;
             }
             
-            QuestionField newQuestion = new QuestionField();
+            QuestionField qField = new QuestionField();
 
-            newQuestion.setCloseButtonAction(eh -> {
+            qField.setCloseButtonAction(eh -> {
                 container.getChildren().removeLast();
             });
 
-            newQuestion.setSaveButtonAction(eh -> {
-                container.getChildren().removeLast();
+            qField.setSaveButtonAction(eh -> {
+                List<String> choiceStrings = qField.getChoices();
+                List<Integer> answers = qField.getAnswers();
+                List<Choice> choices = new ArrayList<>();
+                int answerIndex = 0;
+                for(int i = 0; i < choiceStrings.size(); i++){
+                    boolean isAnswer = i == answers.get(answerIndex);
+                    choices.add(
+                        new Choice(choiceStrings.get(i), 
+                        isAnswer
+                        )
+                    );
+                    if (isAnswer && answerIndex < answers.size() - 1) answerIndex++;
+                }
+
+                Question question = new Question(
+                    qField.getQuestion(),
+                    questionType,
+                    choices
+                );
+
+                Result<Integer> saveRes = this.setsService.addQuestion(
+                    this.studySet.getId(),
+                    question
+                );
+
+                if(saveRes.isSuccess()){
+                    container.getChildren().removeLast();
+                    List<Choice> newChoices = new ArrayList<>();
+                    for(Choice choice: question.getChoices()){
+                        newChoices.add(new Choice(choice));
+                    }
+
+                    Question newQuestion = new Question(
+                        saveRes.getValue(),
+                        question.getDescription(),
+                        question.getType(),
+                        newChoices
+                    );
+
+                    this.addQuestionDetail(newQuestion);
+                }
+                
             });
 
-            newQuestion.lockQuestionType(questionType);
-            newQuestion.setSaveVisible(true);
+            qField.lockQuestionType(questionType);
+            qField.setSaveVisible(true);
 
-            container.getChildren().add(newQuestion);
+            container.getChildren().add(qField);
         });
     }
 

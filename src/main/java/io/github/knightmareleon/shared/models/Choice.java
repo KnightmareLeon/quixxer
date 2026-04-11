@@ -15,6 +15,12 @@ public class Choice {
         this.isAnswer = isAnswer;
     }
 
+    public Choice(Choice choice){
+        this.id = choice.getId();
+        this.description = choice.getDescription();
+        this.isAnswer = choice.isAnswer();
+    }
+
     public void setDescription(String description){
         this.description = description;
     }
