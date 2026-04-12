@@ -5,6 +5,7 @@ import java.util.List;
 
 import io.github.knightmareleon.shared.constants.QuestionType;
 import io.github.knightmareleon.shared.constants.StandardStyleClass;
+import io.github.knightmareleon.shared.models.Choice;
 import io.github.knightmareleon.shared.ui.controls.IconButton;
 import io.github.knightmareleon.shared.utils.ControllerRootSetter;
 import javafx.collections.FXCollections;
@@ -39,7 +40,7 @@ public class QuestionField extends VBox{
         "Enumeration", 
         "True or False"
     );
-    @FXML private VBox choices;
+    @FXML private VBox choicesContainer;
     private final List<HBox> choiceRows = new ArrayList<>();
 
     private final ToggleGroup trueOrFalse = new ToggleGroup();
@@ -73,7 +74,7 @@ public class QuestionField extends VBox{
                 return;
             }
 
-            choices.getChildren().clear();
+            choicesContainer.getChildren().clear();
             choiceRows.clear();
 
             if(newVal.equals("Identification") || newVal.equals("Enumeration")){
@@ -82,7 +83,7 @@ public class QuestionField extends VBox{
             } else {
                 addChoiceButton.setVisible(false);
 
-                choices.getChildren().addAll(this.trueButton, this.falseButton);
+                choicesContainer.getChildren().addAll(this.trueButton, this.falseButton);
             }
 
         });
@@ -125,7 +126,7 @@ public class QuestionField extends VBox{
 
             row.getChildren().add(checkBox);
 
-            if (choices.getChildren().isEmpty()){
+            if (choicesContainer.getChildren().isEmpty()){
                 checkBox.setSelected(true);
             }
         }
@@ -136,12 +137,12 @@ public class QuestionField extends VBox{
 
         deleteChoiceField.setOnAction(e -> {
             if (choiceRows.size() > 1){
-                choices.getChildren().remove(row);
+                choicesContainer.getChildren().remove(row);
                 choiceRows.remove(row);
             }
         });
 
-        choices.getChildren().add(row);
+        choicesContainer.getChildren().add(row);
     }
 
     public String getQuestion(){
@@ -152,21 +153,21 @@ public class QuestionField extends VBox{
         return this.qTypePicker.getValue();
     }
 
-    public List<String> getChoices(){
-        List<String> choiceList = new ArrayList<>();
+    private List<String> getChoiceStrings(){
+        List<String> choiceStringList = new ArrayList<>();
         if(this.getType().equals("True or False")){
-            choiceList = List.of("True", "False");
-            return choiceList;
+            choiceStringList = List.of("True", "False");
+            return choiceStringList;
         }
         int index = this.getType().equals("Identification") ? 1 : 0;
         for (HBox row : this.choiceRows) {
-            choiceList.add(((TextField)row.getChildren().get(index)).getText());
+            choiceStringList.add(((TextField)row.getChildren().get(index)).getText());
         }
 
-        return choiceList;
+        return choiceStringList;
     }
 
-    public List<Integer> getAnswers(){
+    private List<Integer> getAnswers(){
         String type = this.getType();
         List<Integer> answerIndices = new ArrayList<>();
         switch(type){
@@ -192,6 +193,24 @@ public class QuestionField extends VBox{
 
         }
         return answerIndices;
+    }
+
+    public List<Choice> getChoices(){
+        List<String> choiceStrings = this.getChoiceStrings();
+        List<Integer> answers = this.getAnswers();
+        List<Choice> choices = new ArrayList<>();
+        int answerIndex = 0;
+        for(int i = 0; i < choiceStrings.size(); i++){
+            boolean isAnswer = i == answers.get(answerIndex);
+            choices.add(
+                new Choice(choiceStrings.get(i), 
+                isAnswer
+                )
+            );
+            if (isAnswer && answerIndex < answers.size() - 1) answerIndex++;
+        }
+
+        return choices;
     }
 
     public void setCloseButtonAction(EventHandler<ActionEvent> closeAction){

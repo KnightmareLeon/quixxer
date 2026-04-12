@@ -10,7 +10,6 @@ import io.github.knightmareleon.features.sets.components.controls.QuestionField;
 import io.github.knightmareleon.features.sets.constants.SetsConstants;
 import io.github.knightmareleon.features.sets.constants.SetsPageURL;
 import io.github.knightmareleon.shared.constants.QuestionType;
-import io.github.knightmareleon.shared.models.Choice;
 import io.github.knightmareleon.shared.models.Question;
 import io.github.knightmareleon.shared.models.StudySet;
 import io.github.knightmareleon.shared.ui.controls.StandardAlert;
@@ -85,23 +84,11 @@ public class SetsCreateController implements SetsPage{
                 case "Enumeration"-> QuestionType.ENUMERATION;
                 default -> QuestionType.IDENTIFICATION;
             };
-            List<String> choiceStrings = questionField.getChoices();
-            List<Integer> answers = questionField.getAnswers();
-            List<Choice> choices = new ArrayList<>();
-            int answerIndex = 0;
-            for(int i = 0; i < choiceStrings.size(); i++){
-                boolean isAnswer = i == answers.get(answerIndex);
-                choices.add(
-                    new Choice(choiceStrings.get(i), 
-                    isAnswer
-                    )
-                );
-                if (isAnswer && answerIndex < answers.size() - 1) answerIndex++;
-            }
+
             questions.add(new Question(
                 question,
                 qType,
-                choices
+                questionField.getChoices()
             ));
 
         }

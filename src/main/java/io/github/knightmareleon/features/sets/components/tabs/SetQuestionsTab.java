@@ -146,24 +146,11 @@ public class SetQuestionsTab extends TabPane{
             });
 
             qField.setSaveButtonAction(eh -> {
-                List<String> choiceStrings = qField.getChoices();
-                List<Integer> answers = qField.getAnswers();
-                List<Choice> choices = new ArrayList<>();
-                int answerIndex = 0;
-                for(int i = 0; i < choiceStrings.size(); i++){
-                    boolean isAnswer = i == answers.get(answerIndex);
-                    choices.add(
-                        new Choice(choiceStrings.get(i), 
-                        isAnswer
-                        )
-                    );
-                    if (isAnswer && answerIndex < answers.size() - 1) answerIndex++;
-                }
 
                 Question question = new Question(
                     qField.getQuestion(),
                     questionType,
-                    choices
+                    qField.getChoices()
                 );
 
                 Result<Integer> saveRes = this.setsService.addQuestion(

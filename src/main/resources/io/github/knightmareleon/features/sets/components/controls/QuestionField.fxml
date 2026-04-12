@@ -62,7 +62,7 @@
     <Label 
         text="Choices" 
         styleClass="standard-font"/>
-    <VBox fx:id="choices" 
+    <VBox fx:id="choicesContainer" 
         fillWidth="true"
         maxWidth="1136"
         spacing="12">
