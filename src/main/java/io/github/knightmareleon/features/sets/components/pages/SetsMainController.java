@@ -69,6 +69,12 @@ public class SetsMainController implements SetsPage{
             this.createStudySetComponents();
             this.setsLister.refresh();
         });
+        this.pagination.addPageFieldListener((obs, oldVal, newVal) -> {
+            int newPage = Integer.parseInt(newVal);
+            this.currentPage = newPage;
+            this.createStudySetComponents();
+            this.setsLister.refresh();
+        });
     }
 
     @FXML
