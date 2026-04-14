@@ -1,12 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+
 <?import javafx.scene.control.Label?>
 
 <StackPane xmlns:fx="http://javafx.com/fxml/1"
            fx:controller="io.github.knightmareleon.features.dashboard.DashboardController"
-           styleClass="standard-gray-bg">
-
-    <Label text="Dashboard" style="-fx-font-size: 24px;" />
-
+           styleClass="standard-gray-bg"
+           style="-fx-padding: 44 0 44 0">
+    <VBox
+        fx:id="mainContainer"
+        alignment="TOP_LEFT"
+        spacing="24"
+        styleClass="standard-dark-bg,component-shadow"
+        style="-fx-border-radius: 53; -fx-background-radius: 53; -fx-padding: 48;"
+        fillWidth="true"
+        maxWidth="1136" >
+        <Label
+            text="Dashboard"
+            style="-fx-font-size: 32 !important"
+            styleClass="standard-header-font"/>
+        <HBox
+            spacing="24">
+            <VBox
+                stylesheets="/io/github/knightmareleon/css/controls.css"
+                style="-fx-padding:10"
+                fillWidth="true"
+                HBox.hgrow="ALWAYS"
+                alignment="CENTER_LEFT"
+                styleClass="component-standard-bg-no-hover,border-radius-15"
+                spacing="12"
+                maxWidth="Infinity">
+                    <Label
+                        fx:id="headerLabel"
+                        style="-fx-font-size: 32 !important"
+                        styleClass="standard-header-font"
+                        text="Total Sets"/>
+                    <Label
+                        fx:id="dataLabel"
+                        style="-fx-font-size: 12 !important"
+                        styleClass="standard-font"/>
+            </VBox>
+            <VBox
+                stylesheets="/io/github/knightmareleon/css/controls.css"
+                style="-fx-padding:10"
+                fillWidth="true"
+                HBox.hgrow="ALWAYS"
+                alignment="CENTER"
+                styleClass="component-standard-bg-no-hover,border-radius-15"
+                spacing="12"
+                maxWidth="Infinity">
+                <Label
+                    fx:id="headerLabel"
+                    style="-fx-font-size: 32 !important"
+                    styleClass="standard-header-font"/>
+                <Label
+                    fx:id="dataLabel"
+                    style="-fx-font-size: 12 !important"
+                    styleClass="standard-font"/>
+            </VBox>
+        </HBox>
+    </VBox>
 </StackPane>

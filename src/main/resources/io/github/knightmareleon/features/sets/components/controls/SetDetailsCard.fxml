@@ -15,7 +15,7 @@
     alignment="CENTER"
     styleClass="component-standard-bg-no-hover,border-radius-15"
     spacing="12"
-    maxWidth="99999999999999">
+    maxWidth="Infinity">
     <Label
         fx:id="headerLabel"
         style="-fx-font-size: 18 !important"

@@ -100,6 +100,7 @@ public class TestPlayerController implements TestPage, TestConfigReceiver{
 
         this.mainContentHeaderLabel.setText("Question " + (this.currentTestSession().getCurrentIndex() + 1) );
         questionLabel.getStyleClass().add(StandardStyleClass.STANDARD_FONT);
+
         this.centralContent.getChildren().setAll(questionLabel);
 
         this.addAnswerFields(
