@@ -87,7 +87,7 @@ public class TestSetupController implements TestPage, StudySetReceiver, TestType
         startButton.setOnAction(e -> {this.onStartClicked();});
 
         switch(this.testType){
-            case TestType.MULTIPLE_CHOICE -> {
+            case MULTIPLE_CHOICE -> {
                 ToggleButton randomizedButton = new ToggleButton("Randomized");
                 randomizedButton.getStyleClass().addAll(
                     StandardStyleClass.COMPONENT_BG,
@@ -96,7 +96,7 @@ public class TestSetupController implements TestPage, StudySetReceiver, TestType
                 );
                 this.extraConfigs.put("Randomized", randomizedButton);
             }
-            case TestType.FLASHCARD -> {
+            case FLASHCARD -> {
                 Label inputStyleLabel = new Label("Input Style:");
 
                 inputStyleLabel.getStyleClass().add(StandardStyleClass.STANDARD_FONT);
@@ -171,6 +171,42 @@ public class TestSetupController implements TestPage, StudySetReceiver, TestType
                 spacesButton.setDisable(!textInputButton.isSelected());
 
                 this.extraConfigs.put("InputStyle", inputStyleContainer);
+                this.extraConfigs.put("Ignore", ignoreOptionsContainer);
+            }
+
+            case ENUMERATION -> {
+                Label ignoreOptionsLabel = new Label("Ignore on Grading: ");
+                ignoreOptionsLabel.getStyleClass().add(StandardStyleClass.STANDARD_FONT);
+
+                ToggleButton casesButton = new ToggleButton("Case");
+                ToggleButton punctuationButton = new ToggleButton("Punctuation");
+                ToggleButton spacesButton = new ToggleButton("Spaces");
+
+                casesButton.getStyleClass().addAll(
+                    StandardStyleClass.COMPONENT_BG,
+                    StandardStyleClass.WHITE_BORDER,
+                    StandardStyleClass.STANDARD_FONT
+                );
+                punctuationButton.getStyleClass().addAll(
+                    StandardStyleClass.COMPONENT_BG,
+                    StandardStyleClass.WHITE_BORDER,
+                    StandardStyleClass.STANDARD_FONT
+                );
+                spacesButton.getStyleClass().addAll(
+                    StandardStyleClass.COMPONENT_BG,
+                    StandardStyleClass.WHITE_BORDER,
+                    StandardStyleClass.STANDARD_FONT
+                );
+
+                HBox ignoreOptionsContainer = new HBox(
+                    24, 
+                    ignoreOptionsLabel,
+                    casesButton,
+                    punctuationButton,
+                    spacesButton
+                );
+                ignoreOptionsContainer.setAlignment(Pos.CENTER_LEFT);
+
                 this.extraConfigs.put("Ignore", ignoreOptionsContainer);
             }
             default -> {
