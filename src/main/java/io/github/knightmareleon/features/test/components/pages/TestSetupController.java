@@ -297,6 +297,16 @@ public class TestSetupController implements TestPage, StudySetReceiver, TestType
                 testConfigBuilder.setIgnorePunctuation(punctuationButton.isSelected());
                 testConfigBuilder.setIgnoreSpaces(spacesButton.isSelected());
             }
+            if(this.testType == TestType.ENUMERATION){
+                HBox ignoreContainer = (HBox)this.extraConfigs.get("Ignore");
+                ToggleButton casesButton = (ToggleButton) ignoreContainer.getChildren().get(1);
+                ToggleButton punctuationButton = (ToggleButton) ignoreContainer.getChildren().get(2);
+                ToggleButton spacesButton = (ToggleButton) ignoreContainer.getChildren().get(3);
+
+                testConfigBuilder.setIgnoreCases(casesButton.isSelected());
+                testConfigBuilder.setIgnorePunctuation(punctuationButton.isSelected());
+                testConfigBuilder.setIgnoreSpaces(spacesButton.isSelected());
+            }
             this.testNavigator.show(TestPageURL.PLAY, testConfigBuilder.build());
         }
     }
