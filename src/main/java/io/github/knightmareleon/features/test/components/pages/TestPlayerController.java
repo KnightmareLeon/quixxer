@@ -17,6 +17,7 @@ import io.github.knightmareleon.shared.utils.Converter;
 import io.github.knightmareleon.shared.utils.Transitions;
 import javafx.animation.AnimationTimer;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -359,6 +360,86 @@ public class TestPlayerController implements TestPage, TestConfigReceiver{
 
 
                 answerFieldContainer.getChildren().add(submitButton);
+            }
+            case TestType.ENUMERATION -> {
+                VBox enumQFieldsContainer = new VBox();
+                enumQFieldsContainer.setFillWidth(true);
+                enumQFieldsContainer.setSpacing(12);
+
+                Button newFieldButton = new Button("Add Field");
+                Button removeFieldButton = new Button("Remove Field");
+                newFieldButton.setOnAction(e -> {
+                    if(enumQFieldsContainer.getChildren().size() < 6) {
+                        TextField newEnumField = new TextField();
+                        newEnumField.setMaxWidth(Double.MAX_VALUE);
+                        enumQFieldsContainer.getChildren().add(newEnumField);
+                    } 
+                });
+
+                removeFieldButton.setOnAction(e -> {
+                    if(enumQFieldsContainer.getChildren().size() != 1) {
+                        enumQFieldsContainer.getChildren().removeLast();
+                    } 
+                });
+
+                newFieldButton.getStyleClass().addAll(
+                    StandardStyleClass.STANDARD_FONT,
+                    StandardStyleClass.BORDER_RADIUS_15,
+                    StandardStyleClass.COMPONENT_BG
+                );
+                newFieldButton.setMaxWidth(Double.MAX_VALUE);
+                removeFieldButton.getStyleClass().addAll(
+                    StandardStyleClass.STANDARD_FONT,
+                    StandardStyleClass.BORDER_RADIUS_15,
+                    StandardStyleClass.COMPONENT_BG
+                );
+                removeFieldButton.setMaxWidth(Double.MAX_VALUE);
+
+                TextField firstEnumField = new TextField();
+                firstEnumField.setMaxWidth(Double.MAX_VALUE);
+                enumQFieldsContainer.getChildren().add(firstEnumField);
+
+                Button submitButton = new Button("Submit");
+                submitButton.getStyleClass().addAll(
+                    StandardStyleClass.STANDARD_FONT,
+                    StandardStyleClass.BORDER_RADIUS_15,
+                    StandardStyleClass.COMPONENT_BG
+                );
+                submitButton.setMaxWidth(Double.MAX_VALUE);
+
+                submitButton.setOnAction(e -> {
+                    List<Node> qFields = enumQFieldsContainer.getChildren();
+                    List<Choice> choices = question.getChoices();
+                    if(qFields.size() != choices.size()){
+                        this.handleQuestionResult(question, false, timer);
+                        return;
+                    }
+
+                    for(Node qField : qFields){
+                        TextField quField = (TextField) qField;
+                        boolean found = false;
+                        for(Choice choice : choices){
+                            if(quField.getText().equals(choice.getDescription())){
+                                found = true;
+                                break;
+                            }
+                        }
+
+                        if(!found){
+                            this.handleQuestionResult(question, false, timer);
+                            return;
+                        }
+                    }
+
+                    this.handleQuestionResult(question, true, timer);
+                });
+
+                answerFieldContainer.getChildren().addAll(
+                    enumQFieldsContainer,
+                    newFieldButton,
+                    removeFieldButton,
+                    submitButton
+                );
             }
             case TestType.TRUE_OR_FALSE -> {
 
