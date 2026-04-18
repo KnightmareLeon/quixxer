@@ -416,10 +416,23 @@ public class TestPlayerController implements TestPage, TestConfigReceiver{
                     }
 
                     for(Node qField : qFields){
-                        TextField quField = (TextField) qField;
+                        String answer = ((TextField) qField).getText();
                         boolean found = false;
                         for(Choice choice : choices){
-                            if(quField.getText().equals(choice.getDescription())){
+                            String correctAns = choice.getDescription();
+                            if(this.testConfig.ignoreCases()) {
+                                answer = answer.toLowerCase();
+                                correctAns = correctAns.toLowerCase();
+                            }
+                            if(this.testConfig.ignorePunctuation()){
+                                answer = answer.replaceAll("\\p{Punct}", "");
+                                correctAns = correctAns.replaceAll("\\p{Punct}", "");
+                            }
+                            if(this.testConfig.ignoreSpaces()){
+                                answer = answer.replaceAll("\\s+", "");
+                                correctAns = correctAns.replaceAll("\\s+", "");
+                            }
+                            if(answer.equals(correctAns)){
                                 found = true;
                                 break;
                             }
