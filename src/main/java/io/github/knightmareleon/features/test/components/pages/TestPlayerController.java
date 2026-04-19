@@ -372,6 +372,9 @@ public class TestPlayerController implements TestPage, TestConfigReceiver{
                     if(enumQFieldsContainer.getChildren().size() < 6) {
                         TextField newEnumField = new TextField();
                         newEnumField.setMaxWidth(Double.MAX_VALUE);
+                        newEnumField.getStyleClass().add(
+                            StandardStyleClass.STANDARD_FONT
+                        );
                         enumQFieldsContainer.getChildren().add(newEnumField);
                     } 
                 });
@@ -397,6 +400,9 @@ public class TestPlayerController implements TestPage, TestConfigReceiver{
 
                 TextField firstEnumField = new TextField();
                 firstEnumField.setMaxWidth(Double.MAX_VALUE);
+                firstEnumField.getStyleClass().add(
+                    StandardStyleClass.STANDARD_FONT
+                );
                 enumQFieldsContainer.getChildren().add(firstEnumField);
 
                 Button submitButton = new Button("Submit");
