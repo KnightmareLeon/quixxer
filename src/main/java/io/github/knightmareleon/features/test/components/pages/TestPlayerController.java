@@ -375,6 +375,7 @@ public class TestPlayerController implements TestPage, TestConfigReceiver{
                         newEnumField.getStyleClass().add(
                             StandardStyleClass.STANDARD_FONT
                         );
+                        newEnumField.setStyle("-fx-text-fill: black !important");
                         enumQFieldsContainer.getChildren().add(newEnumField);
                     } 
                 });
@@ -403,6 +404,7 @@ public class TestPlayerController implements TestPage, TestConfigReceiver{
                 firstEnumField.getStyleClass().add(
                     StandardStyleClass.STANDARD_FONT
                 );
+                firstEnumField.setStyle("-fx-text-fill: black !important");
                 enumQFieldsContainer.getChildren().add(firstEnumField);
 
                 Button submitButton = new Button("Submit");
