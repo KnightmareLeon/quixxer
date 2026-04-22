@@ -245,6 +245,13 @@ public class TestPlayerController implements TestPage, TestConfigReceiver{
     private void addAnswerFields(Question question, AnimationTimer timer){
         VBox answerFieldContainer = new VBox(24);
         answerFieldContainer.setFillWidth(true);
+
+        Label answerLabel = new Label("Answer(s):");
+        answerLabel.getStyleClass().add(
+            StandardStyleClass.STANDARD_FONT
+        );
+
+        answerFieldContainer.getChildren().add(answerLabel);
         switch(this.testConfig.getType()){
             case TestType.MULTIPLE_CHOICE -> {
                 List<Choice> choices = question.getChoices();
