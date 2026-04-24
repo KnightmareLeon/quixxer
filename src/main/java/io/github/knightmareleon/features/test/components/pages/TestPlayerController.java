@@ -531,7 +531,7 @@ public class TestPlayerController implements TestPage, TestConfigReceiver{
         }
 
         this.mainContentPane.setBottom(answerFieldContainer);
-                Transitions.standardFadeTransition(answerFieldContainer);
+        Transitions.standardFadeTransition(answerFieldContainer);
 
         if(this.testConfig.isTimed()) timer.start();
     }
@@ -550,6 +550,7 @@ public class TestPlayerController implements TestPage, TestConfigReceiver{
         this.incorrectProgressBar.setProgress(0.0001);
         this.correctProgressBar.setProgress(0.0001);
     }
+
     @FXML
     @SuppressWarnings("unused")
     private void onBackPageClicked(){
