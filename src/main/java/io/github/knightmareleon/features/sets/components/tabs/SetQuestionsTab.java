@@ -18,8 +18,6 @@ import io.github.knightmareleon.shared.ui.controls.StandardAlert;
 import io.github.knightmareleon.shared.utils.ControllerRootSetter;
 import io.github.knightmareleon.shared.utils.Result;
 import io.github.knightmareleon.shared.utils.Transitions;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
@@ -32,7 +30,6 @@ public class SetQuestionsTab extends TabPane{
     
     private final SetsService setsService;
     private final StudySet studySet;
-    private final EventHandler<ActionEvent> onAddQuestionClicked;
 
     @FXML private VBox identContainer;
     @FXML private VBox enumContainer;
@@ -47,14 +44,12 @@ public class SetQuestionsTab extends TabPane{
     @SuppressWarnings("LeakingThisInConstructor")
     public SetQuestionsTab(
         SetsService setsService,
-        StudySet studySet,
-        EventHandler<ActionEvent> onAddQuestionClicked
+        StudySet studySet
     ) 
     
     {
         this.setsService = setsService;
         this.studySet = studySet;
-        this.onAddQuestionClicked = onAddQuestionClicked;
 
         FXMLLoader loader = new FXMLLoader(
             getClass().getResource("SetQuestionsTab.fxml")
