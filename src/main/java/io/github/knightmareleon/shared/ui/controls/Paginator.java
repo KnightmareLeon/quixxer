@@ -11,7 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 
 public class Paginator extends HBox{
-    
+
     @FXML private Button firstPageButton;
     @FXML private Button prevPageButton;
     @FXML private NaturalNumberField pageField;
