@@ -6,7 +6,12 @@ public enum TestPageURL implements PageURL{
     MAIN("/io/github/knightmareleon/features/test/components/pages/TestMainView.fxml"),
     SETS("/io/github/knightmareleon/features/test/components/pages/TestSetsPickerView.fxml"),
     SETUP("/io/github/knightmareleon/features/test/components/pages/TestSetupView.fxml"),
+    SETUP_MULTI("/io/github/knightmareleon/features/test/components/pages/TestMultipleChoiceSetupView.fxml"),
+    SETUP_FCARD("/io/github/knightmareleon/features/test/components/pages/TestFlashcardSetupView.fxml"),
+    SETUP_ENUME("/io/github/knightmareleon/features/test/components/pages/TestEnumerationSetupView.fxml"),
+    SETUP_TROFS("/io/github/knightmareleon/features/test/components/pages/TestTrueOrFalseSetupView.fxml"),
     PLAY("/io/github/knightmareleon/features/test/components/pages/TestPlayerView.fxml");
+
     private final String url;
 
     TestPageURL(String url) {

@@ -98,7 +98,15 @@ public class TestSetsPickerController implements TestPage, TestTypeReceiver{
     }
 
     private void onSetClicked(StudySet studySet, TestType type){
-        navigator.show(TestPageURL.SETUP, studySet, type);
+        switch(type){
+            case ENUMERATION -> navigator.show(TestPageURL.SETUP_ENUME, studySet);
+            case FLASHCARD -> navigator.show(TestPageURL.SETUP_FCARD, studySet);
+            case MULTIPLE_CHOICE -> navigator.show(TestPageURL.SETUP_MULTI, studySet);
+            case TRUE_OR_FALSE -> navigator.show(TestPageURL.SETUP_TROFS, studySet);
+            case MATCHING_TYPE -> throw new UnsupportedOperationException("Unimplemented case: " + type);
+            case COMBINED -> throw new UnsupportedOperationException("Unimplemented case: " + type);
+            default -> throw new IllegalArgumentException("Unexpected value: " + type);
+        }
     }
 
     private void createStudySetComponents(){

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ToggleButton?>
+
+<?import io.github.knightmareleon.shared.ui.controls.NaturalNumberField?>
+
+<fx:root type="VBox"
+    xmlns:fx="http://javafx.com/fxml"
+    fx:id="generalSettingsContainer"
+    spacing="24"
+    alignment="TOP_LEFT"
+    fillWidth="true">
+    <Label 
+        text="General Test Configurations"
+        styleClass="standard-header-font"/>
+    <HBox
+        alignment="CENTER_LEFT"
+        spacing="12">
+        <Label 
+            text="Max Questions"
+            styleClass="standard-font"
+            labelFor="$totalQuestionsField"/>
+        <NaturalNumberField 
+            fx:id="totalQuestionsField"
+            styleClass="standard-font"
+            style="-fx-text-fill: black !important;"/>
+        <Label fx:id="totalQuestionsMax"
+            styleClass="standard-font"/>
+    </HBox>
+    <HBox
+        alignment="CENTER_LEFT"
+        spacing="12">
+        <ToggleButton 
+            text="Timed"
+            fx:id="timeToggleButton"
+            styleClass="component-standard-bg,white-border,standard-font"/>
+        <ToggleButton 
+            text="0:30"
+            fx:id="thirtySecButton"
+            styleClass="component-standard-bg,white-border,standard-font"/>
+        <ToggleButton 
+            text="1:00"
+            fx:id="oneMinButton"
+            styleClass="component-standard-bg,white-border,standard-font"/>
+        <ToggleButton 
+            text="3:00"
+            fx:id="threeMinButton"
+            styleClass="component-standard-bg,white-border,standard-font"/>
+        <ToggleButton 
+            text="5:00"
+            fx:id="fiveMinButton"
+            styleClass="component-standard-bg,white-border,standard-font"/>
+        <ToggleButton 
+            text="10:00"
+            fx:id="tenMinButton"
+            styleClass="component-standard-bg,white-border,standard-font"/>
+    </HBox>
+    <ToggleButton 
+        text="Shuffled"
+        fx:id="shuffleToggleButton"
+        styleClass="component-standard-bg,white-border,standard-font"/>
+    <ToggleButton
+        text="Continuous"
+        fx:id="continuousToggleButton"
+        styleClass="component-standard-bg,white-border,standard-font"/>
+</fx:root>
