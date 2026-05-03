@@ -50,6 +50,21 @@
             fillWidth="true">
             <TestGeneralSettings 
                 fx:id="generalSettings"/>
+            <Label text="Multiple Choice Settings"
+                styleClass="standard-header-font"/>
+            <ToggleButton
+                fx:id="randomized"
+                text="Randomized Choices"
+                styleClass="component-standard-bg, white-border, standard-font" 
+                />
+            <Region
+                VBox.vgrow="ALWAYS" />
+            <Button 
+                text="Start"
+                maxWidth="Infinity"
+                onAction="#onStartClicked"
+                styleClass="component-standard-bg, standard-font, border-radius-15"/>
         </VBox>
+
     </ScrollPane>
 </VBox>
