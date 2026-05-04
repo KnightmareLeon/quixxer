@@ -14,5 +14,4 @@ public class TestFlashcardSetupController extends TestSetupController{
     protected void onStartClicked() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
-    
 }

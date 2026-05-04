@@ -50,6 +50,8 @@
             fillWidth="true">
             <TestGeneralSettings 
                 fx:id="generalSettings"/>
+            <Label 
+                text=""/>
         </VBox>
     </ScrollPane>
 </VBox>

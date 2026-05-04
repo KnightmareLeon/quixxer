@@ -50,6 +50,13 @@
             fillWidth="true">
             <TestGeneralSettings 
                 fx:id="generalSettings"/>
+        <Region
+            VBox.vgrow="ALWAYS" />
+        <Button 
+            text="Start"
+            maxWidth="Infinity"
+            onAction="#onStartClicked"
+            styleClass="component-standard-bg, standard-font, border-radius-15"/>
         </VBox>
     </ScrollPane>
 </VBox>

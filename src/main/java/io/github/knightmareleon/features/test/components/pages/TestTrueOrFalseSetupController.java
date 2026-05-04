@@ -2,6 +2,7 @@ package io.github.knightmareleon.features.test.components.pages;
 
 import io.github.knightmareleon.features.test.constants.TestPageURL;
 import io.github.knightmareleon.features.test.constants.TestType;
+import io.github.knightmareleon.shared.models.TestConfig;
 
 public class TestTrueOrFalseSetupController extends TestSetupController{
 
@@ -12,7 +13,8 @@ public class TestTrueOrFalseSetupController extends TestSetupController{
 
     @Override
     protected void onStartClicked() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        TestConfig.Builder configBuilder = createGeneralTestConfig(TestType.TRUE_OR_FALSE);
+        this.testNavigator.show(TestPageURL.PLAY, configBuilder.build());
     }
     
 }
