@@ -51,7 +51,47 @@
             <TestGeneralSettings 
                 fx:id="generalSettings"/>
             <Label 
-                text=""/>
+                text="Flashcard Settings"
+                styleClass="standard-header-font"/>
+            <HBox
+                alignment="CENTER_LEFT"
+                spacing="24">
+                <Label 
+                    text="Input Style:"
+                    styleClass="standard-font"/>
+                <ToggleButton 
+                    fx:id="correctMarkButton"
+                    text="Mark as Correct/Incorrect"
+                    styleClass="standard-font, component-standard-bg, white-border"/>
+                <ToggleButton
+                    fx:id="textInputButton"
+                    text="Text Input"
+                    styleClass="standard-font, component-standard-bg, white-border"/>
+            </HBox>
+            <HBox
+                alignment="CENTER_LEFT"
+                spacing="24">
+                <Label
+                    text="Ignore Options:"
+                    styleClass="standard-font"/>
+                <ToggleButton 
+                    fx:id="casesButton"
+                    text="Case"
+                    styleClass="standard-font, component-standard-bg, white-border"/>
+                <ToggleButton
+                    fx:id="punctuationButton"
+                    text="Punctuation"
+                    styleClass="standard-font, component-standard-bg, white-border"/>
+                <ToggleButton
+                    fx:id="spacesButton"
+                    text="Spaces"
+                    styleClass="standard-font, component-standard-bg, white-border"/>
+            </HBox>
+            <Button 
+                text="Start"
+                maxWidth="Infinity"
+                onAction="#onStartClicked"
+                styleClass="component-standard-bg, standard-font, border-radius-15"/>
         </VBox>
     </ScrollPane>
 </VBox>

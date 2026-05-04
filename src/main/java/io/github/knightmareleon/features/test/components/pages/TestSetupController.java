@@ -187,25 +187,6 @@ public abstract class TestSetupController implements TestPage, StudySetReceiver{
         }
         return null;
     }
-        // Alert alert = new StandardAlert(Alert.AlertType.CONFIRMATION);
-        // alert.setTitle("Start");
-        // alert.setHeaderText("Starting Test for " + this.studySet.getTitle());
-        // alert.setContentText("Are you sure you want to start?");
-        // Optional<ButtonType> alertResult = alert.showAndWait();
-        // if(alertResult.isPresent() && alertResult.get() == ButtonType.OK){
-        //     TestConfig.Builder testConfigBuilder = new TestConfig.Builder(
-        //         this.testType, 
-        //         this.studySet, 
-        //         Integer.parseInt(this.totalQuestions.getText()), 
-        //         this.timeToggleButton.isSelected(), 
-        //         this.timeToggleButton.isSelected() ? 
-        //         Converter.toTimeSetting(
-        //             ((ToggleButton)timeToggleGroup.getSelectedToggle()).getText()
-        //         ) : null,
-        //         this.continuousToggleButton.isSelected(),
-        //         this.shuffleToggleButton.isSelected()
-        //     );
-            
             // if(this.testType == TestType.MULTIPLE_CHOICE 
             //     && ((ToggleButton)this.extraConfigs.get("Randomized")).isSelected())
             //     testConfigBuilder.setRandomized(true);
