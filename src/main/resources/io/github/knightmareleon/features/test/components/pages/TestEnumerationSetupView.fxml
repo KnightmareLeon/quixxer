@@ -50,6 +50,39 @@
             fillWidth="true">
             <TestGeneralSettings 
                 fx:id="generalSettings"/>
+            <Label 
+                text="Enumeration Settings"
+                styleClass="standard-header-font"/>
+            <HBox
+                alignment="CENTER_LEFT"
+                spacing="24">
+                <Label
+                    text="Ignore Options:"
+                    styleClass="standard-font"/>
+                <ToggleButton 
+                    fx:id="casesButton"
+                    text="Case"
+                    styleClass="standard-font, component-standard-bg, white-border"/>
+                <ToggleButton
+                    fx:id="punctuationButton"
+                    text="Punctuation"
+                    styleClass="standard-font, component-standard-bg, white-border"/>
+                <ToggleButton
+                    fx:id="spacesButton"
+                    text="Spaces"
+                    styleClass="standard-font, component-standard-bg, white-border"/>
+            </HBox>
+            <ToggleButton
+                fx:id="orderButton"
+                text="In Order"
+                styleClass="standard-font, component-standard-bg, white-border"/>
+            <Region
+                VBox.vgrow="ALWAYS" />
+            <Button 
+                text="Start"
+                maxWidth="Infinity"
+                onAction="#onStartClicked"
+                styleClass="component-standard-bg, standard-font, border-radius-15"/>
         </VBox>
     </ScrollPane>
 </VBox>

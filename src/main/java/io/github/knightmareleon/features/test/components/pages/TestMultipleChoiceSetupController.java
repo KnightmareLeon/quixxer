@@ -18,6 +18,7 @@ public class TestMultipleChoiceSetupController extends TestSetupController{
     @Override
     protected void onStartClicked() {
         TestConfig.Builder configBuilder = createGeneralTestConfig(TestType.MULTIPLE_CHOICE);
+        if(configBuilder == null) return;
         configBuilder.setRandomized(randomized.isSelected());
         this.testNavigator.show(TestPageURL.PLAY, configBuilder.build());
     }

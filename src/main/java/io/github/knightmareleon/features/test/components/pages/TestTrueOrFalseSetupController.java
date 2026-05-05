@@ -14,6 +14,7 @@ public class TestTrueOrFalseSetupController extends TestSetupController{
     @Override
     protected void onStartClicked() {
         TestConfig.Builder configBuilder = createGeneralTestConfig(TestType.TRUE_OR_FALSE);
+        if(configBuilder == null) return;
         this.testNavigator.show(TestPageURL.PLAY, configBuilder.build());
     }
     

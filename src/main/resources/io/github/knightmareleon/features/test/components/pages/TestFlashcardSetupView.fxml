@@ -87,6 +87,8 @@
                     text="Spaces"
                     styleClass="standard-font, component-standard-bg, white-border"/>
             </HBox>
+            <Region
+                VBox.vgrow="ALWAYS" />
             <Button 
                 text="Start"
                 maxWidth="Infinity"

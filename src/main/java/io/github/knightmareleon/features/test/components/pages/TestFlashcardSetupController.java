@@ -52,6 +52,7 @@ public class TestFlashcardSetupController extends TestSetupController{
     @Override
     protected void onStartClicked() {
         TestConfig.Builder configBuilder = createGeneralTestConfig(TestType.FLASHCARD);
+        if(configBuilder == null) return;
         boolean inTextInput = this.textInputButton.isSelected();
         if(inTextInput){
             configBuilder.setIfTextInput(inTextInput);
