@@ -1,5 +1,5 @@
 package io.github.knightmareleon.features.test.components.pages;
 
-public class TestEnumerationPlayer {
+public class TestEnumerationPlayerController {
     
 }
