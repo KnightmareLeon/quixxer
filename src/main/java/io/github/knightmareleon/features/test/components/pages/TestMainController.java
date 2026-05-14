@@ -14,7 +14,6 @@ public class TestMainController implements TestPage{
         this.testNavigator = testNavigator;
     }
 
-
     @FXML
     @SuppressWarnings("unused")
     private void onMultipleChoiceClicked(){
