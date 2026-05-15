@@ -1,4 +1,4 @@
-package io.github.knightmareleon.features.test.components.pages;
+package io.github.knightmareleon.features.test.components.pages.setup;
 
 import io.github.knightmareleon.features.test.constants.TestPageURL;
 import io.github.knightmareleon.features.test.constants.TestType;

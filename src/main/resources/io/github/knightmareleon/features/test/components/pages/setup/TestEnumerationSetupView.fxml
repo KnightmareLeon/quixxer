@@ -13,7 +13,7 @@
 <?import io.github.knightmareleon.features.test.components.controls.TestGeneralSettings?>
 
 <VBox xmlns:fx="http://javafx.com/fxml/1"
-    fx:controller="io.github.knightmareleon.features.test.components.pages.TestFlashcardSetupController"
+    fx:controller="io.github.knightmareleon.features.test.components.pages.setup.TestEnumerationSetupController"
     fx:id="vbox"
     style="-fx-padding:48; -fx-border-radius: 53; -fx-background-radius: 53;"
     spacing="24"
@@ -26,7 +26,7 @@
         alignment="CENTER_LEFT">
         <Label fx:id="setupTitle" 
             styleClass="standard-header-font"
-            text="Flashcard Test Setup"/>
+            text="Enumeration Test Setup"/>
         <Region HBox.hgrow="ALWAYS" />
         <IconButton 
             iconLiteral="bi-box-arrow-left"
@@ -51,23 +51,8 @@
             <TestGeneralSettings 
                 fx:id="generalSettings"/>
             <Label 
-                text="Flashcard Settings"
+                text="Enumeration Settings"
                 styleClass="standard-header-font"/>
-            <HBox
-                alignment="CENTER_LEFT"
-                spacing="24">
-                <Label 
-                    text="Input Style:"
-                    styleClass="standard-font"/>
-                <ToggleButton 
-                    fx:id="correctMarkButton"
-                    text="Mark as Correct/Incorrect"
-                    styleClass="standard-font, component-standard-bg, white-border"/>
-                <ToggleButton
-                    fx:id="textInputButton"
-                    text="Text Input"
-                    styleClass="standard-font, component-standard-bg, white-border"/>
-            </HBox>
             <HBox
                 alignment="CENTER_LEFT"
                 spacing="24">
@@ -87,6 +72,10 @@
                     text="Spaces"
                     styleClass="standard-font, component-standard-bg, white-border"/>
             </HBox>
+            <ToggleButton
+                fx:id="orderButton"
+                text="In Order"
+                styleClass="standard-font, component-standard-bg, white-border"/>
             <Region
                 VBox.vgrow="ALWAYS" />
             <Button 

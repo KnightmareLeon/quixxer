@@ -13,7 +13,7 @@
 <?import io.github.knightmareleon.features.test.components.controls.TestGeneralSettings?>
 
 <VBox xmlns:fx="http://javafx.com/fxml/1"
-    fx:controller="io.github.knightmareleon.features.test.components.pages.TestMultipleChoiceSetupController"
+    fx:controller="io.github.knightmareleon.features.test.components.pages.setup.TestFlashcardSetupController"
     fx:id="vbox"
     style="-fx-padding:48; -fx-border-radius: 53; -fx-background-radius: 53;"
     spacing="24"
@@ -26,7 +26,7 @@
         alignment="CENTER_LEFT">
         <Label fx:id="setupTitle" 
             styleClass="standard-header-font"
-            text="Multiple Choice Test Setup"/>
+            text="Flashcard Test Setup"/>
         <Region HBox.hgrow="ALWAYS" />
         <IconButton 
             iconLiteral="bi-box-arrow-left"
@@ -50,13 +50,43 @@
             fillWidth="true">
             <TestGeneralSettings 
                 fx:id="generalSettings"/>
-            <Label text="Multiple Choice Settings"
+            <Label 
+                text="Flashcard Settings"
                 styleClass="standard-header-font"/>
-            <ToggleButton
-                fx:id="randomized"
-                text="Randomized Choices"
-                styleClass="component-standard-bg, white-border, standard-font" 
-                />
+            <HBox
+                alignment="CENTER_LEFT"
+                spacing="24">
+                <Label 
+                    text="Input Style:"
+                    styleClass="standard-font"/>
+                <ToggleButton 
+                    fx:id="correctMarkButton"
+                    text="Mark as Correct/Incorrect"
+                    styleClass="standard-font, component-standard-bg, white-border"/>
+                <ToggleButton
+                    fx:id="textInputButton"
+                    text="Text Input"
+                    styleClass="standard-font, component-standard-bg, white-border"/>
+            </HBox>
+            <HBox
+                alignment="CENTER_LEFT"
+                spacing="24">
+                <Label
+                    text="Ignore Options:"
+                    styleClass="standard-font"/>
+                <ToggleButton 
+                    fx:id="casesButton"
+                    text="Case"
+                    styleClass="standard-font, component-standard-bg, white-border"/>
+                <ToggleButton
+                    fx:id="punctuationButton"
+                    text="Punctuation"
+                    styleClass="standard-font, component-standard-bg, white-border"/>
+                <ToggleButton
+                    fx:id="spacesButton"
+                    text="Spaces"
+                    styleClass="standard-font, component-standard-bg, white-border"/>
+            </HBox>
             <Region
                 VBox.vgrow="ALWAYS" />
             <Button 
@@ -65,6 +95,5 @@
                 onAction="#onStartClicked"
                 styleClass="component-standard-bg, standard-font, border-radius-15"/>
         </VBox>
-
     </ScrollPane>
 </VBox>

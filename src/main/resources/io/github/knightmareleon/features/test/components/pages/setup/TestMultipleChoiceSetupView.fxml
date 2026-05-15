@@ -13,7 +13,7 @@
 <?import io.github.knightmareleon.features.test.components.controls.TestGeneralSettings?>
 
 <VBox xmlns:fx="http://javafx.com/fxml/1"
-    fx:controller="io.github.knightmareleon.features.test.components.pages.TestTrueOrFalseSetupController"
+    fx:controller="io.github.knightmareleon.features.test.components.pages.setup.TestMultipleChoiceSetupController"
     fx:id="vbox"
     style="-fx-padding:48; -fx-border-radius: 53; -fx-background-radius: 53;"
     spacing="24"
@@ -26,7 +26,7 @@
         alignment="CENTER_LEFT">
         <Label fx:id="setupTitle" 
             styleClass="standard-header-font"
-            text="True or False Test Setup"/>
+            text="Multiple Choice Test Setup"/>
         <Region HBox.hgrow="ALWAYS" />
         <IconButton 
             iconLiteral="bi-box-arrow-left"
@@ -50,13 +50,21 @@
             fillWidth="true">
             <TestGeneralSettings 
                 fx:id="generalSettings"/>
-        <Region
-            VBox.vgrow="ALWAYS" />
-        <Button 
-            text="Start"
-            maxWidth="Infinity"
-            onAction="#onStartClicked"
-            styleClass="component-standard-bg, standard-font, border-radius-15"/>
+            <Label text="Multiple Choice Settings"
+                styleClass="standard-header-font"/>
+            <ToggleButton
+                fx:id="randomized"
+                text="Randomized Choices"
+                styleClass="component-standard-bg, white-border, standard-font" 
+                />
+            <Region
+                VBox.vgrow="ALWAYS" />
+            <Button 
+                text="Start"
+                maxWidth="Infinity"
+                onAction="#onStartClicked"
+                styleClass="component-standard-bg, standard-font, border-radius-15"/>
         </VBox>
+
     </ScrollPane>
 </VBox>

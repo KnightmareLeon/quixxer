@@ -13,7 +13,7 @@
 <?import io.github.knightmareleon.shared.ui.controls.NaturalNumberField?>
 
 <VBox xmlns:fx="http://javafx.com/fxml/1"
-    fx:controller="io.github.knightmareleon.features.test.components.pages.TestSetupController"
+    fx:controller="io.github.knightmareleon.features.test.components.pages.setup.TestSetupController"
     fx:id="vbox"
     style="-fx-padding:48; -fx-border-radius: 53; -fx-background-radius: 53;"
     spacing="24"

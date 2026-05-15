@@ -1,9 +1,10 @@
-package io.github.knightmareleon.features.test.components.pages;
+package io.github.knightmareleon.features.test.components.pages.setup;
 
 import java.util.Optional;
 
 import io.github.knightmareleon.features.test.components.TestNavigator;
 import io.github.knightmareleon.features.test.components.controls.TestGeneralSettings;
+import io.github.knightmareleon.features.test.components.pages.TestPage;
 import io.github.knightmareleon.features.test.constants.TestType;
 import io.github.knightmareleon.shared.models.StudySet;
 import io.github.knightmareleon.shared.models.TestConfig;
