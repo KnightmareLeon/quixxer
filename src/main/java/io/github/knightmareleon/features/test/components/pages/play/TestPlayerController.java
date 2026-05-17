@@ -1,10 +1,11 @@
-package io.github.knightmareleon.features.test.components.pages;
+package io.github.knightmareleon.features.test.components.pages.play;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import io.github.knightmareleon.features.test.components.TestConfigReceiver;
 import io.github.knightmareleon.features.test.components.TestNavigator;
+import io.github.knightmareleon.features.test.components.pages.TestPage;
 import io.github.knightmareleon.features.test.constants.TestPageURL;
 import io.github.knightmareleon.features.test.constants.TestType;
 import io.github.knightmareleon.shared.constants.StandardStyleClass;

@@ -10,7 +10,7 @@ public enum TestPageURL implements PageURL{
     SETUP_FCARD("/io/github/knightmareleon/features/test/components/pages/setup/TestFlashcardSetupView.fxml"),
     SETUP_ENUME("/io/github/knightmareleon/features/test/components/pages/setup/TestEnumerationSetupView.fxml"),
     SETUP_TROFS("/io/github/knightmareleon/features/test/components/pages/setup/TestTrueOrFalseSetupView.fxml"),
-    PLAY("/io/github/knightmareleon/features/test/components/pages/TestPlayerView.fxml");
+    PLAY("/io/github/knightmareleon/features/test/components/pages/play/TestPlayerView.fxml");
 
     private final String url;
 
