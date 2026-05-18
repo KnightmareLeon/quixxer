@@ -45,6 +45,14 @@
             iconStyleClass="icon-base-color"
             minHeight="48"
             minWidth="48"/>
+        <IconToggleButton
+            fx:id="sourcesToggleButton"
+            text="Sources"
+            iconLiteral="far-folder-open"
+            styleClass="icon-button-transparent-bg"
+            iconStyleClass="icon-base-color"
+            minHeight="48"
+            minWidth="48"/>
         <Region HBox.hgrow="ALWAYS" />
         <IconButton 
             iconLiteral="bi-pencil-square"

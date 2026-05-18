@@ -28,6 +28,7 @@ public class SetDetailsController extends VBox implements SetsPage, StudySetRece
     private final ToggleGroup setTabs = new ToggleGroup();
     @FXML private IconToggleButton detailsToggleButton;
     @FXML private IconToggleButton questionToggleButton;
+    @FXML private IconToggleButton sourcesToggleButton;
 
     @FXML private Label setName;
     @FXML private VBox tabsContainer;
@@ -61,7 +62,7 @@ public class SetDetailsController extends VBox implements SetsPage, StudySetRece
 
         this.detailsToggleButton.setToggleGroup(this.setTabs);
         this.questionToggleButton.setToggleGroup(this.setTabs);
-
+        this.sourcesToggleButton.setToggleGroup(this.setTabs);
         setTabs.selectedToggleProperty().addListener((obsVal, oldVal, newVal) -> {
             if (newVal == null) {
                 oldVal.setSelected(true);
