@@ -3,6 +3,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 
 <?import javafx.scene.control.Label?>
 
@@ -35,7 +36,7 @@
                 maxWidth="Infinity">
                     <Label
                         fx:id="headerLabel"
-                        style="-fx-font-size: 32 !important"
+                        style="-fx-font-size: 24 !important"
                         styleClass="standard-header-font"
                         text="Total Sets"/>
                     <Label
@@ -48,18 +49,42 @@
                 style="-fx-padding:10"
                 fillWidth="true"
                 HBox.hgrow="ALWAYS"
-                alignment="CENTER"
+                alignment="CENTER_LEFT"
                 styleClass="component-standard-bg-no-hover,border-radius-15"
                 spacing="12"
                 maxWidth="Infinity">
                 <Label
                     fx:id="headerLabel"
-                    style="-fx-font-size: 32 !important"
-                    styleClass="standard-header-font"/>
+                    style="-fx-font-size: 24 !important"
+                    styleClass="standard-header-font"
+                    text="Last Taken Set"/>
                 <Label
                     fx:id="dataLabel"
                     style="-fx-font-size: 12 !important"
                     styleClass="standard-font"/>
+            </VBox>
+        </HBox>
+        <HBox
+            VBox.vgrow="ALWAYS">
+            <VBox
+                stylesheets="/io/github/knightmareleon/css/controls.css"
+                style="-fx-padding:10"
+                fillWidth="true"
+                HBox.hgrow="ALWAYS"
+                alignment="CENTER_LEFT"
+                styleClass="component-standard-bg-no-hover,border-radius-15"
+                spacing="12"
+                maxWidth="Infinity">
+                <Label
+                    fx:id="headerLabel"
+                    style="-fx-font-size: 24 !important"
+                    styleClass="standard-header-font"
+                    text="Statistics"/>
+                <Label
+                    fx:id="dataLabel"
+                    style="-fx-font-size: 12 !important"
+                    styleClass="standard-font"/>
+                <Region VBox.vgrow="ALWAYS" />
             </VBox>
         </HBox>
     </VBox>
