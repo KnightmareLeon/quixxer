@@ -7,11 +7,12 @@ import javafx.scene.layout.VBox;
 
 public class DashboardController {
 
-    private final AppContext context;
+    private final DashboardService dbService;
     @FXML private VBox mainContainer;
 
     public DashboardController(AppContext context){
-        this.context = context;
+        this.dbService = context.getDBService();
+
     }
 
     @FXML
