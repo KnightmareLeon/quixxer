@@ -3,7 +3,7 @@
 A personal project aimed at creating a desktop application for making test study sets for a more engaging review for students. 
 Currently supports tests in flashcards, multiple choice, true or false, and enumeration.
 
-Still working on saving statistics for the tests taken.
+Still working on saving statistics for the tests taken and planning to add sources tab.
 
 ### Tech Stack:
 

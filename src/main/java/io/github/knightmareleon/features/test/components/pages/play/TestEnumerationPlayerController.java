@@ -1,4 +1,4 @@
-package io.github.knightmareleon.features.test.components.pages;
+package io.github.knightmareleon.features.test.components.pages.play;
 
 public class TestEnumerationPlayerController {
     
